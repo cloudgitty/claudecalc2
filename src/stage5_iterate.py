@@ -16,6 +16,12 @@ def main():
     s = Solver(R0=load_r0(), log=progress)
     w0 = s.widths()
     progress("(5) start RFI widths: " + " ".join(f"{k}={w0[k][0]:.1f}" for k in w0 if k.endswith("RFI")))
+    # warm-up: the starting responses are crude (e.g. 40% fold to a 3-bet), and a
+    # simultaneous update from them oscillates (BB 3-bets 60%+, LJ opens 60%).  So the
+    # response nodes are first iterated to a fixed point against the starting opens.
+    hw, cw = s.iterate(20, tag="warm-up (opens fixed)", update_open=False)
+    json.dump(hw, open(W("hist_warmup.json"), "w"))
+    progress(f"(5) warm-up converged={cw} after {len(hw)} sweeps")
     hist, conv = s.iterate(12, tag="main")
     s.save(W("state_main.npz"))
     json.dump(hist, open(W("hist_main.json"), "w"))

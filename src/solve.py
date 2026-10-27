@@ -256,7 +256,7 @@ class Solver:
             out[name] = (100 * (self.w * r).sum() / tot, 100 * (self.w * (c + r)).sum() / tot)
         return out
 
-    def step(self, damp=0.5):
+    def step(self, damp=0.5, update_open=True):
         new, new_open = self.sweep()
         oldS = {k: dict(v) for k, v in self.S.items()}; old_open = dict(self.open)
         wold = self.widths()
@@ -266,8 +266,9 @@ class Solver:
                 c = damp * s[a] + (1 - damp) * nw[a]; r = damp * s[b] + (1 - damp) * nw[b]
                 s[a], s[b] = self.quantise(c, r)
             s["O3c"] = round5(damp * s["O3c"] + (1 - damp) * nw["O3c"])
-        for o in self.open:
-            self.open[o] = round5(damp * self.open[o] + (1 - damp) * new_open[o])
+        if update_open:
+            for o in self.open:
+                self.open[o] = round5(damp * self.open[o] + (1 - damp) * new_open[o])
         wnew = self.widths()
         dw = max(max(abs(wnew[k][0] - wold[k][0]), abs(wnew[k][1] - wold[k][1])) for k in SPOT_ORDER)
         dfs = []
@@ -278,11 +279,11 @@ class Solver:
                 dfs.append(100 * np.average(np.abs(c1 - c0)[m] + np.abs(r1 - r0)[m], weights=self.w[m]))
         return dw, float(np.mean(dfs)), float(np.max(dfs)), wnew
 
-    def iterate(self, max_rounds=12, tol_w=0.3, tol_f=2.0, tag="main"):
+    def iterate(self, max_rounds=12, tol_w=0.3, tol_f=2.0, tag="main", update_open=True):
         hist = []; ok = 0
         for it in range(1, max_rounds + 1):
             t0 = time.time()
-            dw, mf, mxf, wn = self.step()
+            dw, mf, mxf, wn = self.step(update_open=update_open)
             ok = ok + 1 if (dw <= tol_w and mf <= tol_f) else 0
             line = (f"[{tag}] round {it}: max width change {dw:.2f} pts, mean byte-freq change {mf:.2f} pts "
                     f"(worst spot {mxf:.2f}); RFI widths " +

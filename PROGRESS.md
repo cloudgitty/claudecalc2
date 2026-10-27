@@ -44,3 +44,7 @@
 - 2026-10-27 01:27:24 (3) precision holdout band 11 (4000 classes x 64000 boards, truth SE 0.19 pts): model R2 0.9973 spearman 0.9982; posterior R2 0.9973 spearman 0.9982; RMSE raw sim 0.80 / model 0.28 / posterior 0.27 pts
 - 2026-10-27 01:27:24 (3) feature model + EB shrinkage done for all bands
 - 2026-10-27 01:27:28 (5) start RFI widths: LJ_RFI=20.0 HJ_RFI=25.0 CO_RFI=32.0 BTN_RFI=48.0 SB_RFI=42.0
+- 2026-10-27 01:28:31 [main] round 1: max width change 39.28 pts, mean byte-freq change 41.02 pts (worst spot 62.61); RFI widths LJ=23.1 HJ=31.8 CO=45.6 BTN=69.2 SB=69.6 (63s)
+- 2026-10-27 01:29:30 [main] round 2: max width change 46.16 pts, mean byte-freq change 43.39 pts (worst spot 63.17); RFI widths LJ=61.4 HJ=65.8 CO=72.7 BTN=84.5 SB=84.7 (59s)
+- 2026-10-27 01:30:26 [main] round 3: max width change 48.05 pts, mean byte-freq change 35.84 pts (worst spot 68.43); RFI widths LJ=59.1 HJ=65.1 CO=72.7 BTN=78.8 SB=81.0 (56s)
+- 2026-10-27 01:37:37 (5) start RFI widths: LJ_RFI=20.0 HJ_RFI=25.0 CO_RFI=32.0 BTN_RFI=48.0 SB_RFI=42.0
