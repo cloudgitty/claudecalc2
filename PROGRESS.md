@@ -20,3 +20,4 @@
 - 2026-10-27 00:28:50 (2) simulation done: 962988 classes x 12 bands x 4000 boards (64 min)
 - 2026-10-27 00:58:38 (3) band 0: holdout R2 raw 0.9635 / noise-corrected 0.9978, spearman raw 0.9669, sim SE 0.76 pts, model err 0.19 pts, posterior SE 0.18 pts (2.1 min)
 - 2026-10-27 01:00:47 (3) band 1: holdout R2 raw 0.9674 / noise-corrected 0.9979, spearman raw 0.9709, sim SE 0.76 pts, model err 0.20 pts, posterior SE 0.19 pts (2.1 min)
+- 2026-10-27 01:02:54 (3) band 2: holdout R2 raw 0.9699 / noise-corrected 0.9979, spearman raw 0.9721, sim SE 0.77 pts, model err 0.21 pts, posterior SE 0.20 pts (2.1 min)
