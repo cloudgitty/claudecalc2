@@ -35,6 +35,10 @@ def main():
     vd = json.load(open(W("validation_decode.json")))
     ck = json.load(open(W("checks.json")))
     hm = json.load(open(W("hist_main.json"))); hr = json.load(open(W("hist_refine.json")))
+    hw = json.load(open(W("hist_warmup.json")))
+    stamps = [l[2:21] for l in open(R("PROGRESS.md")) if l.startswith("- 20")]
+    t_first = time.mktime(time.strptime(stamps[0], "%Y-%m-%d %H:%M:%S"))
+    t_last = time.time()
     edges = list(np.load(W("bands.npz"))["edges"])
     # ---- spot table
     srows = ["| spot | classes played | raise % of all hands | continue % of all hands | reach % of all hands | raise % of reach | continue % of reach |",
@@ -95,6 +99,10 @@ change <= 2 pts, two rounds in a row; the frequency change is the combo-weighted
 
 {fmt_hist(hm, 'main')}
 
+Warm-up (opens held at the starting widths, response nodes only):
+
+{fmt_hist(hw, 'warm-up')}
+
 Refinement rounds after the borderline re-simulation (exact equities in place):
 
 {fmt_hist(hr, 'refine')}
@@ -126,7 +134,8 @@ Playability model (nut-minus-reverse-nut potential), noise-corrected holdout R2 
 **Borderline re-simulation.** Band = classes within +-{100*rs['half']:.2f}% of reaching combos of a
 cutoff (RFI +-{100*rs['half_rfi']:.2f}%), in every output spot. Classes per spot: {json.dumps(rs['bands'])}.
 {rs['tasks']:,} (class, actual range) pairs, {rs['trials']:.3e} trials; max SE {100*rs['max_se']:.3f} pts
-(mean {100*rs['mean_se']:.3f}). Band-mixture approximation vs the exact equity against the actual range:
+(mean {100*rs['mean_se']:.3f}), share with SE <= 0.3 pts {100*rs.get('share_se_le_0p3', float('nan')):.2f}%;
+{rs.get('degenerate_tasks', 0):,} degenerate tasks dropped (the range almost always collides with the hero's cards). Band-mixture approximation vs the exact equity against the actual range:
 bias {100*rs['mixture_bias']:+.2f} pts, RMSE {100*rs['mixture_rmse']:.2f} pts, 95th percentile |error|
 {100*rs['mixture_p95_abs']:.2f} pts.
 
@@ -161,6 +170,16 @@ state with the same equity corrections.
 {chr(10).join(files)}
 
 Packed JSON: classes field {cl:.2f} MB (base64), 24 spot fields {sp:.2f} MB in total.
+
+## Resources
+
+Elapsed wall-clock from the first stage to this report: {(t_last - t_first)/3600:.1f} h on 4 vCPU (15 GB RAM).
+This includes idle time and one container restart, plus failed solve attempts that were discarded
+(calibrated-R0 runs, a sampler hang). CPU use was about 3.8 cores whenever a stage was running;
+total CPU time is roughly {(t_last - t_first)/3600*4*0.85:.0f} CPU-hours (estimate: elapsed x 4 cores
+x 0.85 average utilisation; per-process accounting was not recorded across the restart). The largest
+compute items: band simulation 4.6e10 trials (64 min), borderline re-simulation about 4e10 trials
+(about 90 min), model fits about 30 min, iterations about 30 min per full solve.
 """
     open(R("REPORT.md"), "w").write(rep)
     print("REPORT.md written")
