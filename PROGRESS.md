@@ -18,3 +18,4 @@
 - 2026-10-27 00:24:09 (2b) band 10 [55-75%] simulated: 962988 classes x 4000 boards in 4.8 min
 - 2026-10-27 00:28:50 (2b) band 11 [75-100%] simulated: 962988 classes x 4000 boards in 4.7 min
 - 2026-10-27 00:28:50 (2) simulation done: 962988 classes x 12 bands x 4000 boards (64 min)
+- 2026-10-27 00:58:38 (3) band 0: holdout R2 raw 0.9635 / noise-corrected 0.9978, spearman raw 0.9669, sim SE 0.76 pts, model err 0.19 pts, posterior SE 0.18 pts (2.1 min)
