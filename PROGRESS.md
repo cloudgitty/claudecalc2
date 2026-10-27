@@ -12,3 +12,9 @@
 - 2026-10-26 23:55:27 (2b) band 4 [8-12%] simulated: 962988 classes x 4000 boards in 4.8 min
 - 2026-10-27 00:00:12 (2b) band 5 [12-17%] simulated: 962988 classes x 4000 boards in 4.7 min
 - 2026-10-27 00:04:59 (2b) band 6 [17-23%] simulated: 962988 classes x 4000 boards in 4.8 min
+- 2026-10-27 00:09:44 (2b) band 7 [23-30%] simulated: 962988 classes x 4000 boards in 4.7 min
+- 2026-10-27 00:14:34 (2b) band 8 [30-40%] simulated: 962988 classes x 4000 boards in 4.8 min
+- 2026-10-27 00:19:23 (2b) band 9 [40-55%] simulated: 962988 classes x 4000 boards in 4.8 min
+- 2026-10-27 00:24:09 (2b) band 10 [55-75%] simulated: 962988 classes x 4000 boards in 4.8 min
+- 2026-10-27 00:28:50 (2b) band 11 [75-100%] simulated: 962988 classes x 4000 boards in 4.7 min
+- 2026-10-27 00:28:50 (2) simulation done: 962988 classes x 12 bands x 4000 boards (64 min)
