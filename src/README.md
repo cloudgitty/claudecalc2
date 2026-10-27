@@ -21,6 +21,7 @@ or stage by stage:
 | `python3 stage4_calibrate.py` | R0 calibration (flop-turn-river simulations) | `r0.json` |
 | `python3 stage5_iterate.py` | damped best-response iteration | `state_main.npz`, `hist_main.json` |
 | `python3 stage6_borderline.py` | borderline re-simulation vs the actual ranges, refinement rounds | `resim.npz`, `corr.pkl`, `state_final.npz` |
+| `python3 stage6b_topup.py` | top up re-simulations still above SE 0.3, redo corrections and refinement | `resim.npz`, `corr.pkl`, `state_final.npz` |
 | `python3 stage7_pack.py` | packing and structural validation | `../plo6_ranges_packed.json`, `../widths.json`, `../test_vectors.json` |
 | `python3 validate_decode.py` | independent decoder round trip | `validation_decode.json` |
 | `python3 stage8_checks.py` | sensitivity reruns, hand sanity, first-principles checks | `checks.json` |
