@@ -7,3 +7,8 @@
 - 2026-10-26 23:34:14 (2b) band 0 [0-1.5%] simulated: 962988 classes x 4000 boards in 5.8 min
 - 2026-10-26 23:34:46 (4) R0 calibrated: srp,oop=0.810, srp,ip=1.177, 3bp,oop=0.856, 3bp,ip=1.157, 4bp,oop=0.826, 4bp,ip=1.175, srp,sbcold=0.711
 - 2026-10-26 23:40:53 (2b) band 1 [1.5-3%] simulated: 962988 classes x 4000 boards in 6.6 min
+- 2026-10-26 23:45:54 (2b) band 2 [3-5%] simulated: 962988 classes x 4000 boards in 5.0 min
+- 2026-10-26 23:50:40 (2b) band 3 [5-8%] simulated: 962988 classes x 4000 boards in 4.8 min
+- 2026-10-26 23:55:27 (2b) band 4 [8-12%] simulated: 962988 classes x 4000 boards in 4.8 min
+- 2026-10-27 00:00:12 (2b) band 5 [12-17%] simulated: 962988 classes x 4000 boards in 4.7 min
+- 2026-10-27 00:04:59 (2b) band 6 [17-23%] simulated: 962988 classes x 4000 boards in 4.8 min
