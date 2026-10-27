@@ -94,7 +94,7 @@ def precision_holdout(res, m=4000, trials=64000):
         pools.append(pool)
     P = engine.Pools(pools)
     hero = np.tile(idx, NB); pid = np.repeat(np.arange(NB), m)
-    s, sq, ws, ls = engine.sim_tasks(codes[hero], pid, np.full(len(hero), trials), P, 31337)
+    s, sq, ws, ls, _ = engine.sim_tasks(codes[hero], pid, np.full(len(hero), trials), P, 31337)
     out = {}
     for b in range(NB):
         sel = pid == b

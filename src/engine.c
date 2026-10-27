@@ -241,19 +241,24 @@ static inline void draw_board(rng_t *g, uint64_t used, int *b) {
 
 // tasks: hero class code, pool index, number of trials. Outputs per task:
 // sum of outcome (1 win, .5 tie), sum of squares, wins+ties made with
-// straight-or-better (nut potential), losses holding straight-or-better.
+// straight-or-better (nut potential), losses holding straight-or-better, and the
+// number of trials actually played (a trial is dropped if no villain hand compatible
+// with the hero representative is found in 5000 draws, e.g. a tiny range that always
+// shares a card with the hero).
 void sim_tasks(int64_t ntask, const int64_t *codes, const int32_t *pidx, const int32_t *ntr,
                const uint8_t *pools, const int64_t *poff, const int64_t *plen, uint64_t seed,
-               double *o_sum, double *o_sq, double *o_ws, double *o_ls) {
+               double *o_sum, double *o_sq, double *o_ws, double *o_ls, double *o_cnt) {
     #pragma omp parallel for schedule(dynamic, 16)
     for (int64_t t = 0; t < ntask; t++) {
         rng_t g; rng_seed(&g, seed, (uint64_t)t);
         const uint8_t *pool = pools + 6 * poff[pidx[t]]; int64_t pl = plen[pidx[t]];
-        double s = 0, sq = 0, ws = 0, ls = 0;
+        double s = 0, sq = 0, ws = 0, ls = 0, cnt = 0;
         int h[6], v[6], b[6]; hand_t H, V; board_t B;
         for (int i = 0; i < ntr[t]; i++) {
-            uint64_t hm = rand_rep(codes[t], &g, h), vm;
-            do { vm = pool_hand(pool + 6 * (int64_t)rng_below(&g, (uint32_t)pl), v); } while (vm & hm);
+            uint64_t hm = rand_rep(codes[t], &g, h), vm; int tries = 0;
+            do { vm = pool_hand(pool + 6 * (int64_t)rng_below(&g, (uint32_t)pl), v); } while ((vm & hm) && ++tries < 5000);
+            if (vm & hm) continue;
+            cnt += 1;
             draw_board(&g, hm | vm, b);
             prep_board(b, &B); prep_hand(h, &H); prep_hand(v, &V);
             uint32_t eh = omaha_best(&H, &B), ev = omaha_best(&V, &B);
@@ -261,7 +266,7 @@ void sim_tasks(int64_t ntask, const int64_t *codes, const int32_t *pidx, const i
             s += o; sq += o * o;
             if ((eh >> 20) >= 4) { if (o > 0) ws += o; else ls += 1; }
         }
-        o_sum[t] = s; o_sq[t] = sq; o_ws[t] = ws; o_ls[t] = ls;
+        o_sum[t] = s; o_sq[t] = sq; o_ws[t] = ws; o_ls[t] = ls; o_cnt[t] = cnt;
     }
 }
 
@@ -467,13 +472,15 @@ void sample_values(int64_t n, const int64_t *codes, const uint8_t *pool, int64_t
     #pragma omp parallel for schedule(dynamic, 256)
     for (int64_t t = 0; t < n; t++) {
         rng_t g; rng_seed(&g, seed, (uint64_t)t);
-        double acc[8] = {0}; int h[6], v[6];
+        double acc[8] = {0}; int h[6], v[6], ok = 0;
         for (int i = 0; i < m; i++) {
-            uint64_t hm = rand_rep(codes[t], &g, h), vm; int64_t j;
-            do { j = rng_below(&g, (uint32_t)pl); vm = pool_hand(pool + 6 * j, v); } while (vm & hm);
+            uint64_t hm = rand_rep(codes[t], &g, h), vm; int64_t j; int tries = 0;
+            do { j = rng_below(&g, (uint32_t)pl); vm = pool_hand(pool + 6 * j, v); } while ((vm & hm) && ++tries < 2000);
+            if (vm & hm) continue;           // no compatible villain hand found: skip
+            ok++;
             for (int k = 0; k < nv; k++) acc[k] += vals[j * nv + k];
         }
-        for (int k = 0; k < nv; k++) out[t * nv + k] = (float)(acc[k] / m);
+        for (int k = 0; k < nv; k++) out[t * nv + k] = ok ? (float)(acc[k] / ok) : -1.0f;
     }
 }
 

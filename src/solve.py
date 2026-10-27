@@ -153,6 +153,9 @@ class Solver:
         idx = self.rng.choice(self.n, 200_000, p=V / V.sum())
         pool = engine.sample_reps(self.codes[idx], int(self.rng.integers(1 << 62)))
         raw = engine.sample_values(self.codes, pool, vals[idx], 48, int(self.rng.integers(1 << 62)))
+        bad = raw[:, 0] < 0                          # no compatible villain hand: use the plain mean
+        if bad.any():
+            raw[bad] = ((vals * V[:, None]).sum(0) / V.sum()).astype(np.float32)
         out = np.empty((self.n, vals.shape[1]))
         for k in range(vals.shape[1]):              # average within rank multiset (kills MC noise)
             g = np.bincount(self.ginv, weights=raw[:, k] * self.w) / self.gw
@@ -279,9 +282,11 @@ class Solver:
                 dfs.append(100 * np.average(np.abs(c1 - c0)[m] + np.abs(r1 - r0)[m], weights=self.w[m]))
         return dw, float(np.mean(dfs)), float(np.max(dfs)), wnew
 
-    def iterate(self, max_rounds=12, tol_w=0.3, tol_f=2.0, tag="main", update_open=True):
-        hist = []; ok = 0
-        for it in range(1, max_rounds + 1):
+    def iterate(self, max_rounds=12, tol_w=0.3, tol_f=2.0, tag="main", update_open=True, ckpt=None, hist=None):
+        hist = list(hist or []); ok = 0
+        for x in hist: ok = ok + 1 if (x["dw"] <= tol_w and x["mean_df"] <= tol_f) else 0
+        if ok >= 2: return hist, True
+        for it in range(len(hist) + 1, max_rounds + 1):
             t0 = time.time()
             dw, mf, mxf, wn = self.step(update_open=update_open)
             ok = ok + 1 if (dw <= tol_w and mf <= tol_f) else 0
@@ -290,6 +295,8 @@ class Solver:
                     " ".join(f"{o}={wn[o + '_RFI'][0]:.1f}" for o in INIT_OPEN) + f" ({time.time()-t0:.0f}s)")
             self.log(line)
             hist.append(dict(round=it, dw=dw, mean_df=mf, max_df=mxf, widths=wn))
+            if ckpt:                                  # resume point after a restart
+                self.save(ckpt + ".npz"); json.dump(hist, open(ckpt + ".json", "w"))
             if ok >= 2: break
         return hist, ok >= 2
 

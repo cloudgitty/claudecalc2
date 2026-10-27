@@ -81,10 +81,10 @@ def sim_tasks(codes, pidx, ntr, pools, seed):
     pidx = np.ascontiguousarray(pidx, dtype=np.int32)
     ntr = np.ascontiguousarray(ntr, dtype=np.int32)
     n = len(codes)
-    outs = [np.zeros(n) for _ in range(4)]
+    outs = [np.zeros(n) for _ in range(5)]
     lib.sim_tasks(ctypes.c_int64(n), _p(codes), _p(pidx), _p(ntr), _p(pools.arr), _p(pools.off),
                   _p(pools.len), ctypes.c_uint64(seed), *[_p(o) for o in outs])
-    return outs  # sum, sumsq, ws, ls
+    return outs  # sum, sumsq, ws, ls, trials played
 
 
 def sample_values(codes, pool, vals, m, seed):

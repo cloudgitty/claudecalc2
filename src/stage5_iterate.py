@@ -19,10 +19,18 @@ def main():
     # warm-up: the starting responses are crude (e.g. 40% fold to a 3-bet), and a
     # simultaneous update from them oscillates (BB 3-bets 60%+, LJ opens 60%).  So the
     # response nodes are first iterated to a fixed point against the starting opens.
-    hw, cw = s.iterate(20, tag="warm-up (opens fixed)", update_open=False)
-    json.dump(hw, open(W("hist_warmup.json"), "w"))
-    progress(f"(5) warm-up converged={cw} after {len(hw)} sweeps")
-    hist, conv = s.iterate(12, tag="main")
+    import os
+    def resume(name):
+        if os.path.exists(W(name + ".json")):
+            s.load(W(name + ".npz")); return json.load(open(W(name + ".json")))
+        return None
+    hw = resume("ckpt_warmup")
+    if not os.path.exists(W("ckpt_main.json")):
+        hw, cw = s.iterate(20, tag="warm-up (opens fixed)", update_open=False, ckpt=W("ckpt_warmup"), hist=hw)
+        json.dump(hw, open(W("hist_warmup.json"), "w"))
+        progress(f"(5) warm-up converged={cw} after {len(hw)} sweeps")
+    hm = resume("ckpt_main")
+    hist, conv = s.iterate(12, tag="main", ckpt=W("ckpt_main"), hist=hm)
     s.save(W("state_main.npz"))
     json.dump(hist, open(W("hist_main.json"), "w"))
     progress(f"(5) iterations done: converged={conv} after {len(hist)} rounds ({(time.time()-t0)/60:.0f} min)")

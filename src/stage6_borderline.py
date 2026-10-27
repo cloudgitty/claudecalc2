@@ -82,17 +82,22 @@ def main():
     tt = time.time()
     S1 = engine.sim_tasks(codes[hero], pid, np.full(len(hero), n1), P, 777)
     rate = len(hero) * n1 / (time.time() - tt)
-    eq = S1[0] / n1; var = np.maximum(S1[1] / n1 - eq ** 2, 1e-4)
-    need = np.ceil(var / SE_TARGET ** 2).astype(np.int64) - n1
-    more = np.nonzero(need > 0)[0]
-    progress(f"(6) pass 1: {len(hero)} tasks x {n1} trials at {rate/1e6:.1f}M trials/s; {len(more)} need a top-up")
-    tot = [x.copy() for x in S1]; ntr = np.full(len(hero), n1, dtype=np.int64)
+    c1 = np.maximum(S1[4], 1)
+    eq = S1[0] / c1; var = np.maximum(S1[1] / c1 - eq ** 2, 1e-4)
+    need = np.ceil(var / SE_TARGET ** 2).astype(np.int64) - S1[4].astype(np.int64)
+    more = np.nonzero((need > 0) & (S1[4] > 0))[0]
+    progress(f"(6) pass 1: {len(hero)} tasks x {n1} trials at {rate/1e6:.1f}M trials/s; {len(more)} need a top-up; "
+             f"{int((S1[4] < n1).sum())} tasks lost trials to card collisions")
+    tot = [x.copy() for x in S1]
     if len(more):
         S2 = engine.sim_tasks(codes[hero[more]], pid[more], need[more].astype(np.int32), P, 778)
-        for k in range(4): tot[k][more] += S2[k]
-        ntr[more] += need[more]
-    eq = tot[0] / ntr; var = np.maximum(tot[1] / ntr - eq ** 2, 1e-6); se = np.sqrt(var / ntr)
-    pl = (tot[2] - tot[3]) / ntr
+        for k in range(5): tot[k][more] += S2[k]
+    ntr = tot[4]
+    valid = ntr > 0
+    ntr1 = np.maximum(ntr, 1)
+    eq = tot[0] / ntr1; var = np.maximum(tot[1] / ntr1 - eq ** 2, 1e-6); se = np.where(valid, np.sqrt(var / ntr1), 0)
+    pl = (tot[2] - tot[3]) / ntr1
+    hero, pid, eq, se, pl, ntr = hero[valid], pid[valid], eq[valid], se[valid], pl[valid], ntr[valid]
     np.savez(W("resim.npz"), hero=hero, pid=pid, eq=eq, se=se, pl=pl, ntr=ntr, rkeys=np.array(rkeys))
     # corrections relative to the band mixture, and validation of the mixture model
     errs = []

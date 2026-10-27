@@ -24,7 +24,7 @@ def run_all(pool, trials, seed, label):
     n = len(codes)
     P = engine.Pools([pool])
     t0 = time.time()
-    s, sq, ws, ls = engine.sim_tasks(codes, np.zeros(n), np.full(n, trials), P, seed)
+    s, sq, ws, ls, _ = engine.sim_tasks(codes, np.zeros(n), np.full(n, trials), P, seed)
     dt = time.time() - t0
     print(f"{label}: {n*trials/dt/1e6:.1f}M trials/s, {n/dt:.0f} classes/s", flush=True)
     return s / trials, sq, ws / trials, ls / trials, dt
