@@ -16,6 +16,7 @@ from common import W, classes
 SEATS = ["LJ", "HJ", "CO", "BTN", "SB", "BB"]
 STACK = 200.0
 INIT_OPEN = {"LJ": 20, "HJ": 25, "CO": 32, "BTN": 48, "SB": 42}
+BEHIND = 0.72 / 0.82    # spec's SB-vs-BB-behind penalty, applied per player left to act behind a cold-caller
 R0_DEFAULT = {("srp", "ip"): 1.00, ("srp", "oop"): 0.82, ("srp", "sbcold"): 0.72,
               ("3bp", "ip"): 1.00, ("3bp", "oop"): 0.82, ("4bp", "ip"): 0.90, ("4bp", "oop"): 0.82}
 
@@ -50,7 +51,9 @@ class Pair:
         self.potj = 2 * STACK + self.dead
         self.d_pos = "ip" if self.d_ip else "oop"
         self.o_pos = "oop" if self.d_ip else "ip"
-        self.d_srp = ("srp", "sbcold") if D == "SB" else ("srp", self.d_pos)
+        self.d_srp = ("srp", self.d_pos)
+        self.d_behind = len(SEATS) - 1 - SEATS.index(D)          # players left to act behind D
+        self.d_call_mult = BEHIND ** self.d_behind                # SB: one (the spec's 0.72/0.82)
 
 
 def round5(x):
@@ -135,8 +138,8 @@ class Solver:
             eq[idx] += de; pl[idx] += dp
         return eq, pl
 
-    def realise(self, R0key, pl, reach):
-        r0 = self.R0[R0key]
+    def realise(self, R0key, pl, reach, mult=1.0):
+        r0 = self.R0[R0key] * mult
         m = reach > 0
         if not m.any(): return np.full(self.n, r0)
         mu = np.average(pl[m], weights=reach[m]); sd = np.sqrt(np.average((pl[m] - mu) ** 2, weights=reach[m]))
@@ -196,7 +199,7 @@ class Solver:
             val_O2[key] = np.maximum(0, np.maximum(v_o2c, v_o2r))
             # ---- D1: responder facing the open
             reach_d1 = self.w
-            Rd = self.realise(p.d_srp, eq["open"][1], reach_d1)
+            Rd = self.realise(p.d_srp, eq["open"][1], reach_d1, p.d_call_mult)
             v_d1c = Rd * eq["open"][0] * p.pot_srp - (p.o_amt - p.d_post)
             ro2 = self.respond(Rg["open"], np.stack([1 - S["O2c"] - S["O2r"], S["O2c"], S["O2r"]], 1), 3)
             Rd3 = self.realise(("3bp", p.d_pos), eq["ocall3"][1], reach_d1)
