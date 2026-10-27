@@ -1,23 +1,23 @@
 {
  "plo6_6max_200bb/LJ_RFI": {
-  "raise": 5.53,
-  "continue": 5.53
+  "raise": 5.52,
+  "continue": 5.52
  },
  "plo6_6max_200bb/HJ_RFI": {
-  "raise": 6.06,
-  "continue": 6.06
+  "raise": 6.09,
+  "continue": 6.09
  },
  "plo6_6max_200bb/CO_RFI": {
   "raise": 8.15,
   "continue": 8.15
  },
  "plo6_6max_200bb/BTN_RFI": {
-  "raise": 19.73,
-  "continue": 19.73
+  "raise": 19.74,
+  "continue": 19.74
  },
  "plo6_6max_200bb/SB_RFI": {
-  "raise": 7.71,
-  "continue": 7.71
+  "raise": 7.72,
+  "continue": 7.72
  },
  "plo6_6max_200bb/BB_vs_LJ": {
   "raise": 1.93,
@@ -28,11 +28,11 @@
   "continue": 70.16
  },
  "plo6_6max_200bb/BB_vs_CO": {
-  "raise": 2.4,
+  "raise": 2.39,
   "continue": 71.75
  },
  "plo6_6max_200bb/BB_vs_BTN": {
-  "raise": 4.21,
+  "raise": 4.22,
   "continue": 75.88
  },
  "plo6_6max_200bb/BB_vs_SB": {
@@ -48,36 +48,36 @@
   "continue": 31.03
  },
  "plo6_6max_200bb/BTN_vs_CO": {
-  "raise": 11.33,
+  "raise": 11.32,
   "continue": 17.69
  },
  "plo6_6max_200bb/LJ_vs_BB3bet": {
   "raise": 2.24,
-  "continue": 5.5
+  "continue": 5.48
  },
  "plo6_6max_200bb/HJ_vs_BB3bet": {
   "raise": 2.22,
-  "continue": 5.93
+  "continue": 5.95
  },
  "plo6_6max_200bb/CO_vs_BB3bet": {
   "raise": 2.28,
-  "continue": 7.65
+  "continue": 7.63
  },
  "plo6_6max_200bb/BTN_vs_BB3bet": {
   "raise": 2.84,
-  "continue": 17.47
+  "continue": 17.46
  },
  "plo6_6max_200bb/SB_vs_BB3bet": {
   "raise": 2.05,
-  "continue": 6.87
+  "continue": 6.89
  },
  "plo6_6max_200bb/CO_vs_BTN3bet": {
   "raise": 1.79,
-  "continue": 7.89
+  "continue": 7.87
  },
  "plo6_6max_200bb/BTN_vs_SB3bet": {
   "raise": 2.96,
-  "continue": 18.32
+  "continue": 18.31
  },
  "plo6_6max_200bb/BB_vs_BTN4bet": {
   "raise": 3.55,
@@ -93,6 +93,6 @@
  },
  "plo6_6max_200bb/BTN_vs_CO4bet": {
   "raise": 3.06,
-  "continue": 11.04
+  "continue": 11.03
  }
 }

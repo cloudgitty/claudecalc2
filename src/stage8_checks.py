@@ -75,10 +75,11 @@ def first_principles():
     # exact enumeration vs Monte Carlo for fixed matchups
     ex = []
     for hs, vs in [("As Ah Ks Kh Qd Jc", "Ts 9h 8s 7h 6d 5c"), ("As Ks Qh Jh Td 9c", "Ac Ad 7s 6h 3d 2c"),
-                   ("2s 2h 2d 7s 8h 9c", "Kc Qc Jd Td 9s 8h")]:
+                   ("2s 2h 2d 7s 8h 9c", "Kc Qc Jd Td 9s 8d")]:
         h = [card(x) for x in hs.split()]; v = [card(x) for x in vs.split()]
-        e = engine.exact_hvh(h, v); m = engine.mc_hvh(h, v, 400000, 5)
-        ex.append(dict(hero=hs, villain=vs, exact=e, mc_400k=m, z=(m - e) / np.sqrt(e * (1 - e) / 400000)))
+        assert len(set(h + v)) == 12, (hs, vs)
+        e = engine.exact_hvh(h, v); m = engine.mc_hvh(h, v, 32000000, 101)
+        ex.append(dict(hero=hs, villain=vs, exact=e, mc_32m=m, z=(m - e) / np.sqrt(e * (1 - e) / 32000000)))
     res["exact_vs_mc"] = ex
     return res
 
@@ -102,7 +103,11 @@ def sensitivity(state, corr):
 
 
 def main():
+    import sys
     state = W("state_final.npz")
+    if "--fp-only" in sys.argv:          # recompute only the first-principles block
+        res = json.load(open(W("checks.json"))); res["first_principles"] = first_principles()
+        json.dump(res, open(W("checks.json"), "w"), indent=1); return
     corr = pickle.load(open(W("corr.pkl"), "rb"))
     res = {"hands": hand_sanity(state), "first_principles": first_principles()}
     json.dump(res, open(W("checks.json"), "w"), indent=1)

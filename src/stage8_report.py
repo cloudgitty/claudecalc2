@@ -50,8 +50,9 @@ def main():
         elif node == "O2": reach = w * s.open[o]
         else: reach = w * s.S[f"{o}-{d}"]["D1r"]
         rt = reach.sum()
+        # stored frequencies are conditional on reaching the node, so weight them by reach
         srows.append(f"| {k} | {int((b > 0).sum()):,} | {100*(w*r).sum()/tot:.2f} | {100*(w*(c+r)).sum()/tot:.2f} | "
-                     f"{100*rt/tot:.2f} | {100*(w*r).sum()/rt:.1f} | {100*(w*(c+r)).sum()/rt:.1f} |")
+                     f"{100*rt/tot:.2f} | {100*(reach*r).sum()/rt:.1f} | {100*(reach*(c+r)).sum()/rt:.1f} |")
     # ---- model table
     mrows = ["| band | range (% of hands, strength order) | holdout R2 raw (4k-board targets) | noise-corrected R2 | Spearman raw | precision-holdout R2 model | precision-holdout Spearman model | RMSE raw sim / model / posterior (pts) |",
              "|---|---|---|---|---|---|---|---|"]
@@ -72,7 +73,7 @@ def main():
         srows2.append(f"| {k} | " + " | ".join(f"{sens[l]['delta'][k][0]:+.2f} / {sens[l]['delta'][k][1]:+.2f}" for l in sens) + " |")
     conv_line = "; ".join(f"{l}: converged={sens[l]['converged']} in {sens[l]['rounds']} rounds" for l in sens)
     fp = ck["first_principles"]
-    ex = "\n".join(f"| {e['hero']} | {e['villain']} | {100*e['exact']:.3f} | {100*e['mc_400k']:.3f} | {e['z']:+.2f} |" for e in fp["exact_vs_mc"])
+    ex = "\n".join(f"| {e['hero']} | {e['villain']} | {100*e['exact']:.3f} | {100*e['mc_32m']:.3f} | {e['z']:+.2f} |" for e in fp["exact_vs_mc"])
     files = []
     for f in ["plo6_ranges_packed.json", "widths.json", "test_vectors.json"]:
         files.append(f"| {f} | {os.path.getsize(R(f))/1e6:.3f} MB |")
@@ -85,9 +86,11 @@ def main():
 {notes.split('<!--AUTO-->')[0] if notes else ''}
 ## Summary per spot
 
-Widths are combo-weighted shares of all 20,358,520 hands. "Reach" is the share of all
-hands that get to the decision: all hands for RFI and defend spots, the opening range
-for opener vs 3-bet, and the 3-bet range for 3-bettor vs 4-bet.
+Widths (as in widths.json) are combo-weighted shares of all 20,358,520 hands, using each class's
+stored frequency (which is conditional on reaching the node). "Reach" is the share of all hands
+that get to the decision: all hands for RFI and defend spots, the opening range (weighted by open
+frequency) for opener vs 3-bet, and the 3-bet range for 3-bettor vs 4-bet. The two "% of reach"
+columns are reach-weighted averages of the stored frequencies.
 
 {chr(10).join(srows)}
 
@@ -145,7 +148,7 @@ bias {100*rs['mixture_bias']:+.2f} pts, RMSE {100*rs['mixture_rmse']:.2f} pts, 9
 - Band a vs band b plus band b vs band a must be about 1: max deviation {fp['max_|eq(a,b)+eq(b,a)-1|']:.4f}.
 - Exact enumeration of all C(40,5) = 658,008 boards vs the Monte Carlo sampler:
 
-| hero | villain | exact eq % | MC eq % (400k) | z |
+| hero | villain | exact eq % | MC eq % (32M boards) | z |
 |---|---|---|---|---|
 {ex}
 
