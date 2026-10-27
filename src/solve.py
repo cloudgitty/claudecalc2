@@ -77,7 +77,7 @@ def ramp(margin, w, half=0.01):
 
 
 class Solver:
-    def __init__(self, R0=None, open_size=3.0, removal=True, seed=1, log=print, EPL=None):
+    def __init__(self, R0=None, open_size=3.0, removal=True, seed=1, log=print, EPL=None, behind=True):
         self.codes, self.combos = classes()
         self.n = len(self.codes)
         self.w = self.combos.astype(np.float64)
@@ -94,7 +94,9 @@ class Solver:
         self.pairs = {}
         for i, o in enumerate(SEATS[:5]):
             for d in SEATS[i + 1:]:
-                p = Pair(o, d, open_size); self.pairs[p.key] = p
+                p = Pair(o, d, open_size)
+                if not behind: p.d_call_mult = BEHIND if d == "SB" else 1.0   # only the spec's SB rule
+                self.pairs[p.key] = p
         self.grp = (self.codes >> 12)                         # rank multiset id
         _, self.ginv = np.unique(self.grp, return_inverse=True)
         self.gw = np.bincount(self.ginv, weights=self.w)
