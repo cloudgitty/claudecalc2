@@ -48,3 +48,12 @@
 - 2026-10-27 01:29:30 [main] round 2: max width change 46.16 pts, mean byte-freq change 43.39 pts (worst spot 63.17); RFI widths LJ=61.4 HJ=65.8 CO=72.7 BTN=84.5 SB=84.7 (59s)
 - 2026-10-27 01:30:26 [main] round 3: max width change 48.05 pts, mean byte-freq change 35.84 pts (worst spot 68.43); RFI widths LJ=59.1 HJ=65.1 CO=72.7 BTN=78.8 SB=81.0 (56s)
 - 2026-10-27 01:37:37 (5) start RFI widths: LJ_RFI=20.0 HJ_RFI=25.0 CO_RFI=32.0 BTN_RFI=48.0 SB_RFI=42.0
+- 2026-10-27 01:38:39 [warm-up (opens fixed)] round 1: max width change 39.28 pts, mean byte-freq change 36.26 pts (worst spot 62.61); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (62s)
+- 2026-10-27 01:39:37 [warm-up (opens fixed)] round 2: max width change 39.31 pts, mean byte-freq change 42.35 pts (worst spot 75.17); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (58s)
+- 2026-10-27 01:40:29 [warm-up (opens fixed)] round 3: max width change 41.00 pts, mean byte-freq change 34.68 pts (worst spot 71.17); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (52s)
+- 2026-10-27 01:41:21 [warm-up (opens fixed)] round 4: max width change 23.50 pts, mean byte-freq change 21.87 pts (worst spot 44.85); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (53s)
+- 2026-10-27 01:42:14 [warm-up (opens fixed)] round 5: max width change 25.79 pts, mean byte-freq change 21.41 pts (worst spot 64.54); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (52s)
+- 2026-10-27 01:43:07 [warm-up (opens fixed)] round 6: max width change 15.67 pts, mean byte-freq change 22.46 pts (worst spot 40.56); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (53s)
+- 2026-10-27 01:44:01 [warm-up (opens fixed)] round 7: max width change 14.26 pts, mean byte-freq change 21.55 pts (worst spot 49.41); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (54s)
+- 2026-10-27 01:44:52 [warm-up (opens fixed)] round 8: max width change 13.80 pts, mean byte-freq change 18.87 pts (worst spot 38.85); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (52s)
+- 2026-10-27 01:45:44 [warm-up (opens fixed)] round 9: max width change 18.78 pts, mean byte-freq change 15.16 pts (worst spot 37.22); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (51s)
