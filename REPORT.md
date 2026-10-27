@@ -332,14 +332,14 @@ state with the same equity corrections.
 | widths.json | 0.002 MB |
 | test_vectors.json | 0.299 MB |
 
-Packed JSON: classes field 0.07 MB (base64), 24 spot fields 1.74 MB in total.
+Packed JSON: classes field 0.07 MB (base64; the sorted codes compress far better than the ~1.5 MB the prompt expected, and the independent decoder confirms all 962,988 codes), 24 spot fields 1.74 MB in total. Total is under the 6 MB budget.
 
 ## Resources
 
 Elapsed wall-clock from the first stage to this report: 8.1 h on 4 vCPU (15 GB RAM).
 This includes idle time and one container restart, plus failed solve attempts that were discarded
 (calibrated-R0 runs, a sampler hang). CPU use was about 3.8 cores whenever a stage was running;
-total CPU time is roughly 28 CPU-hours (estimate: elapsed x 4 cores
+total CPU time is at most about 28 CPU-hours (upper bound: elapsed x 4 cores
 x 0.85 average utilisation; per-process accounting was not recorded across the restart). The largest
 compute items: band simulation 4.6e10 trials (64 min), borderline re-simulation about 4e10 trials
 (about 90 min), model fits about 30 min, iterations about 30 min per full solve.

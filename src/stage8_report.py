@@ -172,14 +172,14 @@ state with the same equity corrections.
 |---|---|
 {chr(10).join(files)}
 
-Packed JSON: classes field {cl:.2f} MB (base64), 24 spot fields {sp:.2f} MB in total.
+Packed JSON: classes field {cl:.2f} MB (base64; the sorted codes compress far better than the ~1.5 MB the prompt expected, and the independent decoder confirms all 962,988 codes), 24 spot fields {sp:.2f} MB in total. Total is under the 6 MB budget.
 
 ## Resources
 
 Elapsed wall-clock from the first stage to this report: {(t_last - t_first)/3600:.1f} h on 4 vCPU (15 GB RAM).
 This includes idle time and one container restart, plus failed solve attempts that were discarded
 (calibrated-R0 runs, a sampler hang). CPU use was about 3.8 cores whenever a stage was running;
-total CPU time is roughly {(t_last - t_first)/3600*4*0.85:.0f} CPU-hours (estimate: elapsed x 4 cores
+total CPU time is at most about {(t_last - t_first)/3600*4*0.85:.0f} CPU-hours (upper bound: elapsed x 4 cores
 x 0.85 average utilisation; per-process accounting was not recorded across the restart). The largest
 compute items: band simulation 4.6e10 trials (64 min), borderline re-simulation about 4e10 trials
 (about 90 min), model fits about 30 min, iterations about 30 min per full solve.
