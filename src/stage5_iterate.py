@@ -6,9 +6,19 @@ from common import W, progress
 from solve import Solver, R0_DEFAULT
 
 
+USE_CALIBRATED = False   # see REPORT: the calibrated R0 drive the solve into unravelling
+
+
 def load_r0(shift=0.0):
-    d = json.load(open(W("r0.json")))["R0"]
-    return {tuple(k.split(",")): v + shift for k, v in d.items()}
+    """R0 used by the solve.  The measured values (stage 4, work/r0.json) are reported
+    but not used: with IP R0 ~1.17 every IP call/3-bet with ~40% equity is profitable and
+    the opening ranges unravel (LJ 1.5%, BTN 3-bets 33% vs CO); a symmetric-range control
+    run shows the measurement reflects the fixed strategy's exploitability."""
+    if USE_CALIBRATED:
+        d = {tuple(k.split(",")): v for k, v in json.load(open(W("r0.json")))["R0"].items()}
+    else:
+        d = dict(R0_DEFAULT)
+    return {k: v + shift for k, v in d.items()}
 
 
 def main():

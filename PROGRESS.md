@@ -98,3 +98,5 @@
 - 2026-10-27 03:40:46 [main] round 12: max width change 2.33 pts, mean byte-freq change 5.44 pts (worst spot 19.57); RFI widths LJ=2.1 HJ=2.4 CO=3.9 BTN=48.2 SB=2.0 (51s)
 - 2026-10-27 03:40:54 (5) iterations done: converged=False after 12 rounds (31 min)
 - 2026-10-27 03:41:58 (6) borderline band +-2.0% => 2208791 tasks, est 5.40e+10 trials > budget; narrowing
+- 2026-10-27 04:10:03 (5) restart: R0 = spec defaults (calibrated R0 rejected, see REPORT), players-behind call penalty 0.878^k for every cold-caller; previous runs: calibrated R0 -> LJ 2.1/HJ 2.4/CO 3.9/BTN 48.2/SB 2.0 (degenerate)
+- 2026-10-27 04:10:09 (5) start RFI widths: LJ_RFI=20.0 HJ_RFI=25.0 CO_RFI=32.0 BTN_RFI=48.0 SB_RFI=42.0
