@@ -100,3 +100,41 @@
 - 2026-10-27 03:41:58 (6) borderline band +-2.0% => 2208791 tasks, est 5.40e+10 trials > budget; narrowing
 - 2026-10-27 04:10:03 (5) restart: R0 = spec defaults (calibrated R0 rejected, see REPORT), players-behind call penalty 0.878^k for every cold-caller; previous runs: calibrated R0 -> LJ 2.1/HJ 2.4/CO 3.9/BTN 48.2/SB 2.0 (degenerate)
 - 2026-10-27 04:10:09 (5) start RFI widths: LJ_RFI=20.0 HJ_RFI=25.0 CO_RFI=32.0 BTN_RFI=48.0 SB_RFI=42.0
+- 2026-10-27 04:11:10 [warm-up (opens fixed)] round 1: max width change 37.52 pts, mean byte-freq change 36.19 pts (worst spot 62.49); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (61s)
+- 2026-10-27 04:12:14 [warm-up (opens fixed)] round 2: max width change 26.92 pts, mean byte-freq change 41.90 pts (worst spot 73.00); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (58s)
+- 2026-10-27 04:13:14 [warm-up (opens fixed)] round 3: max width change 36.10 pts, mean byte-freq change 34.72 pts (worst spot 57.50); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (52s)
+- 2026-10-27 04:14:15 [warm-up (opens fixed)] round 4: max width change 26.17 pts, mean byte-freq change 20.70 pts (worst spot 34.47); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (52s)
+- 2026-10-27 04:15:18 [warm-up (opens fixed)] round 5: max width change 19.26 pts, mean byte-freq change 19.06 pts (worst spot 40.89); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (54s)
+- 2026-10-27 04:16:19 [warm-up (opens fixed)] round 6: max width change 16.29 pts, mean byte-freq change 20.44 pts (worst spot 36.73); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (53s)
+- 2026-10-27 04:17:21 [warm-up (opens fixed)] round 7: max width change 12.61 pts, mean byte-freq change 21.20 pts (worst spot 44.59); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (53s)
+- 2026-10-27 04:18:23 [warm-up (opens fixed)] round 8: max width change 11.78 pts, mean byte-freq change 20.12 pts (worst spot 40.85); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (53s)
+- 2026-10-27 04:19:22 [warm-up (opens fixed)] round 9: max width change 23.79 pts, mean byte-freq change 18.29 pts (worst spot 52.92); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (50s)
+- 2026-10-27 04:20:20 [warm-up (opens fixed)] round 10: max width change 10.81 pts, mean byte-freq change 15.41 pts (worst spot 49.23); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (50s)
+- 2026-10-27 04:21:17 [warm-up (opens fixed)] round 11: max width change 5.83 pts, mean byte-freq change 11.66 pts (worst spot 40.37); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (49s)
+- 2026-10-27 04:22:13 [warm-up (opens fixed)] round 12: max width change 5.53 pts, mean byte-freq change 8.90 pts (worst spot 35.47); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (50s)
+- 2026-10-27 04:23:09 [warm-up (opens fixed)] round 13: max width change 4.93 pts, mean byte-freq change 6.53 pts (worst spot 23.60); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (49s)
+- 2026-10-27 04:24:04 [warm-up (opens fixed)] round 14: max width change 3.57 pts, mean byte-freq change 4.93 pts (worst spot 14.98); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (49s)
+- 2026-10-27 04:25:00 [warm-up (opens fixed)] round 15: max width change 2.24 pts, mean byte-freq change 3.73 pts (worst spot 13.26); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (51s)
+- 2026-10-27 04:25:57 [warm-up (opens fixed)] round 16: max width change 1.65 pts, mean byte-freq change 2.57 pts (worst spot 7.63); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (51s)
+- 2026-10-27 04:26:53 [warm-up (opens fixed)] round 17: max width change 0.85 pts, mean byte-freq change 1.89 pts (worst spot 6.64); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (52s)
+- 2026-10-27 04:27:50 [warm-up (opens fixed)] round 18: max width change 2.12 pts, mean byte-freq change 1.63 pts (worst spot 10.21); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (52s)
+- 2026-10-27 04:28:45 [warm-up (opens fixed)] round 19: max width change 1.86 pts, mean byte-freq change 1.35 pts (worst spot 8.52); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (51s)
+- 2026-10-27 04:29:41 [warm-up (opens fixed)] round 20: max width change 1.20 pts, mean byte-freq change 1.13 pts (worst spot 4.67); RFI widths LJ=20.0 HJ=25.0 CO=32.0 BTN=48.0 SB=42.0 (52s)
+- 2026-10-27 04:29:46 (5) warm-up converged=False after 20 sweeps
+- 2026-10-27 04:30:38 [main] round 1: max width change 11.67 pts, mean byte-freq change 6.28 pts (worst spot 29.05); RFI widths LJ=14.4 HJ=18.2 CO=24.3 BTN=41.9 SB=30.3 (52s)
+- 2026-10-27 04:31:34 [main] round 2: max width change 7.53 pts, mean byte-freq change 7.61 pts (worst spot 22.47); RFI widths LJ=10.8 HJ=13.7 CO=19.1 BTN=36.9 SB=22.8 (52s)
+- 2026-10-27 04:32:31 [main] round 3: max width change 5.11 pts, mean byte-freq change 7.93 pts (worst spot 24.19); RFI widths LJ=8.3 HJ=10.6 CO=15.3 BTN=32.7 SB=17.7 (52s)
+- 2026-10-27 04:33:27 [main] round 4: max width change 4.10 pts, mean byte-freq change 7.67 pts (worst spot 20.62); RFI widths LJ=6.9 HJ=8.9 CO=13.1 BTN=29.7 SB=14.9 (52s)
+- 2026-10-27 04:34:23 [main] round 5: max width change 8.59 pts, mean byte-freq change 11.08 pts (worst spot 32.18); RFI widths LJ=5.9 HJ=7.6 CO=11.3 BTN=27.1 SB=12.6 (51s)
+- 2026-10-27 04:35:20 [main] round 6: max width change 5.15 pts, mean byte-freq change 10.14 pts (worst spot 23.19); RFI widths LJ=5.3 HJ=6.7 CO=10.1 BTN=25.2 SB=11.1 (52s)
+- 2026-10-27 04:36:17 [main] round 7: max width change 3.81 pts, mean byte-freq change 8.00 pts (worst spot 23.93); RFI widths LJ=5.1 HJ=6.4 CO=9.4 BTN=23.9 SB=10.2 (53s)
+- 2026-10-27 04:37:14 [main] round 8: max width change 2.23 pts, mean byte-freq change 6.10 pts (worst spot 18.99); RFI widths LJ=5.3 HJ=6.4 CO=9.1 BTN=22.9 SB=9.5 (52s)
+- 2026-10-27 04:38:10 [main] round 9: max width change 1.48 pts, mean byte-freq change 4.13 pts (worst spot 11.84); RFI widths LJ=5.7 HJ=6.5 CO=8.9 BTN=22.1 SB=9.0 (52s)
+- 2026-10-27 04:39:08 [main] round 10: max width change 1.52 pts, mean byte-freq change 3.61 pts (worst spot 10.53); RFI widths LJ=5.9 HJ=6.6 CO=8.7 BTN=21.5 SB=8.6 (54s)
+- 2026-10-27 04:40:08 [main] round 11: max width change 0.95 pts, mean byte-freq change 2.44 pts (worst spot 6.42); RFI widths LJ=6.0 HJ=6.6 CO=8.5 BTN=21.0 SB=8.3 (56s)
+- 2026-10-27 04:41:05 [main] round 12: max width change 0.62 pts, mean byte-freq change 1.87 pts (worst spot 4.44); RFI widths LJ=5.9 HJ=6.5 CO=8.4 BTN=20.7 SB=8.0 (54s)
+- 2026-10-27 04:41:12 (5) iterations done: converged=False after 12 rounds (31 min)
+- 2026-10-27 04:42:19 (6) borderline band +-2.0% => 2148810 tasks, est 5.25e+10 trials > budget; narrowing
+- 2026-10-27 04:43:23 (6) borderline band +-1.8% => 1984922 tasks, est 4.85e+10 trials > budget; narrowing
+- 2026-10-27 04:44:20 (6) borderline band +-1.5% => 1820245 tasks, est 4.45e+10 trials > budget; narrowing
+- 2026-10-27 04:45:16 (6) borderline band +-1.25% of reaching combos (RFI +-1.25%): 1519431 (class, range) tasks over 76 ranges; classes per spot: {"LJ_RFI": 22537, "HJ_RFI": 22543, "CO_RFI": 22569, "BTN_RFI": 23269, "SB_RFI": 22515, "BB_vs_LJ": 48217, "BB_vs_HJ": 48240, "BB_vs_CO": 48182, "BB_vs_BTN": 47022, "BB_vs_SB": 47671, "SB_vs_CO": 46328, "SB_vs_BTN": 45819, "BTN_vs_CO": 43833, "LJ_vs_BB3bet": 3680, "HJ_vs_BB3bet": 3943, "CO_vs_BB3bet": 4720, "BTN_vs_BB3bet": 10594, "SB_vs_BB3bet": 5031, "CO_vs_BTN3bet": 4676, "BTN_vs_SB3bet": 10916, "BB_vs_BTN4bet": 3316, "BB_vs_SB4bet": 3882, "SB_vs_BTN4bet": 3795, "BTN_vs_CO4bet": 6166}
