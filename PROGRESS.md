@@ -21,3 +21,26 @@
 - 2026-10-27 00:58:38 (3) band 0: holdout R2 raw 0.9635 / noise-corrected 0.9978, spearman raw 0.9669, sim SE 0.76 pts, model err 0.19 pts, posterior SE 0.18 pts (2.1 min)
 - 2026-10-27 01:00:47 (3) band 1: holdout R2 raw 0.9674 / noise-corrected 0.9979, spearman raw 0.9709, sim SE 0.76 pts, model err 0.20 pts, posterior SE 0.19 pts (2.1 min)
 - 2026-10-27 01:02:54 (3) band 2: holdout R2 raw 0.9699 / noise-corrected 0.9979, spearman raw 0.9721, sim SE 0.77 pts, model err 0.21 pts, posterior SE 0.20 pts (2.1 min)
+- 2026-10-27 01:05:06 (3) band 3: holdout R2 raw 0.9717 / noise-corrected 0.9980, spearman raw 0.9752, sim SE 0.77 pts, model err 0.21 pts, posterior SE 0.20 pts (2.2 min)
+- 2026-10-27 01:07:20 (3) band 4: holdout R2 raw 0.9735 / noise-corrected 0.9982, spearman raw 0.9794, sim SE 0.77 pts, model err 0.21 pts, posterior SE 0.20 pts (2.2 min)
+- 2026-10-27 01:09:36 (3) band 5: holdout R2 raw 0.9751 / noise-corrected 0.9984, spearman raw 0.9830, sim SE 0.77 pts, model err 0.20 pts, posterior SE 0.20 pts (2.3 min)
+- 2026-10-27 01:11:53 (3) band 6: holdout R2 raw 0.9761 / noise-corrected 0.9984, spearman raw 0.9854, sim SE 0.77 pts, model err 0.20 pts, posterior SE 0.19 pts (2.3 min)
+- 2026-10-27 01:14:09 (3) band 7: holdout R2 raw 0.9769 / noise-corrected 0.9984, spearman raw 0.9868, sim SE 0.77 pts, model err 0.21 pts, posterior SE 0.20 pts (2.3 min)
+- 2026-10-27 01:16:22 (3) band 8: holdout R2 raw 0.9776 / noise-corrected 0.9986, spearman raw 0.9877, sim SE 0.77 pts, model err 0.20 pts, posterior SE 0.19 pts (2.2 min)
+- 2026-10-27 01:18:38 (3) band 9: holdout R2 raw 0.9781 / noise-corrected 0.9986, spearman raw 0.9880, sim SE 0.77 pts, model err 0.20 pts, posterior SE 0.19 pts (2.3 min)
+- 2026-10-27 01:20:55 (3) band 10: holdout R2 raw 0.9778 / noise-corrected 0.9986, spearman raw 0.9872, sim SE 0.77 pts, model err 0.20 pts, posterior SE 0.19 pts (2.3 min)
+- 2026-10-27 01:23:17 (3) band 11: holdout R2 raw 0.9765 / noise-corrected 0.9985, spearman raw 0.9846, sim SE 0.77 pts, model err 0.20 pts, posterior SE 0.19 pts (2.4 min)
+- 2026-10-27 01:27:24 (3) precision holdout band 0 (4000 classes x 64000 boards, truth SE 0.19 pts): model R2 0.9957 spearman 0.9958; posterior R2 0.9958 spearman 0.9959; RMSE raw sim 0.79 / model 0.27 / posterior 0.27 pts
+- 2026-10-27 01:27:24 (3) precision holdout band 1 (4000 classes x 64000 boards, truth SE 0.19 pts): model R2 0.9960 spearman 0.9962; posterior R2 0.9961 spearman 0.9963; RMSE raw sim 0.78 / model 0.28 / posterior 0.27 pts
+- 2026-10-27 01:27:24 (3) precision holdout band 2 (4000 classes x 64000 boards, truth SE 0.19 pts): model R2 0.9964 spearman 0.9966; posterior R2 0.9966 spearman 0.9967; RMSE raw sim 0.80 / model 0.28 / posterior 0.27 pts
+- 2026-10-27 01:27:24 (3) precision holdout band 3 (4000 classes x 64000 boards, truth SE 0.19 pts): model R2 0.9965 spearman 0.9968; posterior R2 0.9967 spearman 0.9969; RMSE raw sim 0.79 / model 0.28 / posterior 0.28 pts
+- 2026-10-27 01:27:24 (3) precision holdout band 4 (4000 classes x 64000 boards, truth SE 0.19 pts): model R2 0.9969 spearman 0.9976; posterior R2 0.9971 spearman 0.9977; RMSE raw sim 0.79 / model 0.28 / posterior 0.27 pts
+- 2026-10-27 01:27:24 (3) precision holdout band 5 (4000 classes x 64000 boards, truth SE 0.19 pts): model R2 0.9972 spearman 0.9981; posterior R2 0.9973 spearman 0.9982; RMSE raw sim 0.79 / model 0.27 / posterior 0.27 pts
+- 2026-10-27 01:27:24 (3) precision holdout band 6 (4000 classes x 64000 boards, truth SE 0.19 pts): model R2 0.9972 spearman 0.9983; posterior R2 0.9973 spearman 0.9983; RMSE raw sim 0.79 / model 0.28 / posterior 0.27 pts
+- 2026-10-27 01:27:24 (3) precision holdout band 7 (4000 classes x 64000 boards, truth SE 0.19 pts): model R2 0.9973 spearman 0.9985; posterior R2 0.9974 spearman 0.9985; RMSE raw sim 0.80 / model 0.28 / posterior 0.27 pts
+- 2026-10-27 01:27:24 (3) precision holdout band 8 (4000 classes x 64000 boards, truth SE 0.19 pts): model R2 0.9973 spearman 0.9985; posterior R2 0.9974 spearman 0.9986; RMSE raw sim 0.80 / model 0.28 / posterior 0.27 pts
+- 2026-10-27 01:27:24 (3) precision holdout band 9 (4000 classes x 64000 boards, truth SE 0.19 pts): model R2 0.9974 spearman 0.9986; posterior R2 0.9975 spearman 0.9986; RMSE raw sim 0.78 / model 0.28 / posterior 0.27 pts
+- 2026-10-27 01:27:24 (3) precision holdout band 10 (4000 classes x 64000 boards, truth SE 0.19 pts): model R2 0.9974 spearman 0.9985; posterior R2 0.9975 spearman 0.9985; RMSE raw sim 0.80 / model 0.28 / posterior 0.27 pts
+- 2026-10-27 01:27:24 (3) precision holdout band 11 (4000 classes x 64000 boards, truth SE 0.19 pts): model R2 0.9973 spearman 0.9982; posterior R2 0.9973 spearman 0.9982; RMSE raw sim 0.80 / model 0.28 / posterior 0.27 pts
+- 2026-10-27 01:27:24 (3) feature model + EB shrinkage done for all bands
+- 2026-10-27 01:27:28 (5) start RFI widths: LJ_RFI=20.0 HJ_RFI=25.0 CO_RFI=32.0 BTN_RFI=48.0 SB_RFI=42.0
