@@ -145,4 +145,49 @@ counts with the 14 matchup cells that exist (`config/buckets.json`):
 - SRP SPR 6 is about 70% of all compute (2.2 h per chip-EV solve, 1.8 h per cold ICM solve).
   Ways to cut it, if the time is not available (each changes the spec, so it is a product
   decision): narrower SRP ranges (cost scales with combos per player), one river bet size at
-  SPR 6, or a 1% stop target for SPR 6 (the last 0.5 points take ~40% of the iterations).
+  SPR 6, or a 1% stop target for SPR 6 (going from 1% to 0.5% takes about half of the iterations).
+
+## Summary of session B1
+
+### Finished
+- Step 0 and tasks 1-9. Tests 1-4 pass, also under ASan + UBSan (`make asan`); test 1 also in full
+  (`make test-full`).
+- `config/buckets.json` (14 cells, 2 skipped), the Swift layer files (not compiled), the
+  benchmarks and the early estimate (above).
+- Extras that Part B2 will need: `range.c` (range notation), `handcat.c` (the spec's six hand
+  categories on the flop), `ss_warm_start`, 16-bit storage option, `ss_copy_strategy` /
+  `ss_evaluate`, placeholder ranges in `ranges/`, the `libreader.h` interface.
+
+### Not finished / not in scope of B1
+- Swift layer not compiled (no Swift on Linux here): see the checklist above.
+- `libreader.c` is a stub returning "not implemented"; the library format, the builder
+  (`tools/librarybuilder`), packing, `LiteLibrary.bin`/`.json`, `LIBRARY_FORMAT.md` and spec
+  tests 5 and 6 are Part B2's work.
+- Mac-only checks: Xcode build, parity of C `icm` with the app's Swift `ICMEngine`, device timings.
+
+### What Part B2 must know
+1. **Build:** `make` at the repo root; `make test` (fast, ~1 min), `make asan`. Engine headers:
+   `ICMKit/Sources/ICMCore/include/icmcore.h`. `ICMKit/README.md` has a solve example.
+   The repo root also holds an unrelated PLO6 project (`src/`, `app/`, root `PROGRESS.md`): leave
+   it alone; Part B progress lives in this file.
+2. **Solver API** (`streetsolver.h`): `ss_config_default`, `ss_create`, `ss_solve`, tree walking
+   with `ss_root` / `ss_node_*` / `ss_chance_child`, average strategy per node with
+   `ss_node_strategy` (`out[action * 1326 + combo]`). Player 0 = out of position (big blind),
+   1 = in position (button). Amounts are "to" amounts on the street. Values in `ss_result` are
+   relative to giving up the starting pot (chips, or $ in ICM mode).
+3. **ICM setup is B2's call:** `icm_stacks` are every player's chips *behind* at the flop, the pot
+   goes to the winner, other stacks are fixed. How the canonical stacks and the SPR's effective
+   stack combine (the spec only says effective stacks are set from the pot) must be decided and
+   written in `DECISIONS.md`. The estimate gave both players exactly the effective stack behind.
+4. **Compute plan:** see the early estimate. Use the mirrored-cell deduplication (16 ICM + 1
+   chip-EV solve per pot type, SPR and flop) and warm-start each ICM solve from the chip-EV
+   solve (`ss_warm_start(icm, chips, 1.0)`) for SPR 3.5 and 6. Run solves single-threaded, 4 at
+   a time (3 for SRP SPR 6), with `compact_storage = 2` and `memory_limit` about 4 GB.
+   Expect about 10 sessions for T1-T5 at the spec's settings.
+5. **Flop summaries:** `hand_category()` gives the spec's categories (definitions in
+   `DECISIONS.md`). For "bet %" use the hero's first decision node on the flop (IP: the node after
+   the OOP check). "Stack-off threshold" needs the flop nodes where hero faces an all-in.
+6. **Exploitability** is per player, in % of that player's pot value; the stop rule needs both
+   under 0.5%. Exploitability can rise briefly before converging (DCFR); judge by the final check.
+7. Placeholder ranges are wide (SRP 500-700 live combos per player); cost scales roughly with
+   combos, so real solver ranges (if narrower) make the library cheaper.
