@@ -242,3 +242,6 @@ Session B2 start: 2026-10-28 08:44:43 UTC (`date -u`). Wrap-up at 21:44 UTC.
   reserves each solver's real size once it exists (`ss_memory_required`) and a 13.5 GB budget.
   Consequence: the ICM solves whose chip-EV solve was already finished (3 pilot groups and the
   T2 3-bet Ks9s4s group) run cold instead of warm, so those pilot timings are pessimistic.
+- 11:37 **T1 complete** (204 / 204 solves, 336 entries, 3.4 core-hours). Packed:
+  `library/LiteLibrary.bin` 349 entries, 9,836 bytes, T1 flagged complete; test 6 passes
+  (3,490 values, 0 mismatches).
