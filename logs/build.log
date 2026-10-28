@@ -250,3 +250,15 @@
 2026-10-28 14:24:08 srp-spr35-9s5d2c-rcl-o4i5 T2 iterations 110 exploitability 0.413% / 0.415% seconds 973.3 memory 2224MB raw 14.6KB
 2026-10-28 14:26:09 srp-spr35-9s5d2c-rcl-o0i3 T2 iterations 140 exploitability 0.486% / 0.284% seconds 1235.2 memory 2224MB raw 14.6KB
 2026-10-28 14:26:29 srp-spr35-9s5d2c-rcl-o4i3 T2 iterations 120 exploitability 0.418% / 0.338% seconds 1038.5 memory 2224MB raw 14.1KB
+2026-10-28 14:36:20 srp-spr35-9s5d2c-rcl-o3i4 T2 iterations 110 exploitability 0.492% / 0.389% seconds 848.5 memory 2224MB raw 14.7KB
+2026-10-28 14:38:08 srp-spr35-9s5d2c-cl-o3i0 T2 iterations 110 exploitability 0.476% / 0.346% seconds 839.4 memory 2224MB raw 13.7KB
+2026-10-28 14:41:39 srp-spr35-9s5d2c-cl-o2i1 T2 iterations 120 exploitability 0.493% / 0.407% seconds 909.6 memory 2224MB raw 14.0KB
+2026-10-28 14:42:48 srp-spr35-9s5d2c-cl-o0i3 T2 iterations 130 exploitability 0.461% / 0.323% seconds 998.3 memory 2224MB raw 14.4KB
+2026-10-28 14:51:49 srp-spr35-KsKd4c-cl-o5i3 T2 iterations 120 exploitability 0.461% / 0.377% seconds 540.5 memory 1327MB raw 13.3KB
+2026-10-28 14:54:24 srp-spr35-9s5d2c-cl-o1i2 T2 iterations 140 exploitability 0.496% / 0.374% seconds 1083.8 memory 2224MB raw 14.2KB
+2026-10-28 14:55:34 srp-spr35-9s5d2c-cl-o1i0 T2 iterations 140 exploitability 0.458% / 0.384% seconds 1045.3 memory 2224MB raw 13.8KB
+2026-10-28 15:01:33 srp-spr35-KsKd4c-cl-o3i5 T2 iterations 130 exploitability 0.450% / 0.474% seconds 584.0 memory 1327MB raw 13.8KB
+2026-10-28 15:03:19 srp-spr35-KsKd4c-rcl-o5i1 T2 iterations 120 exploitability 0.481% / 0.443% seconds 535.2 memory 1327MB raw 13.1KB
+2026-10-28 15:06:33 srp-spr35-9s5d2c-cl-o0i1 T2 iterations 200 exploitability 0.491% / 0.477% seconds 1492.7 memory 2224MB raw 14.9KB
+2026-10-28 15:06:47 srp-spr35-KsKd4c-rcl-o1i5 T2 iterations 150 exploitability 0.411% / 0.445% seconds 673.0 memory 1327MB raw 14.0KB
+2026-10-28 15:12:02 srp-spr35-KsKd4c-rcl-o3i0 T2 iterations 140 exploitability 0.354% / 0.485% seconds 629.0 memory 1327MB raw 12.3KB
