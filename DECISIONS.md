@@ -51,7 +51,7 @@ Decisions taken while building Part B unattended. Newest sessions append at the 
 - 60 ordered pairs (30 per table). Quartiles use linear interpolation (numpy's default):
   thresholds 3.59%, 6.98%, 10.11%. Bucket b holds premiums in [t(b-1), t(b)); bucket 3 is >= 10.11%.
 - Bucket centre = midpoint of its range, with the smallest and largest observed premium
-  (1.18% and 23.54%) as the outer edges. The pair chosen for a cell is the one, among the pairs
+  (0.97% and 19.25%) as the outer edges. The pair chosen for a cell is the one, among the pairs
   whose (hero, villain) premiums fall in that cell, with the smallest Euclidean distance to the
   cell centre.
 - Values were cross-checked against an independent brute-force Python ICM (max diff 5e-7).
