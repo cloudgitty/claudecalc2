@@ -9,6 +9,8 @@
  *       --stop-at EPOCH   start no new solve after this Unix time
  *       --max N           start at most N solves
  *       --only a,b,...    only these solve ids (in manifest order)
+ *       --first a,b,...   run these solve ids first (in the given order), then the tiers
+ *   librarybuilder test5 a,b,...           spec test 5 on finished solves (5+ per pot type)
  *   librarybuilder pack                     results/ -> library/LiteLibrary.bin and .json
  *   librarybuilder test6                    spec test 6 on library/LiteLibrary.bin
  *   librarybuilder status                   solved / left per tier, compute hours, exploitability
@@ -117,7 +119,14 @@ typedef struct {
     int done, failed;
 } Runner;
 
-static int needs_warm(const LbSolve *s) { return s->icm && s->spr_idx >= 1 && s->chip_solve >= 0; }
+/* ICM solves at SPR 3.5 and 6 warm-start from their chip-EV solve (B1: no gain at
+   SPR 1.5). LB_WARM_ALL=1 also warm-starts SPR 1.5 (used to test the path quickly). */
+static int g_warm_all;   /* set once in cmd_run before the workers start */
+
+static int needs_warm(const LbSolve *s)
+{
+    return s->icm && (s->spr_idx >= 1 || g_warm_all) && s->chip_solve >= 0;
+}
 
 /* Takes the warm-start source (if any) and releases this job's claim on it. */
 static void release_holder(Runner *R, Holder *h, ss_solver *dst, int *warm_used)
@@ -291,11 +300,19 @@ static int parse_list(const char *s, int *out, int max)
     return n;
 }
 
+static int in_list(const char *list, const char *id)
+{
+    size_t l = strlen(id);
+    for (const char *p = list; (p = strstr(p, id)) != NULL; p += l)
+        if ((p == list || p[-1] == ',') && (p[l] == 0 || p[l] == ',')) return 1;
+    return 0;
+}
+
 static int cmd_run(int argc, char **argv)
 {
     int tiers[5] = { 1, 2, 3, 4, 5 }, ntiers = 5, jobs = 4, max_start = 0;
     double budget = 13000, stop_at = 0;
-    const char *only = NULL;
+    const char *only = NULL, *first = NULL;
     for (int i = 2; i < argc; i++) {
         if (!strcmp(argv[i], "--tiers") && i + 1 < argc) ntiers = parse_list(argv[++i], tiers, 5);
         else if (!strcmp(argv[i], "--jobs") && i + 1 < argc) jobs = atoi(argv[++i]);
@@ -303,9 +320,11 @@ static int cmd_run(int argc, char **argv)
         else if (!strcmp(argv[i], "--stop-at") && i + 1 < argc) stop_at = atof(argv[++i]);
         else if (!strcmp(argv[i], "--max") && i + 1 < argc) max_start = atoi(argv[++i]);
         else if (!strcmp(argv[i], "--only") && i + 1 < argc) only = argv[++i];
+        else if (!strcmp(argv[i], "--first") && i + 1 < argc) first = argv[++i];
         else { fprintf(stderr, "unknown option %s\n", argv[i]); return 2; }
     }
     if (jobs < 1) jobs = 1;
+    g_warm_all = getenv("LB_WARM_ALL") && atoi(getenv("LB_WARM_ALL"));
     LbBuckets b;
     LbManifest *m = calloc(1, sizeof(LbManifest));
     if (!m || lb_load_buckets(BUCKETS_PATH, &b) || lb_read_manifest(m, MANIFEST_DIR)) { free(m); return 1; }
@@ -325,15 +344,33 @@ static int cmd_run(int argc, char **argv)
     /* state -1: not part of this run (already solved or filtered out) */
     for (int i = 0; i < m->nsolves; i++) R.state[i] = -1;
     int skipped = 0;
+    if (first) {
+        /* priority list, in the given order */
+        const char *p = first;
+        while (*p) {
+            char id[64];
+            size_t l = strcspn(p, ",");
+            if (l >= sizeof id) l = sizeof id - 1;
+            memcpy(id, p, l);
+            id[l] = 0;
+            p += l;
+            if (*p == ',') p++;
+            int si = lb_find_solve(m, id);
+            if (si < 0) { fprintf(stderr, "unknown solve id %s\n", id); continue; }
+            if (R.state[si] != -1) continue;
+            char path[256];
+            snprintf(path, sizeof path, "%s/%s.json.gz", RESULTS_DIR, id);
+            if (lb_file_exists(path)) { skipped++; continue; }
+            R.jobs[R.njobs++] = si;
+            R.state[si] = J_PENDING;
+        }
+    }
     for (int t = 0; t < ntiers; t++)
         for (int i = 0; i < m->nsolves; i++) {
             const LbSolve *s = &m->solves[i];
             if (s->tier != tiers[t]) continue;
-            if (only) {
-                const char *p = strstr(only, s->id);
-                size_t l = strlen(s->id);
-                if (!p || (p != only && p[-1] != ',') || (p[l] && p[l] != ',')) continue;
-            }
+            if (R.state[i] != -1) continue;   /* already queued by --first */
+            if (only && !in_list(only, s->id)) continue;
             char path[256];
             snprintf(path, sizeof path, "%s/%s.json.gz", RESULTS_DIR, s->id);
             if (lb_file_exists(path)) { skipped++; continue; }
@@ -453,6 +490,36 @@ int main(int argc, char **argv)
         return 0;
     }
     if (!strcmp(argv[1], "run")) return cmd_run(argc, argv);
+    if (!strcmp(argv[1], "test5")) {
+        /* Spec test 5: exploitability reaches the target on (at least) 5 sample spots
+           of each pot type. Checks the finished results of the listed solves. */
+        if (argc < 3) { fprintf(stderr, "usage: librarybuilder test5 id,id,...\n"); return 2; }
+        LbManifest *m = calloc(1, sizeof(LbManifest));
+        if (!m || lb_read_manifest(m, MANIFEST_DIR)) { free(m); return 1; }
+        int ok_count[2] = { 0, 0 }, bad = 0;
+        for (int i = 0; i < m->nsolves; i++) {
+            const LbSolve *s = &m->solves[i];
+            if (!in_list(argv[2], s->id)) continue;
+            char path[256];
+            snprintf(path, sizeof path, "%s/%s.json.gz", RESULTS_DIR, s->id);
+            char *js = lb_file_exists(path) ? lb_read_gz(path) : NULL;
+            if (!js) { printf("  %-34s not solved\n", s->id); bad++; continue; }
+            const char *end = js + strlen(js), *e = lb_json_find(js, end, "exploitability_pct");
+            double e0 = 99, e1 = 99, it = 0;
+            if (e) sscanf(e, "[%lf, %lf]", &e0, &e1);
+            lb_json_number(js, end, "iterations", &it);
+            int pass = e0 <= 0.5 && e1 <= 0.5 && it < 1000;
+            printf("  %-34s %-3s SPR %-3g %s iterations %4.0f exploitability %.3f%% / %.3f%% %s\n", s->id,
+                   LB_POT_NAME[s->pot_type], LB_SPR[s->spr_idx], s->icm ? "ICM " : "chip", it, e0, e1, pass ? "ok" : "FAIL");
+            if (pass) ok_count[s->pot_type]++; else bad++;
+            free(js);
+        }
+        int pass = bad == 0 && ok_count[0] >= 5 && ok_count[1] >= 5;
+        printf("test 5: %d single-raised and %d 3-bet spots reached 0.5%%, %d failed: %s\n", ok_count[0], ok_count[1], bad,
+               pass ? "PASS" : "FAIL");
+        free(m);
+        return pass ? 0 : 1;
+    }
     if (!strcmp(argv[1], "status")) return cmd_status();
     if (!strcmp(argv[1], "pack") || !strcmp(argv[1], "test6")) {
         LbBuckets b;

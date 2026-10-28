@@ -196,3 +196,26 @@ Iterations to 0.5% of the pot, single solves:
   canonical values" can't hold literally (a 10bb player can't have 36bb behind at SPR 6). The
   bigger player keeps their extra chips (behind > E); the solver's effective stack is E.
 - Payouts 40/25/15/10/6/4, all six players.
+
+### Summaries (`tools/lb_summary.c`) and reader (`libreader.c`)
+- Definitions are in `LIBRARY_FORMAT.md` ("How the values are computed"). Main choices: bet % is
+  measured at hero's first chance to bet on the flop using hero's preflop range weights; bet
+  size is the size with the most betting mass; check-raise % averages over the in-position bet
+  sizes that can be raised, weighted by how often each is bet; the stack-off threshold pools all
+  flop nodes where hero faces an all-in, weighted by the probability of reaching them; bluff % is
+  the weak-draw + air share of the betting mass.
+- Each result stores both players' summaries, so one solve fills its two library entries.
+- Chip-EV values of an entry come from the chip-EV solve of the same spot, for the same seat
+  (position).
+- Reader: bilinear over premium bucket centres, linear over SPR, average over the solved flops of
+  the class; categorical values from the heaviest corner; nearest-spot fallback otherwise.
+  Premiums outside the outer bucket centres are clamped.
+
+### Tests 5 and 6
+- Test 6 is `librarybuilder test6` on the real `library/LiteLibrary.bin`: every value of every
+  packed entry is read back with `libreader` and compared with the value in the result file
+  (relative tolerance 2^-11, the binary16 rounding bound). The unit test `test_library` checks the
+  same round trip plus queries on synthetic data.
+- Test 5 is `librarybuilder test5 $(cat manifest/pilot.txt)`: the 20 pilot solves (10 per pot type,
+  all three SPRs, five flop classes, chip EV and ICM) must all reach 0.5% for both players below
+  the 1000-iteration cap. The spec asks for 5 per pot type; the pilot gives 10.

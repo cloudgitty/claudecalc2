@@ -217,3 +217,21 @@ Session B2 start: 2026-10-28 08:44:43 UTC (`date -u`). Wrap-up at 21:44 UTC.
   B1 left only the library reader (B2 task 6) and the Swift compile (needs a Mac).
 - 08:45 Task 2 (ranges): the repo has no preflop solver, so the six placeholder files from B1 in
   `ranges/` are used as they are (`"placeholder": true`, listed in `DECISIONS.md`).
+- 08:53 Task 3 (manifest): `librarybuilder manifest` -> `manifest/solves.tsv` (1,836 solves) and
+  `manifest/entries.tsv` (3,024 library entries): T1-T3 204 solves / 336 entries each, T4 816 /
+  1,344, T5 408 / 672. Mapping and ICM table choices in `DECISIONS.md`.
+- 08:55 Task 4 (builder): `tools/librarybuilder` (`librarybuilder.c`, `lb_common.c`,
+  `lb_summary.c`, `lb_pack.c`): threaded runner (4 single-threaded solves, memory budget,
+  `--stop-at`, `--first`), resumable (skips `results/<id>.json.gz` that exist), atomic gzip
+  results, raw flop strategies in `raw/`, log in `logs/build.log`. ICM solves at SPR 3.5 / 6
+  warm-start from their chip-EV solve held in memory.
+- 08:57 Task 5 (summaries) and task 6 (packer, reader): `lb_summary.c` (five numbers + hand
+  categories per player), `lb_pack.c` (`library/LiteLibrary.bin` + `.json`), `libreader.c`
+  (interpolation + nearest-spot fallback), `LIBRARY_FORMAT.md`, Swift `PostflopLibrary.swift`
+  (**not yet compiled**). New unit test `test_library` (synthetic results: round trip,
+  exact lookup, bucket and SPR interpolation, fallback, CRC) passes.
+- 09:06 Sanitizers: `make asan` (8 test programs incl. `test_library`) passes; the builder ran 2
+  real solves and a warm-start chain (chip EV + 2 ICM) under ASan + UBSan with no reports.
+- 09:13 Task 8 + 9 started as one run: `librarybuilder run --jobs 4 --tiers 1,2 --first <pilot>
+  --stop-at 21:20 UTC`. The 20 pilot solves (`manifest/pilot.txt`, 4 per tier, both pot types,
+  chip EV + ICM pairs) go first, then T1, then T2. Results are committed about every 45 minutes.
