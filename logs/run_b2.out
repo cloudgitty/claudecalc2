@@ -81,3 +81,35 @@ librarybuilder: 415 solves to run, 5 already solved, 4 jobs at a time, budget 13
 2026-10-28 09:58:03 3bp-spr15-Ks9s4s-rcl-o3i4 T1 iterations 60 exploitability 0.495% / 0.176% seconds 11.6 memory 50MB raw 1.8KB
 2026-10-28 09:58:21 3bp-spr15-Ks9s4s-cl-o3i0 T1 iterations 90 exploitability 0.401% / 0.241% seconds 18.3 memory 50MB raw 1.9KB
 2026-10-28 09:58:34 3bp-spr15-Ks9s4s-cl-o0i3 T1 iterations 60 exploitability 0.460% / 0.178% seconds 12.2 memory 50MB raw 1.8KB
+2026-10-28 09:58:51 3bp-spr15-Ks9s4s-cl-o2i1 T1 iterations 90 exploitability 0.454% / 0.213% seconds 17.1 memory 50MB raw 1.9KB
+2026-10-28 09:59:04 3bp-spr15-Ks9s4s-cl-o1i2 T1 iterations 70 exploitability 0.361% / 0.151% seconds 13.3 memory 50MB raw 1.8KB
+2026-10-28 09:59:26 3bp-spr15-Ks9s4s-cl-o1i0 T1 iterations 110 exploitability 0.440% / 0.181% seconds 21.8 memory 50MB raw 1.9KB
+2026-10-28 09:59:41 3bp-spr15-Ks9s4s-cl-o0i1 T1 iterations 80 exploitability 0.406% / 0.134% seconds 15.0 memory 50MB raw 1.7KB
+2026-10-28 10:00:10 3bp-spr15-9s8d7c-chip T1 iterations 50 exploitability 0.364% / 0.200% seconds 29.0 memory 173MB raw 2.5KB
+2026-10-28 10:00:38 3bp-spr15-9s8d7c-cl-o5i3 T1 iterations 50 exploitability 0.442% / 0.339% seconds 28.1 memory 173MB raw 2.6KB
+2026-10-28 10:01:12 3bp-spr15-9s8d7c-cl-o3i5 T1 iterations 60 exploitability 0.394% / 0.237% seconds 33.4 memory 173MB raw 2.6KB
+2026-10-28 10:01:41 3bp-spr15-9s8d7c-rcl-o5i1 T1 iterations 50 exploitability 0.415% / 0.344% seconds 28.9 memory 173MB raw 2.6KB
+2026-10-28 10:02:14 3bp-spr15-9s8d7c-rcl-o1i5 T1 iterations 60 exploitability 0.412% / 0.175% seconds 33.5 memory 173MB raw 2.5KB
+2026-10-28 10:02:48 3bp-spr15-9s8d7c-rcl-o3i0 T1 iterations 60 exploitability 0.424% / 0.431% seconds 33.5 memory 173MB raw 2.6KB
+2026-10-28 10:03:09 3bp-spr15-9s8d7c-rcl-o0i3 T1 iterations 40 exploitability 0.260% / 0.322% seconds 21.2 memory 173MB raw 2.7KB
+2026-10-28 10:03:39 3bp-spr15-9s8d7c-rcl-o5i4 T1 iterations 50 exploitability 0.494% / 0.345% seconds 29.5 memory 173MB raw 2.6KB
+2026-10-28 10:04:13 3bp-spr15-9s8d7c-rcl-o4i5 T1 iterations 60 exploitability 0.369% / 0.239% seconds 34.2 memory 173MB raw 2.6KB
+2026-10-28 10:04:42 3bp-spr15-9s8d7c-rcl-o4i3 T1 iterations 50 exploitability 0.476% / 0.411% seconds 29.4 memory 173MB raw 2.7KB
+2026-10-28 10:05:19 3bp-spr15-9s8d7c-rcl-o3i4 T1 iterations 60 exploitability 0.432% / 0.199% seconds 36.5 memory 173MB raw 2.6KB
+2026-10-28 10:05:57 3bp-spr15-9s8d7c-cl-o3i0 T1 iterations 60 exploitability 0.446% / 0.448% seconds 37.7 memory 173MB raw 2.7KB
+2026-10-28 10:06:20 3bp-spr15-9s8d7c-cl-o0i3 T1 iterations 40 exploitability 0.386% / 0.438% seconds 23.7 memory 173MB raw 2.7KB
+2026-10-28 10:06:57 3bp-spr15-9s8d7c-cl-o2i1 T1 iterations 60 exploitability 0.445% / 0.415% seconds 36.3 memory 173MB raw 2.7KB
+2026-10-28 10:07:22 3bp-spr15-9s8d7c-cl-o1i2 T1 iterations 40 exploitability 0.362% / 0.433% seconds 25.0 memory 173MB raw 2.7KB
+2026-10-28 10:08:25 3bp-spr15-9s8d7c-cl-o1i0 T1 iterations 100 exploitability 0.424% / 0.153% seconds 62.6 memory 173MB raw 2.6KB
+2026-10-28 10:08:51 3bp-spr15-9s8d7c-cl-o0i1 T1 iterations 50 exploitability 0.323% / 0.291% seconds 26.7 memory 173MB raw 2.6KB
+Terminated
+runner exit 143
+librarybuilder: 312 solves to run, 112 already solved, 4 jobs at a time, budget 13500 MB
+2026-10-28 10:27:07 3bp-spr60-Jh7h3h-rcl-o3i0 T5 iterations 220 exploitability 0.486% / 0.388% seconds 427.7 memory 544MB raw 4.8KB
+2026-10-28 10:34:00 3bp-spr60-AsJs5d-cl-o2i1 T3 iterations 230 exploitability 0.408% / 0.473% seconds 840.5 memory 1079MB raw 4.5KB
+2026-10-28 10:37:00 3bp-spr35-8s8d3h-cl-o0i1 T4 iterations 130 exploitability 0.440% / 0.286% seconds 180.2 memory 407MB raw 5.0KB
+2026-10-28 10:37:57 srp-spr15-Qh9h4c-chip T4 iterations 50 exploitability 0.409% / 0.342% seconds 56.3 memory 299MB raw 6.0KB
+2026-10-28 10:39:01 srp-spr15-Qh9h4c-rcl-o3i4 T4 iterations 60 exploitability 0.350% / 0.279% seconds 63.7 memory 299MB raw 5.8KB
+2026-10-28 10:40:28 srp-spr15-Ks7d2c-chip T1 iterations 50 exploitability 0.458% / 0.486% seconds 87.4 memory 490MB raw 7.0KB
+2026-10-28 10:41:46 srp-spr35-9s8d7c-chip T2 iterations 120 exploitability 0.440% / 0.325% seconds 878.0 memory 2132MB raw 12.6KB
+2026-10-28 10:42:45 srp-spr15-Ks7d2c-cl-o2i1 T1 iterations 80 exploitability 0.414% / 0.373% seconds 136.3 memory 490MB raw 6.0KB
