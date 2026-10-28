@@ -59,3 +59,29 @@ When the package is first opened in Xcode (iOS 18 target):
 10. Device timings: run a river and a turn solve on an iPhone 13 (see Benchmarks).
 - 02:45 Re-ran `make asan` on the final engine (16-bit storage, warm start, hand categories
   added since 00:51): all 7 test programs pass under ASan + UBSan (+ LeakSanitizer), no reports.
+
+## Benchmarks (task 8): on-device spots vs the iPhone 13 targets
+
+Machine: cloud Intel Xeon vCPU @ 2.8 GHz, gcc 13 `-O3` for baseline x86-64 (SSE2, similar vector
+width to ARM NEON; no `-march=native`). An iPhone 13 (A15: 2 performance + 4 efficiency cores)
+is ARM, so these numbers are a guide only; the real check is on a device.
+Tool: `build/bench <ranges.json> [river|turn|all]` (env `ICM=1` for ICM payoffs, `ONE_THREAD=1`).
+Spec tree (33% / 75% / all-in, raise 3x, one raise), stop at 0.5% of the pot, cap 1000 iterations.
+Ranges are the full placeholder preflop ranges (a worst case: on device the ranges reaching the
+turn or river are narrower after earlier action).
+
+| Spot | Ranges (live combos OOP/IP) | Mode | 1 thread | 4 threads | Iterations |
+| --- | --- | --- | --- | --- | --- |
+| River Ks7d2c4h9s, pot 20, stack 60 | SRP 38bb (599/535) | chip EV | 0.02 s | 0.03 s | 50 |
+| River, same | SRP 38bb | ICM | 0.03 s | - | 70 |
+| River, same | 3-bet 97bb (140/158) | chip / ICM | 0.008 s | - | 80 |
+| Turn+river Ks7d2c4h, pot 10, stack 50 | SRP 38bb (630/563) | chip EV | 12.6-13.5 s | 4.6 s | 140 |
+| Turn+river, same | SRP 38bb | ICM | 12.4 s | - | 130 |
+| Turn+river, same | 3-bet 97bb (145/167) | chip EV | 3.4 s | - | 140 |
+| Turn+river, same | 3-bet 97bb | ICM | 4.8 s | - | 190 |
+
+Against the targets: river under 2 s is met with a margin of about 60x; turn plus river under
+20 s is met single-threaded even with full-width SRP ranges (12-13.5 s) and with 4 threads in
+4.6 s. Memory: river < 1 MB, turn 10-40 MB (16-bit storage halves it if ever needed).
+Turn trees have 8,253 nodes (48 river cards, no suit symmetry on this board); boards with suit
+symmetry are smaller.
