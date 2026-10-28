@@ -162,3 +162,6 @@ Iterations to 0.5% of the pot, single solves:
   chips 130 (vs 110). No setting is better across the board, so the defaults stay.
 - Exploitability is not always monotonic with beta 0 (a temporary rise of up to ~40% was seen
   twice, e.g. SRP SPR 6 at iteration 200); the solves still converge.
+- Warm-start source (3-bet SPR 3.5, Ks7d2c, a second matchup on the runaway table, iterations to
+  0.5%): cold 170; warm from the chip-EV solve 120; warm from another matchup's ICM solve 150.
+  So every ICM solve should warm-start from the chip-EV solve of its spot, not from a neighbour.
