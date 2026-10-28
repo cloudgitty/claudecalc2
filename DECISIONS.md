@@ -225,3 +225,13 @@ Iterations to 0.5% of the pot, single solves:
   solver's own allocations (`ss_memory_required`) plus held chip-EV solvers, but not malloc
   overhead, thread stacks or summary buffers, so it must stay well below the limit: use
   `--budget-mb 10500` (13.5 GB was killed at 12:01 in B2).
+
+## Build session 3
+
+- Warm starts load the chip-EV state file directly into each ICM solver instead of copying from
+  a chip-EV solver held in memory (same result, no extra memory). State files are removed once
+  every dependent of the run has loaded them; leftover files after a stop are reused next run.
+- Memory budget 11 GB (no held solvers any more; B2 measured resident memory about 0.5 GB under
+  the budget). No new solve after 10:00 UTC so that a 2-hour single-raised SPR 6 solve still ends
+  before the 11:21 wrap-up.
+- `tools/verify_results.py` is the task-1 check of `results/` against the manifest.

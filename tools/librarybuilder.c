@@ -25,6 +25,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/statvfs.h>
 #include <time.h>
 
 #define RESULTS_DIR "results"
@@ -98,11 +99,11 @@ static size_t write_summary(char *p, size_t n, const LbSummary *s)
 
 enum { J_PENDING = 0, J_RUNNING, J_DONE, J_FAILED };
 
+/* Warm-start source of a chip-EV solve: its state file in STATE_DIR. No solver is
+   kept in memory; each dependent ICM solve loads the file into its own solver. */
 typedef struct {
-    ss_solver *solver;    /* finished chip-EV solve kept as warm-start source */
-    int waiting;          /* dependent ICM jobs of this run that have not copied it yet */
-    double mem_mb;
-    int on_disk;          /* a saved state exists in STATE_DIR (load it when first needed) */
+    int waiting;          /* dependent ICM jobs of this run that have not loaded it yet */
+    int on_disk;          /* the state file exists */
 } Holder;
 
 typedef struct {
@@ -125,6 +126,14 @@ typedef struct {
    SPR 1.5). LB_WARM_ALL=1 also warm-starts SPR 1.5 (used to test the path quickly). */
 static int g_warm_all;   /* set once in cmd_run before the workers start */
 
+/* Free disk space (GB) where the state files go. */
+static double disk_free_gb(void)
+{
+    struct statvfs v;
+    if (statvfs(".", &v) != 0) return 1e9;
+    return (double)v.f_bavail * (double)v.f_frsize / 1e9;
+}
+
 static int needs_warm(const LbSolve *s)
 {
     return s->icm && (s->spr_idx >= 1 || g_warm_all) && s->chip_solve >= 0;
@@ -135,54 +144,33 @@ static void state_path(const Runner *R, int chip, char *out, size_t n)
     snprintf(out, n, "%s/%s.bin", STATE_DIR, R->m->solves[chip].id);
 }
 
-/* Rebuilds a chip-EV solver from its saved state (same configuration as when it ran). */
-static ss_solver *load_saved(Runner *R, int chip)
-{
-    float *ranges = malloc(sizeof(float) * 2 * NUM_COMBOS);
-    ss_config c;
-    char err[256], path[256];
-    if (!ranges || lb_spot_config(R->b, &R->m->solves[chip], &c, ranges, NULL)) { free(ranges); return NULL; }
-    ss_solver *S = ss_create(&c, err, sizeof err);
-    free(ranges);
-    state_path(R, chip, path, sizeof path);
-    if (S && ss_load_state(S, path)) { ss_destroy(S); S = NULL; }
-    return S;
-}
-
-/* Takes the warm-start source (if any) and releases this job's claim on it.
+/* Warm-starts dst from the chip-EV state file (if there is one) and releases this
+   job's claim on it; the file is removed after the last dependent has loaded it.
    h - R->holders is the chip-EV solve index. */
 static void release_holder(Runner *R, Holder *h, ss_solver *dst, int *warm_used)
 {
     if (!h) return;
     int chip = (int)(h - R->holders);
-    pthread_mutex_lock(&R->lock);
-    if (dst && !h->solver && h->on_disk) {
-        h->on_disk = 0;   /* one attempt */
-        ss_solver *S = load_saved(R, chip);
-        if (S) {
-            h->solver = S;
-            h->mem_mb = ss_memory_required(S) / 1048576.0;
-            R->reserved_mb += h->mem_mb;
+    char path[256];
+    state_path(R, chip, path, sizeof path);
+    if (dst && h->on_disk) {
+        if (ss_load_state(dst, path) == 0) {
+            ss_restart_average(dst, 1.0);
+            *warm_used = 1;
+        } else {
+            ss_restart_average(dst, 0.0);   /* a failed read may leave partial data: clear it (cold start) */
         }
     }
-    if (dst && h->solver && ss_warm_start(dst, h->solver, 1.0) == 0) *warm_used = 1;
-    if (--h->waiting <= 0) {
-        if (h->solver) {
-            ss_destroy(h->solver);
-            h->solver = NULL;
-            R->reserved_mb -= h->mem_mb;
-        }
-        char path[256];
-        state_path(R, chip, path, sizeof path);
+    pthread_mutex_lock(&R->lock);
+    if (--h->waiting <= 0 && h->on_disk) {
         remove(path);
-        pthread_cond_broadcast(&R->cond);
+        h->on_disk = 0;
     }
     pthread_mutex_unlock(&R->lock);
 }
 
-/* Returns 1 if the finished solver was kept as a warm-start source. *mem_mb is the
-   job's reservation: an estimate on entry, replaced by the solver's real size once
-   it exists (the caller releases *mem_mb). */
+/* *mem_mb is the job's reservation: an estimate on entry, replaced by the solver's
+   real size once it exists (the caller releases *mem_mb). Returns 0. */
 static int run_one(Runner *R, int solve, Holder *h, double *mem_mb, int *warm_used)
 {
     const LbSolve *s = &R->m->solves[solve];
@@ -266,15 +254,16 @@ static int run_one(Runner *R, int solve, Holder *h, double *mem_mb, int *warm_us
     }
 
     int keep = 0;
+    int saved = 0;
     if (!s->icm && R->holders[solve].waiting > 0) {
-        /* save the state so warm starts survive a restart or crash */
+        /* save the state: dependents load it (also after a restart or crash) */
         char path[256];
         state_path(R, solve, path, sizeof path);
-        if (ss_save_state(S, path)) { fprintf(stderr, "%s: cannot save state\n", s->id); remove(path); }
+        if (ss_save_state(S, path) == 0) saved = 1;
+        else { fprintf(stderr, "%s: cannot save state\n", s->id); remove(path); }
     }
     pthread_mutex_lock(&R->lock);
-    Holder *own = &R->holders[solve];
-    if (!s->icm && own->waiting > 0) { own->solver = S; own->mem_mb = *mem_mb; keep = 1; }
+    if (saved) R->holders[solve].on_disk = 1;
     R->state[solve] = J_DONE;
     R->done++;
     char line[512];
@@ -309,6 +298,8 @@ static void *worker(void *arg)
                     continue;   /* wait for its chip-EV solve */
                 double mem = MEM_MB[s->pot_type][s->spr_idx];
                 if (R->running > 0 && R->reserved_mb + mem > R->budget_mb) continue;
+                /* a chip-EV solve with dependents writes a state file of up to ~3.5 GB */
+                if (!s->icm && R->holders[si].waiting > 0 && R->running > 0 && disk_free_gb() < 10.0) continue;
                 pick = si;
                 break;
             }
@@ -327,15 +318,11 @@ static void *worker(void *arg)
                 R->state[pick] = J_DONE;
                 if (needs_warm(s) && R->holders[s->chip_solve].waiting > 0) {
                     Holder *hs = &R->holders[s->chip_solve];
-                    if (--hs->waiting <= 0) {
-                        if (hs->solver) {
-                            ss_destroy(hs->solver);
-                            hs->solver = NULL;
-                            R->reserved_mb -= hs->mem_mb;
-                        }
+                    if (--hs->waiting <= 0 && hs->on_disk) {
                         char sp[256];
                         state_path(R, s->chip_solve, sp, sizeof sp);
                         remove(sp);
+                        hs->on_disk = 0;
                     }
                 }
                 pthread_cond_broadcast(&R->cond);
@@ -347,14 +334,15 @@ static void *worker(void *arg)
         R->started++;
         R->reserved_mb += mem;
         Holder *h = needs_warm(s) ? &R->holders[s->chip_solve] : NULL;
-        if (h && R->state[s->chip_solve] == -1 && !h->on_disk && !h->solver) h = NULL;   /* no source: cold start */
+        if (h && R->state[s->chip_solve] == -1 && !h->on_disk) h = NULL;   /* no source: cold start */
         pthread_mutex_unlock(&R->lock);
 
         int used = 0;
         int kept = run_one(R, pick, h, &mem, &used);
 
         pthread_mutex_lock(&R->lock);
-        if (!kept) R->reserved_mb -= mem;   /* a kept chip-EV solver stays reserved until released */
+        (void)kept;
+        R->reserved_mb -= mem;
         R->running--;
         pthread_cond_broadcast(&R->cond);
     }
@@ -477,7 +465,6 @@ static int cmd_run(int argc, char **argv)
     if (jobs > 64) jobs = 64;
     for (int i = 0; i < jobs; i++) pthread_create(&th[i], NULL, worker, &R);
     for (int i = 0; i < jobs; i++) pthread_join(th[i], NULL);
-    for (int i = 0; i < m->nsolves; i++) ss_destroy(R.holders[i].solver);
     printf("librarybuilder: %d solved, %d failed\n", R.done, R.failed);
     if (R.log) fclose(R.log);
     pthread_mutex_destroy(&R.lock);

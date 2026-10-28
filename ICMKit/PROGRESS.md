@@ -377,3 +377,23 @@ Single-raised SPR 6 solves (3.6 GB each) limit concurrency to 2-3 under the 10.5
 6. **Not done here:** Swift layer (incl. `PostflopLibrary.swift`) still not compiled; Mac checks
    (Xcode build, ICM parity with the app's `ICMEngine`, device timings) remain.
 7. Placeholder ranges are still in use; real preflop ranges would change every result.
+
+---
+
+# Build session 3
+
+Start: 2026-10-28 22:21:34 UTC (`date -u`). Wrap-up at 11:21 UTC; no new solves after 10:00 UTC
+(a single-raised SPR 6 solve can take ~2 hours).
+
+## Log
+- 22:25 Task 1 (check): core, tools and tests build; `make test` passes (8 programs);
+  `python3 tools/verify_results.py`: all 431 results match the manifest (ids, tier, pot type,
+  SPR, flop, mode, seats, both summaries, exploitability <= 0.5%), no stray raw files.
+- 22:28 Builder change: chip-EV solvers are no longer held in memory for warm starts. The
+  chip-EV state is saved to `work/state/`, and each dependent ICM solve loads it straight into
+  its own solver (`ss_load_state` + `ss_restart_average`). Identical results to the in-memory
+  path (same iterations); tested normally and under ASan + UBSan. Frees up to 3.6 GB per
+  single-raised SPR 6 group. Chip-EV solves with dependents are not started while less than
+  10 GB of disk is free.
+- 22:29 Task 2 (solve): `librarybuilder run --jobs 4 --tiers 3,4,5 --budget-mb 11000
+  --stop-at 10:00 UTC` (1,405 solves pending). Log: `logs/run_s3.out`, `logs/build.log`.
