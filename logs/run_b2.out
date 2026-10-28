@@ -226,3 +226,9 @@ librarybuilder: 312 solves to run, 112 already solved, 4 jobs at a time, budget 
 Killed
 runner exit 137
 librarybuilder: 194 solves to run, 234 already solved, 4 jobs at a time, budget 10500 MB
+2026-10-28 12:24:59 srp-spr35-Ks7d2c-rcl-o5i1 T2 iterations 140 exploitability 0.449% / 0.329% seconds 969.2 memory 2184MB raw 13.7KB
+2026-10-28 12:25:29 srp-spr35-Ks7d2c-cl-o3i5 T2 iterations 140 exploitability 0.488% / 0.334% seconds 999.6 memory 2184MB raw 13.7KB
+2026-10-28 12:26:39 srp-spr35-Ks7d2c-cl-o5i3 T2 iterations 150 exploitability 0.466% / 0.383% seconds 1069.1 memory 2184MB raw 14.0KB
+2026-10-28 12:40:03 srp-spr35-Ks7d2c-rcl-o3i0 T2 iterations 120 exploitability 0.446% / 0.283% seconds 874.0 memory 2184MB raw 12.8KB
+2026-10-28 12:44:37 srp-spr35-Ks7d2c-rcl-o0i3 T2 iterations 150 exploitability 0.455% / 0.284% seconds 1078.1 memory 2184MB raw 13.5KB
+2026-10-28 12:44:43 srp-spr35-Ks7d2c-rcl-o1i5 T2 iterations 160 exploitability 0.480% / 0.261% seconds 1184.0 memory 2184MB raw 13.3KB
