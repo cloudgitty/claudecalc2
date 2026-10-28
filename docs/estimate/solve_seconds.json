@@ -1,0 +1,6 @@
+{"srp1.5": {"chips": 80, "icm": 89, "warm": 107},
+ "3bp1.5": {"chips": 27, "icm": 31, "warm": 25},
+ "srp3.5": {"chips": 957, "icm": 880, "warm": 663},
+ "3bp3.5": {"chips": 198, "icm": 309, "warm": 234},
+ "srp6": {"chips": 7843, "icm": 6462, "warm": 4200},
+ "3bp6": {"chips": 757, "icm": 1454, "warm": 802}}

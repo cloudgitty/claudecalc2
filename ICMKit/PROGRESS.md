@@ -85,3 +85,64 @@ Against the targets: river under 2 s is met with a margin of about 60x; turn plu
 4.6 s. Memory: river < 1 MB, turn 10-40 MB (16-bit storage halves it if ever needed).
 Turn trees have 8,253 nodes (48 river cards, no suit symmetry on this board); boards with suit
 symmetry are smaller.
+
+## Early estimate (task 9): flop solve cost and library compute
+
+Setup: flop Ks7d2c (rainbow: no suit symmetry, the most expensive kind), placeholder ranges from
+`ranges/`, spec tree, stop at 0.5% of the pot (both players), cap 1000. Every solve ran
+**single-threaded with 4 solves running at once on the 4 cores**, i.e. as the library build
+would run. ICM table: the chip-leader table with the 50bb and 35bb players replaced by the two
+players of the spot, each with the effective stack behind (others 60/30/15/10bb, payouts
+40/25/15/10/6/4). Memory is the solver's own count; above 4 GB the solver switched to 16-bit
+storage (SRP SPR 6 only). Raw output: `docs/estimate/estimate_raw.txt`.
+Command: `MODE=chips|icm|warm build/estimate 1 Ks7d2c <spot>`.
+
+| Spot | Pot / stack | Live combos | Tree nodes | Memory | Chip EV | ICM, cold | ICM, warm from chip EV |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| SRP SPR 1.5 | 6 / 9 | 519/478 | 136k | 490 MB | 50 it, 80 s | 60 it, 89 s | 70 it, 107 s |
+| SRP SPR 3.5 | 6 / 21 | 552/521 | 563k | 2.18 GB | 150 it, 957 s | 140 it, 880 s | 110 it, 663 s |
+| SRP SPR 6 | 6 / 36 | 644/576 | 1.59M | 3.57 GB (16-bit; 7.0 GB float32) | 340 it, 7,843 s | 290 it, 6,462 s | see below |
+| 3-bet SPR 1.5 | 15 / 22.5 | 157/177 | 136k | 170 MB | 50 it, 27 s | 60 it, 31 s | 50 it, 25 s |
+| 3-bet SPR 3.5 | 15 / 52.5 | 140/157 | 563k | 628 MB | 110 it, 198 s | 180 it, 309 s | 140 it, 234 s |
+| 3-bet SPR 6 | 15 / 90 | 146/171 | 1.59M | 1.88 GB | 150 it, 757 s | 300 it, 1,454 s | 170 it, 802 s |
+
+All solves reached the 0.5% target (final values in the raw file); none hit the cap. The four
+spots the task asked for are the SPR 1.5 and SPR 6 rows; SPR 3.5 was added to project T2/T4.
+Peak memory equals the solver's count (RSS within 1%). A 4-thread run of 3-bet SPR 6 took 232 s
+(vs 749 s single-threaded, 3.2x).
+
+**Other flops.** Suit symmetry shrinks trees: paired and two-tone flops are about 0.6x the
+rainbow tree, monotone about 0.28x (measured on all 18 representative flops). Iterations also
+vary by flop: cold ICM, 3-bet SPR 3.5, flop 1 of each class took 309 / 473 / 229 / 127 / 90 /
+266 s (Ks7d2c, 9s5d2c, KsKd4c, AsJs5d, Ks9s4s, 9s8d7c): mean 0.81x Ks7d2c. The projection
+uses 0.81 for every flop.
+
+**Projection** (`python3 tools/project_estimate.py docs/estimate/solve_seconds.json`). Solve
+counts with the 14 matchup cells that exist (`config/buckets.json`):
+- *Spec as written:* per (pot type, SPR, flop) 28 ICM + 2 chip-EV solves, all cold.
+- *Deduplicated:* one ICM solve serves cell (a,b) in position and cell (b,a) out of position
+  (mirrored pairs), so 16 ICM solves; one chip-EV solve serves both positions.
+- *Deduplicated + warm:* each ICM solve warm-starts from the chip-EV solve of the same spot
+  (only where that helped: SPR 3.5 and 6). SRP SPR 6 warm is provisionally 0.65x cold (the
+  measured ratios are 0.55-0.76) until the run below finishes.
+
+| Tier | Spec as written (core-h) | Deduplicated (core-h) | Dedup + warm (core-h) | Dedup + warm, wall h on 4 cores |
+| --- | --- | --- | --- | --- |
+| T1 (SPR 1.5, flop 1) | 4.8 | 2.7 | 2.6 | 0.7 |
+| T2 (SPR 3.5, flop 1) | 48 | 27 | 21 | 5.2 |
+| T3 (SPR 6, flop 1) | 322 | 183 | 120 | 30 |
+| T4 (SPR 1.5 + 3.5, flops 2-3) | 106 | 60 | 47 | 12 |
+| T5 (SPR 6, flops 2-3) | 645 | 365 | 239 | 60 |
+| **Total** | **1,126** | **638** | **430** | **107** |
+
+**Sessions needed** (14-hour sessions with about 12 hours of solving on 4 cores = 48 core-hours):
+- spec as written: about 24 sessions;
+- deduplicated: about 13 sessions;
+- **deduplicated + warm start: about 9 sessions**, plus about one more because SRP SPR 6 solves
+  (3.6 GB each) can only run 3 at a time within 15 GB. So about **10 sessions** for T1-T5.
+- T1 and T2 together need only ~6 hours, so B2 can finish them in its own session while it
+  writes the builder; T3 needs about 3 sessions, T4 one, T5 about 5-6.
+- SRP SPR 6 is about 70% of all compute (2.2 h per chip-EV solve, 1.8 h per cold ICM solve).
+  Ways to cut it, if the time is not available (each changes the spec, so it is a product
+  decision): narrower SRP ranges (cost scales with combos per player), one river bet size at
+  SPR 6, or a 1% stop target for SPR 6 (the last 0.5 points take ~40% of the iterations).
