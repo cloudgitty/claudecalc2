@@ -70,19 +70,22 @@ Spec tree (33% / 75% / all-in, raise 3x, one raise), stop at 0.5% of the pot, ca
 Ranges are the full placeholder preflop ranges (a worst case: on device the ranges reaching the
 turn or river are narrower after earlier action).
 
+Final run on the idle machine (06:20 UTC; timings vary by about 10% between runs on this vCPU):
+
 | Spot | Ranges (live combos OOP/IP) | Mode | 1 thread | 4 threads | Iterations |
 | --- | --- | --- | --- | --- | --- |
-| River Ks7d2c4h9s, pot 20, stack 60 | SRP 38bb (599/535) | chip EV | 0.02 s | 0.03 s | 50 |
-| River, same | SRP 38bb | ICM | 0.03 s | - | 70 |
-| River, same | 3-bet 97bb (140/158) | chip / ICM | 0.008 s | - | 80 |
-| Turn+river Ks7d2c4h, pot 10, stack 50 | SRP 38bb (630/563) | chip EV | 12.6-13.5 s | 4.6 s | 140 |
-| Turn+river, same | SRP 38bb | ICM | 12.4 s | - | 130 |
-| Turn+river, same | 3-bet 97bb (145/167) | chip EV | 3.4 s | - | 140 |
-| Turn+river, same | 3-bet 97bb | ICM | 4.8 s | - | 190 |
+| River Ks7d2c4h9s, pot 20, stack 60 | SRP 38bb (599/535) | chip EV | 0.030 s | 0.026 s | 50 |
+| River, same | SRP 38bb | ICM | 0.029 s | 0.030 s | 70 |
+| River, same | 3-bet 97bb (140/158) | chip EV | 0.013 s | 0.009 s | 80 |
+| River, same | 3-bet 97bb | ICM | 0.008 s | 0.008 s | 80 |
+| Turn+river Ks7d2c4h, pot 10, stack 50 | SRP 38bb (630/563) | chip EV | 14.3 s | 5.8 s | 140 |
+| Turn+river, same | SRP 38bb | ICM | 13.4 s | 4.7 s | 130 |
+| Turn+river, same | 3-bet 97bb (145/167) | chip EV | 3.6 s | 1.6 s | 140 |
+| Turn+river, same | 3-bet 97bb | ICM | 5.0 s | 2.3 s | 190 |
 
 Against the targets: river under 2 s is met with a margin of about 60x; turn plus river under
-20 s is met single-threaded even with full-width SRP ranges (12-13.5 s) and with 4 threads in
-4.6 s. Memory: river < 1 MB, turn 10-40 MB (16-bit storage halves it if ever needed).
+20 s is met single-threaded even with full-width SRP ranges (13-14 s) and with 4 threads in
+5-6 s. River solves gain nothing from threads (no chance node to split). Memory: river < 1 MB, turn 10-40 MB (16-bit storage halves it if ever needed).
 Turn trees have 8,253 nodes (48 river cards, no suit symmetry on this board); boards with suit
 symmetry are smaller.
 
@@ -101,7 +104,7 @@ Command: `MODE=chips|icm|warm build/estimate 1 Ks7d2c <spot>`.
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | SRP SPR 1.5 | 6 / 9 | 519/478 | 136k | 490 MB | 50 it, 80 s | 60 it, 89 s | 70 it, 107 s |
 | SRP SPR 3.5 | 6 / 21 | 552/521 | 563k | 2.18 GB | 150 it, 957 s | 140 it, 880 s | 110 it, 663 s |
-| SRP SPR 6 | 6 / 36 | 644/576 | 1.59M | 3.57 GB (16-bit; 7.0 GB float32) | 340 it, 7,843 s | 290 it, 6,462 s | see below |
+| SRP SPR 6 | 6 / 36 | 644/576 | 1.59M | 3.57 GB (16-bit; 7.0 GB float32) | 310 it, 7,233 s | 290 it, 6,462 s | 140 it, 3,329 s |
 | 3-bet SPR 1.5 | 15 / 22.5 | 157/177 | 136k | 170 MB | 50 it, 27 s | 60 it, 31 s | 50 it, 25 s |
 | 3-bet SPR 3.5 | 15 / 52.5 | 140/157 | 563k | 628 MB | 110 it, 198 s | 180 it, 309 s | 140 it, 234 s |
 | 3-bet SPR 6 | 15 / 90 | 146/171 | 1.59M | 1.88 GB | 150 it, 757 s | 300 it, 1,454 s | 170 it, 802 s |
@@ -123,26 +126,26 @@ counts with the 14 matchup cells that exist (`config/buckets.json`):
 - *Deduplicated:* one ICM solve serves cell (a,b) in position and cell (b,a) out of position
   (mirrored pairs), so 16 ICM solves; one chip-EV solve serves both positions.
 - *Deduplicated + warm:* each ICM solve warm-starts from the chip-EV solve of the same spot
-  (only where that helped: SPR 3.5 and 6). SRP SPR 6 warm is provisionally 0.65x cold (the
-  measured ratios are 0.55-0.76) until the run below finishes.
+  (only where that helped: SPR 3.5 and 6; at SPR 1.5 the faster of cold and warm is used).
 
 | Tier | Spec as written (core-h) | Deduplicated (core-h) | Dedup + warm (core-h) | Dedup + warm, wall h on 4 cores |
 | --- | --- | --- | --- | --- |
 | T1 (SPR 1.5, flop 1) | 4.8 | 2.7 | 2.6 | 0.7 |
 | T2 (SPR 3.5, flop 1) | 48 | 27 | 21 | 5.2 |
-| T3 (SPR 6, flop 1) | 322 | 183 | 120 | 30 |
+| T3 (SPR 6, flop 1) | 321 | 182 | 100 | 25 |
 | T4 (SPR 1.5 + 3.5, flops 2-3) | 106 | 60 | 47 | 12 |
-| T5 (SPR 6, flops 2-3) | 645 | 365 | 239 | 60 |
-| **Total** | **1,126** | **638** | **430** | **107** |
+| T5 (SPR 6, flops 2-3) | 642 | 364 | 200 | 50 |
+| **Total** | **1,121** | **635** | **371** | **93** |
 
 **Sessions needed** (14-hour sessions with about 12 hours of solving on 4 cores = 48 core-hours):
-- spec as written: about 24 sessions;
+- spec as written: about 23 sessions;
 - deduplicated: about 13 sessions;
-- **deduplicated + warm start: about 9 sessions**, plus about one more because SRP SPR 6 solves
-  (3.6 GB each) can only run 3 at a time within 15 GB. So about **10 sessions** for T1-T5.
+- **deduplicated + warm start: about 8 sessions**, plus about one more because SRP SPR 6 solves
+  (3.6 GB each, 7.1 GB peak while a warm start holds two solvers) can only run 3 at a time within
+  15 GB. So about **9 sessions** for T1-T5.
 - T1 and T2 together need only ~6 hours, so B2 can finish them in its own session while it
-  writes the builder; T3 needs about 3 sessions, T4 one, T5 about 5-6.
-- SRP SPR 6 is about 70% of all compute (2.2 h per chip-EV solve, 1.8 h per cold ICM solve).
+  writes the builder; T3 needs about 2.5 sessions, T4 one, T5 about 5.
+- SRP SPR 6 is about 70% of all compute (2 h per chip-EV solve, 0.9 h per warm ICM solve).
   Ways to cut it, if the time is not available (each changes the spec, so it is a product
   decision): narrower SRP ranges (cost scales with combos per player), one river bet size at
   SPR 6, or a 1% stop target for SPR 6 (going from 1% to 0.5% takes about half of the iterations).
@@ -183,7 +186,9 @@ counts with the 14 matchup cells that exist (`config/buckets.json`):
    chip-EV solve per pot type, SPR and flop) and warm-start each ICM solve from the chip-EV
    solve (`ss_warm_start(icm, chips, 1.0)`) for SPR 3.5 and 6. Run solves single-threaded, 4 at
    a time (3 for SRP SPR 6), with `compact_storage = 2` and `memory_limit` about 4 GB.
-   Expect about 10 sessions for T1-T5 at the spec's settings.
+   Expect about 9 sessions for T1-T5 at the spec's settings. The chip-EV solver can be freed
+   after the warm start is set up only once all 16 ICM solves have copied it, so keep it (or
+   rebuild it) for the group; with SRP SPR 6 that means ~7 GB while both exist.
 5. **Flop summaries:** `hand_category()` gives the spec's categories (definitions in
    `DECISIONS.md`). For "bet %" use the hero's first decision node on the flop (IP: the node after
    the OOP check). "Stack-off threshold" needs the flop nodes where hero faces an all-in.

@@ -146,8 +146,9 @@ about 500-700 per player, 3-bet pots about 140-180.
   cells have mirrored pairs in `config/buckets.json`). With 14 cells that is 16 ICM solves per
   (pot type, SPR, flop) instead of 28, plus 1 chip-EV solve instead of 2 (one chip-EV solve gives
   both players' strategies).
-- `ss_warm_start` (regrets of a finished solve, fresh average) cut ICM iterations by about 20-40%
-  on SPR 3.5+ spots in tests; at SPR 1.5 it made no difference. See PROGRESS.md for numbers.
+- `ss_warm_start` (regrets of a finished solve, fresh average) cut ICM iterations by 21-52% on
+  SPR 3.5 and 6 flops (SRP SPR 6: 290 -> 140); at SPR 1.5 it made no consistent difference.
+  See PROGRESS.md for numbers.
 - `compact_storage = 2` with `memory_limit` keeps each solve near the 3 GB budget only up to
   SPR 3.5 single-raised pots; SPR 6 single-raised pots need about 3.6 GB even with 16-bit storage
   (7 GB with float32), so run at most 3 of those at once.
