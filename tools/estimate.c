@@ -77,7 +77,7 @@ static int run(const Spot *sp, const char *flop, int threads)
     c.max_iterations = 10;
     c.target_exploitability_pct = 0.0;
     c.check_every = 10;
-    c.compact_storage = 2;
+    c.compact_storage = getenv("COMPACT") ? atoi(getenv("COMPACT")) : 2;
     c.memory_limit = (size_t)(getenv("MEMLIMIT_MB") ? atof(getenv("MEMLIMIT_MB")) : 4096.0) * 1048576;
     if (!strcmp(mode, "icm")) set_icm(&c);
     char err[256];

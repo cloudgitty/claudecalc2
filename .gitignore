@@ -4,3 +4,4 @@ __pycache__/
 plo6_200bb_full_backup.zip
 build/
 build-asan/
+build-prof/

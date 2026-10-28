@@ -126,3 +126,28 @@ Decisions taken while building Part B unattended. Newest sessions append at the 
 - Draws: outs = turn cards that give a straight or flush (or straight flush) the player does
   not already have. 8 or more = strong draw, 1-7 = weak draw. Backdoor draws and overcards are
   not outs, so on dry rainbow boards most unpaired hands are "air".
+
+### Placeholder preflop ranges (`ranges/`)
+The repo has no preflop solver, so these six files are rough placeholders typical of tournament
+play at each depth, all marked `"placeholder": true`. Out of position = big blind, in position =
+button. In 3-bet pots the big blind is the 3-bettor (out of position) and the button the caller.
+- `ranges/srp_spr1.5.json` (about 11bb): button open 2.2bb, big blind flat call
+- `ranges/srp_spr3.5.json` (about 23bb)
+- `ranges/srp_spr6.json` (about 38bb)
+- `ranges/3bp_spr1.5.json` (about 30bb): big blind 3-bet to 7bb, button call
+- `ranges/3bp_spr3.5.json` (about 60bb)
+- `ranges/3bp_spr6.json` (about 97bb)
+Flat-call ranges leave out the hands that would 3-bet or 4-bet. Live combos on Ks7d2c: SRP
+about 500-700 per player, 3-bet pots about 140-180.
+
+### Compute-saving choices for the library (recommendations to Part B2)
+- One ICM solve serves two library entries: cell (a,b) with hero in position and cell (b,a)
+  with hero out of position use the same two players in the same seats (all 12 off-diagonal
+  cells have mirrored pairs in `config/buckets.json`). With 14 cells that is 16 ICM solves per
+  (pot type, SPR, flop) instead of 28, plus 1 chip-EV solve instead of 2 (one chip-EV solve gives
+  both players' strategies).
+- `ss_warm_start` (regrets of a finished solve, fresh average) cut ICM iterations by about 20-40%
+  on SPR 3.5+ spots in tests; at SPR 1.5 it made no difference. See PROGRESS.md for numbers.
+- `compact_storage = 2` with `memory_limit` keeps each solve near the 3 GB budget only up to
+  SPR 3.5 single-raised pots; SPR 6 single-raised pots need about 3.6 GB even with 16-bit storage
+  (7 GB with float32), so run at most 3 of those at once.
