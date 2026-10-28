@@ -166,3 +166,33 @@ Iterations to 0.5% of the pot, single solves:
 - Warm-start source (3-bet SPR 3.5, Ks7d2c, a second matchup on the runaway table, iterations to
   0.5%): cold 170; warm from the chip-EV solve 120; warm from another matchup's ICM solve 150.
   So every ICM solve should warm-start from the chip-EV solve of its spot, not from a neighbour.
+
+## B2 (library tools and starter library), 2026-10-28
+
+### Spots, solves and the manifest (`manifest/solves.tsv`, `manifest/entries.tsv`)
+- A **library entry** is what the app looks up: (hero bucket, villain bucket, position, pot type,
+  SPR, flop). A **solve** is one solver run. `entries.tsv` maps every entry to its ICM solve, which
+  player is the hero inside it (0 = OOP / big blind, 1 = IP / button), and its chip-EV solve.
+  `results/<id>.json.gz` and `raw/<id>.bin` are keyed by solve id, so the spec's
+  `results/<spotId>.json.gz` uses the solve id as spot id.
+- Cell (a,b) with hero in position and cell (b,a) with hero out of position are the same two
+  players in the same seats, so they share one solve (B1 decision). Per pot type, SPR and flop:
+  1 chip-EV solve + 16 ICM solves for the 28 ICM entries. Totals: T1-T3 204 solves each,
+  T4 816, T5 408; 1,836 solves for 3,024 entries.
+- Solve ids: `<srp|3bp>-spr<15|35|60>-<flop>-chip` and `...-<rcl|cl>-o<OOP seat>i<IP seat>`
+  (rcl = runaway chip leader table, cl = chip leader table; seats index `stacks_bb` in
+  `config/buckets.json`, 0 = largest).
+- Tier of a spot: flop 1 at SPR 1.5 / 3.5 / 6 = T1 / T2 / T3; flops 2-3 at SPR 1.5 or 3.5 = T4,
+  at SPR 6 = T5.
+
+### ICM table of a spot
+- Pot 6bb (single-raised) or 15bb (3-bet); effective stack E = SPR x pot.
+- The whole canonical table is scaled by one factor k so that the shorter player of the pair has
+  exactly E behind after putting in half the pot: k = (E + pot/2) / min(stack of the two players).
+  Every stack becomes k x canonical; the two players then have pot/2 less behind. The pot is
+  treated as coming from the two players (blinds and antes of the others are ignored).
+- Why: ICM equity and the risk premium depend only on stack proportions, so scaling keeps each
+  matchup's ICM pressure (and its bucket) exactly, while the spec's "other stacks keep their
+  canonical values" can't hold literally (a 10bb player can't have 36bb behind at SPR 6). The
+  bigger player keeps their extra chips (behind > E); the solver's effective stack is E.
+- Payouts 40/25/15/10/6/4, all six players.
