@@ -1,0 +1,20 @@
+{
+  "placeholder": true,
+  "note": "Rough placeholder ranges typical of tournament play at this depth (no preflop solver in the repo). Replace with solver output when available.",
+  "pot_type": "single_raised",
+  "spr": 6.0,
+  "pot_bb": 6.0,
+  "effective_stack_bb": 38.2,
+  "out_of_position": "bb",
+  "in_position": "btn",
+  "ranges": {
+    "btn": {
+      "description": "button open to 2.2bb at about 38bb",
+      "range": "22+,A2s+,K2s+,Q3s+,J5s+,T6s+,96s+,85s+,74s+,64s+,53s+,43s,A2o+,K7o+,Q8o+,J8o+,T8o+,98o"
+    },
+    "bb": {
+      "description": "big blind flat call vs 2.2bb (3-bets removed)",
+      "range": "22-JJ,A2s-AQs,K2s+,Q2s+,J3s+,T5s+,95s+,85s+,74s+,63s+,53s+,43s,A2o-AQo,K5o+,Q7o+,J7o+,T7o+,97o+,87o,76o"
+    }
+  }
+}

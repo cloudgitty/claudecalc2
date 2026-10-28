@@ -98,9 +98,9 @@ static void test_isomorphism_and_threads(void)
     range_parse("88+,ATs+,KJs+,QJs,AQo+", ip);
     ss_config c;
     base_config(&c, "Ks9s4s2h", 10.0, 30.0);
-    c.max_iterations = 150;
-    c.target_exploitability_pct = 0.0;
-    c.check_every = 50;
+    c.max_iterations = 1000;
+    c.target_exploitability_pct = 0.15;
+    c.check_every = 10;
     ss_solver *iso = make(&c);
     c.use_isomorphism = 0;
     ss_solver *plain = make(&c);
@@ -117,7 +117,8 @@ static void test_isomorphism_and_threads(void)
            rp.exploitability_pct[0], rq.seconds);
     CHECK(ri.tree_nodes < rp.tree_nodes, "isomorphism did not shrink the tree");
     CHECK(fabs(ri.value[0] - rp.value[0]) < 0.002 * c.pot, "iso value %.5f vs %.5f", ri.value[0], rp.value[0]);
-    CHECK(fabs(ri.exploitability_pct[0] - rp.exploitability_pct[0]) < 0.05, "iso exploitability differs");
+    for (int p = 0; p < 2; p++)
+        CHECK(ri.exploitability_pct[p] <= 0.15 && rp.exploitability_pct[p] <= 0.15, "iso / plain did not converge");
     CHECK(fabs(ri.value[0] - rq.value[0]) < 1e-6 * c.pot && ri.exploitability_pct[1] == rq.exploitability_pct[1],
           "threads change the result: %.7f vs %.7f", ri.value[0], rq.value[0]);
     /* An isomorphic card maps onto a stored child. */

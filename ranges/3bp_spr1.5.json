@@ -1,0 +1,20 @@
+{
+  "placeholder": true,
+  "note": "Rough placeholder ranges typical of tournament play at this depth (no preflop solver in the repo). Replace with solver output when available.",
+  "pot_type": "three_bet",
+  "spr": 1.5,
+  "pot_bb": 15.0,
+  "effective_stack_bb": 29.5,
+  "out_of_position": "bb",
+  "in_position": "btn",
+  "ranges": {
+    "btn": {
+      "description": "button calls a 3-bet to 7bb at about 30bb (4-bet shoves removed)",
+      "range": "22-99,A2s-AJs,K9s+,Q9s+,J9s+,T9s,98s,87s,ATo-AQo,KJo+"
+    },
+    "bb": {
+      "description": "big blind 3-bet to 7bb vs 2.2bb at about 30bb",
+      "range": "77+,A8s+,A5s-A4s,KTs+,QTs+,JTs,ATo+,KJo+"
+    }
+  }
+}

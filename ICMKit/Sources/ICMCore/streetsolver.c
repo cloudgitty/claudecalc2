@@ -56,6 +56,8 @@ typedef struct {
 typedef struct {
     uint16_t str;        /* hand strength */
     uint16_t idx;        /* live combo index */
+    uint8_t a, b;        /* its two cards */
+    uint16_t pad;
 } SortedCombo;
 
 typedef struct {
@@ -409,6 +411,8 @@ static int setup_boards(ss_solver *S)
                     cards[6] = (uint8_t)y;
                     S->sb[pos + cnt].str = handeval7(cards);
                     S->sb[pos + cnt].idx = (uint16_t)i;
+                    S->sb[pos + cnt].a = (uint8_t)x;
+                    S->sb[pos + cnt].b = (uint8_t)y;
                     cnt++;
                 }
                 qsort(S->sb + pos, (size_t)cnt, sizeof(SortedCombo), cmp_sorted);
@@ -917,78 +921,71 @@ static void strategy_from(const float *src, int k, int n, int positive_part, flo
     for (int h = 0; h < n; h++) tmp[h] = 0.0f;
     for (int a = 0; a < k; a++) {
         const float *r = src + (size_t)a * n;
+        float *s = sig + (size_t)a * n;
         if (positive_part)
-            for (int h = 0; h < n; h++) tmp[h] += r[h] > 0.0f ? r[h] : 0.0f;
+            for (int h = 0; h < n; h++) { float x = r[h] > 0.0f ? r[h] : 0.0f; s[h] = x; tmp[h] += x; }
         else
-            for (int h = 0; h < n; h++) tmp[h] += r[h];
+            for (int h = 0; h < n; h++) { s[h] = r[h]; tmp[h] += r[h]; }
     }
+    for (int h = 0; h < n; h++) tmp[h] = tmp[h] > 0.0f ? 1.0f / tmp[h] : 0.0f;
     float uni = 1.0f / (float)k;
     for (int a = 0; a < k; a++) {
-        const float *r = src + (size_t)a * n;
         float *s = sig + (size_t)a * n;
-        for (int h = 0; h < n; h++) {
-            float x = positive_part ? (r[h] > 0.0f ? r[h] : 0.0f) : r[h];
-            s[h] = tmp[h] > 0.0f ? x / tmp[h] : uni;
-        }
+        for (int h = 0; h < n; h++) s[h] = tmp[h] > 0.0f ? s[h] * tmp[h] : uni;
     }
 }
 
+/*
+ * Showdown on a complete board. For each own combo h, with W = reach of opponent
+ * combos strictly weaker, E = weaker or equal and C = all compatible (each
+ * excluding combos that share a card with h):
+ *     cfv[h] += uw * W + ut * (E - W) + ul * (C - E)
+ * One sweep over own combos in strength order with two pointers into the
+ * opponent's sorted list (each pointer only moves forward); per-card sums remove
+ * blocked combos.
+ */
 static void showdown(const ss_solver *S, int id, int trav, const float *reach, const float *u, float scale, float *out)
 {
     int op = 1 - trav;
     const SortedCombo *T = S->sb + S->sb_off[trav][id];
     const SortedCombo *O = S->sb + S->sb_off[op][id];
     int nt = S->sb_cnt[trav][id], no = S->sb_cnt[op][id];
-    const uint8_t *ta = S->c1[trav], *tb = S->c2[trav], *oa = S->c1[op], *ob = S->c2[op];
     const int16_t *sm = S->same[trav];
     float uw = u[0] * scale, ul = u[1] * scale, ut = u[2] * scale;
-    float cs[52], tot;
-
-    /* ties (applied to every compatible pair, corrected below) */
-    if (ut != 0.0f) {
-        memset(cs, 0, sizeof(cs));
-        tot = 0.0f;
-        for (int j = 0; j < no; j++) {
-            int v = O[j].idx;
-            float r = reach[v];
-            tot += r; cs[oa[v]] += r; cs[ob[v]] += r;
-        }
-        for (int i = 0; i < nt; i++) {
-            int h = T[i].idx;
-            float m = tot - cs[ta[h]] - cs[tb[h]];
-            if (sm[h] >= 0) m += reach[sm[h]];
-            out[h] += ut * m;
-        }
-    }
-    /* wins: opponent combos strictly weaker */
-    float dw = uw - ut;
-    memset(cs, 0, sizeof(cs));
-    tot = 0.0f;
-    for (int i = 0, j = 0; i < nt; i++) {
+    float dw = uw - ut, de = ut - ul;
+    float cs_lt[52], cs_le[52];
+    float tot_lt = 0.0f, tot_le = 0.0f;
+    memset(cs_lt, 0, sizeof(cs_lt));
+    memset(cs_le, 0, sizeof(cs_le));
+    int jl = 0, je = 0;
+    for (int i = 0; i < nt; i++) {
         uint16_t st = T[i].str;
-        while (j < no && O[j].str < st) {
-            int v = O[j].idx;
-            float r = reach[v];
-            tot += r; cs[oa[v]] += r; cs[ob[v]] += r;
-            j++;
+        while (jl < no && O[jl].str < st) {
+            float r = reach[O[jl].idx];
+            tot_lt += r; cs_lt[O[jl].a] += r; cs_lt[O[jl].b] += r;
+            jl++;
         }
-        int h = T[i].idx;
-        out[h] += dw * (tot - cs[ta[h]] - cs[tb[h]]);
+        while (je < no && O[je].str <= st) {
+            float r = reach[O[je].idx];
+            tot_le += r; cs_le[O[je].a] += r; cs_le[O[je].b] += r;
+            je++;
+        }
+        int h = T[i].idx, x = T[i].a, y = T[i].b;
+        float rs = sm[h] >= 0 ? reach[sm[h]] : 0.0f;   /* the identical combo ties */
+        float W = tot_lt - cs_lt[x] - cs_lt[y];
+        float E = tot_le - cs_le[x] - cs_le[y] + rs;
+        out[h] += dw * W + de * E;
     }
-    /* losses: opponent combos strictly stronger */
-    float dl = ul - ut;
-    memset(cs, 0, sizeof(cs));
-    tot = 0.0f;
-    for (int i = nt - 1, j = no - 1; i >= 0; i--) {
-        uint16_t st = T[i].str;
-        while (j >= 0 && O[j].str > st) {
-            int v = O[j].idx;
-            float r = reach[v];
-            tot += r; cs[oa[v]] += r; cs[ob[v]] += r;
-            j--;
-        }
-        int h = T[i].idx;
-        out[h] += dl * (tot - cs[ta[h]] - cs[tb[h]]);
+    /* the "le" sums now cover every opponent combo: add ul * C */
+    while (je < no) {
+        float r = reach[O[je].idx];
+        tot_le += r; cs_le[O[je].a] += r; cs_le[O[je].b] += r;
+        je++;
+    }
+    for (int i = 0; i < nt; i++) {
+        int h = T[i].idx, x = T[i].a, y = T[i].b;
+        float rs = sm[h] >= 0 ? reach[sm[h]] : 0.0f;
+        out[h] += ul * (tot_le - cs_le[x] - cs_le[y] + rs);
     }
 }
 
