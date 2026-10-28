@@ -245,3 +245,7 @@ Session B2 start: 2026-10-28 08:44:43 UTC (`date -u`). Wrap-up at 21:44 UTC.
 - 11:37 **T1 complete** (204 / 204 solves, 336 entries, 3.4 core-hours). Packed:
   `library/LiteLibrary.bin` 349 entries, 9,836 bytes, T1 flagged complete; test 6 passes
   (3,490 values, 0 mismatches).
+- 12:01 The runner was killed by the out-of-memory killer (14.0 GB resident: the session's
+  memory cgroup limit is about 14 GB, not the 15 GB `free` shows). In-flight solves were lost
+  (at most ~10 minutes each) and the held SRP SPR 6 rainbow chip-EV solver too, so that pilot
+  ICM solve runs cold. Restarted at 12:10 with a 10.5 GB budget (`--budget-mb 10500`).

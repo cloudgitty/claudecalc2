@@ -219,3 +219,9 @@ Iterations to 0.5% of the pot, single solves:
 - Test 5 is `librarybuilder test5 $(cat manifest/pilot.txt)`: the 20 pilot solves (10 per pot type,
   all three SPRs, five flop classes, chip EV and ICM) must all reach 0.5% for both players below
   the 1000-iteration cap. The spec asks for 5 per pot type; the pilot gives 10.
+
+### Builder memory budget
+- The session's memory cgroup kills processes at about 14 GB resident. The budget counts each
+  solver's own allocations (`ss_memory_required`) plus held chip-EV solvers, but not malloc
+  overhead, thread stacks or summary buffers, so it must stay well below the limit: use
+  `--budget-mb 10500` (13.5 GB was killed at 12:01 in B2).
