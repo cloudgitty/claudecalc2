@@ -9,6 +9,7 @@
 #include "handeval.h"
 #include "flopclass.h"
 #include "riskpremium.h"
+#include "range.h"
 #include "streetsolver.h"
 #include "libreader.h"
 
