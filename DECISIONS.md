@@ -151,3 +151,14 @@ about 500-700 per player, 3-bet pots about 140-180.
 - `compact_storage = 2` with `memory_limit` keeps each solve near the 3 GB budget only up to
   SPR 3.5 single-raised pots; SPR 6 single-raised pots need about 3.6 GB even with 16-bit storage
   (7 GB with float32), so run at most 3 of those at once.
+
+### DCFR parameters (tested, defaults kept at alpha 1.5, beta 0, gamma 2)
+Iterations to 0.5% of the pot, single solves:
+- Turn+river SRP benchmark (chips): (1.5,0,2) 140; (1.5,0.5,2) 140; (2,0,2) 160; (1.5,0,3) 130;
+  (1,0,1) 430; (3,0,2) 190.
+- Flop 3-bet SPR 3.5, ICM: (1.5,0,2) 180; (1.5,0.5,2) 150; (1.5,0,3) 180; (2,0.5,2) 190;
+  (1.5,1,2) did not converge in 1000.
+- beta 0.5 on other flops: SRP SPR 1.5 ICM 80 (vs 60), 3-bet SPR 1.5 ICM 80 (vs 60), 3-bet SPR 3.5
+  chips 130 (vs 110). No setting is better across the board, so the defaults stay.
+- Exploitability is not always monotonic with beta 0 (a temporary rise of up to ~40% was seen
+  twice, e.g. SRP SPR 6 at iteration 200); the solves still converge.

@@ -80,6 +80,9 @@ static int run(const Spot *sp, const char *flop, int threads)
     c.compact_storage = getenv("COMPACT") ? atoi(getenv("COMPACT")) : 2;
     c.memory_limit = (size_t)(getenv("MEMLIMIT_MB") ? atof(getenv("MEMLIMIT_MB")) : 4096.0) * 1048576;
     if (!strcmp(mode, "icm")) set_icm(&c);
+    if (getenv("ALPHA")) c.dcfr_alpha = atof(getenv("ALPHA"));
+    if (getenv("BETA")) c.dcfr_beta = atof(getenv("BETA"));
+    if (getenv("GAMMA")) c.dcfr_gamma = atof(getenv("GAMMA"));
     char err[256];
     ss_result r;
     ss_solver *s;
