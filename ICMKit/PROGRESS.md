@@ -11,3 +11,18 @@ toolchain could be installed. The prompt was revised to a portable C11 core; tha
 ## Log
 
 - 00:18 Step 0: new spec saved unchanged as `docs/PART_B_SPEC.md`.
+- 00:27 Task 1 done: package layout (`ICMKit/Package.swift`, `Sources/ICMCore` C target with
+  `include/icmcore.h` + `module.modulemap`, `Sources/ICMKit` Swift layer), root `Makefile`
+  (`make`, `make test`, `make test-full`, `make asan`).
+- 00:27 Task 2 done: `icm.c`; test 2 passes (1,240 random tables of 2-9 players vs brute force over
+  all finishing orders, worst difference 9e-12; equities sum to the pool).
+- 00:27 Task 3 done: `handeval.c`; test 1 passes in full: all 133,784,560 seven-card hands match the
+  standard category counts (5.2 s). Fast subset kept in `make test`.
+- 00:27 Task 4 done: `flopclass.c`; all 18 representative flops land in their class, list unchanged.
+- 00:28 Task 5 done: `riskpremium.c`, `tools/buckets.c` -> `config/buckets.json`. Thresholds
+  3.59% / 6.98% / 10.11%; 14 cells, skipped (0,0) and (2,2). Reasoning in `DECISIONS.md`.
+- 00:49 Task 6: `streetsolver.c` + `threadpool.c`. Test 3 (toy river) passes for s = 0.33, 0.75,
+  1.5 (all within 0.1 points). Test 4 passes (see below). `test_solver` checks tree rules, zero-sum
+  chip values, isomorphism, thread determinism, cancel and the memory limit.
+- 00:51 All tests (`make asan`) pass under AddressSanitizer + UndefinedBehaviorSanitizer
+  (LeakSanitizer on): no reports.
