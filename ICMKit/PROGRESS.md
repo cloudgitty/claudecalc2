@@ -299,3 +299,9 @@ solve counts. With one or two flops per pot type it depends heavily on the flops
 flops are monotone and two-tone (cheap trees) so T3 is underestimated, T5's single-raised pilot is
 a rainbow flop with a cold ICM solve so T5 is overestimated. See the wrap-up for a projection that
 also uses every solve of the build.
+- 14:15 Builder: chip-EV solvers kept for warm starts are now also saved to `work/state/`
+  (git-ignored; 50 MB to 3.5 GB each) and reloaded after a restart or crash; the file is removed
+  once the last dependent ICM solve has copied it. Tested (normal + ASan/UBSan): a solve started in
+  a second run warm-starts from the saved state. The B2 run keeps its binary; the new one
+  (`build-next/librarybuilder`, also in the source) is for the next run. In B2 the 12:01 crash
+  had lost 4 held T2 chip-EV solvers, so ~60 T2 ICM solves ran cold (~40% slower).
