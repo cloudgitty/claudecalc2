@@ -205,3 +205,15 @@ counts with the 14 matchup cells that exist (`config/buckets.json`):
 ### Final check (06:22 UTC)
 `make test-full` and `make asan` both pass on the final code (all 7 test programs; the full
 133,784,560-hand enumeration included in `test-full`).
+
+---
+
+# Part B2: library tools and starter library
+
+Session B2 start: 2026-10-28 08:44:43 UTC (`date -u`). Wrap-up at 21:44 UTC.
+
+## Log
+- 08:45 Task 1 (catch up): clean build of core, tools and tests; `make test` passes (7 programs).
+  B1 left only the library reader (B2 task 6) and the Swift compile (needs a Mac).
+- 08:45 Task 2 (ranges): the repo has no preflop solver, so the six placeholder files from B1 in
+  `ranges/` are used as they are (`"placeholder": true`, listed in `DECISIONS.md`).
