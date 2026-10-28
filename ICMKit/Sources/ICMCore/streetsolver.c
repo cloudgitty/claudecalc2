@@ -127,6 +127,7 @@ struct ss_solver {
     size_t scratch_floats;
     tp_pool *pool;
     int iter;
+    int warm;                /* first iteration keeps the regrets (warm start) */
     float disc_pos, disc_neg, disc_strat;
     atomic_int cancel;
     atomic_int progress_iter;
@@ -979,16 +980,24 @@ static void showdown(const ss_solver *S, int id, int trav, const float *reach, c
     int nt = S->sb_cnt[trav][id], no = S->sb_cnt[op][id];
     float uw = u[0] * scale, ul = u[1] * scale, ut = u[2] * scale;
     float dw = uw - ul, dq = ut - ul;
-    float cs_lt[52], cs_eq[52];
-    float tot_lt = 0.0f;
-    memset(cs_lt, 0, sizeof(cs_lt));
+    /* cumulative sums kept in two interleaved halves to shorten dependency chains */
+    float cs0[52], cs1[52], cs_eq[52];
+    float t0 = 0.0f, t1 = 0.0f;
+    memset(cs0, 0, sizeof(cs0));
+    memset(cs1, 0, sizeof(cs1));
     memset(cs_eq, 0, sizeof(cs_eq));
     int jl = 0, i = 0;
     while (i < nt) {
         uint16_t st = T[i].str;
-        while (jl < no && O[jl].str < st) {
-            float r = reach[O[jl].idx];
-            tot_lt += r; cs_lt[O[jl].a] += r; cs_lt[O[jl].b] += r;
+        while (jl + 1 < no && O[jl + 1].str < st) {
+            float r0 = reach[O[jl].idx], r1 = reach[O[jl + 1].idx];
+            t0 += r0; cs0[O[jl].a] += r0; cs0[O[jl].b] += r0;
+            t1 += r1; cs1[O[jl + 1].a] += r1; cs1[O[jl + 1].b] += r1;
+            jl += 2;
+        }
+        if (jl < no && O[jl].str < st) {
+            float r0 = reach[O[jl].idx];
+            t0 += r0; cs0[O[jl].a] += r0; cs0[O[jl].b] += r0;
             jl++;
         }
         int je = jl;
@@ -998,10 +1007,11 @@ static void showdown(const ss_solver *S, int id, int trav, const float *reach, c
             tot_eq += r; cs_eq[O[je].a] += r; cs_eq[O[je].b] += r;
             je++;
         }
+        float tot = t0 + t1;
         for (; i < nt && T[i].str == st; i++) {
             int x = T[i].a, y = T[i].b;
             float rs = T[i].same >= 0 ? reach[T[i].same] : 0.0f;   /* the identical combo ties */
-            float W = tot_lt - cs_lt[x] - cs_lt[y];
+            float W = tot - (cs0[x] + cs1[x]) - (cs0[y] + cs1[y]);
             float Q = tot_eq - cs_eq[x] - cs_eq[y] + rs;
             out[T[i].idx] += dw * W + dq * Q;
         }
@@ -1010,12 +1020,14 @@ static void showdown(const ss_solver *S, int id, int trav, const float *reach, c
     /* finish the cumulative sums: they now cover every opponent combo -> ul * C */
     for (; jl < no; jl++) {
         float r = reach[O[jl].idx];
-        tot_lt += r; cs_lt[O[jl].a] += r; cs_lt[O[jl].b] += r;
+        t0 += r; cs0[O[jl].a] += r; cs0[O[jl].b] += r;
     }
+    float tot = t0 + t1;
+    for (int c = 0; c < 52; c++) cs0[c] += cs1[c];
     for (i = 0; i < nt; i++) {
         int x = T[i].a, y = T[i].b;
         float rs = T[i].same >= 0 ? reach[T[i].same] : 0.0f;
-        out[T[i].idx] += ul * (tot_lt - cs_lt[x] - cs_lt[y] + rs);
+        out[T[i].idx] += ul * (tot - cs0[x] - cs0[y] + rs);
     }
 }
 
@@ -1298,7 +1310,9 @@ static void cfr_iteration(ss_solver *S)
     int t = ++S->iter;
     const ss_config *c = &S->cfg;
     if (t == 1) {
-        S->disc_pos = S->disc_neg = S->disc_strat = 0.0f;
+        S->disc_pos = S->disc_neg = S->warm ? 1.0f : 0.0f;
+        S->disc_strat = 0.0f;
+        S->warm = 0;
     } else {
         double tp = pow((double)(t - 1), c->dcfr_alpha);
         double tn = pow((double)(t - 1), c->dcfr_beta);
@@ -1387,6 +1401,30 @@ int ss_copy_strategy(ss_solver *dst, const ss_solver *src)
         memcpy(dst->store, src->store, sizeof(float) * dst->nstore);
     }
     dst->iter = src->iter;
+    dst->have_expl = 0;
+    return 0;
+}
+
+int ss_warm_start(ss_solver *dst, const ss_solver *src, double regret_scale)
+{
+    if (ss_copy_strategy(dst, src)) return -1;
+    float sc = (float)regret_scale;
+    for (size_t i = 0; i < dst->nnodes; i++) {
+        const Node *nd = &dst->nodes[i];
+        if (nd->kind != SS_NODE_DECISION) continue;
+        size_t kn = (size_t)nd->nchild * (size_t)dst->n[nd->player];
+        if (dst->compact) {
+            dst->scales[2 * (size_t)nd->util] *= sc;
+            memset(dst->cstore + nd->data + kn, 0, kn * sizeof(uint16_t));
+            dst->scales[2 * (size_t)nd->util + 1] = 0.0f;
+        } else {
+            float *r = dst->store + nd->data;
+            for (size_t j = 0; j < kn; j++) r[j] *= sc;
+            memset(r + kn, 0, kn * sizeof(float));
+        }
+    }
+    dst->iter = 0;
+    dst->warm = 1;
     dst->have_expl = 0;
     return 0;
 }

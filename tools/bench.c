@@ -23,6 +23,9 @@ static int run(const Spot *sp, const float *oop, const float *ip, int threads)
     c.target_exploitability_pct = 0.5;
     c.check_every = 10;
     c.compact_storage = getenv("COMPACT") ? atoi(getenv("COMPACT")) : 0;
+    if (getenv("ALPHA")) c.dcfr_alpha = atof(getenv("ALPHA"));
+    if (getenv("BETA")) c.dcfr_beta = atof(getenv("BETA"));
+    if (getenv("GAMMA")) c.dcfr_gamma = atof(getenv("GAMMA"));
     char err[256];
     ss_solver *s = ss_create(&c, err, sizeof err);
     if (!s) { fprintf(stderr, "%s: %s\n", sp->name, err); return 1; }
@@ -55,7 +58,7 @@ int main(int argc, char **argv)
     }
     if (!strcmp(which, "turn") || !strcmp(which, "all")) {
         run(&turn, oop, ip, 1);
-        run(&turn, oop, ip, 4);
+        if (!getenv("ONE_THREAD")) run(&turn, oop, ip, 4);
     }
     return 0;
 }

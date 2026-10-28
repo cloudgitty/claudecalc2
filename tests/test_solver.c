@@ -171,6 +171,36 @@ static void test_compact_storage(void)
     ss_destroy(q);
 }
 
+static void test_warm_start(void)
+{
+    range_parse("66+,A9s+,KTs+,QTs+,JTs,T9s,98s,AJo+,KQo", oop);
+    range_parse("88+,ATs+,KJs+,QJs,AQo+", ip);
+    ss_config c;
+    base_config(&c, "Ks9s4s2h", 10.0, 40.0);
+    c.max_iterations = 1000;
+    c.target_exploitability_pct = 0.3;
+    ss_solver *chips = make(&c);
+    c.mode = SS_MODE_ICM;
+    c.icm_players = 4;
+    c.icm_stacks[0] = 45; c.icm_stacks[1] = 60; c.icm_stacks[2] = 30; c.icm_stacks[3] = 15;
+    c.icm_num_payouts = 3;
+    c.icm_payouts[0] = 50; c.icm_payouts[1] = 30; c.icm_payouts[2] = 20;
+    ss_solver *cold = make(&c), *warm = make(&c);
+    if (!chips || !cold || !warm) return;
+    ss_result r0, rc, rw;
+    ss_solve(chips, &r0);
+    ss_solve(cold, &rc);
+    CHECK(ss_warm_start(warm, chips, 1.0) == 0, "warm start");
+    ss_solve(warm, &rw);
+    printf("warm start: ICM cold %d iterations, warm from chip EV %d iterations\n", rc.iterations, rw.iterations);
+    CHECK(rw.exploitability_pct[0] <= 0.3 && rw.exploitability_pct[1] <= 0.3, "warm start did not converge");
+    CHECK(rw.iterations <= rc.iterations, "warm start slower than cold (%d vs %d)", rw.iterations, rc.iterations);
+    CHECK(fabs(rw.value[0] - rc.value[0]) < 0.01 * rc.pot_value[0], "warm value %.5f vs cold %.5f", rw.value[0], rc.value[0]);
+    ss_destroy(chips);
+    ss_destroy(cold);
+    ss_destroy(warm);
+}
+
 static int cancel_after = 0;
 static void progress_cb(void *user, int iteration, double expl)
 {
@@ -231,6 +261,7 @@ int main(void)
     test_river_properties();
     test_isomorphism_and_threads();
     test_compact_storage();
+    test_warm_start();
     test_cancel();
     test_flop();
     return check_finish("test_solver");

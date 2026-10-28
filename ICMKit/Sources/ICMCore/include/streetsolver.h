@@ -128,6 +128,12 @@ int ss_evaluate(ss_solver *s, ss_result *result);
    (payoff mode and table may differ). Returns 0, or -1 if the trees differ. */
 int ss_copy_strategy(ss_solver *dst, const ss_solver *src);
 
+/* Warm start: dst continues from src's regrets (multiplied by regret_scale) with a
+   fresh average strategy and iteration count. Same tree requirements as
+   ss_copy_strategy. Useful when solving the same spot with different payoffs
+   (for example ICM tables after a chip-EV solve). Returns 0 or -1. */
+int ss_warm_start(ss_solver *dst, const ss_solver *src, double regret_scale);
+
 /* Thread-safe request to stop ss_solve at the next check point. */
 void ss_cancel(ss_solver *s);
 
