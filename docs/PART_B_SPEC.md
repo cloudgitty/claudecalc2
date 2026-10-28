@@ -2,38 +2,57 @@
 
 ## Context
 
-ICM Calc + Ranges is an iPhone module (Swift, SwiftUI, iOS 18+) inside the app Poker JARVIS. It calculates ICM equity, bubble factor and preflop ICM ranges. Part B adds deep-stack postflop play:
+ICM Calc + Ranges is an iPhone module (Swift, SwiftUI, iOS 18+) inside the app Poker JARVIS, built in Xcode. It calculates ICM equity, bubble factor and preflop ICM ranges. Part B adds deep-stack postflop play:
 
-1. **StreetSolver:** a heads-up postflop CFR solver whose terminal payoffs are valued in tournament prize money (ICM), not chips. The same Swift code runs on the iPhone for turn and river spots and in the cloud for the flop library build.
+1. **Street solver:** a heads-up postflop CFR solver whose terminal payoffs are valued in tournament prize money (ICM), not chips. The same C code runs on the iPhone for turn and river spots and in the cloud for the flop library build.
 2. **Lite library:** precomputed flop solutions packed into a file under 1MB that ships inside the app. For each spot it stores a few summary numbers for ICM and for chip EV.
 
 UI is out of scope.
 
 ## Ground rules
 
-- **Language: Swift**, in a Swift package named `ICMKit`. Extend it if it exists; otherwise create it.
-- **Core modules must compile on Linux and iOS.** No Apple-only frameworks in core code (no Accelerate, no UIKit). Use Swift `SIMD` types and plain loops. Apple-only speed-ups may sit behind `#if canImport(Accelerate)`.
+- **C core:** all engine code is C11, written to compile unchanged with clang for iOS (arm64) and with gcc or clang on Linux (x86-64).
+- **Portable code only:** no x86-only intrinsics or headers in shared code. Rely on the compiler's auto-vectorization, or put platform-specific speed-ups behind `#ifdef` with a plain C fallback. Convert to and from 16-bit floats with your own functions rather than relying on `_Float16`.
+- **Threads:** a small thread pool on pthreads, which works on Linux and iOS. Solver functions must be callable from any thread and keep no global mutable state.
+- **Memory:** every allocation is freed; each solve can report its peak memory. All tests also pass under AddressSanitizer and UndefinedBehaviorSanitizer.
 - **Write all solver code yourself.** Do not copy or adapt code from TexasSolver, postflop-solver, WASM Postflop or any GPL/AGPL project. The output ships in a commercial app.
 - **No gambling features.** This is a math and study tool.
 
+## Package layout
+
+| Path | Contents |
+| --- | --- |
+| `ICMKit/Sources/ICMCore/` | C source files |
+| `ICMKit/Sources/ICMCore/include/` | Public C headers, one umbrella header `icmcore.h` |
+| `ICMKit/Sources/ICMKit/` | Thin Swift layer over `ICMCore` (compiled later in Xcode) |
+| `ICMKit/Package.swift` | Swift package with targets `ICMCore` (C) and `ICMKit` (Swift) |
+| `tools/` | Linux and macOS command-line tools in C, including the library builder. Not shipped in the app. |
+| `tests/` | C test programs |
+| `Makefile` or `CMakeLists.txt` | Builds the core, tools and tests here. Includes a sanitizer build. |
+
+If the repository already has an `ICMKit` package with a Swift `ICMEngine`, leave that file unchanged and add the C target beside it.
+
 ## Modules
 
-| Module | Job |
+| Module (C) | Job |
 | --- | --- |
-| `ICMEngine` | Malmuth-Harville ICM equity for up to 9 players. Reuse unchanged if it exists. |
-| `HandEvaluator` | Fast 7-card hand evaluator, own implementation (lookup-table based). |
-| `RiskPremium` | Risk premium for any pair of players at a table: the extra equity a player needs under ICM, on top of chip EV, to call an all-in against that opponent. |
-| `StreetSolver` | Heads-up postflop solver, flop to river, with ICM terminal payoffs. |
-| `LibraryBuilder` | Command-line tool that generates the spots, runs solves in parallel and packs results. Linux and macOS only, not shipped in the app. |
-| `PostflopLibrary` | Reader for the packed library file, used by the app. iOS-compatible. |
+| `icm` | Malmuth-Harville ICM equity for up to 9 players. Must give the same results as the app's Swift `ICMEngine`; parity is checked later on the Mac. |
+| `handeval` | Fast 7-card hand evaluator, own implementation (lookup-table based). |
+| `riskpremium` | Risk premium for any pair of players at a table: the extra equity a player needs under ICM, on top of chip EV, to call an all-in against that opponent. |
+| `streetsolver` | Heads-up postflop solver, flop to river, with ICM terminal payoffs. |
+| `libreader` | Reader for the packed library file, used by the app. |
+| `tools/librarybuilder` | Generates the spots, runs solves in parallel and packs results. Linux and macOS only, links zlib. |
 
-## StreetSolver
+**Swift layer (`ICMKit/Sources/ICMKit/`):** small Swift types and functions that wrap the C calls: solve a turn or river spot, read the library, compute risk premium. No solver logic in Swift.
 
-- **Algorithm:** Discounted CFR (or CFR+), combo-level ranges (up to 1,326 combos, minus board blockers), suit isomorphism, chance nodes for turn and river cards, O(n) river showdown evaluation using sorted hand strength. Float32.
+## Street solver
+
+- **Algorithm:** Discounted CFR (or CFR+), combo-level ranges (up to 1,326 combos, minus board blockers), suit isomorphism, chance nodes for turn and river cards, O(n) river showdown evaluation using sorted hand strength. 32-bit floats.
 - **Tree, every street:** bet 33% pot, bet 75% pot, all-in. Facing a bet: fold, call, raise to 3× the bet, all-in. At most one raise per street, then all-in or call only. Any bet or raise that would leave less than 67% of the pot behind becomes all-in. Both players have the same options; out-of-position acts first.
-- **Payoffs:** each terminal chip state (hero stack, villain stack, all other stacks fixed) is valued in $ with `ICMEngine` against the spot's full table and payouts. Each player maximizes their own $ EV. The game is not zero-sum, so report each player's best-response gain as their exploitability.
+- **Payoffs:** each terminal chip state (hero stack, villain stack, all other stacks fixed) is valued in $ with `icm` against the spot's full table and payouts. Each player maximizes their own $ EV. The game is not zero-sum, so report each player's best-response gain as their exploitability.
 - **Chip EV mode:** same solver with payoffs equal to chips won or lost.
 - **Stop rule:** exploitability under 0.5% of the pot, or a configurable iteration cap.
+- **Cancel and progress:** a solve can report progress and be cancelled from another thread (the app shows a progress bar and a cancel button).
 - **On-device use:** the same API solves a single turn or river spot. iPhone 13 targets: river under 2 seconds, turn plus river under 20 seconds.
 
 ## Matchups by risk premium
@@ -85,7 +104,7 @@ Counts assume all 16 matchup cells exist; skipped cells reduce them.
 
 ## Preflop ranges
 
-- If `ICMKit` contains `PreflopSolver`, use it to generate ranges for each canonical table, stack depth and line.
+- If the repo contains a preflop solver, use it to generate ranges for each canonical table, stack depth and line.
 - Otherwise write placeholder ranges in `ranges/` (one JSON file per pot type and stack depth, standard range notation), based on typical tournament ranges at those depths. Mark every file `"placeholder": true` and list them in `DECISIONS.md`.
 
 ## What each spot stores
@@ -100,7 +119,7 @@ For the hero, for ICM and for the matching chip EV baseline:
 
 **Hand categories:** sets and better / two pair; top pair; middle and bottom pair; strong draws (8 or more outs); weak draws; air.
 
-**Raw strategies:** also save each solve's flop decision points, quantized to 8 bits and compressed, in `raw/`, at most 50KB per solve. Not shipped; kept for a fuller library later.
+**Raw strategies:** also save each solve's flop decision points, quantized to 8 bits and zlib-compressed, in `raw/`, at most 50KB per solve. Not shipped; kept for a fuller library later.
 
 ## Running builds
 
@@ -111,16 +130,22 @@ For the hero, for ICM and for the matching chip EV baseline:
 
 ## Packing and the reader
 
-- Pack all finished results into `LiteLibrary.bin`: a header with format version, bucket thresholds and which tiers are complete, an index, then values as Float16. Under 1MB.
+- Pack all finished results into `LiteLibrary.bin`: a header with format version, bucket thresholds and which tiers are complete, an index, then values as 16-bit floats. Under 1MB.
 - Also export `LiteLibrary.json` for inspection.
-- `PostflopLibrary` answers queries by (hero premium, villain premium, position, pot type, SPR, flop). It maps any flop to its class with the same classifier, interpolates between the nearest premium buckets and SPRs, and falls back to the nearest solved spot when a spot is missing.
+- `libreader` answers queries by (hero premium, villain premium, position, pot type, SPR, flop). It maps any flop to its class with the same classifier, interpolates between the nearest premium buckets and SPRs, and falls back to the nearest solved spot when a spot is missing. The Swift layer exposes it to the app.
 - Document the format in `LIBRARY_FORMAT.md`.
 
-## Tests
+## Tests (C test programs)
 
 1. **Hand evaluator:** enumerate all 133,784,560 seven-card hands and match the standard category counts: straight flush 41,584; four of a kind 224,848; full house 3,473,184; flush 4,047,644; straight 6,180,020; three of a kind 6,461,620; two pair 31,433,400; one pair 58,627,800; high card 23,294,460.
-2. **ICM engine:** matches a brute-force ICM calculation on random tables of 2 to 9 players. Equities sum to the prize pool.
+2. **ICM:** matches a brute-force ICM calculation on random tables of 2 to 9 players. Equities sum to the prize pool.
 3. **Toy river game:** polarized range (nuts and air) against bluff-catchers, one bet size s (as a fraction of pot). The bluff share of the betting range is within 1 percentage point of s ÷ (1 + 2s), and the defender's call frequency within 1 point of 1 ÷ (1 + s).
 4. **ICM sanity:** with winner-take-all payouts, ICM mode matches chip EV mode within solver tolerance.
 5. **Convergence:** exploitability reaches the target on 5 sample spots of each pot type.
-6. **Round trip:** every value read back from `LiteLibrary.bin` matches its source result within Float16 precision.
+6. **Round trip:** every value read back from `LiteLibrary.bin` matches its source result within 16-bit float precision.
+
+## Checks for later on the Mac (not in the cloud)
+
+- The `ICMKit` package builds in Xcode for iOS, with the C target and the Swift layer.
+- The C `icm` results match the app's Swift `ICMEngine` on the same tables.
+- River and turn-plus-river solves meet the iPhone 13 targets on a real device.
