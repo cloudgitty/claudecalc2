@@ -300,3 +300,16 @@ librarybuilder: 194 solves to run, 234 already solved, 4 jobs at a time, budget 
 2026-10-28 16:08:47 srp-spr35-Ks9s4s-rcl-o3i0 T2 iterations 90 exploitability 0.324% / 0.450% seconds 183.0 memory 623MB raw 7.7KB warm
 2026-10-28 16:09:52 srp-spr35-Ks9s4s-rcl-o0i3 T2 iterations 90 exploitability 0.459% / 0.288% seconds 190.5 memory 623MB raw 7.7KB warm
 2026-10-28 16:09:59 srp-spr35-Ks9s4s-rcl-o5i4 T2 iterations 70 exploitability 0.404% / 0.461% seconds 151.6 memory 623MB raw 8.1KB warm
+2026-10-28 16:10:26 srp-spr35-Ks9s4s-rcl-o4i5 T2 iterations 80 exploitability 0.456% / 0.499% seconds 175.5 memory 623MB raw 8.3KB warm
+2026-10-28 16:12:43 srp-spr35-Ks9s4s-rcl-o3i4 T2 iterations 80 exploitability 0.448% / 0.490% seconds 170.1 memory 623MB raw 7.9KB warm
+2026-10-28 16:13:26 srp-spr35-Ks9s4s-rcl-o4i3 T2 iterations 130 exploitability 0.372% / 0.465% seconds 277.9 memory 623MB raw 8.4KB warm
+2026-10-28 16:13:57 srp-spr35-Ks9s4s-cl-o0i3 T2 iterations 100 exploitability 0.439% / 0.363% seconds 210.1 memory 623MB raw 7.9KB warm
+2026-10-28 16:14:07 srp-spr35-Ks9s4s-cl-o3i0 T2 iterations 120 exploitability 0.355% / 0.428% seconds 247.4 memory 623MB raw 8.1KB warm
+2026-10-28 16:16:11 srp-spr35-Ks9s4s-cl-o2i1 T2 iterations 100 exploitability 0.428% / 0.466% seconds 207.0 memory 623MB raw 8.2KB warm
+2026-10-28 16:17:05 srp-spr35-Ks9s4s-cl-o1i2 T2 iterations 100 exploitability 0.499% / 0.470% seconds 218.8 memory 623MB raw 8.0KB warm
+2026-10-28 16:18:02 srp-spr35-Ks9s4s-cl-o1i0 T2 iterations 110 exploitability 0.462% / 0.462% seconds 244.4 memory 623MB raw 7.9KB warm
+2026-10-28 16:18:22 srp-spr35-Ks9s4s-cl-o0i1 T2 iterations 110 exploitability 0.443% / 0.428% seconds 253.9 memory 623MB raw 8.1KB warm
+2026-10-28 16:29:10 srp-spr35-9s8d7c-cl-o5i3 T2 iterations 110 exploitability 0.444% / 0.438% seconds 779.3 memory 2132MB raw 12.6KB
+2026-10-28 16:32:15 srp-spr35-9s8d7c-cl-o3i5 T2 iterations 130 exploitability 0.442% / 0.265% seconds 909.6 memory 2132MB raw 12.1KB
+2026-10-28 16:33:25 srp-spr35-9s8d7c-rcl-o5i1 T2 iterations 130 exploitability 0.435% / 0.334% seconds 923.0 memory 2132MB raw 12.6KB
+2026-10-28 16:33:55 srp-spr35-9s8d7c-rcl-o1i5 T2 iterations 130 exploitability 0.480% / 0.271% seconds 932.1 memory 2132MB raw 12.2KB
