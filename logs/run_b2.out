@@ -393,3 +393,32 @@ librarybuilder: 194 solves to run, 234 already solved, 4 jobs at a time, budget 
 2026-10-28 18:16:56 3bp-spr35-Ks9s4s-rcl-o1i5 T2 iterations 140 exploitability 0.460% / 0.205% seconds 86.4 memory 178MB raw 3.3KB
 2026-10-28 18:17:25 3bp-spr35-Ks9s4s-rcl-o3i0 T2 iterations 170 exploitability 0.489% / 0.364% seconds 105.9 memory 178MB raw 3.5KB
 2026-10-28 18:17:26 3bp-spr35-Ks9s4s-rcl-o0i3 T2 iterations 110 exploitability 0.442% / 0.300% seconds 68.2 memory 178MB raw 3.2KB
+2026-10-28 18:18:15 3bp-spr35-Ks9s4s-rcl-o5i4 T2 iterations 150 exploitability 0.462% / 0.236% seconds 92.2 memory 178MB raw 3.2KB
+2026-10-28 18:18:52 3bp-spr35-Ks9s4s-rcl-o3i4 T2 iterations 140 exploitability 0.482% / 0.252% seconds 86.8 memory 178MB raw 3.2KB
+2026-10-28 18:18:53 3bp-spr35-Ks9s4s-rcl-o4i5 T2 iterations 190 exploitability 0.467% / 0.310% seconds 116.6 memory 178MB raw 3.4KB
+2026-10-28 18:19:19 3bp-spr35-Ks9s4s-rcl-o4i3 T2 iterations 190 exploitability 0.459% / 0.161% seconds 114.5 memory 178MB raw 3.2KB
+2026-10-28 18:19:53 3bp-spr35-Ks9s4s-cl-o3i0 T2 iterations 160 exploitability 0.494% / 0.290% seconds 97.8 memory 178MB raw 3.1KB
+2026-10-28 18:20:05 3bp-spr35-Ks9s4s-cl-o0i3 T2 iterations 120 exploitability 0.492% / 0.276% seconds 72.5 memory 178MB raw 3.2KB
+2026-10-28 18:20:34 3bp-spr35-Ks9s4s-cl-o2i1 T2 iterations 170 exploitability 0.473% / 0.222% seconds 101.3 memory 178MB raw 3.0KB
+2026-10-28 18:20:36 3bp-spr35-Ks9s4s-cl-o1i2 T2 iterations 130 exploitability 0.498% / 0.251% seconds 77.3 memory 178MB raw 3.1KB
+2026-10-28 18:21:23 3bp-spr35-Ks9s4s-cl-o0i1 T2 iterations 130 exploitability 0.440% / 0.307% seconds 77.5 memory 178MB raw 3.1KB
+2026-10-28 18:21:33 3bp-spr35-Ks9s4s-cl-o1i0 T2 iterations 170 exploitability 0.473% / 0.234% seconds 100.5 memory 178MB raw 2.9KB
+2026-10-28 18:27:14 3bp-spr35-9s8d7c-chip T2 iterations 210 exploitability 0.452% / 0.309% seconds 399.6 memory 630MB raw 4.3KB
+2026-10-28 18:32:01 3bp-spr35-9s8d7c-cl-o3i5 T2 iterations 150 exploitability 0.492% / 0.311% seconds 284.7 memory 630MB raw 3.7KB warm
+2026-10-28 18:32:37 3bp-spr35-9s8d7c-rcl-o5i1 T2 iterations 170 exploitability 0.493% / 0.366% seconds 321.6 memory 630MB raw 3.8KB warm
+2026-10-28 18:32:42 3bp-spr35-9s8d7c-cl-o5i3 T2 iterations 170 exploitability 0.473% / 0.328% seconds 325.2 memory 630MB raw 3.8KB warm
+2026-10-28 18:33:20 3bp-spr35-9s8d7c-rcl-o1i5 T2 iterations 190 exploitability 0.482% / 0.246% seconds 365.4 memory 630MB raw 3.8KB warm
+2026-10-28 18:35:32 3bp-spr35-9s8d7c-rcl-o3i0 T2 iterations 110 exploitability 0.484% / 0.489% seconds 210.7 memory 630MB raw 3.8KB warm
+2026-10-28 18:37:19 3bp-spr35-9s8d7c-rcl-o5i4 T2 iterations 140 exploitability 0.479% / 0.310% seconds 276.5 memory 630MB raw 3.8KB warm
+2026-10-28 18:37:41 3bp-spr35-9s8d7c-rcl-o4i5 T2 iterations 130 exploitability 0.470% / 0.323% seconds 259.8 memory 630MB raw 3.8KB warm
+2026-10-28 18:40:31 3bp-spr35-9s8d7c-rcl-o4i3 T2 iterations 150 exploitability 0.461% / 0.254% seconds 298.2 memory 630MB raw 3.8KB warm
+2026-10-28 18:40:36 3bp-spr35-9s8d7c-rcl-o0i3 T2 iterations 240 exploitability 0.491% / 0.168% seconds 478.5 memory 630MB raw 3.9KB warm
+2026-10-28 18:41:15 3bp-spr35-9s8d7c-cl-o3i0 T2 iterations 110 exploitability 0.444% / 0.379% seconds 213.5 memory 630MB raw 3.8KB warm
+2026-10-28 18:42:23 3bp-spr35-9s8d7c-rcl-o3i4 T2 iterations 150 exploitability 0.493% / 0.232% seconds 303.0 memory 630MB raw 3.7KB warm
+2026-10-28 18:44:16 3bp-spr35-9s8d7c-cl-o2i1 T2 iterations 110 exploitability 0.464% / 0.369% seconds 218.4 memory 630MB raw 3.8KB warm
+2026-10-28 18:45:33 3bp-spr35-9s8d7c-cl-o1i2 T2 iterations 130 exploitability 0.487% / 0.257% seconds 257.3 memory 630MB raw 3.8KB warm
+2026-10-28 18:45:36 3bp-spr35-9s8d7c-cl-o0i3 T2 iterations 150 exploitability 0.453% / 0.229% seconds 303.8 memory 630MB raw 3.8KB warm
+2026-10-28 18:45:56 3bp-spr35-9s8d7c-cl-o1i0 T2 iterations 110 exploitability 0.437% / 0.374% seconds 211.6 memory 630MB raw 3.8KB warm
+2026-10-28 18:48:41 3bp-spr35-9s8d7c-cl-o0i1 T2 iterations 140 exploitability 0.453% / 0.383% seconds 264.4 memory 630MB raw 3.8KB warm
+librarybuilder: 194 solved, 0 failed
+runner exit 0
