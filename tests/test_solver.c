@@ -4,6 +4,7 @@
  */
 #include "check.h"
 #include "solver_common.h"
+#include <stdio.h>
 #include <string.h>
 
 static float oop[NUM_COMBOS], ip[NUM_COMBOS];
@@ -196,6 +197,21 @@ static void test_warm_start(void)
     CHECK(rw.exploitability_pct[0] <= 0.3 && rw.exploitability_pct[1] <= 0.3, "warm start did not converge");
     CHECK(rw.iterations <= rc.iterations, "warm start slower than cold (%d vs %d)", rw.iterations, rc.iterations);
     CHECK(fabs(rw.value[0] - rc.value[0]) < 0.01 * rc.pot_value[0], "warm value %.5f vs cold %.5f", rw.value[0], rc.value[0]);
+    /* the same warm start through a state file */
+    char path[] = "test_solver_state.tmp";
+    ss_solver *viafile = make(&c);
+    if (viafile) {
+        CHECK(ss_save_state(chips, path) == 0, "save state");
+        CHECK(ss_load_state(viafile, path) == 0, "load state");
+        ss_restart_average(viafile, 1.0);
+        ss_result rf;
+        ss_solve(viafile, &rf);
+        CHECK(rf.iterations == rw.iterations && rf.value[0] == rw.value[0], "warm start via file differs (%d vs %d)",
+              rf.iterations, rw.iterations);
+        CHECK(ss_load_state(cold, "no_such_state_file.tmp") == -1, "loading a missing file must fail");
+        ss_destroy(viafile);
+        remove(path);
+    }
     ss_destroy(chips);
     ss_destroy(cold);
     ss_destroy(warm);

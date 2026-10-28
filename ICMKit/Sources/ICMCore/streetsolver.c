@@ -1405,27 +1405,94 @@ int ss_copy_strategy(ss_solver *dst, const ss_solver *src)
     return 0;
 }
 
-int ss_warm_start(ss_solver *dst, const ss_solver *src, double regret_scale)
+int ss_restart_average(ss_solver *S, double regret_scale)
 {
-    if (ss_copy_strategy(dst, src)) return -1;
+    if (!S) return -1;
     float sc = (float)regret_scale;
-    for (size_t i = 0; i < dst->nnodes; i++) {
-        const Node *nd = &dst->nodes[i];
+    for (size_t i = 0; i < S->nnodes; i++) {
+        const Node *nd = &S->nodes[i];
         if (nd->kind != SS_NODE_DECISION) continue;
-        size_t kn = (size_t)nd->nchild * (size_t)dst->n[nd->player];
-        if (dst->compact) {
-            dst->scales[2 * (size_t)nd->util] *= sc;
-            memset(dst->cstore + nd->data + kn, 0, kn * sizeof(uint16_t));
-            dst->scales[2 * (size_t)nd->util + 1] = 0.0f;
+        size_t kn = (size_t)nd->nchild * (size_t)S->n[nd->player];
+        if (S->compact) {
+            S->scales[2 * (size_t)nd->util] *= sc;
+            memset(S->cstore + nd->data + kn, 0, kn * sizeof(uint16_t));
+            S->scales[2 * (size_t)nd->util + 1] = 0.0f;
         } else {
-            float *r = dst->store + nd->data;
+            float *r = S->store + nd->data;
             for (size_t j = 0; j < kn; j++) r[j] *= sc;
             memset(r + kn, 0, kn * sizeof(float));
         }
     }
-    dst->iter = 0;
-    dst->warm = 1;
-    dst->have_expl = 0;
+    S->iter = 0;
+    S->warm = 1;
+    S->have_expl = 0;
+    return 0;
+}
+
+int ss_warm_start(ss_solver *dst, const ss_solver *src, double regret_scale)
+{
+    if (ss_copy_strategy(dst, src)) return -1;
+    return ss_restart_average(dst, regret_scale);
+}
+
+/* State file: magic, then the sizes that must match, then the raw arrays. */
+typedef struct {
+    char magic[8];
+    uint64_t nnodes, nstore, ndecisions;
+    int32_t n0, n1, compact, iter;
+} StateHeader;
+
+static void state_header(const ss_solver *S, StateHeader *h)
+{
+    memset(h, 0, sizeof(*h));
+    memcpy(h->magic, "ICMSS01", 8);
+    h->nnodes = S->nnodes;
+    h->nstore = S->nstore;
+    h->ndecisions = S->ndecisions;
+    h->n0 = S->n[0];
+    h->n1 = S->n[1];
+    h->compact = S->compact;
+    h->iter = S->iter;
+}
+
+int ss_save_state(const ss_solver *S, const char *path)
+{
+    if (!S || !path) return -1;
+    FILE *f = fopen(path, "wb");
+    if (!f) return -1;
+    StateHeader h;
+    state_header(S, &h);
+    int ok = fwrite(&h, sizeof(h), 1, f) == 1;
+    if (ok && S->compact) {
+        ok = fwrite(S->cstore, sizeof(uint16_t), S->nstore, f) == S->nstore &&
+             fwrite(S->scales, sizeof(float), 2 * S->ndecisions, f) == 2 * S->ndecisions;
+    } else if (ok) {
+        ok = fwrite(S->store, sizeof(float), S->nstore, f) == S->nstore;
+    }
+    if (fclose(f) != 0) ok = 0;
+    return ok ? 0 : -1;
+}
+
+int ss_load_state(ss_solver *S, const char *path)
+{
+    if (!S || !path) return -1;
+    FILE *f = fopen(path, "rb");
+    if (!f) return -1;
+    StateHeader h, want;
+    state_header(S, &want);
+    int ok = fread(&h, sizeof(h), 1, f) == 1 && !memcmp(h.magic, want.magic, 8) && h.nnodes == want.nnodes &&
+             h.nstore == want.nstore && h.ndecisions == want.ndecisions && h.n0 == want.n0 && h.n1 == want.n1 &&
+             h.compact == want.compact;
+    if (ok && S->compact) {
+        ok = fread(S->cstore, sizeof(uint16_t), S->nstore, f) == S->nstore &&
+             fread(S->scales, sizeof(float), 2 * S->ndecisions, f) == 2 * S->ndecisions;
+    } else if (ok) {
+        ok = fread(S->store, sizeof(float), S->nstore, f) == S->nstore;
+    }
+    fclose(f);
+    if (!ok) return -1;
+    S->iter = h.iter;
+    S->have_expl = 0;
     return 0;
 }
 

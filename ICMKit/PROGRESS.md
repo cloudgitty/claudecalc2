@@ -22,13 +22,20 @@ toolchain could be installed. The prompt was revised to a portable C11 core; tha
 - 00:28 Task 5 done: `riskpremium.c`, `tools/buckets.c` -> `config/buckets.json`. Thresholds
   3.59% / 6.98% / 10.11%; 14 cells, skipped (0,0) and (2,2). Reasoning in `DECISIONS.md`.
 - 00:49 Task 6: `streetsolver.c` + `threadpool.c`. Test 3 (toy river) passes for s = 0.33, 0.75,
-  1.5 (all within 0.1 points). Test 4 passes (see below). `test_solver` checks tree rules, zero-sum
+  1.5 (all within 0.1 points). Test 4 passes: winner-take-all ICM and chip EV
+  give equal values, and the ICM strategy played in the chip game is as unexploitable (0.27% /
+  0.28%) as the chip solution, while the real-payout ICM strategy is 9% exploitable there. `test_solver` checks tree rules, zero-sum
   chip values, isomorphism, thread determinism, cancel and the memory limit.
 - 00:51 All tests (`make asan`) pass under AddressSanitizer + UndefinedBehaviorSanitizer
   (LeakSanitizer on): no reports.
 - 00:55 Task 7: Swift layer written, **not yet compiled** (no Swift toolchain here):
   `ICMKit/Sources/ICMKit/Cards.swift`, `CoreICM.swift`, `StreetSolver.swift`, `PostflopLibrary.swift`.
   See "Swift layer: first Xcode build checklist" below.
+- 01:00-02:45 Speed work (one-walk best response, faster showdown sweep), optional 16-bit
+  storage, warm start, hand categories. Re-ran `make asan` at 02:45: all pass.
+- 01:07-06:15 Early estimate runs (task 9) and DCFR parameter tests; benchmarks (task 8).
+- 06:25 State save/load (`ss_save_state` / `ss_load_state` / `ss_restart_average`) so a chip-EV
+  solve can seed ICM solves from disk; final `make asan` run (see end of file).
 
 ## Swift layer: first Xcode build checklist (files not yet compiled)
 
@@ -57,8 +64,6 @@ When the package is first opened in Xcode (iOS 18 target):
 9. Parity check (spec "Checks for later on the Mac"): compare `CoreICM.equity` with the app's
    Swift `ICMEngine` on the same tables (for example the two canonical tables and random tables).
 10. Device timings: run a river and a turn solve on an iPhone 13 (see Benchmarks).
-- 02:45 Re-ran `make asan` on the final engine (16-bit storage, warm start, hand categories
-  added since 00:51): all 7 test programs pass under ASan + UBSan (+ LeakSanitizer), no reports.
 
 ## Benchmarks (task 8): on-device spots vs the iPhone 13 targets
 
@@ -141,8 +146,8 @@ counts with the 14 matchup cells that exist (`config/buckets.json`):
 - spec as written: about 23 sessions;
 - deduplicated: about 13 sessions;
 - **deduplicated + warm start: about 8 sessions**, plus about one more because SRP SPR 6 solves
-  (3.6 GB each, 7.1 GB peak while a warm start holds two solvers) can only run 3 at a time within
-  15 GB. So about **9 sessions** for T1-T5.
+  (3.6 GB each; warm start from a saved state file keeps one solver per process) can only run 3
+  at a time within 15 GB. So about **9 sessions** for T1-T5.
 - T1 and T2 together need only ~6 hours, so B2 can finish them in its own session while it
   writes the builder; T3 needs about 2.5 sessions, T4 one, T5 about 5.
 - SRP SPR 6 is about 70% of all compute (2 h per chip-EV solve, 0.9 h per warm ICM solve).
@@ -186,9 +191,9 @@ counts with the 14 matchup cells that exist (`config/buckets.json`):
    chip-EV solve per pot type, SPR and flop) and warm-start each ICM solve from the chip-EV
    solve (`ss_warm_start(icm, chips, 1.0)`) for SPR 3.5 and 6. Run solves single-threaded, 4 at
    a time (3 for SRP SPR 6), with `compact_storage = 2` and `memory_limit` about 4 GB.
-   Expect about 9 sessions for T1-T5 at the spec's settings. The chip-EV solver can be freed
-   after the warm start is set up only once all 16 ICM solves have copied it, so keep it (or
-   rebuild it) for the group; with SRP SPR 6 that means ~7 GB while both exist.
+   Expect about 9 sessions for T1-T5 at the spec's settings. Save the chip-EV solve with
+   `ss_save_state` (SRP SPR 6: 3.4 GB file in 16-bit storage) and start each ICM solve with
+   `ss_load_state` + `ss_restart_average(s, 1.0)`; then only one solver per core is in memory.
 5. **Flop summaries:** `hand_category()` gives the spec's categories (definitions in
    `DECISIONS.md`). For "bet %" use the hero's first decision node on the flop (IP: the node after
    the OOP check). "Stack-off threshold" needs the flop nodes where hero faces an all-in.
@@ -196,3 +201,7 @@ counts with the 14 matchup cells that exist (`config/buckets.json`):
    under 0.5%. Exploitability can rise briefly before converging (DCFR); judge by the final check.
 7. Placeholder ranges are wide (SRP 500-700 live combos per player); cost scales roughly with
    combos, so real solver ranges (if narrower) make the library cheaper.
+
+### Final check (06:22 UTC)
+`make test-full` and `make asan` both pass on the final code (all 7 test programs; the full
+133,784,560-hand enumeration included in `test-full`).

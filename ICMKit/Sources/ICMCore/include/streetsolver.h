@@ -134,6 +134,17 @@ int ss_copy_strategy(ss_solver *dst, const ss_solver *src);
    (for example ICM tables after a chip-EV solve). Returns 0 or -1. */
 int ss_warm_start(ss_solver *dst, const ss_solver *src, double regret_scale);
 
+/* Saves the solver state (regrets, strategy sums, iteration count) to a file, or
+   loads it into a solver built with the same board, ranges, tree and storage mode
+   (payoffs may differ). Returns 0, or -1 on I/O error or mismatch. */
+int ss_save_state(const ss_solver *s, const char *path);
+int ss_load_state(ss_solver *s, const char *path);
+
+/* Keeps the regrets (multiplied by regret_scale), clears the average strategy and
+   restarts the iteration count: ss_warm_start = ss_copy_strategy + this. Use after
+   ss_load_state to warm-start from a saved solve. */
+int ss_restart_average(ss_solver *s, double regret_scale);
+
 /* Thread-safe request to stop ss_solve at the next check point. */
 void ss_cancel(ss_solver *s);
 
