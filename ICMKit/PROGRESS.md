@@ -305,3 +305,11 @@ also uses every solve of the build.
   a second run warm-starts from the saved state. The B2 run keeps its binary; the new one
   (`build-next/librarybuilder`, also in the source) is for the next run. In B2 the 12:01 crash
   had lost 4 held T2 chip-EV solvers, so ~60 T2 ICM solves ran cold (~40% slower).
+- 18:48 **T2 complete** (204 / 204 solves, 336 entries, 25.7 core-hours); the first runner
+  (tiers 1-2) exited normally.
+- 18:48-20:05 Cores idle: my wait loop's process check matched its own command line
+  (`pgrep -f` on a string that was in the loop itself), so it did not notice the runner had
+  exited. About 75 minutes of solving lost.
+- 20:06 T3 started with the new builder binary (states saved to disk), **3-bet spots only**: a
+  single-raised SPR 6 chip-EV solve takes ~2 hours and would run past the wrap-up. No new solve
+  after 21:20.

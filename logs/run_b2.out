@@ -422,3 +422,4 @@ librarybuilder: 194 solves to run, 234 already solved, 4 jobs at a time, budget 
 2026-10-28 18:48:41 3bp-spr35-9s8d7c-cl-o0i1 T2 iterations 140 exploitability 0.453% / 0.383% seconds 264.4 memory 630MB raw 3.8KB warm
 librarybuilder: 194 solved, 0 failed
 runner exit 0
+librarybuilder: 100 solves to run, 2 already solved, 4 jobs at a time, budget 10500 MB
