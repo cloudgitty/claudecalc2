@@ -250,3 +250,5 @@ librarybuilder: 194 solves to run, 234 already solved, 4 jobs at a time, budget 
 2026-10-28 14:09:11 srp-spr35-9s5d2c-rcl-o3i0 T2 iterations 110 exploitability 0.459% / 0.311% seconds 868.9 memory 2224MB raw 13.8KB
 2026-10-28 14:22:11 srp-spr35-9s5d2c-rcl-o5i4 T2 iterations 110 exploitability 0.468% / 0.359% seconds 986.8 memory 2224MB raw 14.1KB
 2026-10-28 14:24:08 srp-spr35-9s5d2c-rcl-o4i5 T2 iterations 110 exploitability 0.413% / 0.415% seconds 973.3 memory 2224MB raw 14.6KB
+2026-10-28 14:26:09 srp-spr35-9s5d2c-rcl-o0i3 T2 iterations 140 exploitability 0.486% / 0.284% seconds 1235.2 memory 2224MB raw 14.6KB
+2026-10-28 14:26:29 srp-spr35-9s5d2c-rcl-o4i3 T2 iterations 120 exploitability 0.418% / 0.338% seconds 1038.5 memory 2224MB raw 14.1KB
