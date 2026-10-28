@@ -17,7 +17,7 @@ CORE_OBJ := $(patsubst $(CORE)/%.c,$(BUILD)/core/%.o,$(CORE_SRC))
 HEADERS  := $(wildcard $(CORE)/include/*.h) $(wildcard tests/*.h) $(wildcard tools/*.h)
 LIB      := $(BUILD)/libicmcore.a
 
-TESTS     := test_icm test_handeval test_flopclass test_toyriver test_icmsanity test_solver
+TESTS     := test_icm test_handeval test_flopclass test_handcat test_toyriver test_icmsanity test_solver
 TOOLS     := buckets bench estimate
 TEST_BIN  := $(addprefix $(BUILD)/,$(TESTS))
 TOOL_BIN  := $(addprefix $(BUILD)/,$(TOOLS))

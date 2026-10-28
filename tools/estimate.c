@@ -7,6 +7,11 @@
  * the separate 10-iteration timing is skipped (the full solve is the measurement).
  * Storage switches to 16-bit when float32 would need more than MEMLIMIT_MB
  * (default 4096).
+ * Payoff mode from the environment: MODE=chips (default), MODE=icm (cold ICM
+ * solve) or MODE=warm (chip-EV solve, then an ICM solve warm-started from it;
+ * both reported). The ICM table is the chip-leader table with the 50bb and 35bb
+ * players replaced by the two players of the spot, each with the effective
+ * stack behind (other stacks 60, 30, 15, 10bb; payouts 40/25/15/10/6/4).
  *   usage: estimate [threads] [flop] [spot ...]   spot = srp1.5 srp3.5 srp6 3bp1.5 3bp3.5 3bp6
  * Writes a summary line per spot to stdout (and the progress to stderr).
  */
@@ -27,8 +32,39 @@ static void progress(void *user, int it, double e)
     fprintf(stderr, "  %s: iteration %d, exploitability %.3f%%\n", (const char *)user, it, e);
 }
 
+static void set_icm(ss_config *c)
+{
+    static const double others[4] = { 60, 30, 15, 10 };
+    static const double pay[6] = { 40, 25, 15, 10, 6, 4 };
+    c->mode = SS_MODE_ICM;
+    c->icm_players = 6;
+    c->icm_num_payouts = 6;
+    c->seat[0] = 1;
+    c->seat[1] = 2;
+    c->icm_stacks[0] = others[0];
+    c->icm_stacks[1] = c->stack;
+    c->icm_stacks[2] = c->stack;
+    for (int i = 1; i < 4; i++) c->icm_stacks[2 + i] = others[i];
+    for (int i = 0; i < 6; i++) c->icm_payouts[i] = pay[i];
+}
+
+static void report(const Spot *sp, const char *flop, const char *mode, const ss_config *c, const ss_solver *s,
+                   const ss_result *r, int threads, size_t mem, double tcreate, double per_iter_1t)
+{
+    const uint16_t *cb;
+    int n0 = ss_player_combos(s, 0, &cb), n1 = ss_player_combos(s, 1, &cb);
+    printf("%-7s %-5s flop %s pot %4.1f stack %5.1f combos %3d/%3d | nodes %9zu | memory %7.1f MB | build %5.1f s | "
+           "1-thread %7.3f s/iter | %d threads: %4d iterations, %8.1f s, expl %.3f%% / %.3f%% | proj. 1-thread solve %8.0f s | peak RSS %.0f MB%s\n",
+           sp->id, mode, flop, c->pot, c->stack, n0, n1, r->tree_nodes, mem / 1048576.0, tcreate, per_iter_1t, threads,
+           r->iterations, r->seconds, r->exploitability_pct[0], r->exploitability_pct[1],
+           threads == 1 ? r->seconds + tcreate : per_iter_1t * r->iterations + tcreate, peak_rss_mb(),
+           r->compact_storage ? " | 16-bit storage" : "");
+    fflush(stdout);
+}
+
 static int run(const Spot *sp, const char *flop, int threads)
 {
+    const char *mode = getenv("MODE") ? getenv("MODE") : "chips";
     static float oop[NUM_COMBOS], ip[NUM_COMBOS];
     if (load_range(sp->file, "bb", oop) || load_range(sp->file, "btn", ip)) return 1;
     ss_config c;
@@ -43,6 +79,7 @@ static int run(const Spot *sp, const char *flop, int threads)
     c.check_every = 10;
     c.compact_storage = 2;
     c.memory_limit = (size_t)(getenv("MEMLIMIT_MB") ? atof(getenv("MEMLIMIT_MB")) : 4096.0) * 1048576;
+    if (!strcmp(mode, "icm")) set_icm(&c);
     char err[256];
     ss_result r;
     ss_solver *s;
@@ -80,16 +117,21 @@ static int run(const Spot *sp, const char *flop, int threads)
     ss_solve(s, &r);
     nodes = r.tree_nodes;
     if (threads == 1) per_iter_1t = r.seconds / r.iterations;
-    const uint16_t *cb;
-    int n0 = ss_player_combos(s, 0, &cb), n1 = ss_player_combos(s, 1, &cb);
+    report(sp, flop, strcmp(mode, "icm") ? "chips" : "icm", &c, s, &r, threads, mem, tcreate, per_iter_1t);
+    if (!strcmp(mode, "warm")) {
+        ss_config ci = c;
+        set_icm(&ci);
+        ci.progress_user = (void *)"warm ICM";
+        ss_solver *w = ss_create(&ci, err, sizeof err);
+        if (!w) { fprintf(stderr, "%s: %s\n", sp->id, err); ss_destroy(s); return 1; }
+        ss_warm_start(w, s, 1.0);
+        ss_result rw;
+        ss_solve(w, &rw);
+        report(sp, flop, "warm", &ci, w, &rw, threads, mem, tcreate, threads == 1 ? rw.seconds / rw.iterations : per_iter_1t);
+        ss_destroy(w);
+    }
     ss_destroy(s);
-    printf("%-7s flop %s pot %4.1f stack %5.1f combos %3d/%3d | nodes %9zu | memory %7.1f MB | build %5.1f s | "
-           "1-thread %7.3f s/iter | %d threads: %4d iterations, %8.1f s, expl %.3f%% / %.3f%% | proj. 1-thread solve %8.0f s | peak RSS %.0f MB%s\n",
-           sp->id, flop, c.pot, c.stack, n0, n1, nodes, mem / 1048576.0, tcreate, per_iter_1t, threads, r.iterations,
-           r.seconds, r.exploitability_pct[0], r.exploitability_pct[1],
-           threads == 1 ? r.seconds + tcreate : per_iter_1t * r.iterations + tcreate, peak_rss_mb(),
-           r.compact_storage ? " | 16-bit storage" : "");
-    fflush(stdout);
+    (void)nodes;
     return 0;
 }
 

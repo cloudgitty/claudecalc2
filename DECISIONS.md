@@ -112,3 +112,17 @@ Decisions taken while building Part B unattended. Newest sessions append at the 
   fraction of the pot, (b) the ICM solution's exploitability when played in the chip-EV game is
   within the 0.5% tolerance, and (c) reach-weighted strategy distance at well-reached nodes is
   small (it is 10x larger with real payouts, which shows the test can tell them apart).
+
+### Hand categories (`handcat.c`, for the flop summaries in Part B2)
+- Order of precedence: made hands first, then draws, then air. A pair or better that uses a hole
+  card is never counted as a draw (top pair + flush draw is "top pair").
+- "Sets and better / two pair": sets, trips (hole card matching a board pair), two pair using
+  both hole cards, straights, flushes, full houses, quads.
+- "Top pair": a hole card pairs the highest board card, or a pocket pair above it (overpair).
+  On a paired board, pairing the unpaired card counts as top pair only if that card is the
+  highest rank (5s5dAc + Ax), otherwise middle/bottom pair.
+- "Middle and bottom pair": a hole card pairs a lower board card, or an underpair.
+- A board pair alone is not the player's pair.
+- Draws: outs = turn cards that give a straight or flush (or straight flush) the player does
+  not already have. 8 or more = strong draw, 1-7 = weak draw. Backdoor draws and overcards are
+  not outs, so on dry rainbow boards most unpaired hands are "air".
