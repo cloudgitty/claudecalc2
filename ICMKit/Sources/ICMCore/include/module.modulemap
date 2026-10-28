@@ -1,0 +1,4 @@
+module ICMCore {
+    umbrella header "icmcore.h"
+    export *
+}
