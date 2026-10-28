@@ -35,6 +35,8 @@
 #define BUCKETS_PATH "config/buckets.json"
 #define BIN_PATH "library/LiteLibrary.bin"
 #define STATE_DIR "work/state"   /* saved chip-EV solver states for warm starts (not committed) */
+#define CKPT_DIR "work/ckpt"     /* mid-solve checkpoints, so long solves survive a restart */
+#define CKPT_EVERY_S 900.0
 #define JSON_PATH "library/LiteLibrary.json"
 
 static const char *SIZE_NAME[3] = { "33", "75", "allin" };
@@ -169,6 +171,36 @@ static void release_holder(Runner *R, Holder *h, ss_solver *dst, int *warm_used)
     pthread_mutex_unlock(&R->lock);
 }
 
+/* Mid-solve checkpoint: the progress callback (called between iterations) saves the
+   solver state every CKPT_EVERY_S seconds; a sidecar text file keeps the warm-start
+   flag and the solving time so far. */
+typedef struct {
+    ss_solver *S;
+    char path[256], side[272];
+    double last, base_seconds, started;
+    int warm;
+} Ckpt;
+
+static void ckpt_progress(void *user, int iteration, double expl)
+{
+    (void)iteration;
+    (void)expl;
+    Ckpt *k = user;
+    double t = now_s();
+    static double every = -1;   /* LB_CKPT_S overrides the interval (tests); read once */
+    if (every < 0) every = getenv("LB_CKPT_S") ? atof(getenv("LB_CKPT_S")) : CKPT_EVERY_S;
+    if (!k->S || t - k->last < every) return;
+    k->last = t;
+    char tmp[300];
+    snprintf(tmp, sizeof tmp, "%s.tmp", k->path);
+    if (ss_save_state(k->S, tmp) == 0 && rename(tmp, k->path) == 0) {
+        FILE *f = fopen(k->side, "w");
+        if (f) { fprintf(f, "%d %.1f\n", k->warm, k->base_seconds + (t - k->started)); fclose(f); }
+    } else {
+        remove(tmp);
+    }
+}
+
 /* *mem_mb is the job's reservation: an estimate on entry, replaced by the solver's
    real size once it exists (the caller releases *mem_mb). Returns 0. */
 static int run_one(Runner *R, int solve, Holder *h, double *mem_mb, int *warm_used)
@@ -186,6 +218,12 @@ static int run_one(Runner *R, int solve, Holder *h, double *mem_mb, int *warm_us
         pthread_mutex_lock(&R->lock); R->state[solve] = J_FAILED; R->failed++; pthread_mutex_unlock(&R->lock);
         return 0;
     }
+    Ckpt ck;
+    memset(&ck, 0, sizeof ck);
+    snprintf(ck.path, sizeof ck.path, "%s/%s.bin", CKPT_DIR, s->id);
+    snprintf(ck.side, sizeof ck.side, "%s/%s.txt", CKPT_DIR, s->id);
+    c.progress = ckpt_progress;
+    c.progress_user = &ck;
     ss_solver *S = ss_create(&c, err, sizeof err);
     if (!S) {
         fprintf(stderr, "%s: %s\n", s->id, err);
@@ -200,9 +238,29 @@ static int run_one(Runner *R, int solve, Holder *h, double *mem_mb, int *warm_us
     *mem_mb = actual;
     pthread_cond_broadcast(&R->cond);
     pthread_mutex_unlock(&R->lock);
-    release_holder(R, h, S, warm_used);
+    int resumed = 0;
+    if (lb_file_exists(ck.path) && ss_load_state(S, ck.path) == 0) {
+        /* resume an interrupted solve */
+        FILE *f = fopen(ck.side, "r");
+        if (f) {
+            if (fscanf(f, "%d %lf", &ck.warm, &ck.base_seconds) != 2) { ck.warm = 0; ck.base_seconds = 0; }
+            fclose(f);
+        }
+        *warm_used = ck.warm;
+        resumed = 1;
+        release_holder(R, h, NULL, warm_used);
+        *warm_used = ck.warm;
+    } else {
+        release_holder(R, h, S, warm_used);
+        ck.warm = *warm_used;
+    }
+    ck.S = S;
+    ck.started = ck.last = now_s();
     ss_result r;
     ss_solve(S, &r);
+    r.seconds += ck.base_seconds;
+    remove(ck.path);
+    remove(ck.side);
 
     uint8_t flop[3];
     cards_parse(s->flop, flop, 3);
@@ -238,11 +296,11 @@ static int run_one(Runner *R, int solve, Holder *h, double *mem_mb, int *warm_us
                               "\"pot\": %g, \"effective_stack\": %g, \"combos\": [%d, %d], \"warm_start\": %s, "
                               "\"iterations\": %d, \"exploitability_pct\": [%.4f, %.4f], \"value\": [%.6g, %.6g], "
                               "\"pot_value\": [%.6g, %.6g], \"seconds\": %.2f, \"peak_memory_mb\": %.1f, "
-                              "\"storage\": \"%s\", \"raw_bytes\": %zu, \"finished_utc\": \"%s\", \"players\": [",
+                              "\"storage\": \"%s\", \"raw_bytes\": %zu, \"resumed\": %s, \"finished_utc\": \"%s\", \"players\": [",
                               c.pot, c.stack, n0, n1, *warm_used ? "true" : "false", r.iterations,
                               r.exploitability_pct[0], r.exploitability_pct[1], r.value[0], r.value[1], r.pot_value[0],
                               r.pot_value[1], r.seconds, r.peak_memory / 1048576.0, r.compact_storage ? "16-bit" : "float32",
-                              raw_bytes, stamp);
+                              raw_bytes, resumed ? "true" : "false", stamp);
         o += write_summary(js + o, cap - o, &sum[0]);
         o += (size_t)snprintf(js + o, cap - o, ", ");
         o += write_summary(js + o, cap - o, &sum[1]);
@@ -440,6 +498,7 @@ static int cmd_run(int argc, char **argv)
             R.state[i] = J_PENDING;
         }
     lb_mkdirs(STATE_DIR);
+    lb_mkdirs(CKPT_DIR);
     for (int j = 0; j < R.njobs; j++) {
         const LbSolve *s = &m->solves[R.jobs[j]];
         if (!needs_warm(s)) continue;

@@ -235,3 +235,6 @@ Iterations to 0.5% of the pot, single solves:
   the budget). No new solve after 10:00 UTC so that a 2-hour single-raised SPR 6 solve still ends
   before the 11:21 wrap-up.
 - `tools/verify_results.py` is the task-1 check of `results/` against the manifest.
+- Mid-solve checkpoints every 15 minutes (`work/ckpt/`, not committed) because the container can
+  restart without warning (it did at 23:50 in session 3) and single-raised SPR 6 solves take about
+  2 hours. Saving a 3.6 GB state takes a few seconds, well under 1% of solve time.

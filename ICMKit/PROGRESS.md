@@ -397,3 +397,11 @@ Start: 2026-10-28 22:21:34 UTC (`date -u`). Wrap-up at 11:21 UTC; no new solves 
   10 GB of disk is free.
 - 22:29 Task 2 (solve): `librarybuilder run --jobs 4 --tiers 3,4,5 --budget-mb 11000
   --stop-at 10:00 UTC` (1,405 solves pending). Log: `logs/run_s3.out`, `logs/build.log`.
+- 23:50 **Container restart** killed the runner and commit loop (files survived: 479 results,
+  all verified; B2's three saved 3-bet SPR 6 states still in `work/state/`). Lost: the solves in
+  flight, including single-raised SPR 6 chip-EV solves about 80 minutes in.
+- 23:55 Builder change: **mid-solve checkpoints**. Every 15 minutes (between iterations) a
+  running solve saves its state to `work/ckpt/<id>.bin` (+ a sidecar with the warm flag and time
+  so far); a restarted job resumes from it, and the checkpoint is deleted when the job finishes.
+  Tested by killing a solve mid-way: the resumed solve ended with exactly the same iterations and
+  exploitability as an uninterrupted one. Results get `"resumed": true` and the total time.
