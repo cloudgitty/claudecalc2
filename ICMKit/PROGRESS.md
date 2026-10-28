@@ -249,3 +249,53 @@ Session B2 start: 2026-10-28 08:44:43 UTC (`date -u`). Wrap-up at 21:44 UTC.
   memory cgroup limit is about 14 GB, not the 15 GB `free` shows). In-flight solves were lost
   (at most ~10 minutes each) and the held SRP SPR 6 rainbow chip-EV solver too, so that pilot
   ICM solve runs cold. Restarted at 12:10 with a 10.5 GB budget (`--budget-mb 10500`).
+
+## Test 5 and the pilot (tasks 7 and 8)
+
+**Test 5 passes** (14:05): `librarybuilder test5 $(cat manifest/pilot.txt)`: all 20 pilot solves
+(10 single-raised, 10 3-bet; SPR 1.5, 3.5 and 6; dry high, paired, two-tone, monotone, connected
+and dry low flops; chip EV and ICM) reached 0.5% of the pot for both players, in 50-300
+iterations (cap 1000).
+
+**Pilot** (`python3 tools/pilot_report.py`): 20 solves, 4 per tier, run single-threaded with 4
+solves at a time. They count toward the build. Caveats: the 3 SPR 6 ICM pilots and the 3-bet
+SPR 3.5 paired ICM pilot ran cold because of the two runner restarts (warm start would have
+been ~25-50% faster); timings include memory-bandwidth contention from the other 3 solves.
+
+| Solve | Tier | Mode | Iterations | Exploitability % (OOP / IP) | Seconds | Memory MB | Warm |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| srp-spr60-8h4d3c-chip | T5 | chip | 220 | 0.492 / 0.284 | 6013 | 3649 | no |
+| srp-spr60-Ks9s4s-chip | T3 | chip | 260 | 0.474 / 0.351 | 1729 | 2016 | no |
+| 3bp-spr60-AsJs5d-chip | T3 | chip | 210 | 0.498 / 0.304 | 720 | 1079 | no |
+| 3bp-spr60-Jh7h3h-chip | T5 | chip | 300 | 0.476 / 0.177 | 542 | 544 | no |
+| srp-spr60-8h4d3c-cl-o1i2 | T5 | icm | 260 | 0.499 / 0.421 | 7004 | 3649 | no |
+| srp-spr60-Ks9s4s-rcl-o0i3 | T3 | icm | 230 | 0.489 / 0.282 | 1575 | 2016 | no |
+| 3bp-spr60-AsJs5d-cl-o2i1 | T3 | icm | 230 | 0.408 / 0.473 | 841 | 1079 | no |
+| 3bp-spr60-Jh7h3h-rcl-o3i0 | T5 | icm | 220 | 0.486 / 0.388 | 428 | 544 | no |
+| srp-spr35-9s8d7c-chip | T2 | chip | 120 | 0.440 / 0.325 | 878 | 2132 | no |
+| srp-spr35-9s8d7c-cl-o1i2 | T2 | icm | 90 | 0.486 / 0.444 | 637 | 2132 | yes |
+| 3bp-spr35-Ks9s4s-chip | T2 | chip | 140 | 0.480 / 0.244 | 92 | 178 | no |
+| 3bp-spr35-Ks9s4s-rcl-o5i1 | T2 | icm | 170 | 0.492 / 0.293 | 106 | 178 | yes |
+| 3bp-spr35-8s8d3h-chip | T4 | chip | 120 | 0.491 / 0.251 | 163 | 407 | no |
+| 3bp-spr35-8s8d3h-cl-o0i1 | T4 | icm | 130 | 0.440 / 0.285 | 180 | 407 | no |
+| srp-spr15-Qh9h4c-chip | T4 | chip | 50 | 0.409 / 0.342 | 56 | 299 | no |
+| srp-spr15-Qh9h4c-rcl-o3i4 | T4 | icm | 60 | 0.350 / 0.279 | 64 | 299 | no |
+| srp-spr15-Ks7d2c-chip | T1 | chip | 50 | 0.458 / 0.486 | 87 | 490 | no |
+| srp-spr15-Ks7d2c-cl-o2i1 | T1 | icm | 80 | 0.414 / 0.373 | 136 | 490 | no |
+| 3bp-spr15-KsKd4c-chip | T1 | chip | 50 | 0.473 / 0.310 | 19 | 101 | no |
+| 3bp-spr15-KsKd4c-rcl-o4i3 | T1 | icm | 60 | 0.326 / 0.217 | 23 | 101 | no |
+
+
+| Tier | Pilot solves | Median s | Slowest s | Peak memory MB | Projected tier core-h | Solves done / total | Core-h left | Sessions left |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| T1 | 4 | 55 | 136 | 490 | 4.4 | 204 / 204 | 0.0 | 0.0 |
+| T2 | 4 | 371 | 878 | 2132 | 21.4 | 30 / 204 | 18.3 | 0.4 |
+| T3 | 4 | 1208 | 1729 | 2016 | 68.5 | 4 / 204 | 67.2 | 1.4 |
+| T4 | 4 | 113 | 180 | 407 | 27.5 | 4 / 816 | 27.3 | 0.6 |
+| T5 | 4 | 3278 | 7004 | 3649 | 418.2 | 4 / 408 | 414.1 | 8.6 |
+
+The per-tier projection multiplies each tier's pilot chip-EV and ICM times (per pot type) by its
+solve counts. With one or two flops per pot type it depends heavily on the flops: T3's pilot
+flops are monotone and two-tone (cheap trees) so T3 is underestimated, T5's single-raised pilot is
+a rainbow flop with a cold ICM solve so T5 is overestimated. See the wrap-up for a projection that
+also uses every solve of the build.
