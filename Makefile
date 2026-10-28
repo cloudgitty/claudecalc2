@@ -17,7 +17,7 @@ CORE_OBJ := $(patsubst $(CORE)/%.c,$(BUILD)/core/%.o,$(CORE_SRC))
 HEADERS  := $(wildcard $(CORE)/include/*.h) $(wildcard tests/*.h) $(wildcard tools/*.h)
 LIB      := $(BUILD)/libicmcore.a
 
-TESTS     := test_icm test_handeval test_flopclass test_handcat test_toyriver test_icmsanity test_solver
+TESTS     := test_icm test_handeval test_flopclass test_handcat test_library test_toyriver test_icmsanity test_solver
 TOOLS     := buckets bench estimate librarybuilder
 TEST_BIN  := $(addprefix $(BUILD)/,$(TESTS))
 TOOL_BIN  := $(addprefix $(BUILD)/,$(TOOLS))
@@ -31,10 +31,15 @@ $(BUILD)/core/%.o: $(CORE)/%.c $(HEADERS)
 $(LIB): $(CORE_OBJ)
 	ar rcs $@ $^
 
+LB_LIB_SRC := tools/lb_common.c tools/lb_summary.c tools/lb_pack.c
+
+$(BUILD)/test_library: tests/test_library.c $(LB_LIB_SRC) $(LIB) $(HEADERS)
+	$(CC) $(CFLAGS) -Itools tests/test_library.c $(LB_LIB_SRC) $(LIB) $(LDLIBS) -lz -o $@
+
 $(BUILD)/test_%: tests/test_%.c $(LIB) $(HEADERS)
 	$(CC) $(CFLAGS) $< $(LIB) $(LDLIBS) -o $@
 
-LB_SRC := tools/librarybuilder.c tools/lb_common.c tools/lb_summary.c tools/lb_pack.c
+LB_SRC := tools/librarybuilder.c $(LB_LIB_SRC)
 
 $(BUILD)/librarybuilder: $(LB_SRC) $(LIB) $(HEADERS)
 	$(CC) $(CFLAGS) $(LB_SRC) $(LIB) $(LDLIBS) -lz -o $@
