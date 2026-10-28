@@ -57,7 +57,7 @@ typedef struct {
     uint16_t str;        /* hand strength */
     uint16_t idx;        /* live combo index */
     uint8_t a, b;        /* its two cards */
-    uint16_t pad;
+    int16_t same;        /* the same combo in the other player's list, or -1 */
 } SortedCombo;
 
 typedef struct {
@@ -70,7 +70,9 @@ typedef struct {
     int ndealt;
 } Path;
 
-enum { WALK_CFR = 0, WALK_BR, WALK_EV };
+/* WALK_BREV returns two vectors: the best-response value and the value under
+   the average strategy (both against the opponent's average strategy). */
+enum { WALK_CFR = 0, WALK_BREV };
 
 #define UTIL_HASH 8192
 
@@ -90,8 +92,12 @@ struct ss_solver {
     /* tree */
     Node *nodes;
     size_t nnodes, cap_nodes;
-    float *store;
-    size_t nstore;
+    float *store;            /* float32 storage, or NULL when compact */
+    uint16_t *cstore;        /* 16-bit storage (compact mode) */
+    float *scales;           /* compact mode: 2 per decision node (regrets, strategy sums) */
+    size_t nstore;           /* values per array set (regrets + strategy sums) */
+    size_t ndecisions;
+    int compact;
     uint8_t *cmaps;
     size_t ncmaps, cap_cmaps;
     Util *utils;
@@ -413,6 +419,7 @@ static int setup_boards(ss_solver *S)
                     S->sb[pos + cnt].idx = (uint16_t)i;
                     S->sb[pos + cnt].a = (uint8_t)x;
                     S->sb[pos + cnt].b = (uint8_t)y;
+                    S->sb[pos + cnt].same = S->same[p][i];
                     cnt++;
                 }
                 qsort(S->sb + pos, (size_t)cnt, sizeof(SortedCombo), cmp_sorted);
@@ -604,6 +611,7 @@ static int build_decision(ss_solver *S, int64_t idx, const BuildState *bs)
         nd->child = (int32_t)first;
         nd->street_len = (uint8_t)bs->street_len;
         nd->data = (int64_t)S->nstore;
+        nd->util = (int32_t)S->ndecisions++;   /* decision ordinal (scales in compact mode) */
         if (!nd->pot) nd->pot = (float)pot_now;
     }
     S->nstore += 2 * (size_t)na * (size_t)me_n;
@@ -827,23 +835,40 @@ ss_solver *ss_create(const ss_config *cfg, char *err, size_t err_len)
         return NULL;
     }
 
-    size_t N = (size_t)(S->n[0] > S->n[1] ? S->n[0] : S->n[1]);
+    size_t N = 2 * (size_t)(S->n[0] > S->n[1] ? S->n[0] : S->n[1]);   /* x2: best-response walks carry two vectors */
     S->scratch_floats = scratch_need(S, 0, N) + N + 64;
     S->nworkers = S->cfg.threads;
 
     /* Memory check before the large allocations. */
     size_t sb_bytes = (size_t)S->nboards * (size_t)(S->n[0] + S->n[1]) * sizeof(SortedCombo);
-    size_t need = S->mem_cur + S->nstore * sizeof(float) + sb_bytes +
-                  (size_t)S->nworkers * S->scratch_floats * sizeof(float);
+    size_t fixed = S->mem_cur + sb_bytes + (size_t)S->nworkers * S->scratch_floats * sizeof(float);
+    size_t need = fixed + S->nstore * sizeof(float);
+    size_t need_compact = fixed + S->nstore * sizeof(uint16_t) + 2 * S->ndecisions * sizeof(float) +
+                          (size_t)S->nworkers * 8 * (N + 16) * sizeof(float);
+    S->compact = cfg->compact_storage == 1 || (cfg->compact_storage == 2 && cfg->memory_limit && need > cfg->memory_limit);
+    if (S->compact) {
+        /* room to decode two arrays per decision level */
+        S->scratch_floats += scratch_need(S, 0, 2 * N) - scratch_need(S, 0, N);
+        need = need_compact;
+    }
     if (cfg->memory_limit && need > cfg->memory_limit) {
         set_err(err, err_len, "needs %.1f MB, over the %.1f MB limit", need / 1048576.0, cfg->memory_limit / 1048576.0);
         ss_destroy(S);
         return NULL;
     }
 
-    S->store = xcalloc(S, S->nstore, sizeof(float));
+    if (S->compact) {
+        S->cstore = xcalloc(S, S->nstore, sizeof(uint16_t));
+        S->scales = xcalloc(S, 2 * S->ndecisions, sizeof(float));
+    } else {
+        S->store = xcalloc(S, S->nstore, sizeof(float));
+    }
     S->arena = xcalloc(S, (size_t)S->nworkers, sizeof(Arena));
-    if (!S->store || !S->arena) { set_err(err, err_len, "out of memory"); ss_destroy(S); return NULL; }
+    if ((!S->store && !S->cstore) || (S->compact && !S->scales) || !S->arena) {
+        set_err(err, err_len, "out of memory");
+        ss_destroy(S);
+        return NULL;
+    }
     for (int i = 0; i < S->nworkers; i++) {
         S->arena[i].base = xcalloc(S, S->scratch_floats, sizeof(float));
         S->arena[i].cap = S->scratch_floats;
@@ -885,7 +910,9 @@ void ss_destroy(ss_solver *S)
         xfree(S, S->sb_cnt[p], (size_t)S->nboards, sizeof(int32_t));
     }
     xfree(S, S->nodes, S->cap_nodes, sizeof(Node));
-    xfree(S, S->store, S->nstore, sizeof(float));
+    if (S->store) xfree(S, S->store, S->nstore, sizeof(float));
+    if (S->cstore) xfree(S, S->cstore, S->nstore, sizeof(uint16_t));
+    if (S->scales) xfree(S, S->scales, 2 * S->ndecisions, sizeof(float));
     xfree(S, S->cmaps, S->cap_cmaps, 1);
     xfree(S, S->utils, (size_t)S->cap_utils, sizeof(Util));
     xfree(S, S->board_id, 52 * 52, sizeof(int32_t));
@@ -937,12 +964,12 @@ static void strategy_from(const float *src, int k, int n, int positive_part, flo
 
 /*
  * Showdown on a complete board. For each own combo h, with W = reach of opponent
- * combos strictly weaker, E = weaker or equal and C = all compatible (each
+ * combos strictly weaker, Q = equal strength and C = all compatible (each
  * excluding combos that share a card with h):
- *     cfv[h] += uw * W + ut * (E - W) + ul * (C - E)
- * One sweep over own combos in strength order with two pointers into the
- * opponent's sorted list (each pointer only moves forward); per-card sums remove
- * blocked combos.
+ *     cfv[h] += uw * W + ut * Q + ul * (C - W - Q)
+ * One sweep over own combos in strength order: a cumulative pass over the
+ * opponent's sorted list for W, a short pass over each group of equal strength
+ * for Q, and per-card sums to remove blocked combos.
  */
 static void showdown(const ss_solver *S, int id, int trav, const float *reach, const float *u, float scale, float *out)
 {
@@ -950,42 +977,45 @@ static void showdown(const ss_solver *S, int id, int trav, const float *reach, c
     const SortedCombo *T = S->sb + S->sb_off[trav][id];
     const SortedCombo *O = S->sb + S->sb_off[op][id];
     int nt = S->sb_cnt[trav][id], no = S->sb_cnt[op][id];
-    const int16_t *sm = S->same[trav];
     float uw = u[0] * scale, ul = u[1] * scale, ut = u[2] * scale;
-    float dw = uw - ut, de = ut - ul;
-    float cs_lt[52], cs_le[52];
-    float tot_lt = 0.0f, tot_le = 0.0f;
+    float dw = uw - ul, dq = ut - ul;
+    float cs_lt[52], cs_eq[52];
+    float tot_lt = 0.0f;
     memset(cs_lt, 0, sizeof(cs_lt));
-    memset(cs_le, 0, sizeof(cs_le));
-    int jl = 0, je = 0;
-    for (int i = 0; i < nt; i++) {
+    memset(cs_eq, 0, sizeof(cs_eq));
+    int jl = 0, i = 0;
+    while (i < nt) {
         uint16_t st = T[i].str;
         while (jl < no && O[jl].str < st) {
             float r = reach[O[jl].idx];
             tot_lt += r; cs_lt[O[jl].a] += r; cs_lt[O[jl].b] += r;
             jl++;
         }
-        while (je < no && O[je].str <= st) {
+        int je = jl;
+        float tot_eq = 0.0f;
+        while (je < no && O[je].str == st) {
             float r = reach[O[je].idx];
-            tot_le += r; cs_le[O[je].a] += r; cs_le[O[je].b] += r;
+            tot_eq += r; cs_eq[O[je].a] += r; cs_eq[O[je].b] += r;
             je++;
         }
-        int h = T[i].idx, x = T[i].a, y = T[i].b;
-        float rs = sm[h] >= 0 ? reach[sm[h]] : 0.0f;   /* the identical combo ties */
-        float W = tot_lt - cs_lt[x] - cs_lt[y];
-        float E = tot_le - cs_le[x] - cs_le[y] + rs;
-        out[h] += dw * W + de * E;
+        for (; i < nt && T[i].str == st; i++) {
+            int x = T[i].a, y = T[i].b;
+            float rs = T[i].same >= 0 ? reach[T[i].same] : 0.0f;   /* the identical combo ties */
+            float W = tot_lt - cs_lt[x] - cs_lt[y];
+            float Q = tot_eq - cs_eq[x] - cs_eq[y] + rs;
+            out[T[i].idx] += dw * W + dq * Q;
+        }
+        for (int j = jl; j < je; j++) { cs_eq[O[j].a] = 0.0f; cs_eq[O[j].b] = 0.0f; }
     }
-    /* the "le" sums now cover every opponent combo: add ul * C */
-    while (je < no) {
-        float r = reach[O[je].idx];
-        tot_le += r; cs_le[O[je].a] += r; cs_le[O[je].b] += r;
-        je++;
+    /* finish the cumulative sums: they now cover every opponent combo -> ul * C */
+    for (; jl < no; jl++) {
+        float r = reach[O[jl].idx];
+        tot_lt += r; cs_lt[O[jl].a] += r; cs_lt[O[jl].b] += r;
     }
-    for (int i = 0; i < nt; i++) {
-        int h = T[i].idx, x = T[i].a, y = T[i].b;
-        float rs = sm[h] >= 0 ? reach[sm[h]] : 0.0f;
-        out[h] += ul * (tot_le - cs_le[x] - cs_le[y] + rs);
+    for (i = 0; i < nt; i++) {
+        int x = T[i].a, y = T[i].b;
+        float rs = T[i].same >= 0 ? reach[T[i].same] : 0.0f;
+        out[T[i].idx] += ul * (tot_lt - cs_lt[x] - cs_lt[y] + rs);
     }
 }
 
@@ -1076,6 +1106,37 @@ static void chance_combine(const ss_solver *S, const Node *nd, int slot, int tra
     }
 }
 
+/* Compact storage: regrets as int16 and strategy sums as uint16, each array of a
+   node scaled by one float (its largest magnitude maps to the integer range). */
+static void decode_block(const ss_solver *S, const Node *nd, int which, size_t count, float *dst)
+{
+    const uint16_t *src = S->cstore + nd->data + (which ? count : 0);
+    float scale = S->scales[2 * (size_t)nd->util + (size_t)which];
+    if (which == 0)
+        for (size_t i = 0; i < count; i++) dst[i] = (float)(int16_t)src[i] * scale;
+    else
+        for (size_t i = 0; i < count; i++) dst[i] = (float)src[i] * scale;
+}
+
+static void encode_block(ss_solver *S, const Node *nd, int which, size_t count, const float *src)
+{
+    uint16_t *dst = S->cstore + nd->data + (which ? count : 0);
+    float m = 0.0f;
+    for (size_t i = 0; i < count; i++) { float a = fabsf(src[i]); m = a > m ? a : m; }
+    float full = which == 0 ? 32767.0f : 65535.0f;
+    float scale = m > 0.0f ? m / full : 0.0f;
+    float inv = m > 0.0f ? full / m : 0.0f;
+    S->scales[2 * (size_t)nd->util + (size_t)which] = scale;
+    /* round half away from zero; plain arithmetic so the loops vectorise */
+    if (which == 0)
+        for (size_t i = 0; i < count; i++) {
+            float x = src[i] * inv;
+            dst[i] = (uint16_t)(int16_t)(int32_t)(x + (x >= 0.0f ? 0.5f : -0.5f));
+        }
+    else
+        for (size_t i = 0; i < count; i++) dst[i] = (uint16_t)(uint32_t)(src[i] * inv + 0.5f);
+}
+
 static void walk(ss_solver *S, int w, int mode, int64_t idx, int trav, const float *reach, float *out,
                  Path path, int allow_par)
 {
@@ -1083,8 +1144,12 @@ static void walk(ss_solver *S, int w, int mode, int64_t idx, int trav, const flo
     int nt = S->n[trav], op = 1 - trav, no = S->n[op];
     Arena *A = &S->arena[w];
 
+    int width = mode == WALK_BREV ? 2 : 1;
+    size_t W = (size_t)nt * (size_t)width;
+
     if (nd->kind == SS_NODE_FOLD || nd->kind == SS_NODE_SHOWDOWN) {
         terminal(S, nd, trav, reach, out, &path);
+        if (width == 2) memcpy(out + nt, out, sizeof(float) * (size_t)nt);
         return;
     }
 
@@ -1092,18 +1157,21 @@ static void walk(ss_solver *S, int w, int mode, int64_t idx, int trav, const flo
     int k = nd->nchild;
 
     if (nd->kind == SS_NODE_CHANCE) {
-        memset(out, 0, sizeof(float) * (size_t)nt);
+        memset(out, 0, sizeof(float) * W);
         float scale = 1.0f / (float)(52 - (S->root_len + path.ndealt) - 4);
         if (allow_par && S->pool && k > 1) {
-            size_t stride = ((size_t)nt + 15) & ~(size_t)15;
+            size_t stride = (W + 15) & ~(size_t)15;
             ChanceJob J = { S, mode, trav, idx, reach, arena_alloc(A, stride * (size_t)k), stride, path };
             tp_parallel_for(S->pool, k, chance_task, &J);
-            for (int s = 0; s < k; s++) chance_combine(S, nd, s, trav, J.bufs + (size_t)s * stride, scale, out);
+            for (int s = 0; s < k; s++)
+                for (int ch = 0; ch < width; ch++)
+                    chance_combine(S, nd, s, trav, J.bufs + (size_t)s * stride + (size_t)ch * nt, scale, out + (size_t)ch * nt);
         } else {
-            float *tmp = arena_alloc(A, (size_t)nt);
+            float *tmp = arena_alloc(A, W);
             for (int s = 0; s < k; s++) {
                 chance_child(S, w, mode, nd, s, trav, reach, tmp, path);
-                chance_combine(S, nd, s, trav, tmp, scale, out);
+                for (int ch = 0; ch < width; ch++)
+                    chance_combine(S, nd, s, trav, tmp + (size_t)ch * nt, scale, out + (size_t)ch * nt);
             }
         }
         A->top = mark;
@@ -1113,17 +1181,36 @@ static void walk(ss_solver *S, int w, int mode, int64_t idx, int trav, const flo
     /* decision node */
     int actor = nd->player;
     int na_ = S->n[actor];
-    float *reg = S->store + nd->data;
-    float *ssum = reg + (size_t)k * na_;
+    size_t kn = (size_t)k * (size_t)na_;
+    float *reg, *ssum;
+    int need_reg = mode == WALK_CFR, need_ssum = mode != WALK_CFR || actor != trav;
+    if (!S->compact) {
+        reg = S->store + nd->data;
+        ssum = reg + kn;
+    } else {
+        reg = need_reg ? arena_alloc(A, kn) : NULL;
+        ssum = need_ssum ? arena_alloc(A, kn) : NULL;
+        if (need_reg) decode_block(S, nd, 0, kn, reg);
+        if (need_ssum) decode_block(S, nd, 1, kn, ssum);
+    }
 
     if (actor == trav) {
-        float *cb = arena_alloc(A, (size_t)k * nt);
-        for (int a = 0; a < k; a++) walk(S, w, mode, nd->child + a, trav, reach, cb + (size_t)a * nt, path, allow_par);
-        if (mode == WALK_BR) {
+        float *cb = arena_alloc(A, (size_t)k * W);
+        for (int a = 0; a < k; a++) walk(S, w, mode, nd->child + a, trav, reach, cb + (size_t)a * W, path, allow_par);
+        if (mode == WALK_BREV) {
             for (int h = 0; h < nt; h++) out[h] = cb[h];
             for (int a = 1; a < k; a++) {
-                const float *c = cb + (size_t)a * nt;
+                const float *c = cb + (size_t)a * W;
                 for (int h = 0; h < nt; h++) if (c[h] > out[h]) out[h] = c[h];
+            }
+            float *sig = arena_alloc(A, (size_t)k * nt);
+            float *tmp = arena_alloc(A, (size_t)nt);
+            strategy_from(ssum, k, nt, 0, sig, tmp);
+            float *ev = out + nt;
+            memset(ev, 0, sizeof(float) * (size_t)nt);
+            for (int a = 0; a < k; a++) {
+                const float *sa = sig + (size_t)a * nt, *c = cb + (size_t)a * W + nt;
+                for (int h = 0; h < nt; h++) ev[h] += sa[h] * c[h];
             }
         } else {
             float *sig = arena_alloc(A, (size_t)k * nt);
@@ -1144,21 +1231,22 @@ static void walk(ss_solver *S, int w, int mode, int64_t idx, int trav, const flo
                         r[h] = old * (old > 0.0f ? dp : dn) + (c[h] - out[h]);
                     }
                 }
+                if (S->compact) encode_block(S, nd, 0, kn, reg);
             }
         }
     } else {
         float *sig = arena_alloc(A, (size_t)k * no);
         float *nr = arena_alloc(A, (size_t)no);
-        float *tmp = arena_alloc(A, (size_t)nt);
+        float *tmp = arena_alloc(A, W);
         strategy_from(mode == WALK_CFR ? reg : ssum, k, no, mode == WALK_CFR, sig, nr);
-        memset(out, 0, sizeof(float) * (size_t)nt);
+        memset(out, 0, sizeof(float) * W);
         for (int a = 0; a < k; a++) {
             const float *s = sig + (size_t)a * no;
             float sum = 0.0f;
             for (int v = 0; v < no; v++) { nr[v] = reach[v] * s[v]; sum += nr[v]; }
             if (sum <= 0.0f) continue;
             walk(S, w, mode, nd->child + a, trav, nr, tmp, path, allow_par);
-            for (int h = 0; h < nt; h++) out[h] += tmp[h];
+            for (size_t h = 0; h < W; h++) out[h] += tmp[h];
         }
         if (mode == WALK_CFR) {
             float ds = S->disc_strat;
@@ -1167,6 +1255,7 @@ static void walk(ss_solver *S, int w, int mode, int64_t idx, int trav, const flo
                 const float *s = sig + (size_t)a * no;
                 for (int v = 0; v < no; v++) q[v] = q[v] * ds + reach[v] * s[v];
             }
+            if (S->compact) encode_block(S, nd, 1, kn, ssum);
         }
     }
     A->top = mark;
@@ -1175,22 +1264,28 @@ static void walk(ss_solver *S, int w, int mode, int64_t idx, int trav, const flo
 /* ------------------------------------------------------------------------ */
 /* Solving                                                                  */
 
-static double root_value(ss_solver *S, int mode, int p)
+/* Best-response value and average-strategy value of player p at the root. */
+static void root_values(ss_solver *S, int p, double *br, double *ev)
 {
-    float *out = arena_alloc(&S->arena[0], (size_t)S->n[p]);
+    int n = S->n[p];
+    float *out = arena_alloc(&S->arena[0], 2 * (size_t)n);
     Path path = { { 0, 0 }, 0 };
-    walk(S, 0, mode, 0, p, S->w[1 - p], out, path, 1);
-    double v = 0.0;
-    for (int h = 0; h < S->n[p]; h++) v += (double)S->w[p][h] * out[h];
+    walk(S, 0, WALK_BREV, 0, p, S->w[1 - p], out, path, 1);
+    double b = 0.0, e = 0.0;
+    for (int h = 0; h < n; h++) {
+        b += (double)S->w[p][h] * out[h];
+        e += (double)S->w[p][h] * out[n + h];
+    }
     S->arena[0].top = 0;
-    return v / S->norm;
+    *br = b / S->norm;
+    *ev = e / S->norm;
 }
 
 static void compute_exploitability(ss_solver *S)
 {
     for (int p = 0; p < 2; p++) {
-        double br = root_value(S, WALK_BR, p);
-        double ev = root_value(S, WALK_EV, p);
+        double br, ev;
+        root_values(S, p, &br, &ev);
         S->last_value[p] = ev;
         S->last_expl[p] = br - ev;
         S->last_expl_pct[p] = 100.0 * (br - ev) / S->pot_value[p];
@@ -1266,6 +1361,7 @@ static void fill_result(const ss_solver *S, ss_result *res, int status, double s
     res->seconds = seconds;
     res->peak_memory = S->mem_peak;
     res->tree_nodes = S->nnodes;
+    res->compact_storage = S->compact;
     res->status = status;
 }
 
@@ -1279,12 +1375,17 @@ int ss_evaluate(ss_solver *S, ss_result *res)
 
 int ss_copy_strategy(ss_solver *dst, const ss_solver *src)
 {
-    if (!dst || !src || dst->nnodes != src->nnodes || dst->nstore != src->nstore ||
+    if (!dst || !src || dst->nnodes != src->nnodes || dst->nstore != src->nstore || dst->compact != src->compact ||
         dst->n[0] != src->n[0] || dst->n[1] != src->n[1])
         return -1;
     for (size_t i = 0; i < dst->nnodes; i++)
         if (dst->nodes[i].kind != src->nodes[i].kind || dst->nodes[i].nchild != src->nodes[i].nchild) return -1;
-    memcpy(dst->store, src->store, sizeof(float) * dst->nstore);
+    if (dst->compact) {
+        memcpy(dst->cstore, src->cstore, sizeof(uint16_t) * dst->nstore);
+        memcpy(dst->scales, src->scales, sizeof(float) * 2 * dst->ndecisions);
+    } else {
+        memcpy(dst->store, src->store, sizeof(float) * dst->nstore);
+    }
     dst->iter = src->iter;
     dst->have_expl = 0;
     return 0;
@@ -1337,7 +1438,16 @@ int ss_node_strategy(const ss_solver *S, int node, float *out)
     if (!valid_node(S, node) || S->nodes[node].kind != SS_NODE_DECISION || !out) return -1;
     const Node *nd = &S->nodes[node];
     int k = nd->nchild, p = nd->player, n = S->n[p];
-    const float *ssum = S->store + nd->data + (size_t)k * n;
+    float *buf = NULL;
+    const float *ssum;
+    if (S->compact) {
+        buf = malloc(sizeof(float) * (size_t)k * (size_t)n);
+        if (!buf) return -1;
+        decode_block(S, nd, 1, (size_t)k * n, buf);
+        ssum = buf;
+    } else {
+        ssum = S->store + nd->data + (size_t)k * n;
+    }
     memset(out, 0, sizeof(float) * (size_t)k * NUM_COMBOS);
     for (int h = 0; h < n; h++) {
         double tot = 0.0;
@@ -1346,6 +1456,7 @@ int ss_node_strategy(const ss_solver *S, int node, float *out)
             out[(size_t)a * NUM_COMBOS + S->combo[p][h]] =
                 tot > 0.0 ? (float)(ssum[(size_t)a * n + h] / tot) : 1.0f / (float)k;
     }
+    free(buf);
     return k;
 }
 

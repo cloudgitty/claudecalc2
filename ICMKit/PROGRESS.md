@@ -26,3 +26,6 @@ toolchain could be installed. The prompt was revised to a portable C11 core; tha
   chip values, isomorphism, thread determinism, cancel and the memory limit.
 - 00:51 All tests (`make asan`) pass under AddressSanitizer + UndefinedBehaviorSanitizer
   (LeakSanitizer on): no reports.
+- 00:55 Task 7: Swift layer written, **not yet compiled** (no Swift toolchain here):
+  `ICMKit/Sources/ICMKit/Cards.swift`, `CoreICM.swift`, `StreetSolver.swift`, `PostflopLibrary.swift`.
+  See "Swift layer: first Xcode build checklist" below.

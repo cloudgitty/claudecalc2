@@ -135,6 +135,42 @@ static void test_isomorphism_and_threads(void)
     ss_destroy(par);
 }
 
+static void test_compact_storage(void)
+{
+    range_parse("66+,A9s+,KTs+,QTs+,JTs,T9s,98s,AJo+,KQo", oop);
+    range_parse("88+,ATs+,KJs+,QJs,AQo+", ip);
+    ss_config c;
+    base_config(&c, "Ks9s4s2h", 10.0, 30.0);
+    c.max_iterations = 1000;
+    c.target_exploitability_pct = 0.15;
+    ss_solver *f = make(&c);
+    c.compact_storage = 1;
+    ss_solver *q = make(&c);
+    if (!f || !q) return;
+    ss_result rf, rq;
+    ss_solve(f, &rf);
+    ss_solve(q, &rq);
+    printf("compact storage: %.2f MB vs %.2f MB, %d vs %d iterations, value %.4f vs %.4f\n", rq.peak_memory / 1048576.0,
+           rf.peak_memory / 1048576.0, rq.iterations, rf.iterations, rq.value[0], rf.value[0]);
+    CHECK(rq.compact_storage == 1 && rf.compact_storage == 0, "storage mode not reported");
+    CHECK(rq.peak_memory < rf.peak_memory, "compact storage uses more memory");
+    CHECK(rq.exploitability_pct[0] <= 0.15 && rq.exploitability_pct[1] <= 0.15, "compact storage did not converge");
+    CHECK(fabs(rq.value[0] - rf.value[0]) < 0.003 * c.pot, "compact value %.5f vs %.5f", rq.value[0], rf.value[0]);
+    /* auto mode switches to 16-bit only when float32 would exceed the limit */
+    c.compact_storage = 2;
+    c.memory_limit = (size_t)(rf.peak_memory * 0.8);
+    ss_solver *a = make(&c);
+    if (a) {
+        ss_result ra;
+        c.max_iterations = 1;
+        ss_evaluate(a, &ra);
+        CHECK(ra.compact_storage == 1 && ra.peak_memory <= c.memory_limit, "auto mode did not pick 16-bit storage");
+    }
+    ss_destroy(a);
+    ss_destroy(f);
+    ss_destroy(q);
+}
+
 static int cancel_after = 0;
 static void progress_cb(void *user, int iteration, double expl)
 {
@@ -194,6 +230,7 @@ int main(void)
     test_tree_rules();
     test_river_properties();
     test_isomorphism_and_threads();
+    test_compact_storage();
     test_cancel();
     test_flop();
     return check_finish("test_solver");

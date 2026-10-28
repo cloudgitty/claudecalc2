@@ -61,3 +61,54 @@ Decisions taken while building Part B unattended. Newest sessions append at the 
   so each ICM tier has 14/16 of the spec's counts (e.g. T1 = 336 ICM + 24 chip EV solves).
 - Stack roles at both tables: leader (runaway at table 1, chip leader at table 2), 40/30/25 and
   50/35/30 are mid stacks, 15 and 10 are short stacks.
+
+### Street solver (`streetsolver.c`)
+- **Algorithm:** Discounted CFR (alpha 1.5, beta 0, gamma 2, Brown & Sandholm's recommendation)
+  with alternating updates, vector form over the public tree. The discount for iteration t-1 is
+  applied lazily when a node is next updated (equivalent to discounting at the end of the
+  iteration). All solver arithmetic is float32; ICM itself runs in double.
+- **Ranges:** per-player lists of live combos (weight > 0, not blocked by the starting board).
+  Combos blocked by later cards keep their slot; their reach is zeroed at the chance node and
+  their value is excluded when the chance node combines its children.
+- **Chance nodes:** one child per dealt card, weighted 1/45 (turn) and 1/44 (river): every pair of
+  compatible hands sees exactly that many cards. All-in before the river is a terminal that
+  enumerates the runout (44 rivers, or C(45,2) = 990 turn-river pairs) with the same O(n)
+  showdown, instead of building chance nodes below it.
+- **Suit isomorphism:** a suit permutation is used when it maps the starting board onto itself,
+  leaves both range vectors unchanged, and fixes every card dealt so far. Cards that map onto
+  each other share one child; the values for the other cards are the stored child's values with
+  the combo permutation applied. With asymmetric input ranges isomorphism switches itself off.
+  (Rainbow flops have no symmetry; two-tone and monotone flops do.)
+- **Showdown:** for every possible final board, each player's live combos sorted by strength. One
+  sweep per showdown: cumulative sums for strictly weaker opponent combos, a short pass per group
+  of equal strength, and 52 per-card sums to remove combos sharing a card; O(n) per terminal.
+- **Tree:** exactly the spec's: bet 33% / 75% / all-in; facing a bet fold, call, raise to 3x the
+  bet, all-in; one raise per street, after that fold / call / all-in. Bet and raise sizes are
+  "to" amounts on the street; 33% and 75% are of the pot before the bet. The 67% rule compares
+  the chips left behind after the bet is called with the pot after the call. Duplicate sizes
+  (for example 75% turning into all-in) are merged. Both players always have equal effective
+  stacks (the spot's effective stack).
+- **Payoffs:** every terminal is one of win / lose / tie for given total investments (i0, i1),
+  so payoffs are computed once per distinct (i0, i1) and shared (a few hundred ICM evaluations per
+  tree). In ICM mode the two players' final stacks (stack behind - invested + share of the pot)
+  replace their seats at the full table; other stacks are fixed. Each player's payoffs are
+  shifted by a constant (their value when giving up the starting pot), which changes nothing in
+  the solve but keeps float32 values small.
+- **Exploitability:** for each player, best-response value minus value under the average
+  strategies (both against the opponent's average strategy), as a percentage of that player's
+  "pot value" = payoff(win the starting pot now) - payoff(lose it now). In chip mode the pot value
+  is the pot. The stop rule needs both players under the target. One walk per player computes
+  both numbers; checks run every `check_every` (default 10) iterations.
+- **Threads:** a pthread fork-join pool; the first chance level a walk meets is processed in
+  parallel (turn cards for flop solves, river cards for turn solves). Results are combined in a
+  fixed order, so 1 and 4 threads give identical results. Solver objects hold all state; there is
+  no global mutable state except the hand-evaluator tables, built once under `pthread_once`.
+- **Memory:** all solver allocations go through a counter; `ss_memory_required()` and
+  `ss_result.peak_memory` report the peak. `memory_limit` makes `ss_create` fail before the big
+  allocations if the estimate is over the limit.
+- **Test 4 criterion:** with winner-take-all payouts ICM is an affine function of chips, so the
+  games are strategically identical, but strategies of indifferent or barely reached combos are not
+  unique and drift apart with float rounding. The test therefore checks (a) values equal as a
+  fraction of the pot, (b) the ICM solution's exploitability when played in the chip-EV game is
+  within the 0.5% tolerance, and (c) reach-weighted strategy distance at well-reached nodes is
+  small (it is 10x larger with real payouts, which shows the test can tell them apart).

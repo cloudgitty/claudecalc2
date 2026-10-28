@@ -22,6 +22,7 @@ static int run(const Spot *sp, const float *oop, const float *ip, int threads)
     c.max_iterations = 1000;
     c.target_exploitability_pct = 0.5;
     c.check_every = 10;
+    c.compact_storage = getenv("COMPACT") ? atoi(getenv("COMPACT")) : 0;
     char err[256];
     ss_solver *s = ss_create(&c, err, sizeof err);
     if (!s) { fprintf(stderr, "%s: %s\n", sp->name, err); return 1; }
@@ -30,9 +31,9 @@ static int run(const Spot *sp, const float *oop, const float *ip, int threads)
     const uint16_t *cb;
     int n0 = ss_player_combos(s, 0, &cb), n1 = ss_player_combos(s, 1, &cb);
     printf("%-6s %-12s pot %5.1f stack %5.1f combos %4d/%4d threads %d: %7.3f s, %4d iterations, expl %.3f%% / %.3f%%, "
-           "%zu nodes, %.1f MB\n",
+           "%zu nodes, %.1f MB%s\n",
            sp->name, sp->board, sp->pot, sp->stack, n0, n1, threads, r.seconds, r.iterations, r.exploitability_pct[0],
-           r.exploitability_pct[1], r.tree_nodes, r.peak_memory / 1048576.0);
+           r.exploitability_pct[1], r.tree_nodes, r.peak_memory / 1048576.0, r.compact_storage ? " (16-bit storage)" : "");
     fflush(stdout);
     ss_destroy(s);
     return 0;

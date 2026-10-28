@@ -79,6 +79,10 @@ typedef struct {
     int threads;                /* 1 = single-threaded */
     size_t memory_limit;        /* bytes, 0 = no limit; ss_create fails above it */
     int use_isomorphism;        /* suit isomorphism at chance nodes (default 1) */
+    /* Storage of regrets and strategy sums: 0 = float32 (default); 1 = 16-bit with
+       one float32 scale per node and array (about half the memory; all arithmetic
+       stays float32); 2 = float32 unless that exceeds memory_limit, then 16-bit. */
+    int compact_storage;
 
     /* Optional progress callback, called from the solving thread after every
        exploitability check: iteration count and max exploitability in % of pot. */
@@ -97,6 +101,7 @@ typedef struct {
     double seconds;
     size_t peak_memory;             /* bytes */
     size_t tree_nodes;
+    int compact_storage;            /* 1 if 16-bit storage was used */
     int status;                     /* SS_OK, SS_CANCELLED */
 } ss_result;
 
