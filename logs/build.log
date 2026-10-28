@@ -418,3 +418,7 @@
 2026-10-28 18:45:36 3bp-spr35-9s8d7c-cl-o0i3 T2 iterations 150 exploitability 0.453% / 0.229% seconds 303.8 memory 630MB raw 3.8KB warm
 2026-10-28 18:45:56 3bp-spr35-9s8d7c-cl-o1i0 T2 iterations 110 exploitability 0.437% / 0.374% seconds 211.6 memory 630MB raw 3.8KB warm
 2026-10-28 18:48:41 3bp-spr35-9s8d7c-cl-o0i1 T2 iterations 140 exploitability 0.453% / 0.383% seconds 264.4 memory 630MB raw 3.8KB warm
+2026-10-28 20:16:23 3bp-spr60-KsKd4c-chip T3 iterations 200 exploitability 0.470% / 0.328% seconds 638.0 memory 1127MB raw 5.8KB
+2026-10-28 20:18:08 3bp-spr60-AsJs5d-cl-o5i3 T3 iterations 240 exploitability 0.472% / 0.281% seconds 750.8 memory 1079MB raw 4.6KB
+2026-10-28 20:18:53 3bp-spr60-Ks7d2c-chip T3 iterations 150 exploitability 0.465% / 0.382% seconds 783.2 memory 1879MB raw 6.0KB
+2026-10-28 20:24:26 3bp-spr60-9s5d2c-chip T3 iterations 210 exploitability 0.463% / 0.228% seconds 1116.7 memory 1937MB raw 6.1KB
