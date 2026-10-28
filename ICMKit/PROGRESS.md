@@ -313,3 +313,67 @@ also uses every solve of the build.
 - 20:06 T3 started with the new builder binary (states saved to disk), **3-bet spots only**: a
   single-raised SPR 6 chip-EV solve takes ~2 hours and would run past the wrap-up. No new solve
   after 21:20.
+- 21:20 No new solves after this time; the last running T3 solves finished at 22:00 (runner exit 0).
+- 22:01 Wrap-up: packed `library/LiteLibrary.bin` (699 entries, 19,636 bytes, T1 + T2 flagged
+  complete) and `library/LiteLibrary.json`; **test 6 passes** (6,990 values, 0 mismatches).
+
+## Summary of session B2
+
+### Spots solved per tier (solves / library entries)
+
+| Tier | Solves done / total | Entries done / total | Solves left | Compute spent (core-h) | Median solve (s) | Slowest (s) |
+| --- | --- | --- | --- | --- | --- | --- |
+| T1 | 204 / 204 | 336 / 336 | 0 | 3.4 | 43 | 324 |
+| T2 | 204 / 204 | 336 / 336 | 0 | 25.7 | 285 | 1,493 |
+| T3 | 15 / 204 | 20 / 336 | 189 | 5.8 | 1,409 | 2,799 |
+| T4 | 4 / 816 | 3 / 1,344 | 812 | 0.1 | 163 | 180 |
+| T5 | 4 / 408 | 4 / 672 | 404 | 3.9 | 6,013 | 7,004 |
+| **Total** | **431 / 1,836** | **699 / 3,024** | **1,405** | **38.9** | | |
+
+(T3 and T4 counts include pilot solves; T3 also the 3-bet Ks7d2c and other 3-bet groups started
+in the last hour.)
+
+- **Total compute so far:** 38.9 core-hours of solving (plus ~0.1 in B1's tests).
+- **Median exploitability:** 0.454% of the pot (worse of the two players) over 431 solves; every
+  solve met the 0.5% target, none hit the 1000-iteration cap. Peak solver memory 3.6 GB.
+- **Library file:** `library/LiteLibrary.bin` 19,636 bytes for 699 entries (64 + 28 bytes per
+  entry; the full 3,024-entry library will be 84,736 bytes, far under 1 MB).
+- **Tests:** 5 and 6 pass; all 8 unit-test programs pass, also under ASan + UBSan.
+
+### Estimated sessions still needed
+
+`python3 tools/project_remaining.py`: measured seconds per MB of solver memory per pot type, SPR
+and mode, from all 431 solves (real build conditions, 4 at a time), applied to every unsolved
+solve with its flop's tree size.
+
+| Tier | Core-h left | Sessions (48 core-h each) |
+| --- | --- | --- |
+| T3 | 149 | 3.1 |
+| T4 | 46 | 1.0 |
+| T5 | 313 | 6.5 |
+| **Total** | **508** | **10.6** |
+
+Single-raised SPR 6 has only cold ICM measurements (the pilot's warm sources were lost in the
+restarts), so T3/T5 are probably ~20-30% pessimistic: with warm starts at SPR 6 (B1: 290 -> 140
+iterations) expect about **8-10 more sessions**, of which T5's single-raised spots are most.
+Single-raised SPR 6 solves (3.6 GB each) limit concurrency to 2-3 under the 10.5 GB budget.
+
+### What Part B3 must know
+
+1. **Run:** `make` then, for example,
+   `./build/librarybuilder run --jobs 4 --tiers 3,4,5 --budget-mb 10500 --stop-at <epoch>`.
+   It skips solved spots (`results/*.json.gz`), so it resumes where B2 stopped. Commit `results/`,
+   `raw/`, `logs/`, `library/` about hourly; `pack` + `test6` at the end;
+   `python3 tools/project_remaining.py` for the projection; `librarybuilder status` for counts.
+2. **Memory:** the container is killed at about 14 GB resident (B2 lost a run at 12:01 with a
+   13.5 GB budget). Keep `--budget-mb 10500`.
+3. **Warm starts:** the builder now saves chip-EV states to `work/state/` (not committed) so ICM
+   solves stay warm after a restart. B2 left three 3-bet SPR 6 states there (5 GB), but the
+   container is reclaimed after the session, so B3 starts those groups' ICM solves cold.
+4. **Single-raised SPR 6 groups:** the chip-EV solve takes ~2 hours and holds 3.6 GB while its 16
+   ICM solves run. Start them early in a session; never start one in the last ~3 hours.
+5. **Watching the runner:** check it with `pgrep -f "^./build/librarybuilder run"` (anchored).
+   An unanchored `pgrep -f` matches the shell running the check, which cost B2 75 minutes.
+6. **Not done here:** Swift layer (incl. `PostflopLibrary.swift`) still not compiled; Mac checks
+   (Xcode build, ICM parity with the app's `ICMEngine`, device timings) remain.
+7. Placeholder ranges are still in use; real preflop ranges would change every result.
