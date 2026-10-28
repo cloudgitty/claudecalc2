@@ -143,8 +143,10 @@ static void release_holder(Runner *R, Holder *h, ss_solver *dst, int *warm_used)
     pthread_mutex_unlock(&R->lock);
 }
 
-/* Returns 1 if the finished solver was kept as a warm-start source. */
-static int run_one(Runner *R, int solve, Holder *h, double mem_mb, int *warm_used)
+/* Returns 1 if the finished solver was kept as a warm-start source. *mem_mb is the
+   job's reservation: an estimate on entry, replaced by the solver's real size once
+   it exists (the caller releases *mem_mb). */
+static int run_one(Runner *R, int solve, Holder *h, double *mem_mb, int *warm_used)
 {
     const LbSolve *s = &R->m->solves[solve];
     float *ranges = malloc(sizeof(float) * 2 * NUM_COMBOS);
@@ -167,6 +169,12 @@ static int run_one(Runner *R, int solve, Holder *h, double mem_mb, int *warm_use
         pthread_mutex_lock(&R->lock); R->state[solve] = J_FAILED; R->failed++; pthread_mutex_unlock(&R->lock);
         return 0;
     }
+    pthread_mutex_lock(&R->lock);
+    double actual = ss_memory_required(S) / 1048576.0;
+    R->reserved_mb += actual - *mem_mb;
+    *mem_mb = actual;
+    pthread_cond_broadcast(&R->cond);
+    pthread_mutex_unlock(&R->lock);
     release_holder(R, h, S, warm_used);
     ss_result r;
     ss_solve(S, &r);
@@ -223,7 +231,7 @@ static int run_one(Runner *R, int solve, Holder *h, double mem_mb, int *warm_use
     int keep = 0;
     pthread_mutex_lock(&R->lock);
     Holder *own = &R->holders[solve];
-    if (!s->icm && own->waiting > 0) { own->solver = S; own->mem_mb = mem_mb; keep = 1; }
+    if (!s->icm && own->waiting > 0) { own->solver = S; own->mem_mb = *mem_mb; keep = 1; }
     R->state[solve] = J_DONE;
     R->done++;
     char line[512];
@@ -277,7 +285,7 @@ static void *worker(void *arg)
         pthread_mutex_unlock(&R->lock);
 
         int used = 0;
-        int kept = run_one(R, pick, h, mem, &used);
+        int kept = run_one(R, pick, h, &mem, &used);
 
         pthread_mutex_lock(&R->lock);
         if (!kept) R->reserved_mb -= mem;   /* a kept chip-EV solver stays reserved until released */
