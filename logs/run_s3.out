@@ -48,3 +48,4 @@ librarybuilder: 1405 solves to run, 23 already solved, 4 jobs at a time, budget 
 2026-10-28 23:48:19 srp-spr15-8h4d3c-rcl-o3i4 T4 iterations 50 exploitability 0.410% / 0.354% seconds 78.4 memory 505MB raw 7.1KB
 2026-10-28 23:49:50 srp-spr15-8h4d3c-cl-o3i0 T4 iterations 60 exploitability 0.394% / 0.488% seconds 91.1 memory 505MB raw 7.1KB
 runner killed by container restart (~23:50)
+librarybuilder: 1357 solves to run, 71 already solved, 4 jobs at a time, budget 11000 MB
