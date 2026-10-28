@@ -235,3 +235,10 @@ Session B2 start: 2026-10-28 08:44:43 UTC (`date -u`). Wrap-up at 21:44 UTC.
 - 09:13 Task 8 + 9 started as one run: `librarybuilder run --jobs 4 --tiers 1,2 --first <pilot>
   --stop-at 21:20 UTC`. The 20 pilot solves (`manifest/pilot.txt`, 4 per tier, both pot types,
   chip EV + ICM pairs) go first, then T1, then T2. Results are committed about every 45 minutes.
+- 10:19 Scheduling fix: the runner reserved worst-case memory (B1 rainbow sizes, e.g. 3.7 GB
+  for SRP SPR 6) for every running solve and for each chip-EV solver held for warm starts; with
+  four held solvers only one worker could run from about 10:09. Stopped the runner (losing the
+  65-minute SRP SPR 6 rainbow chip-EV solve in progress) and restarted with a binary that
+  reserves each solver's real size once it exists (`ss_memory_required`) and a 13.5 GB budget.
+  Consequence: the ICM solves whose chip-EV solve was already finished (3 pilot groups and the
+  T2 3-bet Ks9s4s group) run cold instead of warm, so those pilot timings are pessimistic.
