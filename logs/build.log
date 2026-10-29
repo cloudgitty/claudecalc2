@@ -1004,3 +1004,7 @@
 2026-10-29 15:30:12 3bp-spr35-Qs6d2h-cl-o0i3 T4 iterations 130 exploitability 0.460% / 0.154% seconds 182.6 memory 624MB raw 4.3KB warm
 2026-10-29 15:30:37 srp-spr35-Qs6d2h-rcl-o1i5 T4 iterations 70 exploitability 0.494% / 0.337% seconds 387.4 memory 2218MB raw 13.7KB warm
 2026-10-29 15:30:56 srp-spr60-9s5d2c-rcl-o3i4 T3 iterations 110 exploitability 0.499% / 0.438% seconds 2282.9 memory 3649MB raw 18.0KB warm
+2026-10-29 15:32:35 3bp-spr35-Qs6d2h-cl-o2i1 T4 iterations 100 exploitability 0.475% / 0.346% seconds 141.9 memory 624MB raw 3.9KB warm
+2026-10-29 15:36:01 3bp-spr35-Qs6d2h-cl-o1i2 T4 iterations 140 exploitability 0.462% / 0.418% seconds 204.8 memory 624MB raw 4.5KB warm
+2026-10-29 15:37:42 srp-spr35-Qs6d2h-rcl-o3i0 T4 iterations 80 exploitability 0.343% / 0.477% seconds 423.7 memory 2218MB raw 13.0KB warm
+2026-10-29 15:38:19 3bp-spr35-Qs6d2h-cl-o1i0 T4 iterations 100 exploitability 0.483% / 0.407% seconds 137.8 memory 624MB raw 4.0KB warm
