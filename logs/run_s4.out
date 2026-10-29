@@ -195,3 +195,9 @@ librarybuilder: 945 solves to run, 483 already solved, 4 jobs at a time, budget 
 2026-10-29 19:44:00 srp-spr60-KsKd4c-rcl-o1i5 T3 iterations 190 exploitability 0.481% / 0.289% seconds 2326.7 memory 2193MB raw 17.4KB warm
 2026-10-29 19:53:12 srp-spr60-KsKd4c-rcl-o4i5 T3 iterations 100 exploitability 0.460% / 0.293% seconds 1203.3 memory 2193MB raw 16.2KB warm
 2026-10-29 19:56:10 srp-spr60-KsKd4c-rcl-o4i3 T3 iterations 100 exploitability 0.472% / 0.348% seconds 1160.5 memory 2193MB raw 16.3KB warm
+2026-10-29 20:09:59 srp-spr60-KsKd4c-rcl-o3i4 T3 iterations 130 exploitability 0.432% / 0.475% seconds 1555.7 memory 2193MB raw 17.1KB warm
+2026-10-29 20:11:31 srp-spr60-KsKd4c-rcl-o0i3 T3 iterations 300 exploitability 0.496% / 0.217% seconds 3590.1 memory 2193MB raw 18.8KB warm
+2026-10-29 20:23:32 srp-spr60-KsKd4c-cl-o3i0 T3 iterations 160 exploitability 0.416% / 0.453% seconds 1816.2 memory 2193MB raw 19.6KB warm
+2026-10-29 20:34:24 srp-spr60-KsKd4c-cl-o2i1 T3 iterations 130 exploitability 0.449% / 0.399% seconds 1462.2 memory 2193MB raw 19.3KB warm
+2026-10-29 20:39:51 srp-spr60-KsKd4c-cl-o1i2 T3 iterations 150 exploitability 0.492% / 0.446% seconds 1697.1 memory 2193MB raw 19.4KB warm
+2026-10-29 20:45:22 srp-spr60-KsKd4c-cl-o0i3 T3 iterations 260 exploitability 0.492% / 0.226% seconds 2947.3 memory 2193MB raw 19.2KB warm
