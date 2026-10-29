@@ -457,3 +457,16 @@ cold), which cut the T3/T5 projection by more than half.
   plus 3.7 GB of checkpoint are on disk now. Chip-EV solves pause under 10 GB free.
 - Check the runner with the anchored `pgrep -f "^./build/librarybuilder run"`; after a container
   restart, restart the runner (checkpoints make that cheap).
+
+---
+
+# Build session 4
+
+Start: 2026-10-29 13:36:35 UTC (`date -u`). Wrap-up at 02:36 UTC; no new solves after 01:00 UTC.
+
+## Log
+- 13:37 Task 1 (check): build and `make test` pass (8 programs); `verify_results.py`: all 891
+  results match the manifest. The checkpoint of `srp-spr60-9s5d2c-rcl-o0i3` and the saved states
+  (`srp-spr60-9s5d2c-chip`, `srp-spr35-Ah8d3c-chip`) survived, so the run resumes and warm-starts.
+- 13:38 Task 2 (solve): `librarybuilder run --jobs 4 --tiers 3,4,5 --budget-mb 11000
+  --stop-at 01:00 UTC` (log `logs/run_s4.out`).
