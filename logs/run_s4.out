@@ -181,3 +181,4 @@ librarybuilder: 945 solves to run, 483 already solved, 4 jobs at a time, budget 
 2026-10-29 18:14:30 srp-spr60-Ks9s4s-cl-o5i3 T3 iterations 250 exploitability 0.483% / 0.323% seconds 1289.7 memory 2016MB raw 11.9KB
 2026-10-29 18:29:36 srp-spr60-AsJs5d-chip T3 iterations 230 exploitability 0.460% / 0.382% seconds 2731.8 memory 2084MB raw 16.5KB
 2026-10-29 18:29:58 srp-spr60-Ks9s4s-rcl-o5i1 T3 iterations 220 exploitability 0.481% / 0.356% seconds 1101.0 memory 2016MB raw 11.1KB
+2026-10-29 18:32:44 srp-spr60-Ks9s4s-rcl-o1i5 T3 iterations 220 exploitability 0.466% / 0.389% seconds 1093.0 memory 2016MB raw 11.3KB
