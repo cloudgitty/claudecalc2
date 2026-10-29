@@ -461,3 +461,6 @@ librarybuilder: 1357 solves to run, 71 already solved, 4 jobs at a time, budget 
 2026-10-29 10:00:05 3bp-spr15-Jh7h3h-chip T4 iterations 60 exploitability 0.476% / 0.214% seconds 10.6 memory 51MB raw 2.0KB
 2026-10-29 10:02:08 srp-spr35-Ah8d3c-rcl-o4i5 T4 iterations 70 exploitability 0.413% / 0.437% seconds 371.9 memory 2110MB raw 12.2KB warm
 2026-10-29 10:03:25 srp-spr60-9s5d2c-rcl-o1i5 T3 iterations 160 exploitability 0.478% / 0.246% seconds 3368.6 memory 3649MB raw 18.1KB warm
+Terminated
+runner exit 143
+runner stopped at wrap-up 11:05; checkpoint kept for srp-spr60-9s5d2c-rcl-o0i3

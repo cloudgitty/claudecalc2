@@ -405,3 +405,55 @@ Start: 2026-10-28 22:21:34 UTC (`date -u`). Wrap-up at 11:21 UTC; no new solves 
   so far); a restarted job resumes from it, and the checkpoint is deleted when the job finishes.
   Tested by killing a solve mid-way: the resumed solve ended with exactly the same iterations and
   exploitability as an uninterrupted one. Results get `"resumed": true` and the total time.
+- 10:00 No new solves after this time. 11:05 stopped the runner with one single-raised SPR 6 ICM
+  solve still running (`srp-spr60-9s5d2c-rcl-o0i3`): its checkpoint from 11:00 is in
+  `work/ckpt/` and the next run resumes it (if the container keeps its disk).
+- 11:06 Wrap-up: `verify_results.py` 891 results match the manifest; packed
+  `library/LiteLibrary.bin` (1,459 entries, 40,916 bytes, T1 + T2 complete); **test 6 passes**
+  (14,590 values, 0 mismatches).
+
+## Task 3: solve times against the pilot
+
+| Tier | Pilot median (s) | Build median so far (s) | Difference |
+| --- | --- | --- | --- |
+| T1 | 55 | 43 | -22% |
+| T2 | 371 | 285 | -23% |
+| T3 | 1,208 | 936 | -23% |
+| T4 | 113 | 41 | **-64%** (more than 50%: projection updated below) |
+| T5 | 3,278 | (no new T5 solves yet) | |
+
+T4's pilot pair was a paired 3-bet SPR 3.5 and a two-tone SRP SPR 1.5 flop; most T4 solves so far
+are cheap SPR 1.5 spots. The projection below no longer uses pilot medians: it applies the
+measured seconds per MB of every finished solve to every unsolved one (`tools/project_remaining.py`).
+New this session: warm single-raised SPR 6 ICM solves were measured (1,700-3,800 s against 6,462 s
+cold), which cut the T3/T5 projection by more than half.
+
+## Summary of build session 3
+
+| Tier | Solves done / total | Entries done / total | Solves left | Compute spent (core-h) | Core-h left (projected) | Sessions left |
+| --- | --- | --- | --- | --- | --- | --- |
+| T1 | 204 / 204 | 336 / 336 | 0 | 3.4 | 0 | 0 |
+| T2 | 204 / 204 | 336 / 336 | 0 | 25.7 | 0 | 0 |
+| T3 | 127 / 204 | 208 / 336 | 77 | 42.9 | 37 | 0.8 |
+| T4 | 352 / 816 | 575 / 1,344 | 464 | 5.8 | 35 | 0.7 |
+| T5 | 4 / 408 | 4 / 672 | 404 | 3.9 | 162 | 3.4 |
+| **Total** | **891 / 1,836** | **1,459 / 3,024** | **945** | **81.8** | **233** | **4.9** |
+
+- This session solved 460 spots (431 -> 891) in about 43 core-hours, despite losing the
+  in-flight solves to the container restart at 23:50.
+- Median exploitability over all 891 solves: 0.450% of the pot; all met the 0.5% target, none
+  hit the iteration cap, none failed.
+- `LiteLibrary.bin`: 40,916 bytes for 1,459 entries.
+- **Estimated sessions still needed: about 5** (233 core-hours at 48 per session). Most of it is
+  T5's single-raised SPR 6 groups (each: ~2 h chip-EV solve + 16 warm ICM solves of ~0.5-1 h,
+  at most 2-3 running at once in the memory budget).
+
+### Notes for the next session
+- Start with the same command: `librarybuilder run --jobs 4 --tiers 3,4,5 --budget-mb 11000
+  --stop-at <13 h minus 1.5 h>`. It resumes the checkpointed solve and warm-starts from the saved
+  states in `work/state/` if the container kept its disk (otherwise those groups' ICM solves run
+  cold; the results are unaffected).
+- Disk: saved states and checkpoints for single-raised SPR 6 are ~3.7 GB each; 5.9 GB of states
+  plus 3.7 GB of checkpoint are on disk now. Chip-EV solves pause under 10 GB free.
+- Check the runner with the anchored `pgrep -f "^./build/librarybuilder run"`; after a container
+  restart, restart the runner (checkpoints make that cheap).
