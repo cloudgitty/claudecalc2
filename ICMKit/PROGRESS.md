@@ -470,3 +470,43 @@ Start: 2026-10-29 13:36:35 UTC (`date -u`). Wrap-up at 02:36 UTC; no new solves 
   (`srp-spr60-9s5d2c-chip`, `srp-spr35-Ah8d3c-chip`) survived, so the run resumes and warm-starts.
 - 13:38 Task 2 (solve): `librarybuilder run --jobs 4 --tiers 3,4,5 --budget-mb 11000
   --stop-at 01:00 UTC` (log `logs/run_s4.out`).
+- 13:38-14:00 Commit signing timed out twice (the session's signing service); retried until it
+  worked, nothing lost. The commit loop had also stopped at some point; restarted at 15:32.
+- 01:16 Main run finished (279 solves, 0 failed). The 11 T3 solves left are single-raised SPR 6
+  (up to ~2 h each), too long to start before the wrap-up, so 01:17-02:10 a short extra run
+  solved 115 cheap T4 3-bet spots (`--only` T4 3-bet, no new solve after 02:05).
+- 02:10 Wrap-up: `verify_results.py` 1,285 results match the manifest; packed
+  `library/LiteLibrary.bin` (2,114 entries, 59,256 bytes, T1 + T2 complete); **test 6 passes**
+  (21,140 values, 0 mismatches). No checkpoints left; saved warm-start states for three groups
+  remain in `work/state/` (used next run if the disk survives).
+
+## Task 3: solve times against the pilot
+
+| Tier | Pilot median (s) | Build median so far (s) | Difference |
+| --- | --- | --- | --- |
+| T1 | 55 | 43 | -22% |
+| T2 | 371 | 285 | -23% |
+| T3 | 1,208 | 1,129 | -7% |
+| T4 | 113 | 66 | -42% |
+| T5 | 3,278 | (no new T5 solves yet) | |
+
+All within 50%; the projection below uses every finished solve (`tools/project_remaining.py`).
+
+## Summary of build session 4
+
+| Tier | Solves done / total | Entries done / total | Solves left | Compute spent (core-h) | Core-h left (projected) | Sessions left |
+| --- | --- | --- | --- | --- | --- | --- |
+| T1 | 204 / 204 | 336 / 336 | 0 | 3.4 | 0 | 0 |
+| T2 | 204 / 204 | 336 / 336 | 0 | 25.7 | 0 | 0 |
+| T3 | 193 / 204 | 318 / 336 | 11 | 75.1 | 7.5 | 0.2 |
+| T4 | 680 / 816 | 1,120 / 1,344 | 136 | 23.5 | 12.4 | 0.3 |
+| T5 | 4 / 408 | 4 / 672 | 404 | 3.9 | 163 | 3.4 |
+| **Total** | **1,285 / 1,836** | **2,114 / 3,024** | **551** | **131.6** | **183** | **3.8** |
+
+- This session: 394 solves (891 -> 1,285), about 50 core-hours, 0 failed.
+- Median exploitability over all 1,285 solves: 0.459% of the pot; all under 0.5%, none hit the cap.
+- `LiteLibrary.bin`: 59,256 bytes for 2,114 entries.
+- **Estimated sessions still needed: about 4** (183 core-hours at 48 per session), almost all
+  T5 (single-raised SPR 6 on flops 2-3 is the bulk).
+- Next session: same command (`--tiers 3,4,5`, stop new solves ~1.5 h before the wrap-up). It
+  first finishes T3's 11 single-raised SPR 6 solves, then T4, then T5.

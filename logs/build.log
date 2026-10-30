@@ -1275,3 +1275,11 @@
 2026-10-30 02:01:04 3bp-spr35-JsTd8h-rcl-o4i5 T4 iterations 90 exploitability 0.485% / 0.277% seconds 109.5 memory 598MB raw 4.0KB warm
 2026-10-30 02:02:21 3bp-spr35-JsTd8h-cl-o3i0 T4 iterations 100 exploitability 0.427% / 0.261% seconds 112.3 memory 598MB raw 3.9KB warm
 2026-10-30 02:02:29 3bp-spr35-JsTd8h-rcl-o4i3 T4 iterations 120 exploitability 0.472% / 0.256% seconds 146.4 memory 598MB raw 4.0KB warm
+2026-10-30 02:02:45 3bp-spr35-JsTd8h-rcl-o3i4 T4 iterations 110 exploitability 0.457% / 0.219% seconds 136.5 memory 598MB raw 4.0KB warm
+2026-10-30 02:03:07 3bp-spr35-JsTd8h-cl-o0i3 T4 iterations 100 exploitability 0.436% / 0.126% seconds 122.8 memory 598MB raw 4.1KB warm
+2026-10-30 02:04:46 3bp-spr35-JsTd8h-cl-o1i2 T4 iterations 110 exploitability 0.488% / 0.234% seconds 136.6 memory 598MB raw 4.0KB warm
+2026-10-30 02:04:50 3bp-spr35-JsTd8h-cl-o1i0 T4 iterations 110 exploitability 0.496% / 0.456% seconds 124.2 memory 598MB raw 4.0KB warm
+2026-10-30 02:05:18 3bp-spr35-JsTd8h-cl-o2i1 T4 iterations 150 exploitability 0.466% / 0.351% seconds 176.2 memory 598MB raw 4.2KB warm
+2026-10-30 02:07:06 3bp-spr35-6s5d4h-cl-o3i5 T4 iterations 100 exploitability 0.487% / 0.363% seconds 135.2 memory 660MB raw 3.9KB warm
+2026-10-30 02:07:30 3bp-spr35-6s5d4h-cl-o5i3 T4 iterations 120 exploitability 0.493% / 0.491% seconds 162.5 memory 660MB raw 4.0KB warm
+2026-10-30 02:09:42 3bp-spr35-JsTd8h-cl-o0i1 T4 iterations 330 exploitability 0.474% / 0.276% seconds 393.4 memory 598MB raw 4.1KB warm
