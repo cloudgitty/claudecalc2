@@ -560,3 +560,16 @@ on all 1,507 finished solves): **125 core-hours left**.
 - `LiteLibrary.bin`: 69,392 bytes for 2,476 entries.
 - **Estimated sessions still needed: about 3** (125 core-hours at 48 per session), all T5.
 - Next session: same command (`--tiers 3,4,5` still works; only T5 is left).
+
+---
+
+# Build session 6
+
+Start: 2026-10-30 22:46:23 UTC (`date -u`). Wrap-up at 11:46 UTC on 2026-10-31; no new solves
+after 10:15 UTC.
+
+## Log
+- 22:46 Task 1 (check): build and `make test` pass (8 programs); `verify_results.py`: all 1,507
+  results match the manifest. Saved warm-start states for 3 groups in `work/state/`.
+- 22:48 Task 2 (solve): `librarybuilder run --jobs 4 --tiers 3,4,5 --budget-mb 11000
+  --stop-at 10:15 UTC` (log `logs/run_s6.out`); only T5 is left (329 solves).
