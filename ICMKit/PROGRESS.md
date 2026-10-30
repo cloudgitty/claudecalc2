@@ -510,3 +510,15 @@ All within 50%; the projection below uses every finished solve (`tools/project_r
   T5 (single-raised SPR 6 on flops 2-3 is the bulk).
 - Next session: same command (`--tiers 3,4,5`, stop new solves ~1.5 h before the wrap-up). It
   first finishes T3's 11 single-raised SPR 6 solves, then T4, then T5.
+
+---
+
+# Build session 5
+
+Start: 2026-10-30 10:47:57 UTC (`date -u`). Wrap-up at 23:47 UTC; no new solves after 22:15 UTC.
+
+## Log
+- 10:48 Task 1 (check): build and `make test` pass (8 programs); `verify_results.py`: all 1,285
+  results match the manifest. Saved warm-start states for 3 groups survived in `work/state/`.
+- 10:49 Task 2 (solve): `librarybuilder run --jobs 4 --tiers 3,4,5 --budget-mb 11000
+  --stop-at 22:15 UTC` (log `logs/run_s5.out`).
