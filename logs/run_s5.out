@@ -218,3 +218,5 @@ librarybuilder: 551 solves to run, 877 already solved, 4 jobs at a time, budget 
 2026-10-30 21:58:11 srp-spr60-Ah8d3c-cl-o1i0 T5 iterations 180 exploitability 0.428% / 0.446% seconds 2902.9 memory 3465MB raw 18.9KB warm
 2026-10-30 22:02:59 3bp-spr60-8s8d3h-cl-o5i3 T5 iterations 330 exploitability 0.491% / 0.413% seconds 741.6 memory 1225MB raw 5.2KB warm
 2026-10-30 22:08:23 3bp-spr60-7s3d2h-cl-o5i3 T5 iterations 290 exploitability 0.475% / 0.486% seconds 1047.4 memory 1988MB raw 5.6KB warm
+2026-10-30 22:26:22 srp-spr60-Qs6d2h-cl-o5i3 T5 iterations 100 exploitability 0.445% / 0.314% seconds 1680.6 memory 3629MB raw 15.2KB warm
+2026-10-30 22:28:13 srp-spr60-Ah8d3c-cl-o0i1 T5 iterations 160 exploitability 0.385% / 0.461% seconds 2526.6 memory 3465MB raw 18.1KB warm
