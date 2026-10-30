@@ -1504,3 +1504,4 @@
 2026-10-30 22:08:23 3bp-spr60-7s3d2h-cl-o5i3 T5 iterations 290 exploitability 0.475% / 0.486% seconds 1047.4 memory 1988MB raw 5.6KB warm
 2026-10-30 22:26:22 srp-spr60-Qs6d2h-cl-o5i3 T5 iterations 100 exploitability 0.445% / 0.314% seconds 1680.6 memory 3629MB raw 15.2KB warm
 2026-10-30 22:28:13 srp-spr60-Ah8d3c-cl-o0i1 T5 iterations 160 exploitability 0.385% / 0.461% seconds 2526.6 memory 3465MB raw 18.1KB warm
+2026-10-30 22:45:16 srp-spr60-Qs6d2h-cl-o3i5 T5 iterations 130 exploitability 0.462% / 0.285% seconds 2205.3 memory 3629MB raw 16.3KB warm

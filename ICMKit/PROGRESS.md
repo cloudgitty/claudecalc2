@@ -522,3 +522,41 @@ Start: 2026-10-30 10:47:57 UTC (`date -u`). Wrap-up at 23:47 UTC; no new solves 
   results match the manifest. Saved warm-start states for 3 groups survived in `work/state/`.
 - 10:49 Task 2 (solve): `librarybuilder run --jobs 4 --tiers 3,4,5 --budget-mb 11000
   --stop-at 22:15 UTC` (log `logs/run_s5.out`).
+- 12:51 The old background commit loop had died; replaced by a logging committer (pack, commit,
+  push every 40 minutes). Commits pushed at 12:51, 14:11, 16:11, 18:11, 20:11 and by hand.
+- 16:47 T3 and T4 complete (every T1-T4 spot solved); runner moves on to T5.
+- 22:15 No new solves started; the last running solve finished at 22:45 (`222 solved, 0 failed`).
+- 22:46 Wrap-up: `verify_results.py` 1,507 results match the manifest, 0 problems; `pack`
+  2,476 entries, 69,392 bytes; test 6 PASS (24,760 values, 0 mismatches).
+
+## Task 3: solve times against the pilot
+
+| Tier | Pilot median s | Build median s (all solves so far) | Difference |
+| --- | --- | --- | --- |
+| T3 | 1,208 | 1,155 | -4% |
+| T4 | 113 | 86 | -24% |
+| T5 | 3,278 | 1,082 (79 solves) | **-67%** |
+
+T5 differs by more than 50%: the pilot's 4 T5 solves were chip-EV and cold ICM solves, while
+most build solves are warm-started ICM solves. The pilot-based projection (`pilot_report.py`,
+337 core-hours left) is therefore replaced by the build-rate projection
+(`project_remaining.py`, seconds per MB of solver memory per pot type, SPR and mode, measured
+on all 1,507 finished solves): **125 core-hours left**.
+
+## Summary of build session 5
+
+| Tier | Solves done / total | Entries done / total | Solves left | Compute spent (core-h) | Core-h left (projected) | Sessions left |
+| --- | --- | --- | --- | --- | --- | --- |
+| T1 | 204 / 204 | 336 / 336 | 0 | 3.4 | 0 | 0 |
+| T2 | 204 / 204 | 336 / 336 | 0 | 25.7 | 0 | 0 |
+| T3 | 204 / 204 | 336 / 336 | 0 | 82.9 | 0 | 0 |
+| T4 | 816 / 816 | 1,344 / 1,344 | 0 | 33.1 | 0 | 0 |
+| T5 | 79 / 408 | 124 / 672 | 329 | 32.4 | 125 | 2.6 |
+| **Total** | **1,507 / 1,836** | **2,476 / 3,024** | **329** | **177.6** | **125** | **2.6** |
+
+- This session: 222 solves (1,285 -> 1,507), about 46 core-hours, 0 failed. Tiers T1-T4 are
+  complete.
+- Median exploitability over all 1,507 solves: 0.461% of the pot; all under 0.5% (T5 max 0.4996%).
+- `LiteLibrary.bin`: 69,392 bytes for 2,476 entries.
+- **Estimated sessions still needed: about 3** (125 core-hours at 48 per session), all T5.
+- Next session: same command (`--tiers 3,4,5` still works; only T5 is left).
