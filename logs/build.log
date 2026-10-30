@@ -1417,3 +1417,17 @@
 2026-10-30 14:41:46 srp-spr35-6s5d4h-cl-o5i3 T4 iterations 70 exploitability 0.421% / 0.489% seconds 338.9 memory 2254MB raw 12.3KB warm
 2026-10-30 14:46:25 3bp-spr60-Ah8d3c-cl-o5i3 T5 iterations 290 exploitability 0.496% / 0.358% seconds 1082.3 memory 1862MB raw 4.9KB warm
 2026-10-30 14:47:15 srp-spr35-6s5d4h-cl-o3i5 T4 iterations 70 exploitability 0.414% / 0.309% seconds 326.9 memory 2254MB raw 13.1KB warm
+2026-10-30 14:52:39 srp-spr35-6s5d4h-rcl-o5i1 T4 iterations 80 exploitability 0.426% / 0.463% seconds 372.3 memory 2254MB raw 13.8KB warm
+2026-10-30 14:53:28 srp-spr35-6s5d4h-rcl-o1i5 T4 iterations 80 exploitability 0.459% / 0.288% seconds 370.5 memory 2254MB raw 13.3KB warm
+2026-10-30 14:58:11 3bp-spr60-Ah8d3c-cl-o3i5 T5 iterations 440 exploitability 0.494% / 0.184% seconds 1592.8 memory 1862MB raw 4.9KB warm
+2026-10-30 14:59:31 srp-spr35-6s5d4h-rcl-o3i0 T4 iterations 90 exploitability 0.371% / 0.397% seconds 409.7 memory 2254MB raw 13.6KB warm
+2026-10-30 15:01:09 srp-spr35-6s5d4h-rcl-o0i3 T4 iterations 100 exploitability 0.453% / 0.195% seconds 459.7 memory 2254MB raw 14.6KB warm
+2026-10-30 15:04:15 srp-spr35-6s5d4h-rcl-o5i4 T4 iterations 80 exploitability 0.460% / 0.411% seconds 361.4 memory 2254MB raw 13.8KB warm
+2026-10-30 15:05:37 srp-spr35-6s5d4h-rcl-o4i5 T4 iterations 80 exploitability 0.437% / 0.342% seconds 363.9 memory 2254MB raw 13.7KB warm
+2026-10-30 15:09:35 srp-spr35-6s5d4h-rcl-o4i3 T4 iterations 110 exploitability 0.460% / 0.445% seconds 503.8 memory 2254MB raw 14.4KB warm
+2026-10-30 15:11:14 srp-spr35-6s5d4h-rcl-o3i4 T4 iterations 90 exploitability 0.445% / 0.315% seconds 416.4 memory 2254MB raw 13.8KB warm
+2026-10-30 15:14:14 srp-spr35-6s5d4h-cl-o3i0 T4 iterations 110 exploitability 0.381% / 0.448% seconds 515.2 memory 2254MB raw 13.8KB warm
+2026-10-30 15:17:36 srp-spr35-6s5d4h-cl-o0i3 T4 iterations 100 exploitability 0.431% / 0.298% seconds 479.2 memory 2254MB raw 13.9KB warm
+2026-10-30 15:22:16 srp-spr35-6s5d4h-cl-o1i2 T4 iterations 100 exploitability 0.466% / 0.398% seconds 479.7 memory 2254MB raw 14.1KB warm
+2026-10-30 15:23:08 srp-spr35-6s5d4h-cl-o2i1 T4 iterations 150 exploitability 0.293% / 0.451% seconds 711.6 memory 2254MB raw 13.6KB warm
+2026-10-30 15:29:00 srp-spr35-6s5d4h-cl-o1i0 T4 iterations 140 exploitability 0.408% / 0.467% seconds 681.7 memory 2254MB raw 13.9KB warm
