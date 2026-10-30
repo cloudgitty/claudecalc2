@@ -1,7 +1,7 @@
 {
   "format_version": 1,
-  "entries": 2358,
-  "tiers_complete": ["T1", "T2"],
+  "entries": 2364,
+  "tiers_complete": ["T1", "T2", "T3", "T4"],
   "thresholds": [0.035861, 0.069824, 0.101052],
   "bucket_centres": [0.022773, 0.052843, 0.085438, 0.146777],
   "value_order": ["bet_pct", "bet_size (0=33%,1=75%,2=all-in,-1=never)", "check_raise_pct", "stackoff_category (0=two pair+,1=top pair,2=mid/bottom pair,3=strong draw,4=weak draw,5=air,-1=none)", "bluff_pct"],
@@ -845,6 +845,7 @@
     {"tier": 3, "hero_bucket": 3, "villain_bucket": 2, "position": "ip", "pot_type": "srp", "spr": 6, "flop_class": "connected", "flop": "9s8d7c", "solve": "srp-spr60-9s8d7c-cl-o1i2", "icm": [36.5, 0, null, 1, 35.87], "chip_ev": [49.55, 0, null, 1, 32.53]},
     {"tier": 3, "hero_bucket": 3, "villain_bucket": 2, "position": "oop", "pot_type": "srp", "spr": 6, "flop_class": "connected", "flop": "9s8d7c", "solve": "srp-spr60-9s8d7c-cl-o2i1", "icm": [0.3032, 0, 10.41, 1, 27.67], "chip_ev": [9.331, 0, 12.51, 1, 28.01]},
     {"tier": 3, "hero_bucket": 3, "villain_bucket": 3, "position": "ip", "pot_type": "srp", "spr": 6, "flop_class": "connected", "flop": "9s8d7c", "solve": "srp-spr60-9s8d7c-cl-o1i0", "icm": [55.99, 0, null, 1, 34.46], "chip_ev": [49.55, 0, null, 1, 32.53]},
+    {"tier": 3, "hero_bucket": 3, "villain_bucket": 3, "position": "oop", "pot_type": "srp", "spr": 6, "flop_class": "connected", "flop": "9s8d7c", "solve": "srp-spr60-9s8d7c-cl-o0i1", "icm": [28.4, 0, 8.034, 1, 34.71], "chip_ev": [9.331, 0, 12.51, 1, 28.01]},
     {"tier": 3, "hero_bucket": 0, "villain_bucket": 1, "position": "ip", "pot_type": "3bp", "spr": 6, "flop_class": "dry high", "flop": "Ks7d2c", "solve": "3bp-spr60-Ks7d2c-cl-o5i3", "icm": [24.95, 0, null, 1, 54.15], "chip_ev": [24.15, 0, null, 1, 54.02]},
     {"tier": 3, "hero_bucket": 0, "villain_bucket": 1, "position": "oop", "pot_type": "3bp", "spr": 6, "flop_class": "dry high", "flop": "Ks7d2c", "solve": "3bp-spr60-Ks7d2c-cl-o3i5", "icm": [99.99, 0, 14.63, 1, 46.58], "chip_ev": [99.66, 1, 28.91, 1, 46.55]},
     {"tier": 3, "hero_bucket": 0, "villain_bucket": 2, "position": "ip", "pot_type": "3bp", "spr": 6, "flop_class": "dry high", "flop": "Ks7d2c", "solve": "3bp-spr60-Ks7d2c-rcl-o5i1", "icm": [26.41, 0, null, 1, 54.55], "chip_ev": [24.15, 0, null, 1, 54.02]},
@@ -1684,6 +1685,7 @@
     {"tier": 4, "hero_bucket": 3, "villain_bucket": 2, "position": "ip", "pot_type": "srp", "spr": 3.5, "flop_class": "connected", "flop": "6s5d4h", "solve": "srp-spr35-6s5d4h-cl-o1i2", "icm": [34.65, 0, null, 1, 49.48], "chip_ev": [52.31, 0, null, 3, 50.62]},
     {"tier": 4, "hero_bucket": 3, "villain_bucket": 2, "position": "oop", "pot_type": "srp", "spr": 3.5, "flop_class": "connected", "flop": "6s5d4h", "solve": "srp-spr35-6s5d4h-cl-o2i1", "icm": [5.293, 0, 19.55, 3, 42.61], "chip_ev": [30.19, 1, 17.45, 3, 43.39]},
     {"tier": 4, "hero_bucket": 3, "villain_bucket": 3, "position": "ip", "pot_type": "srp", "spr": 3.5, "flop_class": "connected", "flop": "6s5d4h", "solve": "srp-spr35-6s5d4h-cl-o1i0", "icm": [57.83, 0, null, 1, 54.05], "chip_ev": [52.31, 0, null, 3, 50.62]},
+    {"tier": 4, "hero_bucket": 3, "villain_bucket": 3, "position": "oop", "pot_type": "srp", "spr": 3.5, "flop_class": "connected", "flop": "6s5d4h", "solve": "srp-spr35-6s5d4h-cl-o0i1", "icm": [50.4, 0, 13.94, 1, 52.2], "chip_ev": [30.19, 1, 17.45, 3, 43.39]},
     {"tier": 4, "hero_bucket": 0, "villain_bucket": 1, "position": "ip", "pot_type": "3bp", "spr": 1.5, "flop_class": "dry high", "flop": "Ah8d3c", "solve": "3bp-spr15-Ah8d3c-cl-o5i3", "icm": [21.93, 0, null, 1, 36.66], "chip_ev": [20.66, 0, null, 1, 36.35]},
     {"tier": 4, "hero_bucket": 0, "villain_bucket": 1, "position": "oop", "pot_type": "3bp", "spr": 1.5, "flop_class": "dry high", "flop": "Ah8d3c", "solve": "3bp-spr15-Ah8d3c-cl-o3i5", "icm": [93.35, 0, 7.502, 1, 32.22], "chip_ev": [88.78, 0, 5.885, 1, 31.25]},
     {"tier": 4, "hero_bucket": 0, "villain_bucket": 2, "position": "ip", "pot_type": "3bp", "spr": 1.5, "flop_class": "dry high", "flop": "Ah8d3c", "solve": "3bp-spr15-Ah8d3c-rcl-o5i1", "icm": [25.69, 0, null, 1, 36.02], "chip_ev": [20.66, 0, null, 1, 36.35]},
@@ -2360,8 +2362,12 @@
     {"tier": 5, "hero_bucket": 3, "villain_bucket": 2, "position": "ip", "pot_type": "srp", "spr": 6, "flop_class": "dry low", "flop": "8h4d3c", "solve": "srp-spr60-8h4d3c-cl-o1i2", "icm": [52.58, 0, null, 1, 58.75], "chip_ev": [74.57, 0, null, 1, 61.26]},
     {"tier": 5, "hero_bucket": 0, "villain_bucket": 1, "position": "ip", "pot_type": "3bp", "spr": 6, "flop_class": "dry high", "flop": "Ah8d3c", "solve": "3bp-spr60-Ah8d3c-cl-o5i3", "icm": [44.88, 0, null, 1, 46.06], "chip_ev": [44.05, 0, null, 1, 45.63]},
     {"tier": 5, "hero_bucket": 0, "villain_bucket": 1, "position": "oop", "pot_type": "3bp", "spr": 6, "flop_class": "dry high", "flop": "Ah8d3c", "solve": "3bp-spr60-Ah8d3c-cl-o3i5", "icm": [98.21, 0, 21.89, 1, 48.93], "chip_ev": [83.77, 0, 28.41, 1, 46.58]},
+    {"tier": 5, "hero_bucket": 0, "villain_bucket": 2, "position": "ip", "pot_type": "3bp", "spr": 6, "flop_class": "dry high", "flop": "Ah8d3c", "solve": "3bp-spr60-Ah8d3c-rcl-o5i1", "icm": [45.36, 0, null, 0, 46.06], "chip_ev": [44.05, 0, null, 1, 45.63]},
+    {"tier": 5, "hero_bucket": 0, "villain_bucket": 3, "position": "ip", "pot_type": "3bp", "spr": 6, "flop_class": "dry high", "flop": "Ah8d3c", "solve": "3bp-spr60-Ah8d3c-rcl-o3i0", "icm": [46.74, 0, null, 0, 45.6], "chip_ev": [44.05, 0, null, 1, 45.63]},
     {"tier": 5, "hero_bucket": 1, "villain_bucket": 0, "position": "ip", "pot_type": "3bp", "spr": 6, "flop_class": "dry high", "flop": "Ah8d3c", "solve": "3bp-spr60-Ah8d3c-cl-o3i5", "icm": [38.96, 0, null, 1, 46.56], "chip_ev": [44.05, 0, null, 1, 45.63]},
     {"tier": 5, "hero_bucket": 1, "villain_bucket": 0, "position": "oop", "pot_type": "3bp", "spr": 6, "flop_class": "dry high", "flop": "Ah8d3c", "solve": "3bp-spr60-Ah8d3c-cl-o5i3", "icm": [75.94, 0, 28.93, 1, 45.77], "chip_ev": [83.77, 0, 28.41, 1, 46.58]},
+    {"tier": 5, "hero_bucket": 2, "villain_bucket": 0, "position": "oop", "pot_type": "3bp", "spr": 6, "flop_class": "dry high", "flop": "Ah8d3c", "solve": "3bp-spr60-Ah8d3c-rcl-o5i1", "icm": [68.15, 0, 27.71, 1, 44.88], "chip_ev": [83.77, 0, 28.41, 1, 46.58]},
+    {"tier": 5, "hero_bucket": 3, "villain_bucket": 0, "position": "oop", "pot_type": "3bp", "spr": 6, "flop_class": "dry high", "flop": "Ah8d3c", "solve": "3bp-spr60-Ah8d3c-rcl-o3i0", "icm": [28.64, 0, 21.77, 1, 40.91], "chip_ev": [83.77, 0, 28.41, 1, 46.58]},
     {"tier": 5, "hero_bucket": 0, "villain_bucket": 3, "position": "ip", "pot_type": "3bp", "spr": 6, "flop_class": "monotone", "flop": "Jh7h3h", "solve": "3bp-spr60-Jh7h3h-rcl-o3i0", "icm": [67, 0, null, 1, 33.02], "chip_ev": [43.14, 0, null, 1, 36.47]},
     {"tier": 5, "hero_bucket": 3, "villain_bucket": 0, "position": "oop", "pot_type": "3bp", "spr": 6, "flop_class": "monotone", "flop": "Jh7h3h", "solve": "3bp-spr60-Jh7h3h-rcl-o3i0", "icm": [0.8355, 0, 2.735, 0, 26.01], "chip_ev": [48.84, 0, 10.55, 3, 33.39]}
   ]
