@@ -625,3 +625,6 @@ Start: 2026-10-31 10:58:45 UTC (`date -u`). Wrap-up at 23:58 UTC; no new solves 
 - 10:59 Task 2 (solve): `librarybuilder run --jobs 4 --tiers 3,4,5 --budget-mb 13000
   --stop-at 22:28 UTC` (log `logs/run_s7.out`); 257 T5 solves left. (First launched with a wrong
   stop time; restarted a minute later with the right one.)
+- 11:06 Still 3 cores busy: three single-raised SPR 6 solves reserve 11,100 MB and a 3-bet SPR 6
+  solve (1,950 MB) did not fit in 13,000. Restarted with `--budget-mb 13100` (6 minutes lost);
+  4 solves running, 12.0 GB resident.
