@@ -628,3 +628,28 @@ Start: 2026-10-31 10:58:45 UTC (`date -u`). Wrap-up at 23:58 UTC; no new solves 
 - 11:06 Still 3 cores busy: three single-raised SPR 6 solves reserve 11,100 MB and a 3-bet SPR 6
   solve (1,950 MB) did not fit in 13,000. Restarted with `--budget-mb 13100` (6 minutes lost);
   4 solves running, 12.0 GB resident.
+- 22:28 No new solves started; the last running solve finished at 22:38 (`111 solved, 0 failed`).
+- 22:40 Wrap-up: `verify_results.py` 1,690 results match the manifest, 0 problems; `pack` 2,783
+  entries, 77,988 bytes; test 6 PASS (27,830 values, 0 mismatches).
+
+## Task 3: solve times against the pilot
+
+T5 build median 1,167 s (262 solves) against the pilot's 3,278 s (-64%); the projection keeps
+using the build-rate model (`project_remaining.py`), as since session 5.
+
+## Summary of build session 7
+
+| Tier | Solves done / total | Entries done / total | Solves left | Compute spent (core-h) | Core-h left (projected) | Sessions left |
+| --- | --- | --- | --- | --- | --- | --- |
+| T1 | 204 / 204 | 336 / 336 | 0 | 3.4 | 0 | 0 |
+| T2 | 204 / 204 | 336 / 336 | 0 | 25.7 | 0 | 0 |
+| T3 | 204 / 204 | 336 / 336 | 0 | 82.9 | 0 | 0 |
+| T4 | 816 / 816 | 1,344 / 1,344 | 0 | 33.1 | 0 | 0 |
+| T5 | 262 / 408 | 431 / 672 | 146 | 120.0 | 46 | 1.0 |
+| **Total** | **1,690 / 1,836** | **2,783 / 3,024** | **146** | **265.1** | **46** | **1.0** |
+
+- This session: 111 solves (1,579 -> 1,690), about 46 core-hours, 0 failed. With `--budget-mb
+  13100` all 4 cores were busy the whole session.
+- Median exploitability over all 1,690 solves: 0.465% of the pot; all under 0.5%.
+- `LiteLibrary.bin`: 77,988 bytes for 2,783 entries.
+- **Estimated sessions still needed: 1** (46 core-hours at 48 per session).
