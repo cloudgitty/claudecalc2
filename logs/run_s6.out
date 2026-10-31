@@ -17,3 +17,8 @@ librarybuilder: 329 solves to run, 1099 already solved, 4 jobs at a time, budget
 Terminated
 runner exit 143
 librarybuilder: 314 solves to run, 1114 already solved, 4 jobs at a time, budget 12900 MB
+2026-10-31 02:55:34 srp-spr60-8h4d3c-cl-o5i3 T5 iterations 290 exploitability 0.475% / 0.378% seconds 4710.0 memory 3649MB raw 22.2KB
+2026-10-31 03:03:48 3bp-spr60-7s3d2h-rcl-o5i1 T5 iterations 370 exploitability 0.386% / 0.490% seconds 1283.5 memory 1988MB raw 5.5KB warm
+2026-10-31 03:06:43 srp-spr60-8h4d3c-cl-o3i5 T5 iterations 210 exploitability 0.491% / 0.474% seconds 3452.3 memory 3649MB raw 22.5KB
+2026-10-31 03:16:01 3bp-spr60-7s3d2h-rcl-o3i0 T5 iterations 210 exploitability 0.469% / 0.488% seconds 729.4 memory 1988MB raw 5.8KB warm
+2026-10-31 03:16:28 3bp-spr60-7s3d2h-rcl-o1i5 T5 iterations 360 exploitability 0.491% / 0.251% seconds 1245.2 memory 1988MB raw 5.7KB warm
