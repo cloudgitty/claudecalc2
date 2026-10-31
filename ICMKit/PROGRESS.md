@@ -612,3 +612,16 @@ uses the build-rate model (`project_remaining.py`) since session 5. Other tiers 
 - `LiteLibrary.bin`: 72,808 bytes for 2,598 entries.
 - **Estimated sessions still needed: about 2** (89 core-hours at 48 per session).
 - Warm-start states kept for 3 groups in `work/state/`; no checkpoints pending.
+
+---
+
+# Build session 7
+
+Start: 2026-10-31 10:58:45 UTC (`date -u`). Wrap-up at 23:58 UTC; no new solves after 22:28 UTC.
+
+## Log
+- 10:59 Task 1 (check): build and `make test` pass (8 programs); `verify_results.py`: all 1,579
+  results match the manifest. Warm-start states for 3 groups in `work/state/`.
+- 10:59 Task 2 (solve): `librarybuilder run --jobs 4 --tiers 3,4,5 --budget-mb 13000
+  --stop-at 22:28 UTC` (log `logs/run_s7.out`); 257 T5 solves left. (First launched with a wrong
+  stop time; restarted a minute later with the right one.)
