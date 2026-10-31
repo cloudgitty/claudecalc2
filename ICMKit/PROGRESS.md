@@ -573,3 +573,8 @@ after 10:15 UTC.
   results match the manifest. Saved warm-start states for 3 groups in `work/state/`.
 - 22:48 Task 2 (solve): `librarybuilder run --jobs 4 --tiers 3,4,5 --budget-mb 11000
   --stop-at 10:15 UTC` (log `logs/run_s6.out`); only T5 is left (329 solves).
+- 02:42 Only 3 of 4 cores were busy: three single-raised SPR 6 solves (3.6 GB each) filled the
+  11,000 MB budget, so no fourth solve fit. Restarted the runner with `--budget-mb 12900` (running
+  solves resumed from their 1-13 minute old checkpoints). With three single-raised SPR 6 solves
+  and one 3-bet SPR 6 solve (1.9 GB) the runner is at 12.6 GB resident, 1.4 GB under the ~14 GB
+  kill limit; load average back to 4.

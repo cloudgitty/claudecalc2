@@ -13,3 +13,7 @@ librarybuilder: 329 solves to run, 1099 already solved, 4 jobs at a time, budget
 2026-10-31 01:31:15 srp-spr60-Qs6d2h-cl-o2i1 T5 iterations 190 exploitability 0.471% / 0.480% seconds 3054.3 memory 3629MB raw 20.9KB warm
 2026-10-31 01:36:14 srp-spr60-Qs6d2h-cl-o0i3 T5 iterations 250 exploitability 0.468% / 0.248% seconds 4130.2 memory 3629MB raw 20.0KB warm
 2026-10-31 02:07:00 srp-spr60-Qs6d2h-cl-o0i1 T5 iterations 130 exploitability 0.472% / 0.431% seconds 2128.4 memory 3629MB raw 19.9KB warm
+2026-10-31 02:12:31 srp-spr60-Qs6d2h-cl-o1i0 T5 iterations 170 exploitability 0.441% / 0.458% seconds 2788.5 memory 3629MB raw 20.7KB warm
+Terminated
+runner exit 143
+librarybuilder: 314 solves to run, 1114 already solved, 4 jobs at a time, budget 12900 MB
