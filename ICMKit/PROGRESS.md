@@ -653,3 +653,16 @@ using the build-rate model (`project_remaining.py`), as since session 5.
 - Median exploitability over all 1,690 solves: 0.465% of the pot; all under 0.5%.
 - `LiteLibrary.bin`: 77,988 bytes for 2,783 entries.
 - **Estimated sessions still needed: 1** (46 core-hours at 48 per session).
+
+---
+
+# Build session 8
+
+Start: 2026-10-31 22:39:40 UTC (`date -u`). Wrap-up at 11:39 UTC on 2026-11-01; no new solves
+after 10:10 UTC.
+
+## Log
+- 22:40 Task 1 (check): build and `make test` pass (8 programs); `verify_results.py`: all 1,690
+  results match the manifest. Warm-start states for 2 groups in `work/state/`.
+- 22:40 Task 2 (solve): `librarybuilder run --jobs 4 --tiers 3,4,5 --budget-mb 13100
+  --stop-at 10:10 UTC` (log `logs/run_s8.out`); 146 T5 solves left (projected 46 core-hours).
