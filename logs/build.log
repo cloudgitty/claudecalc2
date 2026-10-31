@@ -1543,3 +1543,9 @@
 2026-10-31 04:59:21 3bp-spr60-8s8d3h-rcl-o5i1 T5 iterations 370 exploitability 0.499% / 0.485% seconds 821.6 memory 1225MB raw 5.5KB warm
 2026-10-31 05:12:58 3bp-spr60-8s8d3h-rcl-o1i5 T5 iterations 370 exploitability 0.489% / 0.260% seconds 813.4 memory 1225MB raw 5.2KB warm
 2026-10-31 05:22:09 3bp-spr60-8s8d3h-rcl-o3i0 T5 iterations 250 exploitability 0.473% / 0.300% seconds 548.3 memory 1225MB raw 5.9KB warm
+2026-10-31 05:35:05 srp-spr60-8h4d3c-rcl-o0i3 T5 iterations 280 exploitability 0.490% / 0.377% seconds 4627.4 memory 3649MB raw 22.1KB
+2026-10-31 05:46:34 srp-spr60-8h4d3c-rcl-o5i4 T5 iterations 260 exploitability 0.479% / 0.353% seconds 4280.9 memory 3649MB raw 22.1KB
+2026-10-31 05:47:53 3bp-spr60-8s8d3h-rcl-o0i3 T5 iterations 700 exploitability 0.494% / 0.042% seconds 1539.2 memory 1225MB raw 5.9KB warm
+2026-10-31 05:57:29 3bp-spr60-8s8d3h-rcl-o5i4 T5 iterations 260 exploitability 0.489% / 0.335% seconds 571.1 memory 1225MB raw 5.1KB warm
+2026-10-31 05:59:24 srp-spr60-8h4d3c-rcl-o4i5 T5 iterations 270 exploitability 0.491% / 0.369% seconds 4483.8 memory 3649MB raw 22.4KB
+2026-10-31 06:06:56 3bp-spr60-8s8d3h-rcl-o4i5 T5 iterations 240 exploitability 0.486% / 0.308% seconds 562.9 memory 1225MB raw 5.0KB warm
