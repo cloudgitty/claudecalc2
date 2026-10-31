@@ -1635,3 +1635,11 @@
 2026-10-31 17:58:33 srp-spr60-5s5dAc-rcl-o4i3 T5 iterations 70 exploitability 0.492% / 0.419% seconds 792.5 memory 2209MB raw 13.2KB warm
 2026-10-31 18:04:29 srp-spr60-5s5dAc-rcl-o3i4 T5 iterations 80 exploitability 0.469% / 0.419% seconds 906.9 memory 2209MB raw 14.1KB warm
 2026-10-31 18:11:26 srp-spr60-5s5dAc-rcl-o0i3 T5 iterations 210 exploitability 0.483% / 0.269% seconds 2372.2 memory 2209MB raw 17.6KB warm
+2026-10-31 18:21:15 srp-spr60-5s5dAc-cl-o0i3 T5 iterations 120 exploitability 0.441% / 0.321% seconds 1358.2 memory 2209MB raw 17.6KB warm
+2026-10-31 18:25:53 srp-spr60-5s5dAc-cl-o3i0 T5 iterations 170 exploitability 0.447% / 0.441% seconds 1911.8 memory 2209MB raw 19.3KB warm
+2026-10-31 18:26:31 srp-spr60-5s5dAc-cl-o2i1 T5 iterations 120 exploitability 0.475% / 0.353% seconds 1319.1 memory 2209MB raw 16.7KB warm
+2026-10-31 18:31:04 srp-spr60-5s5dAc-cl-o1i2 T5 iterations 100 exploitability 0.487% / 0.478% seconds 1174.3 memory 2209MB raw 17.4KB warm
+2026-10-31 18:44:00 srp-spr60-Qh9h4c-cl-o5i3 T5 iterations 90 exploitability 0.454% / 0.312% seconds 1041.1 memory 2152MB raw 12.5KB warm
+2026-10-31 18:46:56 srp-spr60-5s5dAc-cl-o0i1 T5 iterations 110 exploitability 0.498% / 0.490% seconds 1257.4 memory 2209MB raw 17.5KB warm
+2026-10-31 18:47:33 srp-spr60-5s5dAc-cl-o1i0 T5 iterations 140 exploitability 0.483% / 0.415% seconds 1574.9 memory 2209MB raw 18.5KB warm
+2026-10-31 18:53:52 srp-spr60-Qh9h4c-cl-o3i5 T5 iterations 120 exploitability 0.473% / 0.288% seconds 1365.0 memory 2152MB raw 13.4KB warm
