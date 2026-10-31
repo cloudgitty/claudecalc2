@@ -578,3 +578,37 @@ after 10:15 UTC.
   solves resumed from their 1-13 minute old checkpoints). With three single-raised SPR 6 solves
   and one 3-bet SPR 6 solve (1.9 GB) the runner is at 12.6 GB resident, 1.4 GB under the ~14 GB
   kill limit; load average back to 4.
+- 04:45 10 single-raised SPR 6 solves on 8h4d3c run cold: their chip-EV solve dates from the B2
+  pilot, before warm-start states were kept on disk. Re-solving the chip-EV spot (~6,000 s) to
+  warm-start them would cost about what it saves, so they stay cold.
+- 08:40 Load average 3 again: three single-raised SPR 6 solves (one a chip-EV solve) reserve
+  ~11,000 MB and the 3-bet SPR 6 estimate (1,950 MB) does not fit in 12,900 MB. Not restarted this
+  late (about 1.5 core-hours to gain before 10:15); session 7 starts with `--budget-mb 13000`.
+- 10:15 No new solves started; the last running solve finished at 10:58 (`57 solved, 0 failed`
+  since the restart, 72 this session).
+- 10:59 Wrap-up: `verify_results.py` 1,579 results match the manifest, 0 problems; `pack` 2,598
+  entries, 72,808 bytes; test 6 PASS (25,980 values, 0 mismatches).
+
+## Task 3: solve times against the pilot
+
+T5 build median 1,133 s (151 solves) against the pilot's 3,278 s (-65%); the projection already
+uses the build-rate model (`project_remaining.py`) since session 5. Other tiers are complete.
+
+## Summary of build session 6
+
+| Tier | Solves done / total | Entries done / total | Solves left | Compute spent (core-h) | Core-h left (projected) | Sessions left |
+| --- | --- | --- | --- | --- | --- | --- |
+| T1 | 204 / 204 | 336 / 336 | 0 | 3.4 | 0 | 0 |
+| T2 | 204 / 204 | 336 / 336 | 0 | 25.7 | 0 | 0 |
+| T3 | 204 / 204 | 336 / 336 | 0 | 82.9 | 0 | 0 |
+| T4 | 816 / 816 | 1,344 / 1,344 | 0 | 33.1 | 0 | 0 |
+| T5 | 151 / 408 | 246 / 672 | 257 | 74.3 | 89 | 1.9 |
+| **Total** | **1,579 / 1,836** | **2,598 / 3,024** | **257** | **219.4** | **89** | **1.9** |
+
+- This session: 72 solves (1,507 -> 1,579), about 42 core-hours, 0 failed. T5 solves left are all
+  SPR 6 (single-raised 3.6-3.8 GB each, 3-bet 1.2-2.0 GB), so memory, not cores, limited the
+  running set for part of the session.
+- Median exploitability over all 1,579 solves: 0.463% of the pot; all under 0.5%.
+- `LiteLibrary.bin`: 72,808 bytes for 2,598 entries.
+- **Estimated sessions still needed: about 2** (89 core-hours at 48 per session).
+- Warm-start states kept for 3 groups in `work/state/`; no checkpoints pending.
