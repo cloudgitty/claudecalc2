@@ -1695,3 +1695,16 @@
 2026-10-31 23:09:58 srp-spr60-AdTd5d-rcl-o5i1 T5 iterations 100 exploitability 0.477% / 0.380% seconds 417.6 memory 1965MB raw 9.5KB warm
 2026-10-31 23:10:16 srp-spr60-AdTd5d-cl-o3i5 T5 iterations 110 exploitability 0.478% / 0.312% seconds 471.4 memory 1965MB raw 9.9KB warm
 2026-10-31 23:19:08 srp-spr60-AdTd5d-rcl-o1i5 T5 iterations 130 exploitability 0.491% / 0.286% seconds 547.7 memory 1965MB raw 9.9KB warm
+2026-10-31 23:20:34 srp-spr60-AdTd5d-rcl-o3i0 T5 iterations 150 exploitability 0.381% / 0.492% seconds 616.1 memory 1965MB raw 10.3KB warm
+2026-10-31 23:25:50 srp-spr60-AdTd5d-rcl-o5i4 T5 iterations 70 exploitability 0.481% / 0.382% seconds 313.9 memory 1965MB raw 9.5KB warm
+2026-10-31 23:29:50 srp-spr60-AdTd5d-rcl-o0i3 T5 iterations 150 exploitability 0.483% / 0.213% seconds 641.0 memory 1965MB raw 10.4KB warm
+2026-10-31 23:31:30 srp-spr60-AdTd5d-rcl-o4i5 T5 iterations 80 exploitability 0.482% / 0.360% seconds 337.3 memory 1965MB raw 9.6KB warm
+2026-10-31 23:37:36 srp-spr60-AdTd5d-rcl-o3i4 T5 iterations 90 exploitability 0.483% / 0.410% seconds 364.4 memory 1965MB raw 10.3KB warm
+2026-10-31 23:41:14 srp-spr60-AdTd5d-rcl-o4i3 T5 iterations 170 exploitability 0.385% / 0.456% seconds 681.5 memory 1965MB raw 12.0KB warm
+2026-10-31 23:43:28 srp-spr60-6s5d4h-chip T5 iterations 180 exploitability 0.493% / 0.333% seconds 3306.0 memory 3686MB raw 20.0KB
+2026-10-31 23:46:37 srp-spr60-AdTd5d-cl-o3i0 T5 iterations 140 exploitability 0.345% / 0.472% seconds 539.3 memory 1965MB raw 11.3KB warm
+2026-10-31 23:51:35 srp-spr60-AdTd5d-cl-o0i3 T5 iterations 160 exploitability 0.456% / 0.345% seconds 619.7 memory 1965MB raw 12.2KB warm
+2026-10-31 23:51:41 srp-spr60-AdTd5d-cl-o2i1 T5 iterations 130 exploitability 0.368% / 0.491% seconds 490.3 memory 1965MB raw 11.4KB warm
+2026-10-31 23:55:37 srp-spr60-AdTd5d-cl-o1i2 T5 iterations 140 exploitability 0.451% / 0.400% seconds 537.7 memory 1965MB raw 11.9KB warm
+2026-10-31 23:59:24 srp-spr60-JsTd8h-chip T5 iterations 280 exploitability 0.499% / 0.365% seconds 4761.4 memory 3448MB raw 18.7KB
+2026-11-01 00:00:02 srp-spr60-AdTd5d-cl-o0i1 T5 iterations 130 exploitability 0.473% / 0.452% seconds 498.9 memory 1965MB raw 12.2KB warm
