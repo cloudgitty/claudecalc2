@@ -100,3 +100,15 @@ librarybuilder: 146 solves to run, 1282 already solved, 4 jobs at a time, budget
 2026-11-01 06:30:43 srp-spr60-6s5d4h-cl-o0i3 T5 iterations 250 exploitability 0.452% / 0.489% seconds 4283.7 memory 3686MB raw 21.3KB warm
 2026-11-01 06:34:02 3bp-spr60-AdTd5d-rcl-o5i4 T5 iterations 200 exploitability 0.492% / 0.339% seconds 202.5 memory 522MB raw 3.8KB warm
 2026-11-01 06:37:18 3bp-spr60-AdTd5d-rcl-o4i5 T5 iterations 190 exploitability 0.499% / 0.398% seconds 196.1 memory 522MB raw 4.0KB warm
+2026-11-01 06:41:31 3bp-spr60-AdTd5d-rcl-o4i3 T5 iterations 240 exploitability 0.489% / 0.319% seconds 252.1 memory 522MB raw 3.8KB warm
+2026-11-01 06:45:34 3bp-spr60-AdTd5d-rcl-o3i4 T5 iterations 240 exploitability 0.482% / 0.301% seconds 242.4 memory 522MB raw 4.0KB warm
+2026-11-01 06:49:30 3bp-spr60-AdTd5d-cl-o3i0 T5 iterations 230 exploitability 0.477% / 0.374% seconds 235.6 memory 522MB raw 3.8KB warm
+2026-11-01 06:53:49 3bp-spr60-AdTd5d-cl-o0i3 T5 iterations 260 exploitability 0.493% / 0.238% seconds 258.6 memory 522MB raw 4.1KB warm
+2026-11-01 06:57:08 3bp-spr60-AdTd5d-cl-o2i1 T5 iterations 200 exploitability 0.496% / 0.319% seconds 198.6 memory 522MB raw 3.7KB warm
+2026-11-01 07:00:12 srp-spr60-6s5d4h-cl-o1i2 T5 iterations 250 exploitability 0.491% / 0.408% seconds 4235.3 memory 3686MB raw 21.3KB warm
+2026-11-01 07:00:31 3bp-spr60-AdTd5d-cl-o1i2 T5 iterations 200 exploitability 0.499% / 0.293% seconds 202.4 memory 522MB raw 4.3KB warm
+2026-11-01 07:03:01 3bp-spr60-AdTd5d-cl-o1i0 T5 iterations 170 exploitability 0.459% / 0.308% seconds 168.6 memory 522MB raw 3.8KB warm
+2026-11-01 07:03:48 3bp-spr60-AdTd5d-cl-o0i1 T5 iterations 190 exploitability 0.476% / 0.284% seconds 197.0 memory 522MB raw 4.3KB warm
+2026-11-01 07:06:26 srp-spr60-6s5d4h-cl-o1i0 T5 iterations 170 exploitability 0.495% / 0.417% seconds 2835.6 memory 3686MB raw 19.3KB warm
+2026-11-01 07:13:42 3bp-spr60-JsTd8h-chip T5 iterations 190 exploitability 0.496% / 0.376% seconds 632.1 memory 1811MB raw 5.5KB
+2026-11-01 07:19:34 3bp-spr60-6s5d4h-chip T5 iterations 270 exploitability 0.463% / 0.211% seconds 943.7 memory 1971MB raw 5.3KB
