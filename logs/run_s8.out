@@ -19,3 +19,11 @@ librarybuilder: 146 solves to run, 1282 already solved, 4 jobs at a time, budget
 2026-10-31 23:55:37 srp-spr60-AdTd5d-cl-o1i2 T5 iterations 140 exploitability 0.451% / 0.400% seconds 537.7 memory 1965MB raw 11.9KB warm
 2026-10-31 23:59:24 srp-spr60-JsTd8h-chip T5 iterations 280 exploitability 0.499% / 0.365% seconds 4761.4 memory 3448MB raw 18.7KB
 2026-11-01 00:00:02 srp-spr60-AdTd5d-cl-o0i1 T5 iterations 130 exploitability 0.473% / 0.452% seconds 498.9 memory 1965MB raw 12.2KB warm
+2026-11-01 00:00:33 srp-spr60-AdTd5d-cl-o1i0 T5 iterations 140 exploitability 0.405% / 0.486% seconds 536.2 memory 1965MB raw 11.4KB warm
+2026-11-01 00:09:14 3bp-spr60-Qh9h4c-rcl-o5i4 T5 iterations 240 exploitability 0.480% / 0.268% seconds 516.4 memory 1117MB raw 4.4KB warm
+2026-11-01 00:17:01 3bp-spr60-Qh9h4c-rcl-o4i5 T5 iterations 210 exploitability 0.494% / 0.271% seconds 466.0 memory 1117MB raw 4.4KB warm
+2026-11-01 00:21:18 srp-spr60-JsTd8h-cl-o5i3 T5 iterations 80 exploitability 0.472% / 0.403% seconds 1307.1 memory 3448MB raw 13.7KB warm
+2026-11-01 00:26:32 3bp-spr60-Qh9h4c-rcl-o4i3 T5 iterations 260 exploitability 0.498% / 0.280% seconds 567.2 memory 1117MB raw 4.5KB warm
+2026-11-01 00:27:40 srp-spr60-6s5d4h-cl-o5i3 T5 iterations 110 exploitability 0.474% / 0.397% seconds 1906.3 memory 3686MB raw 16.7KB warm
+2026-11-01 00:32:58 srp-spr60-JsTd8h-cl-o3i5 T5 iterations 120 exploitability 0.458% / 0.277% seconds 1969.6 memory 3448MB raw 14.4KB warm
+2026-11-01 00:35:10 3bp-spr60-Qh9h4c-rcl-o3i4 T5 iterations 230 exploitability 0.481% / 0.234% seconds 514.9 memory 1117MB raw 4.5KB warm
