@@ -666,3 +666,54 @@ after 10:10 UTC.
   results match the manifest. Warm-start states for 2 groups in `work/state/`.
 - 22:40 Task 2 (solve): `librarybuilder run --jobs 4 --tiers 3,4,5 --budget-mb 13100
   --stop-at 10:10 UTC` (log `logs/run_s8.out`); 146 T5 solves left (projected 46 core-hours).
+- 09:36 All 1,836 solves done: the runner ran out of work at 09:36 (`146 solved, 0 failed`), before
+  the 10:10 stop.
+- 09:37 Final checks: `verify_results.py` 1,836 results match the manifest, 0 problems; `pack`
+  3,024 entries, 84,736 bytes; test 6 PASS (30,240 values, 0 mismatches); test 5 PASS (the 20
+  pilot spots, 10 single-raised and 10 3-bet, all reached 0.5%).
+
+## Summary of build session 8
+
+- This session: 146 solves (1,690 -> 1,836), about 43 core-hours, 0 failed. The manifest is
+  finished.
+
+---
+
+# Final summary of Part B (library build)
+
+The library manifest is finished: every solve and every library entry of tiers T1-T5 is solved,
+verified and packed.
+
+| Tier | Solves | Library entries | Compute (core-h) | Median solve s | Slowest s | Median exploitability | Max exploitability |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| T1 | 204 / 204 | 336 / 336 | 3.4 | 43 | 324 | 0.421% | 0.50% |
+| T2 | 204 / 204 | 336 / 336 | 25.7 | 285 | 1,493 | 0.470% | 0.50% |
+| T3 | 204 / 204 | 336 / 336 | 82.9 | 1,155 | 5,532 | 0.485% | 0.50% |
+| T4 | 816 / 816 | 1,344 / 1,344 | 33.1 | 86 | 1,016 | 0.452% | 0.50% |
+| T5 | 408 / 408 | 672 / 672 | 163.1 | 996 | 7,004 | 0.484% | 0.50% |
+| **Total** | **1,836 / 1,836** | **3,024 / 3,024** | **308.2** | | | **0.469%** | **0.50%** |
+
+Exploitability is the larger of the two players', in % of the pot, measured at the end of each
+solve; every solve stopped at or under the 0.5% target, none at the iteration cap.
+
+- **Total solves:** 1,836 (16 ICM + 1 chip-EV solve per pot type, SPR and flop), giving 3,024
+  library entries (14 matchup cells x 2 positions x 2 pot types x 3 SPRs x 18 flops).
+- **Total compute:** 308.2 single-core hours of solving over B2 and build sessions 3-8 (B2 to
+  431 solves, session 3 to 891, session 4 to 1,285, session 5 to 1,507, session 6 to 1,579,
+  session 7 to 1,690, session 8 to 1,836), run 4 at a time; peak solver memory 3,698 MB.
+- **Library file:** `library/LiteLibrary.bin` 84,736 bytes (64 + 28 x 3,024), well under the 1 MB
+  limit; all five tiers flagged complete. Test 6 (reader against the source results) PASS on all
+  30,240 values; test 5 PASS.
+- **B1 benchmarks (from Part B1):** river-only solves 0.01-0.03 s; turn + river single-raised
+  13-14 s on 1 thread, 5-6 s on 4 threads; turn + river 3-bet 3.6-5.0 s on 1 thread, 1.6-2.3 s
+  on 4 threads.
+- **Placeholder ranges:** all six preflop range files are placeholders (`"placeholder": true`):
+  `ranges/srp_spr1.5.json`, `srp_spr3.5.json`, `srp_spr6.json`, `3bp_spr1.5.json`,
+  `3bp_spr3.5.json`, `3bp_spr6.json`. The repo has no preflop solver; replacing them means
+  re-running the library build (see `DECISIONS.md`).
+- **Skipped matchup cells:** (0,0) and (2,2), as in the manifest (`DECISIONS.md`); queries there
+  are answered by interpolation from the neighbouring buckets.
+- **Failed spots:** none. Every runner run ended with `0 failed`, and `verify_results.py` reports
+  0 problems for all 1,836 results.
+- **Cold starts:** 10 single-raised SPR 6 ICM solves on 8h4d3c ran without a warm start (their
+  chip-EV solve predates saved states); they converged to the same target, only slower.
