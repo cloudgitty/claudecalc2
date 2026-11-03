@@ -52,3 +52,15 @@ Task: `docs/TASK.md` (the prompt as given). One-line status after each stage, ne
   n3 9.6/12.3/15.1/16.8/25.9/39.8/49.9. UTG-CO within 0.4 points; BTN (-1.0) and SB (+4.9)
   not yet; rounds n4, n5 running. Result so far: with 19% rake on flops and no rake on hands
   won preflop, the BB 3-bets or folds against a BTN open (3-bet ~21%, call ~0-1%).
+- Rounds n4, n5: RFI n4 9.6/11.7/15.2/17.1/25.4/36.5/45.8, n5 9.5/11.4/14.8/16.1/24.0/35.6/48.6.
+  Criterion (<= 0.5 points) not met; BTN/SB swing 1-4 points. Final R = mean of n3-n5.
+- Stage 6 done (20:40): final preflop solve, 5,000 iterations, worst 0.113 bb/100. RFI
+  9.3/11.5/14.7/16.2/25.1/37.7/46.1 (SB limp 4.1).
+- Stage 7 done (21:41): 11 reachable spots x 100 flops = 1,100 solves, all <= 0.5% of pot
+  (4 spots not reached: srp BTN v SB, CO v BTN, UTG v BTN; 4bp CO v BTN).
+- Rake variants done (23:23): rake 0 control, cap 3bb, rake 5% (one R round each).
+- Stage 8 done (23:30): packed (1.37 MB total), validation (validation.md: all pass except the
+  in-position 3-bet-vs-call / polarisation checks - no in-position flats exist - and LJ in the
+  rake-vs-control check), rake_report.md, test_vectors.json, REPORT.md.
+- Totals: wall clock ~9.5 h (14:18-23:30 UTC); ~30 CPU core-hours (postflop 18.8, preflop ~10,
+  equity 1.5). Output sizes: preflop.json 59,157 B, preflop_ev.bin 50,362 B, postflop/ 1,195,945 B.

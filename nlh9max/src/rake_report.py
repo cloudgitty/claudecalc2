@@ -28,11 +28,14 @@ DRY, WET = 0, 24
 
 
 def cbet(solves_dir, spot, idx):
+    """C-bet frequency of the preflop raiser: its bet frequency at its first flop decision
+    (the root if it is out of position, after the check if it is in position)."""
     paths = glob.glob(os.path.join(solves_dir, spot, f"{idx:03d}_*.bin"))
     if not paths:
         return None
     s = read_solve(paths[0])
-    nd = s["nodes"][0]
+    donk = json.load(open(paths[0][:-4] + ".json"))["donk"]
+    nd = s["nodes"][1 if donk else 0]
     if nd is None:
         return None
     r = s["ranges"][nd["player"]]
@@ -77,7 +80,7 @@ def main():
             for nm, idx in (("dry AcJc8d", DRY), ("wet 9c7c6d", WET)):
                 v = cbet(sd, spot, idx)
                 if v is not None:
-                    rows.append((f"{spot} first-player bet %, {nm}", label, v))
+                    rows.append((f"{spot} c-bet % (preflop raiser), {nm}", label, v))
     if rows:
         out.append("")
         keys = sorted({r[0] for r in rows})

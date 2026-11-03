@@ -1,6 +1,6 @@
 # Validation (section 5)
 
-Preflop solution `work/final/pre`, outputs in `out`.
+Preflop solution `work/final/pre`, outputs in `.`.
 
 ## 1 Probability sums
 
@@ -12,7 +12,7 @@ Preflop solution `work/final/pre`, outputs in `out`.
 ## 2 Round trip (independent decoder)
 
 - PASS preflop: 100000 entries match the packer: worst frequency diff 0 points, worst EV diff 0 bb
-- PASS postflop: 99990 entries match the packer
+- PASS postflop: 100001 entries match the packer
 
 ## 4 Hand sanity (frequencies in %)
 
@@ -35,6 +35,7 @@ Preflop solution `work/final/pre`, outputs in `out`.
 - **FAIL** in position: 3-bet range polarised (flats in the middle of the continuing range): not polarised: the continuing range is all 3-bets (linear 3-bet-or-fold)
 - PASS 4-bet range narrower than the 3-bet range (% of all combos): BB 3-bet vs BTN 19.55, BTN 4-bet 8.83
 - PASS 5-bet range narrower than the 3-bet range (% of all combos): BB 5-bet 5.04 vs BB 3-bet 19.55
+- **FAIL** rake makes every non-blind RFI range tighter than the rake-free control: UTG 9.3 vs 9.5, UTG1 11.5 vs 12.1, LJ 14.7 vs 13.8, HJ 16.2 vs 18.4, CO 25.1 vs 26.4, BTN 37.7 vs 45.3
 
 ## 5 Exploitability reached
 
@@ -60,4 +61,4 @@ Preflop solution `work/final/pre`, outputs in `out`.
 
 - test_vectors.json: 300 preflop and 300 postflop entries
 
-**2 check(s) FAILED**
+**3 check(s) FAILED**
