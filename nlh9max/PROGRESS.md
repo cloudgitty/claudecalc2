@@ -40,3 +40,15 @@ Task: `docs/TASK.md` (the prompt as given). One-line status after each stage, ne
   3-bet ~25 s, 4-bet ~10 s on one core => ~11 core-hours per pass, ~2.8 h on 4 cores. Three
   passes (stage 4 calibration, stage 7 final, plus the rake-off control and sensitivity runs of
   section 5) fit the budget with the full 100-flop set, so no flop cut is needed.
+- Stage 4 done (16:26): 168 calibration solves (14 spots x 12 flops), all <= 0.5% of pot.
+  `srp_CO_vs_BTN` empty (BTN never flats a CO open).
+- Stage 5: R fit. First form (pairwise-normalised R) was degenerate (only R ratios identified,
+  values ran to the 0.05 / 5.0 clips); replaced by the task's literal model share = R x equity x
+  (pot - rake), with the two players' shares normalised to the net pot per terminal. Measured:
+  SRP rake ~19% of the flop pot, 3-bet pots 12-15%, 4-bet 6-9% (cap); IP opener R 1.13-1.34,
+  BB caller 0.73-0.80, OOP 3-bettor 1.03-1.17.
+- Preflop <-> R rounds (damped 50/50 from n2): RFI UTG/UTG1/LJ/HJ/CO/BTN/SB
+  n1 9.7/12.1/14.9/17.7/25.2/33.8/44.5, n2 9.9/11.9/15.5/16.6/25.6/40.8/45.0,
+  n3 9.6/12.3/15.1/16.8/25.9/39.8/49.9. UTG-CO within 0.4 points; BTN (-1.0) and SB (+4.9)
+  not yet; rounds n4, n5 running. Result so far: with 19% rake on flops and no rake on hands
+  won preflop, the BB 3-bets or folds against a BTN open (3-bet ~21%, call ~0-1%).
