@@ -1,0 +1,56 @@
+{
+  "game": "NLH",
+  "seats": [
+    "UTG",
+    "UTG1",
+    "LJ",
+    "HJ",
+    "CO",
+    "BTN",
+    "SB",
+    "BB"
+  ],
+  "players": 8,
+  "blinds_bb": [
+    0.5,
+    1.0
+  ],
+  "ante_bb": 0,
+  "straddle": false,
+  "stack_bb": 100,
+  "rake_pct": 0.1,
+  "rake_cap_bb": 5,
+  "no_flop_no_drop": true,
+  "jackpot_drop_bb": 0,
+  "open_bb": 3.0,
+  "sb_open_bb": 3.5,
+  "sb_limp": true,
+  "bb_iso_vs_limp_bb": 3.0,
+  "threebet_ip_x": 3.0,
+  "threebet_oop_x": 5.0,
+  "squeeze_extra_x": 1.0,
+  "fourbet_ip_x": 2.5,
+  "fourbet_oop_x": 2.8,
+  "fourbet_allin_frac": 0.4,
+  "fivebet": "allin",
+  "max_flop_players": 3,
+  "postflop_bet_sizes": [
+    0.33,
+    0.66,
+    1.25
+  ],
+  "postflop_raise_x": 2.5,
+  "postflop_raise_allin": true,
+  "postflop_bet_allin": false,
+  "postflop_max_raises": 1,
+  "donk_flop_sizes": [
+    0.33
+  ],
+  "postflop_streets": "flop+turn, equity showdown at end of turn",
+  "postflop_target_expl_pct": 0.5,
+  "preflop_target_bb100": 1.0,
+  "rfi_tolerance_pts": 0.5,
+  "quant_step_pct": 5,
+  "flop_count": 100,
+  "cut_flops": false
+}
