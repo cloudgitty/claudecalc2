@@ -18,8 +18,8 @@
  *    independent of each other (card removal among opponents is ignored).
  *  - Fold terminal: the last player wins the pot, no rake (no flop, no drop).
  *  - All-in terminal (heads-up): pot share = exact all-in equity, rake min(10% pot, cap).
- *  - Flop terminal, heads-up: share(h, v) = R_i(h) e / (R_i(h) e + R_j(v) (1 - e)) of the
- *    pot net of the expected rake fraction rho, e = exact equity of h vs v.
+ *  - Flop terminal, heads-up: share(h, v) = R_i(h) e of the pot net of the expected rake
+ *    fraction rho, e = exact equity of h vs v, R measured from postflop solves (fit_r.py).
  *  - Flop terminal, 3-way: hero's share ~ kappa R_i(h) E_j(h) E_k(h) where E_j(h) is h's
  *    equity against j's range; kappa normalises the three shares to 1 for the current
  *    ranges (the 3-way model is approximate and flagged in REPORT.md).
@@ -150,10 +150,7 @@ static void prepare_terminals(void)
                 for (int v = 0; v < NC; v++) {
                     double e = E[h][v], share;
                     if (x->kind == 'A') share = e;
-                    else {
-                        double a = x->R[s][h] * e, b = x->R[1 - s][v] * (1.0 - e);
-                        share = a + b > 0 ? a / (a + b) : 0.5;
-                    }
+                    else share = x->R[s][h] * e;   /* realised share: R x equity (section 2.4) */
                     M[h * NC + v] = (float)(Pc[h][v] * (share * net - x->inv[i]));
                 }
             x->M[s] = M;

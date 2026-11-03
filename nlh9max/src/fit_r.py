@@ -6,9 +6,9 @@ For every solved spot (heads-up, flop root) and side:
   V(h)   = flop-weighted, reach-weighted mean of the per-combo EV over the combos of class h
            (chips from the flop on, rake included) - the hand's realised value of the pot;
   rho    = 1 - (E[V_oop] + E[V_ip]) / P, the expected rake as a fraction of the flop pot P.
-R per hand class is then fitted so that the preflop model's heads-up terminal reproduces V:
-  model(h) = (1 - rho) P sum_v P(v|h) r(v) R_i(h) e / (R_i(h) e + R_j(v)(1 - e)) / sum_v P(v|h) r(v)
-(fixed-point iteration on both sides). Classes are grouped into 5 strength buckets by their
+R per hand class is the ratio of the realised share to the equity share of the net pot:
+  R(h) = V(h) / ((1 - rho) P e(h)),  e(h) = equity of h against the opponent's flop range,
+which is the preflop model's heads-up terminal value R(h) e(h) (1 - rho) P (section 2.4). Classes are grouped into 5 strength buckets by their
 equity against the opponent's flop range (reach-weighted quintiles), and the bucket value is
 the reach-weighted mean of the class R. Output: per spot and side the bucket edges and R, rho,
 and the features used by the regression in src/rmodel.py.
@@ -84,28 +84,26 @@ def fit_spot(name, info, solves_dir, flops, E, P):
     # class reach (combos weight per class / class combo count) for each side
     reach = W / fw_tot / np.array(NCOMBOS)[None, :]
     share = Vc / pot                                    # realised share of the flop pot
-    # fixed point for R (classes with no reach keep R from their bucket later)
+    # direct model: share(h) = (1 - rho) R(h) e(h), e = equity vs the opponent's flop range
     R = np.ones((2, 169))
     net = 1.0 - rho
-    for _ in range(200):
-        for i in range(2):
-            j = 1 - i
-            m = model_share(R[i], R[j], E, P, reach[j], net)
-            ok = np.isfinite(share[i]) & (reach[i] > 1e-6) & (m > 1e-9)
-            upd = np.ones(169)
-            upd[ok] = np.clip(share[i][ok] / m[ok], 0.5, 2.0)
-            R[i] = np.clip(R[i] * upd ** 0.5, 0.05, 5.0)
+    eqs = []
+    for i in range(2):
+        j = 1 - i
+        eq = (P * E * reach[j][None, :]).sum(1) / np.maximum((P * reach[j][None, :]).sum(1), 1e-12)
+        eqs.append(eq)
+        ok = np.isfinite(share[i]) & (reach[i] > 1e-6) & (eq > 1e-6)
+        R[i][ok] = share[i][ok] / (net * eq[ok])
     err = []
     out = {"pot": pot, "stack": info["stack"], "spr": info["spr"], "rho": rho, "flops": len(files),
            "max_expl_pct": max(expl), "median_expl_pct": float(np.median(expl)), "sides": {}}
     for i, seat in ((0, info["oop"]), (1, info["ip"])):
         j = 1 - i
-        m = model_share(R[i], R[j], E, P, reach[j], net)
+        m = net * R[i] * eqs[i]
         ok = np.isfinite(share[i]) & (reach[i] > 1e-6)
         wts = reach[i][ok] * np.array(NCOMBOS)[ok]
-        err.append(float(np.sqrt((wts * (m[ok] - share[i][ok]) ** 2).sum() / wts.sum())))
-        # equity vs the opponent's flop range, buckets by reach-weighted quintiles
-        eq = (P * E * reach[j][None, :]).sum(1) / np.maximum((P * reach[j][None, :]).sum(1), 1e-12)
+        eq = eqs[i]
+        # error of the bucketed model is computed below; buckets by reach-weighted quintiles
         order = np.argsort(eq)
         cw = np.cumsum((reach[i] * np.array(NCOMBOS))[order])
         cw /= cw[-1]
@@ -116,6 +114,8 @@ def fit_spot(name, info, solves_dir, flops, E, P):
             sel = ok & (b == k)
             ww = reach[i][sel] * np.array(NCOMBOS)[sel]
             Rb.append(float((R[i][sel] * ww).sum() / ww.sum()) if ww.sum() > 0 else float("nan"))
+        Rcls = np.array([Rb[k] if np.isfinite(Rb[k]) else np.nanmean(Rb) for k in b])
+        err.append(float(np.sqrt((wts * (net * Rcls[ok] * eq[ok] - share[i][ok]) ** 2).sum() / wts.sum())))
         aggr = info["aggressor"] == seat
         out["sides"][seat] = {
             "ip": int(i == 1), "aggressor": int(aggr), "edges": edges, "R": Rb,
