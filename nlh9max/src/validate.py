@@ -114,6 +114,9 @@ def check_roundtrip_postflop(rep, out_dir, rdir, sdir, n=100000):
         dec = decoder_ref.load_postflop(path)
         name = dec["header"]["spot"]
         idxs = list(dec["flops"])
+        if not idxs:
+            per_spot.append((name + " (not reached, no flops)", 0))
+            continue
         per = max(1, n // max(len(files), 1))
         w = 0
         for _ in range(per):
@@ -216,7 +219,8 @@ def test_vectors(out_dir, rdir, sdir, n=300):
         pre.append({"id": r["id"], "node": r["node"], "hand": LABELS[h], "actions": r["actions"],
                     "freqs": decoder_ref.hands_of(r).get(LABELS[h], {}), "ev_bb": round(float(ev[k][h]), 4)})
     post = []
-    files = sorted(glob.glob(os.path.join(out_dir, "postflop", "*.bin.gz")))
+    files = [p for p in sorted(glob.glob(os.path.join(out_dir, "postflop", "*.bin.gz")))
+             if decoder_ref.load_postflop(p)["flops"]]
     for _ in range(n):
         path = RNG.choice(files)
         dec = decoder_ref.load_postflop(path)
