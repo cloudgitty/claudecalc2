@@ -51,6 +51,18 @@ def write_rfile(path, entries):
                 f.write(np.asarray(R, dtype="<f4").tobytes())
 
 
+def read_rfile_full(path, work="work"):
+    nps = {t["id"]: len(t["players"]) for t in read_tree(f"{work}/tree.txt") if t["kind"] == "P"}
+    out = []
+    with open(path, "rb") as f:
+        n = struct.unpack("<i", f.read(4))[0]
+        for _ in range(n):
+            nid, rho = struct.unpack("<id", f.read(12))
+            Rs = [np.frombuffer(f.read(169 * 4), "<f4").copy() for _ in range(nps[nid])]
+            out.append((nid, rho, Rs))
+    return out
+
+
 def fixed(work, cfg, out):
     entries = []
     for n in read_tree(f"{work}/tree.txt"):
@@ -169,6 +181,15 @@ def fitted(work, cfg, fitp, prefix, out):
             Rb = np.where(np.isfinite(Rb), Rb, np.nanmean(Rb))
             Rs.append(np.clip(Rb[np.searchsorted(edges, eq)], 0.05, 5.0))
         entries.append((t["id"], rho, Rs))
+    blend = os.environ.get("R_BLEND")          # "prev_rfile:weight_of_new", damping between rounds
+    if blend:
+        prevp, wnew = blend.rsplit(":", 1)
+        wnew = float(wnew)
+        prev = {nid: (rho, Rs) for nid, rho, Rs in read_rfile_full(prevp, work)}
+        entries = [(nid, wnew * rho + (1 - wnew) * prev[nid][0],
+                    [wnew * np.asarray(R) + (1 - wnew) * np.asarray(Rp) for R, Rp in zip(Rs, prev[nid][1])])
+                   for nid, rho, Rs in entries]
+        print(f"blended with {prevp}: weight of the new fit {wnew}")
     write_rfile(out, entries)
     print(f"{len(entries)} flop terminals: {nsolved // 2} from solved spots, {nreg // 2} by regression; "
           f"rake points {list(zip(pots.round(1), rakes.round(2)))}")
