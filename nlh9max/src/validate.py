@@ -117,11 +117,15 @@ def check_roundtrip_postflop(rep, out_dir, rdir, sdir, n=100000):
         if not idxs:
             per_spot.append((name + " (not reached, no flops)", 0))
             continue
-        per = max(1, n // max(len(files), 1))
+        per = max(1, -(-n // max(sum(1 for p in files if decoder_ref.load_postflop(p)["flops"]), 1)))
         w = 0
-        for _ in range(per):
+        cache = {}
+        done_here = 0
+        while done_here < per:
             fi = RNG.choice(idxs)
-            src = read_solve(os.path.join(sdir, name, f"{fi:03d}_{flops[fi]['flop']}.bin"))
+            if fi not in cache:
+                cache[fi] = read_solve(os.path.join(sdir, name, f"{fi:03d}_{flops[fi]['flop']}.bin"))
+            src = cache[fi]
             c = RNG.randrange(1326)
             k = RNG.randrange(len(NODE_NAMES))
             nd = src["nodes"][k]
@@ -135,6 +139,7 @@ def check_roundtrip_postflop(rep, out_dir, rdir, sdir, n=100000):
             q = quantise(nd["strat"][:, c]) // STEP
             w = max(w, int(np.abs(q - got[c]).max()))
             tested += 1
+            done_here += 1
         per_spot.append((name, w))
         worst = max(worst, w)
     rep.check(f"postflop: {tested} entries match the packer", worst == 0,
@@ -151,16 +156,21 @@ def check_structure(rep, s, s_norake):
     deff = {k: s[f"BB vs {k} open"]["call"] + s[f"BB vs {k} open"]["raise"] for k in ("BTN", "SB", "CO", "UTG")}
     rep.check("BB defends widest against BTN and SB", min(deff["BTN"], deff["SB"]) > max(deff["CO"], deff["UTG"]),
               ", ".join(f"vs {k} {v:.1f}" for k, v in deff.items()))
-    bb = s["BB vs BTN open"]
-    rep.check("BB 3-bet range narrower than its call range", bb["raise"] < bb["call"],
-              f"3-bet {bb['raise']:.1f} vs call {bb['call']:.1f}")
-    btn = s["BTN vs BB 3-bet"]
-    rep.check("BTN 4-bet range narrower than the BB 3-bet range", btn["4-bet"] < bb["raise"],
-              f"4-bet {btn['4-bet']:.1f} vs 3-bet {bb['raise']:.1f}")
-    if "polar" in s:
-        p = s["polar"]
-        rep.check("BB 3-bet range is polarised (gap in the middle of the strength order)", p["polar"],
-                  p["detail"])
+    ip = s["ip_vs_open"]
+    ok = all(v["3-bet"] < v["call"] for v in ip.values())
+    rep.check("in position: 3-bet range narrower than the call range", ok,
+              "; ".join(f"{k}: 3-bet {v['3-bet']:.1f}, call {v['call']:.1f}" for k, v in ip.items()) +
+              ("" if ok else " - under this rake the in-position player 3-bets or folds (no flat range), "
+                             "so there is no call range for the 3-bets to be narrower than or polarised against"))
+    rep.check("in position: 3-bet range polarised (flats in the middle of the continuing range)",
+              all(v["call"] > 0.5 for v in ip.values()),
+              "not polarised: the continuing range is all 3-bets (linear 3-bet-or-fold)"
+              if not all(v["call"] > 0.5 for v in ip.values()) else "")
+    a = s["absolute"]
+    rep.check("4-bet range narrower than the 3-bet range (% of all combos)", a["BTN 4-bet vs BB"] < a["BB 3-bet vs BTN"],
+              f"BB 3-bet vs BTN {a['BB 3-bet vs BTN']:.2f}, BTN 4-bet {a['BTN 4-bet vs BB']:.2f}")
+    rep.check("5-bet range narrower than the 3-bet range (% of all combos)", a["BB 5-bet vs BTN"] < a["BB 3-bet vs BTN"],
+              f"BB 5-bet {a['BB 5-bet vs BTN']:.2f} vs BB 3-bet {a['BB 3-bet vs BTN']:.2f}")
     if s_norake:
         tighter = {k: (s["rfi"][k], s_norake["rfi"][k]) for k in order}
         ok = all(a <= b + 1e-9 for a, b in tighter.values())

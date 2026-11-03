@@ -102,6 +102,31 @@ def summary(prefix):
     r = actor_reach(tree, strat, n)
     out["BTN vs BB 3-bet"] = {"call": width(strat[n], acts, ("c",), r)[0], "4-bet": width(strat[n], acts, ("r", "a"), r)[0],
                               "(of BTN opens)": 100.0}
+    # absolute widths (% of all 1,326 combos) of the raising ranges along BTN open - BB 3-bet - BTN 4-bet - BB 5-bet
+    absw = {}
+    n3 = node_after(tree, strat, [("BTN", "r")])
+    while SEATS[tree[n3]["player"]] != "BB":
+        n3 = tree[n3]["children"][tree[n3]["actions"].index("f")]
+    def abs_width(node, which):
+        acts_ = tree[node]["actions"]
+        idx = [i for i, a in enumerate(acts_) if a in which]
+        rr = actor_reach(tree, strat, node)
+        return float((PRIOR * rr * strat[node][idx].sum(0)).sum() * 100)
+    absw["BB 3-bet vs BTN"] = abs_width(n3, ("r", "a"))
+    absw["BTN 4-bet vs BB"] = abs_width(n, ("r", "a"))
+    n5 = node_after(tree, strat, [("BTN", "r"), ("BB", "r"), ("BTN", "r")])
+    absw["BB 5-bet vs BTN"] = abs_width(n5, ("r", "a"))
+    out["absolute"] = absw
+    # in-position 3-bet vs call (cold, facing an open)
+    ip = {}
+    for name, line, who in [("BTN vs CO open", [("CO", "r")], "BTN"), ("CO vs HJ open", [("HJ", "r")], "CO"),
+                            ("BTN vs UTG open", [("UTG", "r")], "BTN"), ("HJ vs UTG open", [("UTG", "r")], "HJ")]:
+        m = node_after(tree, strat, line)
+        while SEATS[tree[m]["player"]] != who:
+            m = tree[m]["children"][tree[m]["actions"].index("f")]
+        acts_ = tree[m]["actions"]
+        ip[name] = {"call": width(strat[m], acts_, ("c",))[0], "3-bet": width(strat[m], acts_, ("r", "a"))[0], "node": m}
+    out["ip_vs_open"] = ip
     n = node_after(tree, strat, [("CO", "r"), ("BTN", "r")])
     while SEATS[tree[n]["player"]] != "CO":
         n = tree[n]["children"][tree[n]["actions"].index("f")]
@@ -118,7 +143,7 @@ def main():
     print("RFI widths (% of combos):", " ".join(f"{k} {v:.1f}" for k, v in s["rfi"].items()),
           f"| SB limp {s['sb_limp']:.1f}")
     for k in s:
-        if k in ("rfi", "sanity", "sb_limp"):
+        if k in ("rfi", "sanity", "sb_limp", "absolute", "ip_vs_open"):
             continue
         print(f"{k}: " + ", ".join(f"{a} {b:.1f}" for a, b in s[k].items() if a != "node"))
     if "--json" in sys.argv:
