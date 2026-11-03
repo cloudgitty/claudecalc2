@@ -27,3 +27,16 @@ Task: `docs/TASK.md` (the prompt as given). One-line status after each stage, ne
   4-bet pruning (tree 8,057 nodes). RFI UTG 9.8 UTG1 11.6 LJ 14.3 HJ 17.7 CO 24.5 BTN 35.9
   SB 30.2 (+24.4 limp).
 - Stage 4 started: calibration postflop solves, 15 spots x 12 flops, ranges from stage 3.
+- Postflop speed-ups (15:50): turn-equity tables stored as exact uint8 half-win counts out of 88
+  (1 byte instead of 4: 417 MB -> 83 MB for BTN v BB, and cache-resident), hand classes under 1%
+  reach dropped (<= 0.3% of range mass, see spots.json "trimmed_mass"), vectorised equity
+  products. BTN v BB SRP 100bb: 64-141 s per flop on one core (was 393-748 s), 80-120 MB.
+  Verified against the exact river sweep (same spot, 100 iterations): EV within 0.013 bb,
+  strategy within 7.8 points on one action, values 18.154 vs 18.154 / 8.227 vs 8.227.
+- Spot count: 14 of the 15 spots in the task are reachable; `srp_CO_vs_BTN` (CO opens, BTN flats)
+  has an empty BTN range - in this high-rake equilibrium the BTN 3-bets or folds against a CO
+  open and never cold-calls. Noted in REPORT.md as a structural result, not a reduction.
+- Budget (measured): one full pass = 14 spots x 100 flops. SRP spots average ~90 s per flop,
+  3-bet ~25 s, 4-bet ~10 s on one core => ~11 core-hours per pass, ~2.8 h on 4 cores. Three
+  passes (stage 4 calibration, stage 7 final, plus the rake-off control and sensitivity runs of
+  section 5) fit the budget with the full 100-flop set, so no flop cut is needed.
