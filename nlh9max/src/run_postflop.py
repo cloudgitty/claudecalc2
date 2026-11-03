@@ -5,6 +5,7 @@ usage: python3 src/run_postflop.py <ranges_dir> <out_dir> <flops: all|calib|i,j,
 Ranges and pot / stack / donk flag come from <ranges_dir>/spots.json (src/spots.py).
 Each solve writes <out_dir>/<spot>/<flop index>_<flop>.bin and .json (src/tools/postflop.c);
 finished solves are skipped, so the command can be re-run after a restart.
+Environment RAKE_PCT / RAKE_CAP override the rake (control and sensitivity runs).
 Calibration flops ("calib"): 12 of the 100, one from each of the largest texture groups
 (listed in CALIB) - see REPORT.md.
 """
@@ -51,7 +52,8 @@ def main():
                 continue
             cmd = ["./build/postflop", f, f"{sp['pot']:g}", f"{sp['stack']:g}",
                    os.path.join(rdir, f"{name}_oop.f32"), os.path.join(rdir, f"{name}_ip.f32"), prefix,
-                   f"donk={sp['donk']}", "threads=1"]
+                   f"donk={sp['donk']}", "threads=1",
+                   f"rake={os.environ.get('RAKE_PCT', '0.10')}", f"cap={os.environ.get('RAKE_CAP', '5')}"]
             # largest pots first so the slow solves start early
             tasks.append((-sp["stack"] / sp["pot"], name, i, cmd))
     tasks.sort()

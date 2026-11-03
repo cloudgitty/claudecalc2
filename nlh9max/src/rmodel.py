@@ -203,7 +203,7 @@ SEATS = ["UTG", "UTG1", "LJ", "HJ", "CO", "BTN", "SB", "BB"]
 
 def main():
     mode, work = sys.argv[1], sys.argv[2]
-    cfg = json.load(open("config.json"))
+    cfg = json.load(open(os.environ.get("NLH_CONFIG", "config.json")))
     if mode == "fixed":
         fixed(work, cfg, sys.argv[3] if len(sys.argv) > 3 else f"{work}/rfile.bin")
     else:
