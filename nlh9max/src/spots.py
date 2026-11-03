@@ -16,7 +16,10 @@ import sys
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(__file__))
-from hands import CLASS_COMBOS  # noqa: E402
+from hands import CLASS_COMBOS, NCOMBOS  # noqa: E402
+
+MIN_REACH = 0.01
+NC = np.array(NCOMBOS, dtype=float)
 
 SEATS = ["UTG", "UTG1", "LJ", "HJ", "CO", "BTN", "SB", "BB"]
 SB, BB = 6, 7
@@ -107,14 +110,21 @@ def main():
         stack = 100.0 - inv[oop]
         aggr = t["aggressor"]
         donk = int(aggr is not None and aggr != oop)   # OOP is not the preflop raiser
-        ro, ri = class_to_combos(reach[oop]), class_to_combos(reach[ip])
+        # DEFAULT: hand classes that reach the flop less than 1% of the time are dropped (the
+        # average strategy leaves tiny weights on hands it almost never plays)
+        ro_c = np.where(reach[oop] >= MIN_REACH, reach[oop], 0)
+        ri_c = np.where(reach[ip] >= MIN_REACH, reach[ip], 0)
+        lost = [1 - float((rc * NC).sum() / max((r * NC).sum(), 1e-12)) for rc, r in ((ro_c, reach[oop]), (ri_c, reach[ip]))]
+        ro, ri = class_to_combos(ro_c), class_to_combos(ri_c)
         ro.tofile(os.path.join(out, f"{name}_oop.f32"))
         ri.tofile(os.path.join(out, f"{name}_ip.f32"))
         info[name] = dict(node=nid, oop=SEATS[oop], ip=SEATS[ip], pot=pot, stack=stack, spr=stack / pot,
                           donk=donk, aggressor=SEATS[aggr] if aggr is not None else None,
-                          pot_type=name.split("_")[0], oop_combos=float(ro.sum()), ip_combos=float(ri.sum()))
+                          pot_type=name.split("_")[0], oop_combos=float(ro.sum()), ip_combos=float(ri.sum()),
+                          trimmed_mass=lost, live=[int((ro > 0).sum()), int((ri > 0).sum())])
         print(f"{name:16s} node {nid:5d} pot {pot:6.2f} stack {stack:6.2f} SPR {stack / pot:5.2f} "
-              f"OOP {SEATS[oop]} {ro.sum():6.1f} combos, IP {SEATS[ip]} {ri.sum():6.1f} combos, donk={donk}")
+              f"OOP {SEATS[oop]} {ro.sum():6.1f} ({(ro > 0).sum()} live, trimmed {lost[0]:.4f}) "
+              f"IP {SEATS[ip]} {ri.sum():6.1f} ({(ri > 0).sum()} live, trimmed {lost[1]:.4f}) donk={donk}")
     json.dump(info, open(os.path.join(out, "spots.json"), "w"), indent=1)
 
 

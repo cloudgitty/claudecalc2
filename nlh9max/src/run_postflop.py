@@ -40,6 +40,9 @@ def main():
     tasks = []
     for name in names:
         sp = spots[name]
+        if min(sp.get("live", [1, 1])) == 0:
+            print(f"{name}: skipped, a range is empty (not reached in the preflop equilibrium)", flush=True)
+            continue
         os.makedirs(os.path.join(out, name), exist_ok=True)
         for i in fidx:
             f = flops[i]["flop"]
