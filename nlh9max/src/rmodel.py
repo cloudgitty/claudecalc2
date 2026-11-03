@@ -13,6 +13,7 @@ rho = min(rake_pct x pot, cap) / pot (the rake on the flop pot, ignoring later g
 The fitted model replaces all of these with numbers measured from postflop solves.
 """
 import json
+import os
 import struct
 import sys
 
@@ -66,13 +67,126 @@ def fixed(work, cfg, out):
     print(f"{len(entries)} flop terminals written to {out}")
 
 
+def terminal_reach(prefix, work):
+    """Reach (8 x 169) of every player at every node under the preflop solution in prefix."""
+    tree = json.load(open(f"{work}/tree.json"))["nodes"]
+    strat = np.fromfile(prefix + ".strat", dtype=np.float32)
+    off, S = 0, {}
+    for i, n in enumerate(tree):
+        if n["kind"] == "dec":
+            k = len(n["actions"])
+            S[i] = strat[off:off + k * 169].reshape(k, 169)
+            off += k * 169
+    reach = {0: np.ones((8, 169))}
+    for i, n in enumerate(tree):          # parents come before children in build order
+        if n["kind"] != "dec":
+            continue
+        for a, c in enumerate(n["children"]):
+            r = reach[i].copy()
+            r[n["player"]] *= S[i][a]
+            reach[c] = r
+    return tree, reach
+
+
+def fitted(work, cfg, fitp, prefix, out):
+    """R per class for every flop terminal from the fitted spots (src/fit_r.py) and a
+    regression for the terminals of position pairs that were not solved."""
+    sys.path.insert(0, os.path.dirname(__file__))
+    from fit_r import NB, load_eq
+    fit = json.load(open(fitp))
+    E, P = load_eq(work)
+    spots = {}
+    for name, f in fit.items():
+        spots[name] = f
+    # regression samples: per (spot, side) the bucket R with features
+    X, Y = [], []
+    rake_pts = []
+    for name, f in fit.items():
+        rake_pts.append((f["pot"], f["rho"] * f["pot"]))
+        for seat, sd in f["sides"].items():
+            X.append([1.0, sd["ip"], sd["aggressor"], np.log(f["spr"])])
+            Y.append(sd["R"])
+    X, Y = np.array(X), np.array(Y)
+    beta = []
+    for b in range(NB):
+        ok = np.isfinite(Y[:, b])
+        beta.append(np.linalg.lstsq(X[ok], Y[ok, b], rcond=None)[0])
+    beta = np.array(beta)
+    rake_pts.sort()
+    pots = np.array([p for p, _ in rake_pts])
+    rakes = np.array([r for _, r in rake_pts])
+
+    def exp_rake(pot):
+        r = float(np.interp(pot, pots, rakes, left=rakes[0] * pot / pots[0], right=min(rakes[-1], cfg["rake_cap_bb"])))
+        return min(r, cfg["rake_cap_bb"], cfg["rake_pct"] * pot * 3)
+
+    spot_by_node = {}
+    rinfo = json.load(open(os.path.join(os.path.dirname(fitp), "spots_used.json"))) if os.path.exists(
+        os.path.join(os.path.dirname(fitp), "spots_used.json")) else None
+    if rinfo:
+        for name, sp in rinfo.items():
+            if name in fit:
+                spot_by_node[sp["node"]] = name
+    tree, reach = terminal_reach(prefix, work)
+    entries = []
+    nsolved = nreg = 0
+    for t in read_tree(f"{work}/tree.txt"):
+        if t["kind"] != "P":
+            continue
+        pl = t["players"]
+        pot = t["pot"]
+        rho = exp_rake(pot) / pot
+        if len(pl) == 3:
+            order = sorted(pl, key=postflop_order)
+            fac = {order[0]: 0.85, order[1]: 0.92, order[2]: 1.0}
+            entries.append((t["id"], rho, [np.full(169, fac[p]) for p in pl]))
+            continue
+        name = spot_by_node.get(t["id"])
+        if name:
+            rho = fit[name]["rho"]
+        oop, ip = sorted(pl, key=postflop_order)
+        r = reach[t["id"]]
+        Rs = []
+        for p in pl:
+            o = ip if p == oop else oop
+            eq = (P * E * r[o][None, :]).sum(1) / np.maximum((P * r[o][None, :]).sum(1), 1e-12)
+            if name:
+                sd = fit[name]["sides"][SEATS[p]]
+                edges, Rb = sd["edges"], np.array(sd["R"])
+                nsolved += 1
+            else:
+                stack = 100.0 - t["inv"][p]
+                spr = stack / pot
+                x = np.array([1.0, float(p == ip), float(t["aggr"] == p), np.log(max(spr, 0.1))])
+                Rb = beta @ x
+                # bucket edges from this terminal's own range
+                w = r[p] * np.array([6 if k // 13 == k % 13 else 4 if k // 13 < k % 13 else 12 for k in range(169)])
+                order_ = np.argsort(eq)
+                cw = np.cumsum(w[order_])
+                cw = cw / cw[-1] if cw[-1] > 0 else np.linspace(0, 1, 169)
+                edges = [float(eq[order_][min(np.searchsorted(cw, q), 168)]) for q in np.linspace(0, 1, NB + 1)[1:-1]]
+                nreg += 1
+            Rb = np.where(np.isfinite(Rb), Rb, np.nanmean(Rb))
+            Rs.append(np.clip(Rb[np.searchsorted(edges, eq)], 0.05, 5.0))
+        entries.append((t["id"], rho, Rs))
+    write_rfile(out, entries)
+    print(f"{len(entries)} flop terminals: {nsolved // 2} from solved spots, {nreg // 2} by regression; "
+          f"rake points {list(zip(pots.round(1), rakes.round(2)))}")
+    print("regression beta per bucket [const, ip, aggressor, log spr]:")
+    for b in range(NB):
+        print("  ", np.round(beta[b], 3))
+
+
+SEATS = ["UTG", "UTG1", "LJ", "HJ", "CO", "BTN", "SB", "BB"]
+
+
 def main():
     mode, work = sys.argv[1], sys.argv[2]
     cfg = json.load(open("config.json"))
     if mode == "fixed":
         fixed(work, cfg, sys.argv[3] if len(sys.argv) > 3 else f"{work}/rfile.bin")
     else:
-        raise SystemExit("fitted mode is added in stage 5")
+        fitted(work, cfg, sys.argv[3], sys.argv[4], sys.argv[5] if len(sys.argv) > 5 else f"{work}/rfile.bin")
 
 
 if __name__ == "__main__":
