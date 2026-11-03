@@ -57,6 +57,7 @@ static int nnodes;
 static double E[NC][NC], Pc[NC][NC], prior[NC];
 static double rake_pct = 0.10, rake_cap = 5.0;
 static float *ev_out;      /* per decision node 169 */
+static float *eva_out;     /* per decision node MAXA x 169: EV of each action */
 static double *reach_out;
 
 static void die(const char *m) { fprintf(stderr, "preflop: %s\n", m); exit(1); }
@@ -249,21 +250,32 @@ static void terminal_value(const Node *x, const State *s, int i, double *v)
         }
         (void)pa;
     }
-    double tot = 0;
+    /* additive 3-way model (fitted on 20,000 exact 3-way all-ins, REPORT.md): the share of a
+       hand is q = E_j E_k plus an equal third of the probability the pairwise product misses,
+       (1 - sum of the three players' average q) / 3; then times R and normalised. */
+    double tq = 0, T[3], U[3], D[3];
     for (int a = 0; a < 3; a++) {
-        double t = 0, d = 0;
+        double q = 0, t = 0, u = 0, d = 0;
         const double *ra = s->r[x->players[a]];
         for (int h = 0; h < NC; h++) {
-            t += prior[h] * ra[h] * x->R[a][h] * B[a][0][h] * B[a][1][h];
-            d += prior[h] * ra[h] * F[a][0][h] * F[a][1][h];
+            double ff = F[a][0][h] * F[a][1][h], bb = B[a][0][h] * B[a][1][h], wgt = prior[h] * ra[h];
+            q += wgt * bb;
+            t += wgt * x->R[a][h] * bb;
+            u += wgt * x->R[a][h] * ff;
+            d += wgt * ff;
         }
-        if (d > 0) tot += t / d;
+        T[a] = t; U[a] = u; D[a] = d;
+        if (d > 0) tq += q / d;
     }
-    double kappa = tot > 0 ? 1.0 / tot : 1.0;
+    double add = (1.0 - tq) / 3.0, Z = 0;
+    for (int a = 0; a < 3; a++) if (D[a] > 0) Z += (T[a] + add * U[a]) / D[a];
+    if (!(Z > 0)) Z = 1.0;
     int a = x->players[0] == i ? 0 : x->players[1] == i ? 1 : 2;
     double net = x->pot * (1.0 - x->rho);
-    for (int h = 0; h < NC; h++)
-        v[h] = s->w[h] * (net * kappa * x->R[a][h] * B[a][0][h] * B[a][1][h] - x->inv[i] * F[a][0][h] * F[a][1][h]);
+    for (int h = 0; h < NC; h++) {
+        double ff = F[a][0][h] * F[a][1][h];
+        v[h] = s->w[h] * (net * x->R[a][h] * (B[a][0][h] * B[a][1][h] + add * ff) / Z - x->inv[i] * ff);
+    }
 }
 
 static double dcfr_pos, dcfr_neg, dcfr_avg;
@@ -319,6 +331,12 @@ static void walk(int n, State *s, int i, int mode, double *v)
         if (mode == W_EV) {
             double om[NC], rch = 0;
             opp_mass(s, i, om);
+            if (getenv("PF_DEBUG_NODE") && atoi(getenv("PF_DEBUG_NODE")) == n)
+                for (int a = 0; a < na; a++)
+                    fprintf(stderr, "node %d act %c AA va %.6g om %.6g -> %.4f\n", n, x->act[a], va[a][0], om[0], va[a][0] / om[0]);
+            for (int a = 0; a < na; a++)
+                for (int h = 0; h < NC; h++)
+                    eva_out[((size_t)n * MAXA + a) * NC + h] = om[h] > 1e-12 ? (float)(va[a][h] / om[h]) : 0.0f;
             for (int h = 0; h < NC; h++) {
                 ev_out[(size_t)n * NC + h] = om[h] > 1e-12 ? (float)(v[h] / om[h]) : 0.0f;
                 rch += prior[h] * save[h] * om[h];
@@ -345,6 +363,8 @@ static void walk(int n, State *s, int i, int mode, double *v)
         } else
             walk(x->child[a], s, i, mode, tmp);
         for (int h = 0; h < NC; h++) v[h] += tmp[h];
+        if (mode == W_EV && getenv("PF_DEBUG_SUB") && n >= atoi(getenv("PF_DEBUG_SUB")) && n < atoi(getenv("PF_DEBUG_SUB")) + 4)
+            fprintf(stderr, "  opp node %d (P%d) act %c child %d AA %.6g\n", n, p, x->act[a], x->child[a], tmp[0]);
     }
     memcpy(s->r[p], save, sizeof save);
 }
@@ -443,6 +463,11 @@ static void write_out(const char *prefix)
     f = fopen(path, "wb");
     fwrite(ev_out, sizeof(float), (size_t)nnodes * NC, f);
     fclose(f);
+    snprintf(path, sizeof path, "%s.evact", prefix);
+    f = fopen(path, "wb");
+    for (int n = 0; n < nnodes; n++)
+        if (T[n].kind == 'D') fwrite(eva_out + (size_t)n * MAXA * NC, sizeof(float), (size_t)T[n].nact * NC, f);
+    fclose(f);
     snprintf(path, sizeof path, "%s.reach", prefix);
     f = fopen(path, "wb");
     fwrite(reach_out, sizeof(double), nnodes, f);
@@ -498,6 +523,7 @@ int main(int argc, char **argv)
     prepare_terminals();
     alloc_store();
     ev_out = calloc((size_t)nnodes * NC, sizeof(float));
+    eva_out = calloc((size_t)nnodes * MAXA * NC, sizeof(float));
     reach_out = calloc(nnodes, sizeof(double));
     snprintf(path, sizeof path, "%s.log", prefix);
     FILE *log = fopen(path, "a");

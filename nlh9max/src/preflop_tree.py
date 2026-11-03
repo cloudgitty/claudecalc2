@@ -56,7 +56,7 @@ class Builder:
         inv[SB], inv[BB] = 0.5, 1.0
         st = dict(inv=inv, folded=[False] * 8, level=0, to=1.0, last_raise_to=1.0,
                   aggressor=None, opener=None, callers=[], acted=[False] * 8,
-                  path=[], limped=False, allin=False)
+                  path=[], limped=False, allin=False, vol=[])
         return self.node(st, 0)
 
     def flop_count(self, st):
@@ -108,14 +108,18 @@ class Builder:
                 n_in = sum(1 for q in live if q != p and (st["acted"][q] or q in (SB, BB)) and st["inv"][q] >= to - 1e-9)
                 # players still to act who have money in already (blinds) are not counted until they call
                 committed = [q for q in live if q != p and st["inv"][q] >= to - 1e-9]
-                # DEFAULT: 3-way pots only when single-raised; facing a 3-bet or more, a
-                # call is offered only if it leaves exactly two players (heads-up)
+                # DEFAULT: 3-way pots only when single-raised. Facing a 3-bet or more, a call
+                # is offered only when the raiser is the only player matched so far; players
+                # still to act after a call can then only fold or raise (the pot stays heads-up)
                 cap = cfg["max_flop_players"] if level == 1 else 2
-                others_live_to_act = [q for q in live if q != p and q not in committed]
-                if len(committed) + 1 <= cap and (level == 1 or not others_live_to_act):
+                if len(committed) + 1 <= cap:
                     acts.append(("c", to))
+        # DEFAULT pruning: facing a 3-bet or more, a player who has not yet put chips in
+        # voluntarily (cold; the blinds count as cold) may only fold
+        if level >= 2 and p != st["opener"] and p not in st["vol"]:
+            acts = [("f", None)]
         # raises
-        r = self.raise_size(st, p)
+        r = self.raise_size(st, p) if len(acts) > 1 or level < 2 or p == st["opener"] or p in st["vol"] else None
         if r is not None:
             acts.append(("a" if r >= self.stack - 1e-9 else "r", r))
         kids = []
@@ -125,6 +129,8 @@ class Builder:
             s2 = json.loads(json.dumps(st))
             s2["path"] = st["path"] + [f"{SEATS[p]}:{a}" + (f"{amt:g}" if a in "ra" and False else "")]
             s2["acted"][p] = True
+            if a not in ("f", "k"):
+                s2["vol"] = st["vol"] + [p]
             if a == "f":
                 s2["folded"][p] = True
             elif a in ("c", "k"):

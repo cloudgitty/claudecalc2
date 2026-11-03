@@ -36,10 +36,31 @@ def node_after(tree, strat, line):
     return n
 
 
-def width(strat_node, actions, which):
+def width(strat_node, actions, which, reach=None):
+    """% of all combos taking the actions; with reach, % of the combos that reach the node."""
     idx = [i for i, a in enumerate(actions) if a in which]
     f = strat_node[idx].sum(axis=0)
-    return float((PRIOR * f).sum() * 100), f
+    if reach is None:
+        return float((PRIOR * f).sum() * 100), f
+    z = (PRIOR * reach).sum()
+    return float((PRIOR * reach * f).sum() / z * 100) if z > 0 else 0.0, f
+
+
+def actor_reach(tree, strat, n):
+    """Reach of the acting player at node n along its path (own strategy only)."""
+    path = []
+    m = n
+    parent = {c: (i, k) for i, t in enumerate(tree) if t["kind"] == "dec" for k, c in enumerate(t["children"])}
+    while m in parent:
+        i, k = parent[m]
+        path.append((i, k))
+        m = i
+    p = tree[n]["player"]
+    r = np.ones(169)
+    for i, k in path:
+        if tree[i]["player"] == p:
+            r *= strat[i][k]
+    return r
 
 
 def summary(prefix):
@@ -78,12 +99,16 @@ def summary(prefix):
     # BTN vs BB 3-bet, BTN 4-bet range
     n = node_after(tree, strat, [("BTN", "r"), ("BB", "r")])
     acts = tree[n]["actions"]
-    out["BTN vs BB 3-bet"] = {"call": width(strat[n], acts, ("c",))[0], "4-bet": width(strat[n], acts, ("r", "a"))[0]}
+    r = actor_reach(tree, strat, n)
+    out["BTN vs BB 3-bet"] = {"call": width(strat[n], acts, ("c",), r)[0], "4-bet": width(strat[n], acts, ("r", "a"), r)[0],
+                              "(of BTN opens)": 100.0}
     n = node_after(tree, strat, [("CO", "r"), ("BTN", "r")])
     while SEATS[tree[n]["player"]] != "CO":
         n = tree[n]["children"][tree[n]["actions"].index("f")]
     acts = tree[n]["actions"]
-    out["CO vs BTN 3-bet"] = {"call": width(strat[n], acts, ("c",))[0], "4-bet": width(strat[n], acts, ("r", "a"))[0]}
+    r = actor_reach(tree, strat, n)
+    out["CO vs BTN 3-bet"] = {"call": width(strat[n], acts, ("c",), r)[0], "4-bet": width(strat[n], acts, ("r", "a"), r)[0],
+                              "(of CO opens)": 100.0}
     return out
 
 
