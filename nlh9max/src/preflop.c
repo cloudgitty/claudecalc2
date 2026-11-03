@@ -47,6 +47,7 @@ typedef struct {
     float *reg, *ssum, *cur;
     /* terminal data */
     float *M[3];           /* HU: per side (index in players) the 169 x 169 matrix P(v|h) * value */
+    float *Mo[2];          /* HU flop: the opponent's realised share, for the normalisation */
     float *R[3];           /* 3-way: R per player */
     double rho;
     int tidx;              /* index among flop terminals in the rfile */
@@ -144,17 +145,24 @@ static void prepare_terminals(void)
         if ((x->kind != 'P' && x->kind != 'A') || x->np != 2) continue;
         double net = x->kind == 'A' ? x->pot - rake_of(x->pot) : x->pot * (1.0 - x->rho);
         for (int s = 0; s < 2; s++) {
-            int i = x->players[s], j = x->players[1 - s];
+            int i = x->players[s];
             float *M = malloc(sizeof(float) * NC * NC);
-            for (int h = 0; h < NC; h++)
-                for (int v = 0; v < NC; v++) {
-                    double e = E[h][v], share;
-                    if (x->kind == 'A') share = e;
-                    else share = x->R[s][h] * e;   /* realised share: R x equity (section 2.4) */
-                    M[h * NC + v] = (float)(Pc[h][v] * (share * net - x->inv[i]));
-                }
+            if (x->kind == 'A') {
+                for (int h = 0; h < NC; h++)
+                    for (int v = 0; v < NC; v++)
+                        M[h * NC + v] = (float)(Pc[h][v] * (E[h][v] * net - x->inv[i]));
+            } else {
+                /* flop: M = P(v|h) R_i(h) e (hero's realised share), Mo = P(v|h) R_j(v) (1 - e)
+                   (the opponent's), combined and normalised at each visit */
+                float *Mo = malloc(sizeof(float) * NC * NC);
+                for (int h = 0; h < NC; h++)
+                    for (int v = 0; v < NC; v++) {
+                        M[h * NC + v] = (float)(Pc[h][v] * x->R[s][h] * E[h][v]);
+                        Mo[h * NC + v] = (float)(Pc[h][v] * x->R[1 - s][v] * (1.0 - E[h][v]));
+                    }
+                x->Mo[s] = Mo;
+            }
             x->M[s] = M;
-            (void)j;
         }
     }
 }
@@ -232,7 +240,23 @@ static void terminal_value(const Node *x, const State *s, int i, double *v)
     if (x->np == 2) {
         int side = x->players[0] == i ? 0 : 1, j = x->players[1 - side];
         mv_f(x->M[side], s->r[j], v);
-        for (int h = 0; h < NC; h++) v[h] *= s->w[h];
+        if (x->kind == 'A') {
+            for (int h = 0; h < NC; h++) v[h] *= s->w[h];
+            return;
+        }
+        /* flop: value = net R_i e / Z - inv, Z = expected R_i e + R_j (1 - e) under the current
+           ranges, so the two realised shares add up to the pot net of the expected rake */
+        double Bo[NC], F[NC], num = 0, den = 0;
+        mv_f(x->Mo[side], s->r[j], Bo);
+        mv_pc(s->r[j], F);
+        for (int h = 0; h < NC; h++) {
+            double wgt = prior[h] * s->r[i][h];
+            num += wgt * (v[h] + Bo[h]);
+            den += wgt * F[h];
+        }
+        double Z = den > 0 && num > 0 ? num / den : 1.0;
+        double net = x->pot * (1.0 - x->rho);
+        for (int h = 0; h < NC; h++) v[h] = s->w[h] * (net * v[h] / Z - x->inv[i] * F[h]);
         return;
     }
     /* 3-way flop */

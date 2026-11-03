@@ -9,6 +9,11 @@ python3 src/spots.py $prev/pre $new/ranges
 python3 src/run_postflop.py $new/ranges $new/solves calib all 4
 cp $new/ranges/spots.json $new/spots_used.json
 python3 src/fit_r.py $new/ranges $new/solves $new/fit.json
-python3 src/rmodel.py fitted work $new/fit.json $prev/pre $new/rfile.bin
+# damping: the new R is averaged with the previous round's (weight BLEND, default 0.5)
+if [ -f $prev/rfile.bin ]; then
+  R_BLEND=$prev/rfile.bin:${BLEND:-0.5} python3 src/rmodel.py fitted work $new/fit.json $prev/pre $new/rfile.bin
+else
+  python3 src/rmodel.py fitted work $new/fit.json $prev/pre $new/rfile.bin
+fi
 ./build/preflop work $it $new/pre $new/rfile.bin 4
 python3 src/preflop_report.py $new/pre --json $new/summary.json
