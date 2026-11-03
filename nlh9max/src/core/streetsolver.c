@@ -114,6 +114,8 @@ struct ss_solver {
     /* suit isomorphism */
     uint8_t perm[24][4];
     int perm_ok[24];         /* fixes the starting board and both ranges */
+    float *tq[52];           /* end_after_turn: per turn card, n0 x n1 river-averaged equity of
+                                player 0's combo vs player 1's (0 for blocked pairs) */
     int16_t *permc[2][24];   /* live index -> live index of the permuted combo */
 
     /* payoffs */
@@ -755,6 +757,62 @@ static void compat_mass(const ss_solver *S, int me, const float *reach, float *o
     }
 }
 
+/* end_after_turn: equity matrices for the turn cards the tree uses (chance children of
+   flop-street chance nodes). Q[h][v] = (wins + ties / 2) / 44 over the rivers. */
+static int build_turn_equity(ss_solver *S)
+{
+    int used[52] = { 0 };
+    for (size_t i = 0; i < S->nnodes; i++) {
+        const Node *nd = &S->nodes[i];
+        if (nd->kind != SS_NODE_CHANCE || nd->street_len != 3) continue;
+        for (int k = 0; k < nd->nchild; k++) used[S->nodes[nd->child + k].card] = 1;
+    }
+    int n0 = S->n[0], n1 = S->n[1];
+    uint16_t *s0 = malloc(sizeof(uint16_t) * (size_t)n0), *s1 = malloc(sizeof(uint16_t) * (size_t)n1);
+    if (!s0 || !s1) { free(s0); free(s1); return -1; }
+    for (int t = 0; t < 52; t++) {
+        if (!used[t]) continue;
+        float *Q = xcalloc(S, (size_t)n0 * (size_t)n1, sizeof(float));
+        if (!Q) { free(s0); free(s1); return -1; }
+        S->tq[t] = Q;
+        uint8_t cards[7];
+        memcpy(cards + 2, S->root_board, 3);
+        cards[5] = (uint8_t)t;
+        for (int r = 0; r < 52; r++) {
+            if (r == t || r == S->root_board[0] || r == S->root_board[1] || r == S->root_board[2]) continue;
+            cards[6] = (uint8_t)r;
+            for (int h = 0; h < n0; h++) {
+                int a = S->c1[0][h], b = S->c2[0][h];
+                if (a == t || b == t || a == r || b == r) { s0[h] = 0; continue; }
+                cards[0] = (uint8_t)a; cards[1] = (uint8_t)b;
+                s0[h] = handeval7(cards);
+            }
+            for (int v = 0; v < n1; v++) {
+                int a = S->c1[1][v], b = S->c2[1][v];
+                if (a == t || b == t || a == r || b == r) { s1[v] = 0; continue; }
+                cards[0] = (uint8_t)a; cards[1] = (uint8_t)b;
+                s1[v] = handeval7(cards);
+            }
+            for (int h = 0; h < n0; h++) {
+                if (!s0[h]) continue;
+                int a = S->c1[0][h], b = S->c2[0][h];
+                float *row = Q + (size_t)h * n1;
+                uint16_t sh = s0[h];
+                for (int v = 0; v < n1; v++) {
+                    if (!s1[v]) continue;
+                    int x = S->c1[1][v], y = S->c2[1][v];
+                    if (x == a || x == b || y == a || y == b) continue;
+                    row[v] += sh > s1[v] ? 1.0f : sh == s1[v] ? 0.5f : 0.0f;
+                }
+            }
+        }
+        for (size_t k = 0; k < (size_t)n0 * n1; k++) Q[k] *= 1.0f / 44.0f;
+    }
+    free(s0);
+    free(s1);
+    return 0;
+}
+
 ss_solver *ss_create(const ss_config *cfg, char *err, size_t err_len)
 {
     if (!cfg || !cfg->range[0] || !cfg->range[1]) { set_err(err, err_len, "missing ranges"); return NULL; }
@@ -889,6 +947,11 @@ ss_solver *ss_create(const ss_config *cfg, char *err, size_t err_len)
         if (!S->arena[i].base) { set_err(err, err_len, "out of memory"); ss_destroy(S); return NULL; }
     }
     if (setup_boards(S)) { set_err(err, err_len, "out of memory"); ss_destroy(S); return NULL; }
+    if (cfg->end_after_turn && S->root_len == 3 && !getenv("SS_NO_TQ") && build_turn_equity(S)) {
+        set_err(err, err_len, "out of memory");
+        ss_destroy(S);
+        return NULL;
+    }
 
     /* Normaliser: weight of all compatible starting combo pairs. */
     {
@@ -923,6 +986,8 @@ void ss_destroy(ss_solver *S)
         xfree(S, S->sb_off[p], (size_t)S->nboards, sizeof(int32_t));
         xfree(S, S->sb_cnt[p], (size_t)S->nboards, sizeof(int32_t));
     }
+    for (int t = 0; t < 52; t++)
+        if (S->tq[t]) xfree(S, S->tq[t], (size_t)S->n[0] * (size_t)S->n[1], sizeof(float));
     xfree(S, S->nodes, S->cap_nodes, sizeof(Node));
     if (S->store) xfree(S, S->store, S->nstore, sizeof(float));
     if (S->cstore) xfree(S, S->cstore, S->nstore, sizeof(uint16_t));
@@ -1065,6 +1130,34 @@ static void terminal(const ss_solver *S, const Node *nd, int trav, const float *
     for (int i = 0; i < S->root_len; i++) on_board[S->root_board[i]] = 1;
     for (int i = 0; i < path->ndealt; i++) on_board[path->dealt[i]] = 1;
     uint8_t d[2] = { 0, 0 };
+    if (known == 4 && S->root_len == 3 && S->tq[path->dealt[0]]) {
+        /* precomputed river-averaged equity: out = u_lose m + (u_win - u_lose) Q r (player 0)
+           or u_win m - (u_win - u_lose) Q^T r (player 1), m = compatible opponent mass */
+        const float *Q = S->tq[path->dealt[0]];
+        int n0 = S->n[0], n1 = S->n[1];
+        float uw = u[0], ul = u[1];
+        compat_mass(S, trav, reach, out);
+        if (trav == 0) {
+            for (int h = 0; h < n0; h++) {
+                const float *row = Q + (size_t)h * n1;
+                float acc = 0.0f;
+#pragma omp simd reduction(+ : acc)
+                for (int v = 0; v < n1; v++) acc += row[v] * reach[v];
+                out[h] = ul * out[h] + (uw - ul) * acc;
+            }
+        } else {
+            for (int v = 0; v < n1; v++) out[v] *= uw;
+            for (int h = 0; h < n0; h++) {
+                float rh = reach[h];
+                if (rh == 0.0f) continue;
+                const float *row = Q + (size_t)h * n1;
+                float k = (uw - ul) * rh;
+#pragma omp simd
+                for (int v = 0; v < n1; v++) out[v] -= k * row[v];
+            }
+        }
+        return;
+    }
     if (known == 4) {
         /* one card to come: each compatible pair sees 44 rivers */
         if (path->ndealt == 1) d[0] = path->dealt[0];

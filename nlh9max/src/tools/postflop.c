@@ -36,6 +36,12 @@ static float *read_range(const char *path)
     return r;
 }
 
+static void progress(void *user, int it, double expl)
+{
+    (void)user;
+    fprintf(stderr, "it %d expl %.3f%%\n", it, expl);
+}
+
 static int child_with(ss_solver *S, int node, int act)
 {
     if (node < 0 || ss_node_kind(S, node) != SS_NODE_DECISION) return -1;
@@ -118,6 +124,7 @@ int main(int argc, char **argv)
         else { fprintf(stderr, "unknown option %s\n", key); return 2; }
     }
     if (donk) { c.num_donk_sizes = 1; c.donk_sizes[0] = 0.33; }
+    if (getenv("PF_PROGRESS")) c.progress = progress;
     if (c.compact_storage == 2 && !c.memory_limit) c.memory_limit = (size_t)3000 << 20;
     char err[256];
     ss_solver *S = ss_create(&c, err, sizeof err);

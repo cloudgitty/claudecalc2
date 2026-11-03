@@ -1,6 +1,6 @@
 # nlh9max build. `make` builds the tools into build/, `make test` runs the unit tests.
 CC = gcc
-CFLAGS = -O3 -march=native -Wall -Isrc/core/include
+CFLAGS = -O3 -march=native -fopenmp-simd -Wall -Isrc/core/include
 CORE = src/core/cards.c src/core/handeval.c src/core/streetsolver.c src/core/threadpool.c src/core/icm.c src/core/f16.c
 LIBS = -lpthread -lm
 
