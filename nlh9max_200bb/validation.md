@@ -35,7 +35,7 @@ Preflop solution `work/final/pre`, outputs in `.`.
 - **FAIL** in position: 3-bet range polarised (flats in the middle of the continuing range): not polarised: the continuing range is all 3-bets (linear 3-bet-or-fold)
 - PASS 4-bet range narrower than the 3-bet range (% of all combos): BB 3-bet vs BTN 18.72, BTN 4-bet 8.52
 - PASS 5-bet range narrower than the 3-bet range (% of all combos): BB 5-bet 5.43 vs BB 3-bet 18.72
-- **FAIL** rake makes every non-blind RFI range tighter than the rake-free control: UTG 11.4 vs 12.0, UTG1 12.7 vs 14.1, LJ 14.8 vs 17.3, HJ 19.3 vs 21.5, CO 24.5 vs 19.2, BTN 35.3 vs 29.6
+- **FAIL** rake makes every non-blind RFI range tighter than the rake-free control: UTG 11.4 vs 12.1, UTG1 12.7 vs 12.9, LJ 14.8 vs 14.7, HJ 19.3 vs 18.1, CO 24.5 vs 22.6, BTN 35.3 vs 34.0
 
 ## 5 Exploitability reached
 
@@ -54,9 +54,9 @@ Preflop solution `work/final/pre`, outputs in `.`.
 | srp_BTN_vs_BB | 100 | 0.486 | 0.499 | 600 |
 | srp_CO_vs_BB | 100 | 0.488 | 0.500 | 550 |
 | srp_HJ_vs_BB | 100 | 0.487 | 0.500 | 670 |
-| srp_SB_vs_BB | 100 | 0.487 | 373.675 | 1000 |
+| srp_SB_vs_BB | 100 | 0.487 | 0.802 | 730 |
 | srp_UTG_vs_BB | 100 | 0.487 | 0.500 | 610 |
-- **FAIL** postflop exploitability <= 0.5% of pot (or the iteration cap): worst 373.675% of pot
+- **FAIL** postflop exploitability <= 0.5% of pot (or the iteration cap): worst 0.802% of pot
 
 ## 6 Test vectors
 
