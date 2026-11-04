@@ -43,3 +43,10 @@ solves are recomputed here.
 - Stage 6 done (05:02): final preflop solve with the mean R of n3-n5: 11.4/12.7/14.8/19.3/24.5/
   35.3/51.5 (SB limp 3.8).
 - Stage 7 running: 12 reachable spots x 100 flops = 1,200 solves (344 done at 05:55).
+- Stage 7 done (06:49): 12 reachable spots x 100 flops = 1,200 solves (3 not reached: srp BTN v
+  SB, CO v BTN, UTG v BTN). One degenerate solve (srp SB v BB on Qc8d6h: the BB range is only
+  A8s, 3 live combos) diverged after ~350 iterations and ended at 373.7% of pot at the cap; it was
+  re-solved to its best point, 300 iterations, 0.80% of pot. All other solves <= 0.5%.
+- Rake variants, one R round each (07:30-08:54), then stage 8 packing and validation (08:54).
+  The single-round rake-free control was not settled (CO 19.2 < HJ 21.5), so every variant gets
+  two more damped rounds (running), after which validation and rake_report.md are regenerated.
