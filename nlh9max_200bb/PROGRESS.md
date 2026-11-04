@@ -50,3 +50,13 @@ solves are recomputed here.
 - Rake variants, one R round each (07:30-08:54), then stage 8 packing and validation (08:54).
   The single-round rake-free control was not settled (CO 19.2 < HJ 21.5), so every variant gets
   two more damped rounds (running), after which validation and rake_report.md are regenerated.
+- Variant rounds b, c (to 13:06): rake-free control RFI 12.1/12.9/14.7/18.1/22.6/34.0 (SB 45.3,
+  limp 14.1); cap 3bb 11.1/12.6/17.2/20.3/23.9/36.3; rake 5% 12.4/12.9/14.8/19.9/24.8/35.0. One
+  cap-3bb calibration solve (3bp UTG v BB, Jc8d3h, AK-only range) returned NaN and was skipped
+  in that fit.
+- Stage 8 done (13:15): validation (all pass except: in-position 3-bet vs call / polarisation -
+  no in-position flats; rake vs control - only UTG/UTG1 tighter, within noise; postflop worst
+  0.80% - one degenerate solve), rake_report.md, test_vectors.json, REPORT.md.
+- Totals: wall clock ~12.5 h (00:46-13:15 UTC); ~48 core-hours (postflop 21.7, preflop ~25,
+  equity 1.4). Outputs: preflop.json 56,893 B, preflop_ev.bin 50,362 B, postflop/ 1,191,744 B
+  (1.37 MB total).
