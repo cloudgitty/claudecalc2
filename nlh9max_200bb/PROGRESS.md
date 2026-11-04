@@ -27,3 +27,12 @@ solves are recomputed here.
   UTG1 11.7 LJ 14.3 HJ 18.0 CO 23.8 BTN 34.3 SB 32.3 (+23.0 limp). Spot SPRs: SRP 26-30, 3-bet
   pots IP 9.0-9.8 / OOP 6.1, 4-bet pots 2.2-3.4 (as the task expects).
 - Stage 4 running: calibration solves 14 spots x 12 flops on the stage-3 ranges.
+- 01:36 container restart: pipeline stopped; nothing lost on disk (equity, stage 3, 9 calibration
+  solves); pipeline restarted and resumed.
+- Stage 4-5 done (02:00): 168 calibration solves, 1.9 core-hours (~25 min on 4 cores). Mean
+  seconds per flop: SRP SB v BB 181, BTN v BB 136, CO v BB 73, HJ v BB 48, UTG v BB 29; 3-bet
+  pots 5-24; 4-bet 1-4. **Budget: a full 100-flop pass is ~16 core-hours (~4 h), so all 100 flops
+  are kept for every spot; no flop cut is needed.**
+  R (stage-3 ranges): SRP IP opener 1.15-1.20, BB caller 0.71-0.77, rake 19% of the flop pot;
+  3-bet pots rake 12-15%; 4-bet pots at the 5bb cap (6.7-9.1% of the pot).
+- Preflop <-> R rounds n1-n5 running (pipeline).
