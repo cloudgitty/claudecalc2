@@ -1,0 +1,2007 @@
+{
+ "count": 100,
+ "total_flops": 22100,
+ "method": "Representative flops (stage 1): cluster the 1,755 strategically different flops.",
+ "flops": [
+  {
+   "flop": "AcJc8d",
+   "weight": 0.022805429864253393,
+   "raw_flops": 504,
+   "classes": 42,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 12,
+    "mid": 9,
+    "lo": 6,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 6,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 1
+   },
+   "index": 0
+  },
+  {
+   "flop": "Jc7c4c",
+   "weight": 0.021538461538461538,
+   "raw_flops": 476,
+   "classes": 119,
+   "stratum": "monotone unpaired",
+   "features": {
+    "hi": 9,
+    "mid": 5,
+    "lo": 2,
+    "paired": 0,
+    "trips": 0,
+    "suits": "monotone",
+    "span": 7,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 1
+  },
+  {
+   "flop": "Kc8d6h",
+   "weight": 0.020633484162895926,
+   "raw_flops": 456,
+   "classes": 19,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 11,
+    "mid": 6,
+    "lo": 4,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 7,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 1
+   },
+   "index": 2
+  },
+  {
+   "flop": "9c6c3d",
+   "weight": 0.019547511312217193,
+   "raw_flops": 432,
+   "classes": 36,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 7,
+    "mid": 4,
+    "lo": 1,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 6,
+    "straight": 0,
+    "broadway": 0,
+    "ace_king_high": 0
+   },
+   "index": 3
+  },
+  {
+   "flop": "Jc8c5d",
+   "weight": 0.019547511312217193,
+   "raw_flops": 432,
+   "classes": 36,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 9,
+    "mid": 6,
+    "lo": 3,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 6,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 4
+  },
+  {
+   "flop": "Ac9c5c",
+   "weight": 0.018642533936651582,
+   "raw_flops": 412,
+   "classes": 103,
+   "stratum": "monotone unpaired",
+   "features": {
+    "hi": 12,
+    "mid": 7,
+    "lo": 3,
+    "paired": 0,
+    "trips": 0,
+    "suits": "monotone",
+    "span": 8,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 1
+   },
+   "index": 5
+  },
+  {
+   "flop": "AcJd3h",
+   "weight": 0.018461538461538463,
+   "raw_flops": 408,
+   "classes": 17,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 12,
+    "mid": 9,
+    "lo": 1,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 10,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 1
+   },
+   "index": 6
+  },
+  {
+   "flop": "7c6c4d",
+   "weight": 0.016289592760180997,
+   "raw_flops": 360,
+   "classes": 30,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 5,
+    "mid": 4,
+    "lo": 2,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 3,
+    "straight": 1,
+    "broadway": 0,
+    "ace_king_high": 0
+   },
+   "index": 7
+  },
+  {
+   "flop": "Jc4d2h",
+   "weight": 0.016289592760180997,
+   "raw_flops": 360,
+   "classes": 15,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 9,
+    "mid": 2,
+    "lo": 0,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 9,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 8
+  },
+  {
+   "flop": "JcJd6c",
+   "weight": 0.016289592760180997,
+   "raw_flops": 360,
+   "classes": 30,
+   "stratum": "two-tone paired",
+   "features": {
+    "hi": 9,
+    "mid": 9,
+    "lo": 4,
+    "paired": 1,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 13,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 0
+   },
+   "index": 9
+  },
+  {
+   "flop": "Qc8d6h",
+   "weight": 0.016289592760180997,
+   "raw_flops": 360,
+   "classes": 15,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 10,
+    "mid": 6,
+    "lo": 4,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 6,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 10
+  },
+  {
+   "flop": "8c8d5h",
+   "weight": 0.01574660633484163,
+   "raw_flops": 348,
+   "classes": 29,
+   "stratum": "rainbow paired",
+   "features": {
+    "hi": 6,
+    "mid": 6,
+    "lo": 3,
+    "paired": 1,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 13,
+    "straight": 0,
+    "broadway": 0,
+    "ace_king_high": 0
+   },
+   "index": 11
+  },
+  {
+   "flop": "8c8d5c",
+   "weight": 0.015203619909502263,
+   "raw_flops": 336,
+   "classes": 28,
+   "stratum": "two-tone paired",
+   "features": {
+    "hi": 6,
+    "mid": 6,
+    "lo": 3,
+    "paired": 1,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 13,
+    "straight": 0,
+    "broadway": 0,
+    "ace_king_high": 0
+   },
+   "index": 12
+  },
+  {
+   "flop": "6c3d3h",
+   "weight": 0.014660633484162897,
+   "raw_flops": 324,
+   "classes": 27,
+   "stratum": "rainbow paired",
+   "features": {
+    "hi": 4,
+    "mid": 1,
+    "lo": 1,
+    "paired": 1,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 13,
+    "straight": 0,
+    "broadway": 0,
+    "ace_king_high": 0
+   },
+   "index": 13
+  },
+  {
+   "flop": "AcJc3d",
+   "weight": 0.014660633484162897,
+   "raw_flops": 324,
+   "classes": 27,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 12,
+    "mid": 9,
+    "lo": 1,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 10,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 1
+   },
+   "index": 14
+  },
+  {
+   "flop": "Jc4c2d",
+   "weight": 0.014660633484162897,
+   "raw_flops": 324,
+   "classes": 27,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 9,
+    "mid": 2,
+    "lo": 0,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 9,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 15
+  },
+  {
+   "flop": "Kc8c3d",
+   "weight": 0.014660633484162897,
+   "raw_flops": 324,
+   "classes": 27,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 11,
+    "mid": 6,
+    "lo": 1,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 10,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 1
+   },
+   "index": 16
+  },
+  {
+   "flop": "KcJc6d",
+   "weight": 0.014660633484162897,
+   "raw_flops": 324,
+   "classes": 27,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 11,
+    "mid": 9,
+    "lo": 4,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 7,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 1
+   },
+   "index": 17
+  },
+  {
+   "flop": "Qc8c6d",
+   "weight": 0.014660633484162897,
+   "raw_flops": 324,
+   "classes": 27,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 10,
+    "mid": 6,
+    "lo": 4,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 6,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 18
+  },
+  {
+   "flop": "Tc6c4d",
+   "weight": 0.014660633484162897,
+   "raw_flops": 324,
+   "classes": 27,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 8,
+    "mid": 4,
+    "lo": 2,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 6,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 19
+  },
+  {
+   "flop": "Qc7d3h",
+   "weight": 0.01411764705882353,
+   "raw_flops": 312,
+   "classes": 13,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 10,
+    "mid": 5,
+    "lo": 1,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 9,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 20
+  },
+  {
+   "flop": "6c3c3d",
+   "weight": 0.013574660633484163,
+   "raw_flops": 300,
+   "classes": 25,
+   "stratum": "two-tone paired",
+   "features": {
+    "hi": 4,
+    "mid": 1,
+    "lo": 1,
+    "paired": 1,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 13,
+    "straight": 0,
+    "broadway": 0,
+    "ace_king_high": 0
+   },
+   "index": 21
+  },
+  {
+   "flop": "8c4c2d",
+   "weight": 0.013031674208144797,
+   "raw_flops": 288,
+   "classes": 24,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 6,
+    "mid": 2,
+    "lo": 0,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 6,
+    "straight": 0,
+    "broadway": 0,
+    "ace_king_high": 0
+   },
+   "index": 22
+  },
+  {
+   "flop": "8c6c2d",
+   "weight": 0.013031674208144797,
+   "raw_flops": 288,
+   "classes": 24,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 6,
+    "mid": 4,
+    "lo": 0,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 6,
+    "straight": 0,
+    "broadway": 0,
+    "ace_king_high": 0
+   },
+   "index": 23
+  },
+  {
+   "flop": "9c7c6d",
+   "weight": 0.013031674208144797,
+   "raw_flops": 288,
+   "classes": 24,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 7,
+    "mid": 5,
+    "lo": 4,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 3,
+    "straight": 1,
+    "broadway": 0,
+    "ace_king_high": 0
+   },
+   "index": 24
+  },
+  {
+   "flop": "Ac8c4d",
+   "weight": 0.013031674208144797,
+   "raw_flops": 288,
+   "classes": 24,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 12,
+    "mid": 6,
+    "lo": 2,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 7,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 1
+   },
+   "index": 25
+  },
+  {
+   "flop": "Kc7d3h",
+   "weight": 0.013031674208144797,
+   "raw_flops": 288,
+   "classes": 12,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 11,
+    "mid": 5,
+    "lo": 1,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 10,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 1
+   },
+   "index": 26
+  },
+  {
+   "flop": "KcQdTh",
+   "weight": 0.013031674208144797,
+   "raw_flops": 288,
+   "classes": 12,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 11,
+    "mid": 10,
+    "lo": 8,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 3,
+    "straight": 1,
+    "broadway": 3,
+    "ace_king_high": 1
+   },
+   "index": 27
+  },
+  {
+   "flop": "Qc7c3d",
+   "weight": 0.013031674208144797,
+   "raw_flops": 288,
+   "classes": 24,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 10,
+    "mid": 5,
+    "lo": 1,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 9,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 28
+  },
+  {
+   "flop": "Tc8c3d",
+   "weight": 0.013031674208144797,
+   "raw_flops": 288,
+   "classes": 24,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 8,
+    "mid": 6,
+    "lo": 1,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 7,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 29
+  },
+  {
+   "flop": "Tc8d4h",
+   "weight": 0.013031674208144797,
+   "raw_flops": 288,
+   "classes": 12,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 8,
+    "mid": 6,
+    "lo": 2,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 6,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 30
+  },
+  {
+   "flop": "AcJd8h",
+   "weight": 0.011945701357466063,
+   "raw_flops": 264,
+   "classes": 11,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 12,
+    "mid": 9,
+    "lo": 6,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 6,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 1
+   },
+   "index": 31
+  },
+  {
+   "flop": "Jc8d3h",
+   "weight": 0.011945701357466063,
+   "raw_flops": 264,
+   "classes": 11,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 9,
+    "mid": 6,
+    "lo": 1,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 8,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 32
+  },
+  {
+   "flop": "KcJd5h",
+   "weight": 0.011945701357466063,
+   "raw_flops": 264,
+   "classes": 11,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 11,
+    "mid": 9,
+    "lo": 3,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 8,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 1
+   },
+   "index": 33
+  },
+  {
+   "flop": "JcJd9h",
+   "weight": 0.011402714932126697,
+   "raw_flops": 252,
+   "classes": 21,
+   "stratum": "rainbow paired",
+   "features": {
+    "hi": 9,
+    "mid": 9,
+    "lo": 7,
+    "paired": 1,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 13,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 0
+   },
+   "index": 34
+  },
+  {
+   "flop": "JcTc8d",
+   "weight": 0.011402714932126697,
+   "raw_flops": 252,
+   "classes": 21,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 9,
+    "mid": 8,
+    "lo": 6,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 3,
+    "straight": 1,
+    "broadway": 2,
+    "ace_king_high": 0
+   },
+   "index": 35
+  },
+  {
+   "flop": "Kc7c6d",
+   "weight": 0.011402714932126697,
+   "raw_flops": 252,
+   "classes": 21,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 11,
+    "mid": 5,
+    "lo": 4,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 7,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 1
+   },
+   "index": 36
+  },
+  {
+   "flop": "9c5d2h",
+   "weight": 0.01085972850678733,
+   "raw_flops": 240,
+   "classes": 10,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 7,
+    "mid": 3,
+    "lo": 0,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 7,
+    "straight": 0,
+    "broadway": 0,
+    "ace_king_high": 0
+   },
+   "index": 37
+  },
+  {
+   "flop": "Tc8d7h",
+   "weight": 0.01085972850678733,
+   "raw_flops": 240,
+   "classes": 10,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 8,
+    "mid": 6,
+    "lo": 5,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 3,
+    "straight": 1,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 38
+  },
+  {
+   "flop": "6c4c2d",
+   "weight": 0.009773755656108597,
+   "raw_flops": 216,
+   "classes": 18,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 4,
+    "mid": 2,
+    "lo": 0,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 4,
+    "straight": 1,
+    "broadway": 0,
+    "ace_king_high": 0
+   },
+   "index": 39
+  },
+  {
+   "flop": "Ac4c3d",
+   "weight": 0.009773755656108597,
+   "raw_flops": 216,
+   "classes": 18,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 12,
+    "mid": 2,
+    "lo": 1,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 3,
+    "straight": 1,
+    "broadway": 1,
+    "ace_king_high": 1
+   },
+   "index": 40
+  },
+  {
+   "flop": "Ac6c3d",
+   "weight": 0.009773755656108597,
+   "raw_flops": 216,
+   "classes": 18,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 12,
+    "mid": 4,
+    "lo": 1,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 5,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 1
+   },
+   "index": 41
+  },
+  {
+   "flop": "AcJd7h",
+   "weight": 0.009773755656108597,
+   "raw_flops": 216,
+   "classes": 9,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 12,
+    "mid": 9,
+    "lo": 5,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 7,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 1
+   },
+   "index": 42
+  },
+  {
+   "flop": "AcTc5d",
+   "weight": 0.009773755656108597,
+   "raw_flops": 216,
+   "classes": 18,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 12,
+    "mid": 8,
+    "lo": 3,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 9,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 1
+   },
+   "index": 43
+  },
+  {
+   "flop": "Jc4d4h",
+   "weight": 0.009773755656108597,
+   "raw_flops": 216,
+   "classes": 18,
+   "stratum": "rainbow paired",
+   "features": {
+    "hi": 9,
+    "mid": 2,
+    "lo": 2,
+    "paired": 1,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 13,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 44
+  },
+  {
+   "flop": "Kc5c3d",
+   "weight": 0.009773755656108597,
+   "raw_flops": 216,
+   "classes": 18,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 11,
+    "mid": 3,
+    "lo": 1,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 10,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 1
+   },
+   "index": 45
+  },
+  {
+   "flop": "KcKdJh",
+   "weight": 0.009773755656108597,
+   "raw_flops": 216,
+   "classes": 18,
+   "stratum": "rainbow paired",
+   "features": {
+    "hi": 11,
+    "mid": 11,
+    "lo": 9,
+    "paired": 1,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 13,
+    "straight": 0,
+    "broadway": 3,
+    "ace_king_high": 1
+   },
+   "index": 46
+  },
+  {
+   "flop": "QcTc4d",
+   "weight": 0.009773755656108597,
+   "raw_flops": 216,
+   "classes": 18,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 10,
+    "mid": 8,
+    "lo": 2,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 8,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 0
+   },
+   "index": 47
+  },
+  {
+   "flop": "QcTc6d",
+   "weight": 0.009773755656108597,
+   "raw_flops": 216,
+   "classes": 18,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 10,
+    "mid": 8,
+    "lo": 4,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 6,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 0
+   },
+   "index": 48
+  },
+  {
+   "flop": "QcTd3h",
+   "weight": 0.009773755656108597,
+   "raw_flops": 216,
+   "classes": 9,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 10,
+    "mid": 8,
+    "lo": 1,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 9,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 0
+   },
+   "index": 49
+  },
+  {
+   "flop": "7c5d2h",
+   "weight": 0.008687782805429865,
+   "raw_flops": 192,
+   "classes": 8,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 5,
+    "mid": 3,
+    "lo": 0,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 5,
+    "straight": 0,
+    "broadway": 0,
+    "ace_king_high": 0
+   },
+   "index": 50
+  },
+  {
+   "flop": "7c5d3h",
+   "weight": 0.008687782805429865,
+   "raw_flops": 192,
+   "classes": 8,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 5,
+    "mid": 3,
+    "lo": 1,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 4,
+    "straight": 1,
+    "broadway": 0,
+    "ace_king_high": 0
+   },
+   "index": 51
+  },
+  {
+   "flop": "8c6d5h",
+   "weight": 0.008687782805429865,
+   "raw_flops": 192,
+   "classes": 8,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 6,
+    "mid": 4,
+    "lo": 3,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 3,
+    "straight": 1,
+    "broadway": 0,
+    "ace_king_high": 0
+   },
+   "index": 52
+  },
+  {
+   "flop": "Kc5c5d",
+   "weight": 0.008687782805429865,
+   "raw_flops": 192,
+   "classes": 16,
+   "stratum": "two-tone paired",
+   "features": {
+    "hi": 11,
+    "mid": 3,
+    "lo": 3,
+    "paired": 1,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 13,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 1
+   },
+   "index": 53
+  },
+  {
+   "flop": "Kc5d5h",
+   "weight": 0.008687782805429865,
+   "raw_flops": 192,
+   "classes": 16,
+   "stratum": "rainbow paired",
+   "features": {
+    "hi": 11,
+    "mid": 3,
+    "lo": 3,
+    "paired": 1,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 13,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 1
+   },
+   "index": 54
+  },
+  {
+   "flop": "KcKdJc",
+   "weight": 0.008687782805429865,
+   "raw_flops": 192,
+   "classes": 16,
+   "stratum": "two-tone paired",
+   "features": {
+    "hi": 11,
+    "mid": 11,
+    "lo": 9,
+    "paired": 1,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 13,
+    "straight": 0,
+    "broadway": 3,
+    "ace_king_high": 1
+   },
+   "index": 55
+  },
+  {
+   "flop": "QcTd6h",
+   "weight": 0.008687782805429865,
+   "raw_flops": 192,
+   "classes": 8,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 10,
+    "mid": 8,
+    "lo": 4,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 6,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 0
+   },
+   "index": 56
+  },
+  {
+   "flop": "QcTd9h",
+   "weight": 0.008687782805429865,
+   "raw_flops": 192,
+   "classes": 8,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 10,
+    "mid": 8,
+    "lo": 7,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 3,
+    "straight": 1,
+    "broadway": 2,
+    "ace_king_high": 0
+   },
+   "index": 57
+  },
+  {
+   "flop": "Tc6d4h",
+   "weight": 0.008687782805429865,
+   "raw_flops": 192,
+   "classes": 8,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 8,
+    "mid": 4,
+    "lo": 2,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 6,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 58
+  },
+  {
+   "flop": "AcKc6d",
+   "weight": 0.008144796380090498,
+   "raw_flops": 180,
+   "classes": 15,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 12,
+    "mid": 11,
+    "lo": 4,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 8,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 1
+   },
+   "index": 59
+  },
+  {
+   "flop": "AcQcTd",
+   "weight": 0.008144796380090498,
+   "raw_flops": 180,
+   "classes": 15,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 12,
+    "mid": 10,
+    "lo": 8,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 4,
+    "straight": 1,
+    "broadway": 3,
+    "ace_king_high": 1
+   },
+   "index": 60
+  },
+  {
+   "flop": "Jc5c2d",
+   "weight": 0.008144796380090498,
+   "raw_flops": 180,
+   "classes": 15,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 9,
+    "mid": 3,
+    "lo": 0,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 9,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 61
+  },
+  {
+   "flop": "Jc6c2d",
+   "weight": 0.008144796380090498,
+   "raw_flops": 180,
+   "classes": 15,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 9,
+    "mid": 4,
+    "lo": 0,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 9,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 62
+  },
+  {
+   "flop": "Jc8c3d",
+   "weight": 0.008144796380090498,
+   "raw_flops": 180,
+   "classes": 15,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 9,
+    "mid": 6,
+    "lo": 1,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 8,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 63
+  },
+  {
+   "flop": "JcJd4h",
+   "weight": 0.008144796380090498,
+   "raw_flops": 180,
+   "classes": 15,
+   "stratum": "rainbow paired",
+   "features": {
+    "hi": 9,
+    "mid": 9,
+    "lo": 2,
+    "paired": 1,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 13,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 0
+   },
+   "index": 64
+  },
+  {
+   "flop": "5c4d2h",
+   "weight": 0.007601809954751132,
+   "raw_flops": 168,
+   "classes": 7,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 3,
+    "mid": 2,
+    "lo": 0,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 3,
+    "straight": 1,
+    "broadway": 0,
+    "ace_king_high": 0
+   },
+   "index": 65
+  },
+  {
+   "flop": "Ac6d3h",
+   "weight": 0.007601809954751132,
+   "raw_flops": 168,
+   "classes": 7,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 12,
+    "mid": 4,
+    "lo": 1,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 5,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 1
+   },
+   "index": 66
+  },
+  {
+   "flop": "Ac9d3h",
+   "weight": 0.007601809954751132,
+   "raw_flops": 168,
+   "classes": 7,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 12,
+    "mid": 7,
+    "lo": 1,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 8,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 1
+   },
+   "index": 67
+  },
+  {
+   "flop": "Jc7c7d",
+   "weight": 0.007601809954751132,
+   "raw_flops": 168,
+   "classes": 14,
+   "stratum": "two-tone paired",
+   "features": {
+    "hi": 9,
+    "mid": 5,
+    "lo": 5,
+    "paired": 1,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 13,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 68
+  },
+  {
+   "flop": "KcKd5c",
+   "weight": 0.007601809954751132,
+   "raw_flops": 168,
+   "classes": 14,
+   "stratum": "two-tone paired",
+   "features": {
+    "hi": 11,
+    "mid": 11,
+    "lo": 3,
+    "paired": 1,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 13,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 1
+   },
+   "index": 69
+  },
+  {
+   "flop": "Tc3c3d",
+   "weight": 0.007058823529411765,
+   "raw_flops": 156,
+   "classes": 13,
+   "stratum": "two-tone paired",
+   "features": {
+    "hi": 8,
+    "mid": 1,
+    "lo": 1,
+    "paired": 1,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 13,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 70
+  },
+  {
+   "flop": "5c3c2d",
+   "weight": 0.006515837104072398,
+   "raw_flops": 144,
+   "classes": 12,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 3,
+    "mid": 1,
+    "lo": 0,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 3,
+    "straight": 1,
+    "broadway": 0,
+    "ace_king_high": 0
+   },
+   "index": 71
+  },
+  {
+   "flop": "Ac9c7d",
+   "weight": 0.006515837104072398,
+   "raw_flops": 144,
+   "classes": 12,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 12,
+    "mid": 7,
+    "lo": 5,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 7,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 1
+   },
+   "index": 72
+  },
+  {
+   "flop": "AcKc3d",
+   "weight": 0.006515837104072398,
+   "raw_flops": 144,
+   "classes": 12,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 12,
+    "mid": 11,
+    "lo": 1,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 11,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 1
+   },
+   "index": 73
+  },
+  {
+   "flop": "AcQcJd",
+   "weight": 0.006515837104072398,
+   "raw_flops": 144,
+   "classes": 12,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 12,
+    "mid": 10,
+    "lo": 9,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 3,
+    "straight": 1,
+    "broadway": 3,
+    "ace_king_high": 1
+   },
+   "index": 74
+  },
+  {
+   "flop": "Kc9c7d",
+   "weight": 0.006515837104072398,
+   "raw_flops": 144,
+   "classes": 12,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 11,
+    "mid": 7,
+    "lo": 5,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 6,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 1
+   },
+   "index": 75
+  },
+  {
+   "flop": "KcKd4h",
+   "weight": 0.006515837104072398,
+   "raw_flops": 144,
+   "classes": 12,
+   "stratum": "rainbow paired",
+   "features": {
+    "hi": 11,
+    "mid": 11,
+    "lo": 2,
+    "paired": 1,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 13,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 1
+   },
+   "index": 76
+  },
+  {
+   "flop": "KcQc2d",
+   "weight": 0.006515837104072398,
+   "raw_flops": 144,
+   "classes": 12,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 11,
+    "mid": 10,
+    "lo": 0,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 11,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 1
+   },
+   "index": 77
+  },
+  {
+   "flop": "Qc8c4d",
+   "weight": 0.006515837104072398,
+   "raw_flops": 144,
+   "classes": 12,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 10,
+    "mid": 6,
+    "lo": 2,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 8,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 78
+  },
+  {
+   "flop": "Tc8c6d",
+   "weight": 0.006515837104072398,
+   "raw_flops": 144,
+   "classes": 12,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 8,
+    "mid": 6,
+    "lo": 4,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 4,
+    "straight": 1,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 79
+  },
+  {
+   "flop": "9c7d2h",
+   "weight": 0.005429864253393665,
+   "raw_flops": 120,
+   "classes": 5,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 7,
+    "mid": 5,
+    "lo": 0,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 7,
+    "straight": 0,
+    "broadway": 0,
+    "ace_king_high": 0
+   },
+   "index": 80
+  },
+  {
+   "flop": "9c7d4h",
+   "weight": 0.005429864253393665,
+   "raw_flops": 120,
+   "classes": 5,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 7,
+    "mid": 5,
+    "lo": 2,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 5,
+    "straight": 0,
+    "broadway": 0,
+    "ace_king_high": 0
+   },
+   "index": 81
+  },
+  {
+   "flop": "9c8d6h",
+   "weight": 0.005429864253393665,
+   "raw_flops": 120,
+   "classes": 5,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 7,
+    "mid": 6,
+    "lo": 4,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 3,
+    "straight": 1,
+    "broadway": 0,
+    "ace_king_high": 0
+   },
+   "index": 82
+  },
+  {
+   "flop": "AcKd5h",
+   "weight": 0.005429864253393665,
+   "raw_flops": 120,
+   "classes": 5,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 12,
+    "mid": 11,
+    "lo": 3,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 9,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 1
+   },
+   "index": 83
+  },
+  {
+   "flop": "Kc4d2h",
+   "weight": 0.005429864253393665,
+   "raw_flops": 120,
+   "classes": 5,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 11,
+    "mid": 2,
+    "lo": 0,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 11,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 1
+   },
+   "index": 84
+  },
+  {
+   "flop": "Ac9c2d",
+   "weight": 0.004886877828054298,
+   "raw_flops": 108,
+   "classes": 9,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 12,
+    "mid": 7,
+    "lo": 0,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 8,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 1
+   },
+   "index": 85
+  },
+  {
+   "flop": "Jc9c8d",
+   "weight": 0.004886877828054298,
+   "raw_flops": 108,
+   "classes": 9,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 9,
+    "mid": 7,
+    "lo": 6,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 3,
+    "straight": 1,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 86
+  },
+  {
+   "flop": "Kc4c2d",
+   "weight": 0.004886877828054298,
+   "raw_flops": 108,
+   "classes": 9,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 11,
+    "mid": 2,
+    "lo": 0,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 11,
+    "straight": 0,
+    "broadway": 1,
+    "ace_king_high": 1
+   },
+   "index": 87
+  },
+  {
+   "flop": "KcJc9d",
+   "weight": 0.004886877828054298,
+   "raw_flops": 108,
+   "classes": 9,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 11,
+    "mid": 9,
+    "lo": 7,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 4,
+    "straight": 1,
+    "broadway": 2,
+    "ace_king_high": 1
+   },
+   "index": 88
+  },
+  {
+   "flop": "QcTc2d",
+   "weight": 0.004886877828054298,
+   "raw_flops": 108,
+   "classes": 9,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 10,
+    "mid": 8,
+    "lo": 0,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 10,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 0
+   },
+   "index": 89
+  },
+  {
+   "flop": "Tc9c7d",
+   "weight": 0.004886877828054298,
+   "raw_flops": 108,
+   "classes": 9,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 8,
+    "mid": 7,
+    "lo": 5,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 3,
+    "straight": 1,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 90
+  },
+  {
+   "flop": "7c5c4c",
+   "weight": 0.004705882352941176,
+   "raw_flops": 104,
+   "classes": 26,
+   "stratum": "monotone unpaired",
+   "features": {
+    "hi": 5,
+    "mid": 3,
+    "lo": 2,
+    "paired": 0,
+    "trips": 0,
+    "suits": "monotone",
+    "span": 3,
+    "straight": 1,
+    "broadway": 0,
+    "ace_king_high": 0
+   },
+   "index": 91
+  },
+  {
+   "flop": "Jc9c8c",
+   "weight": 0.0036199095022624436,
+   "raw_flops": 80,
+   "classes": 20,
+   "stratum": "monotone unpaired",
+   "features": {
+    "hi": 9,
+    "mid": 7,
+    "lo": 6,
+    "paired": 0,
+    "trips": 0,
+    "suits": "monotone",
+    "span": 3,
+    "straight": 1,
+    "broadway": 1,
+    "ace_king_high": 0
+   },
+   "index": 92
+  },
+  {
+   "flop": "Ac4d2h",
+   "weight": 0.003257918552036199,
+   "raw_flops": 72,
+   "classes": 3,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 12,
+    "mid": 2,
+    "lo": 0,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 3,
+    "straight": 1,
+    "broadway": 1,
+    "ace_king_high": 1
+   },
+   "index": 93
+  },
+  {
+   "flop": "Ac5d3h",
+   "weight": 0.003257918552036199,
+   "raw_flops": 72,
+   "classes": 3,
+   "stratum": "rainbow unpaired",
+   "features": {
+    "hi": 12,
+    "mid": 3,
+    "lo": 1,
+    "paired": 0,
+    "trips": 0,
+    "suits": "rainbow",
+    "span": 4,
+    "straight": 1,
+    "broadway": 1,
+    "ace_king_high": 1
+   },
+   "index": 94
+  },
+  {
+   "flop": "KcTc2d",
+   "weight": 0.003257918552036199,
+   "raw_flops": 72,
+   "classes": 6,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 11,
+    "mid": 8,
+    "lo": 0,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 11,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 1
+   },
+   "index": 95
+  },
+  {
+   "flop": "KcTc9c",
+   "weight": 0.003257918552036199,
+   "raw_flops": 72,
+   "classes": 18,
+   "stratum": "monotone unpaired",
+   "features": {
+    "hi": 11,
+    "mid": 8,
+    "lo": 7,
+    "paired": 0,
+    "trips": 0,
+    "suits": "monotone",
+    "span": 4,
+    "straight": 1,
+    "broadway": 2,
+    "ace_king_high": 1
+   },
+   "index": 96
+  },
+  {
+   "flop": "QcTc7d",
+   "weight": 0.003257918552036199,
+   "raw_flops": 72,
+   "classes": 6,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 10,
+    "mid": 8,
+    "lo": 5,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 5,
+    "straight": 0,
+    "broadway": 2,
+    "ace_king_high": 0
+   },
+   "index": 97
+  },
+  {
+   "flop": "8c8d8h",
+   "weight": 0.002352941176470588,
+   "raw_flops": 52,
+   "classes": 13,
+   "stratum": "rainbow trips",
+   "features": {
+    "hi": 6,
+    "mid": 6,
+    "lo": 6,
+    "paired": 1,
+    "trips": 1,
+    "suits": "rainbow",
+    "span": 13,
+    "straight": 0,
+    "broadway": 0,
+    "ace_king_high": 0
+   },
+   "index": 98
+  },
+  {
+   "flop": "QcJcTd",
+   "weight": 0.0016289592760180996,
+   "raw_flops": 36,
+   "classes": 3,
+   "stratum": "two-tone unpaired",
+   "features": {
+    "hi": 10,
+    "mid": 9,
+    "lo": 8,
+    "paired": 0,
+    "trips": 0,
+    "suits": "two-tone",
+    "span": 2,
+    "straight": 1,
+    "broadway": 3,
+    "ace_king_high": 0
+   },
+   "index": 99
+  }
+ ]
+}
