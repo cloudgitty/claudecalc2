@@ -22,3 +22,8 @@ solves are recomputed here.
 - Postflop throughput (stand-in ranges, BTN v BB SRP, 197bb behind): 33,126 nodes, 166 MB,
   ~1 s/iteration on one core, 6.3% of pot after 60 iterations (100bb: ~3%) - deeper trees need
   more iterations.
+- Stage 1 done: exact equity table 22 min (85 core-min).
+- Stage 3 done (01:29): fixed-R preflop solve, 3,000 iterations, worst 0.051 bb/100. RFI UTG 9.9
+  UTG1 11.7 LJ 14.3 HJ 18.0 CO 23.8 BTN 34.3 SB 32.3 (+23.0 limp). Spot SPRs: SRP 26-30, 3-bet
+  pots IP 9.0-9.8 / OOP 6.1, 4-bet pots 2.2-3.4 (as the task expects).
+- Stage 4 running: calibration solves 14 spots x 12 flops on the stage-3 ranges.
