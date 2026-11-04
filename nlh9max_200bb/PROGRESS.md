@@ -36,3 +36,10 @@ solves are recomputed here.
   R (stage-3 ranges): SRP IP opener 1.15-1.20, BB caller 0.71-0.77, rake 19% of the flop pot;
   3-bet pots rake 12-15%; 4-bet pots at the 5bb cap (6.7-9.1% of the pot).
 - Preflop <-> R rounds n1-n5 running (pipeline).
+- Rounds (RFI UTG/UTG1/LJ/HJ/CO/BTN/SB): n1 11.1/12.5/14.1/20.4/26.9/36.2/47.8,
+  n2 11.0/11.5/13.7/17.1/25.7/37.4/46.2, n3 10.9/11.8/13.6/17.6/25.2/35.5/49.0,
+  n4 11.7/12.7/17.0/20.9/23.8/35.2/52.9, n5 11.8/12.9/16.6/20.0/24.4/35.0/51.4.
+  Criterion (<= 0.5 points) not met; n4 jumped 3-4 points for LJ/HJ/SB, n5 moved <= 1.5.
+- Stage 6 done (05:02): final preflop solve with the mean R of n3-n5: 11.4/12.7/14.8/19.3/24.5/
+  35.3/51.5 (SB limp 3.8).
+- Stage 7 running: 12 reachable spots x 100 flops = 1,200 solves (344 done at 05:55).
