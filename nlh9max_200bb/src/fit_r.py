@@ -64,7 +64,14 @@ def fit_spot(name, info, solves_dir, flops, E, P):
     for fpath in files:
         idx = int(os.path.basename(fpath).split("_")[0])
         fw = flops[idx]["weight"]
-        s = read_solve(fpath)
+        try:
+            s = read_solve(fpath)
+        except json.JSONDecodeError:
+            print(f"{name}: skipped {os.path.basename(fpath)} (non-finite solve result)")
+            continue
+        if not all(np.isfinite(s["meta"]["exploitability_pct"])):
+            print(f"{name}: skipped {os.path.basename(fpath)} (non-finite solve result)")
+            continue
         m = card_mask(flops[idx]["flop"])
         expl.append(max(s["meta"]["exploitability_pct"]))
         fw_tot += fw
