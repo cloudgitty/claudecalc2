@@ -30,3 +30,9 @@ Everything else (trees, R, all solves) is computed at 300bb.
   no divergence. 2.9 core-hours; SRP solves need up to 650 iterations (SB v BB 266 s, BTN v BB
   160 s per flop). **Budget: full 100-flop pass ~24 core-hours (~6 h); all 100 flops kept.**
 - Rounds: n1 14.0/15.5/17.5/23.1/27.3/40.8/55.2, n2 10.9/14.0/17.0/17.8/20.9/36.8/45.1.
+- Container restarts at ~00:08 and ~02:32 UTC (with a watcher running); the pipeline resumed both
+  times from the last finished step.
+- Rounds: n3 9.5/11.8/15.3/19.1/20.4/34.2/39.3, n4 10.1/12.2/15.4/18.4/20.1/34.6/41.8,
+  n5 10.1/11.6/13.8/18.1/21.9/41.0/34.1. Criterion (<= 0.5 points) not met: n3 -> n4 was within
+  0.7 for UTG-BTN, n4 -> n5 moved BTN +6.4 and SB -7.7. srp_UTG_vs_BTN empty from n3 on.
+- Stage 6 running: final preflop solve with the mean R of n3-n5.
