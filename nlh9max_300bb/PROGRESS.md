@@ -36,3 +36,8 @@ Everything else (trees, R, all solves) is computed at 300bb.
   n5 10.1/11.6/13.8/18.1/21.9/41.0/34.1. Criterion (<= 0.5 points) not met: n3 -> n4 was within
   0.7 for UTG-BTN, n4 -> n5 moved BTN +6.4 and SB -7.7. srp_UTG_vs_BTN empty from n3 on.
 - Stage 6 running: final preflop solve with the mean R of n3-n5.
+- Stage 6 done (03:08): final preflop solve (mean R of n3-n5), 5,000 iterations, worst 0.025
+  bb/100. RFI 10.0/11.8/14.8/18.4/20.8/38.2, SB 38.7 (+15.8 limp). BB vs BTN open: call 14.7,
+  3-bet 15.6 (200bb: 3.2 / 18.7) - deep stacks bring back flatting. Spot SPRs: SRP 39.6-45.7,
+  3-bet 9.3-14.9, 4-bet 3.5-5.3.
+- Stage 7 running: 12 reachable spots x 100 flops (126 of 1,200 done at 04:30).
