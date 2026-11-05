@@ -23,3 +23,10 @@ Everything else (trees, R, all solves) is computed at 300bb.
 - Stage 2: rake unit tests pass.
 - Postflop throughput (stand-in ranges, BTN v BB SRP, 297bb behind): 33,126 nodes, 166 MB, ~0.8 s
   per iteration, 9.6% of pot after 60 iterations (200bb: 6.3%).
+- 19:22-22:02 container down (no watcher running, session looked idle); pipeline resumed from the
+  saved preflop state at iteration 1,000.
+- Stage 3 done (22:14): fixed-R solve, RFI 10.6/12.1/14.5/17.9/24.0/34.7/33.1 (SB limp 21.5).
+- Stage 4-5 done (22:57): 180 calibration solves (all 15 spots reachable), all <= 0.5% of pot,
+  no divergence. 2.9 core-hours; SRP solves need up to 650 iterations (SB v BB 266 s, BTN v BB
+  160 s per flop). **Budget: full 100-flop pass ~24 core-hours (~6 h); all 100 flops kept.**
+- Rounds: n1 14.0/15.5/17.5/23.1/27.3/40.8/55.2, n2 10.9/14.0/17.0/17.8/20.9/36.8/45.1.
