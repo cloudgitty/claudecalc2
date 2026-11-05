@@ -41,3 +41,6 @@ Everything else (trees, R, all solves) is computed at 300bb.
   3-bet 15.6 (200bb: 3.2 / 18.7) - deep stacks bring back flatting. Spot SPRs: SRP 39.6-45.7,
   3-bet 9.3-14.9, 4-bet 3.5-5.3.
 - Stage 7 running: 12 reachable spots x 100 flops (126 of 1,200 done at 04:30).
+- Stage 7 done (08:59): 1,200 solves (12 reachable spots x 100 flops), all <= 0.500% of pot,
+  no divergence (the guard never fired). Not reached: srp BTN v SB, CO v BTN, UTG v BTN.
+- Rake variants running (rake 0, cap 3bb, rake 5%; three R rounds each).
