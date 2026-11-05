@@ -44,3 +44,5 @@ Everything else (trees, R, all solves) is computed at 300bb.
 - Stage 7 done (08:59): 1,200 solves (12 reachable spots x 100 flops), all <= 0.500% of pot,
   no divergence (the guard never fired). Not reached: srp BTN v SB, CO v BTN, UTG v BTN.
 - Rake variants running (rake 0, cap 3bb, rake 5%; three R rounds each).
+- Rake-free control done (13:58, 3 rounds, ~1.6 h each): RFI 10.4/11.6/14.0/16.3/22.5/28.2,
+  SB 50.7 (+15.3 limp). Cap 3bb and rake 5% variants running (~10 h).
