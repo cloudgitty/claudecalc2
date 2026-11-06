@@ -221,11 +221,11 @@ def main():
             os.makedirs("work2/start", exist_ok=True)
             if not done("work2/start0/summary.json"):
                 py("rmodel.py", "fixed work2 work2/start0/rfile.bin", out="work2/start0/rmodel.txt")
-                preflop("work2/start0", plan["final_iterations"], "work2/start0/rfile.bin")
+                preflop("work2/start0", plan.get("start_iterations", 2000), "work2/start0/rfile.bin")
             fit = plan.get("start_fit") or next(f for f in ("work/p0/fit.json", "work/final/fit.json",
                                                              "work/s4/fit.json") if os.path.exists(f))
             py("rmodel.py", f"fitted work2 {fit} work2/start0/pre work2/start/rfile.bin", out="work2/start/rmodel.txt")
-            preflop("work2/start", plan["final_iterations"], "work2/start/rfile.bin", "work2/start0/pre.state")
+            preflop("work2/start", plan.get("start_iterations", 2000), "work2/start/rfile.bin", "work2/start0/pre.state")
             keep("work2/start", "start", milestone=True)
             commit(f"{os.path.basename(os.getcwd())}: start solve on the new preflop tree")
             log(f"start solve on the new tree done (R from {fit})")
