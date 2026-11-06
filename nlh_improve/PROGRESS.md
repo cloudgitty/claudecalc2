@@ -31,3 +31,9 @@
   convergence log, river error).
 - Phase 0, 100bb: RFI 9.3/11.5/14.7/16.2/25.1/37.7/46.1 -> 9.7/12.6/15.3/16.9/24.7/39.8/52.4
   (R refit on all 100 flops, 50/50 with the final R); SB limp 4.1 -> 0.7.
+- Phase 0 done (11:43). RFI UTG/UTG1/LJ/HJ/CO/BTN/SB, final -> refit on all 100 flops:
+  200bb 11.4/12.7/14.8/19.3/24.5/35.3/51.5 -> 11.2/12.9/16.7/20.1/25.3/34.1/53.7;
+  300bb 10.0/11.8/14.8/18.4/20.8/38.2/38.7 -> 10.6/13.4/16.7/18.4/22.2/38.4/44.0 (SB limp 15.8 -> 0.1).
+  Moves are of the size of the old loops' noise. Kept as interim results (work/p0 in each build),
+  not swapped into the delivered files: the stored postflop strategies belong to the old ranges.
+- Phase B measurements running.
