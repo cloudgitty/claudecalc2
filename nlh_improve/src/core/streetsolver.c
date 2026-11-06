@@ -605,22 +605,24 @@ static int build_decision(ss_solver *S, int64_t idx, const BuildState *bs)
     double pot_now = bs->pot_start + bs->inv[0] + bs->inv[1];
     Action acts[16];
     int na = 0;
+    int riv = c->river_reduced && bs->street_len == 5;
 
     if (facing <= mine + 1e-12) {
         acts[na].act = SS_ACT_CHECK; acts[na].amount = mine; na++;
         int donk = c->num_donk_sizes > 0 && idx == 0;   /* player 0's first decision = the root */
         int nb = donk ? c->num_donk_sizes : c->num_bet_sizes;
         const double *bsz = donk ? c->donk_sizes : c->bet_sizes;
+        if (riv) { nb = 1; bsz = &c->river_bet_frac; }
         for (int i = 0; i < nb; i++) {
             double amt = sized(c, bsz[i] * pot_now, bs->stack, bs->pot_start);
             add_action(acts, &na, SS_ACT_BET, amt, bs->stack);
             if (deep_allin(c, bs, amt, mine)) add_action(acts, &na, SS_ACT_ALLIN, bs->stack, bs->stack);
         }
-        if (c->allow_allin && !c->allin_raise_only && !donk) add_action(acts, &na, SS_ACT_ALLIN, bs->stack, bs->stack);
+        if (c->allow_allin && (!c->allin_raise_only || riv) && !donk) add_action(acts, &na, SS_ACT_ALLIN, bs->stack, bs->stack);
     } else {
         acts[na].act = SS_ACT_FOLD; acts[na].amount = mine; na++;
         acts[na].act = SS_ACT_CALL; acts[na].amount = facing; na++;
-        if (facing < bs->stack - 1e-9) {
+        if (facing < bs->stack - 1e-9 && !riv) {
             if (bs->raises < c->max_raises) {
                 double amt = sized(c, c->raise_multiple * facing, bs->stack, bs->pot_start);
                 add_action(acts, &na, SS_ACT_RAISE, amt, bs->stack);

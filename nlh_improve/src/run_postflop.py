@@ -5,7 +5,7 @@ usage: python3 src/run_postflop.py <ranges_dir> <out_dir> <flops: all|calib|i,j,
 Ranges and pot / stack / donk flag come from <ranges_dir>/spots.json (src/spots.py).
 Each solve writes <out_dir>/<spot>/<flop index>_<flop>.bin and .json (src/tools/postflop.c);
 finished solves are skipped, so the command can be re-run after a restart.
-Environment RAKE_PCT / RAKE_CAP override the rake (control and sensitivity runs); RIVER=1 solves
+Environment RAKE_PCT / RAKE_CAP override the rake (control and sensitivity runs); RIVER=1 solves (RIVER_REDUCED=<pot fraction>: one river bet size + all-in, no river raises)
 flop to river instead of ending at the turn; CKPT_S sets the checkpoint interval (default 600 s);
 MEM_MB sets the per-solve memory limit. Raises per street and the deep all-in rule come from the
 config (postflop_max_raises, postflop_allin_extra_frac).
@@ -39,6 +39,8 @@ def main():
              f"allin_extra={cfg.get('postflop_allin_extra_frac', 0.0)}",
              f"turnend={0 if os.environ.get('RIVER') == '1' else 1}",
              f"ckpt={os.environ.get('CKPT_S', '600')}"]
+    if os.environ.get("RIVER") == "1" and os.environ.get("RIVER_REDUCED"):
+        extra.append(f"river_reduced={os.environ['RIVER_REDUCED']}")
     if os.environ.get("MEM_MB"):
         extra.append(f"mem_mb={os.environ['MEM_MB']}")
     spots = json.load(open(os.path.join(rdir, "spots.json")))

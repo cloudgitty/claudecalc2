@@ -73,6 +73,10 @@ typedef struct {
     int num_donk_sizes;
     double donk_sizes[SS_MAX_BET_SIZES];
     int end_after_turn;
+    /* river_reduced (improvement item 8): on the river only one bet size (river_bet_frac x pot)
+       plus all-in, and facing a river bet only fold or call (no raises, no all-in raise) */
+    int river_reduced;
+    double river_bet_frac;
     double rake_pct, rake_cap;
 
     /* Payoffs. ICM: icm_stacks are every player's chips behind at the start of the

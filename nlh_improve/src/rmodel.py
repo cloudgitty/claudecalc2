@@ -136,13 +136,13 @@ def fitted(work, cfg, fitp, prefix, out):
         if not corr:
             return np.ones(len(buckets))
         g = corr["groups"]
-        key = f"{PT.get(ptype, 'srp')}|{int(ip_)}|{int(ag_)}"
-        if key not in g:
-            alt = [k for k in g if k.startswith(f"{PT.get(ptype, 'srp')}|{int(ip_)}|")] or \
-                  [k for k in g if k.split("|")[1] == str(int(ip_))]
-            if not alt:
-                return np.ones(len(buckets))
-            key = alt[0]
+        # nearest pot type with river solves (4-bet and 5-bet pots use the 3-bet groups, limped pots
+        # the single-raised ones), same position and aggressor role; then same position only
+        pts = sorted(PT, key=lambda q: (abs(q - ptype), -q))
+        cand = [f"{PT[q]}|{int(ip_)}|{int(ag_)}" for q in pts] + [f"{PT[q]}|{int(ip_)}|{a}" for q in pts for a in (0, 1)]
+        key = next((k for k in cand if k in g), None)
+        if key is None:
+            return np.ones(len(buckets))
         return np.array(g[key])[np.clip(buckets, 0, len(g[key]) - 1)]
     rake_pts.sort()
     pots = np.array([p for p, _ in rake_pts])

@@ -11,7 +11,8 @@ checkpoints): fit.json, rfile.bin, the preflop strategy/EV/log and progress line
 
 Steps
  0 tree from config + plan options; config2.json written
- 1 start ranges: the build's final preflop solution (or a cold fixed-R solve if absent)
+ 1 start ranges: the build's final preflop solution; on a new tree a cold fixed-prior solve, then
+   one with R from the build's last fit
  2 river correction: turn-end and river solves on `river_flops` flops for every spot,
    fit both, src/river_corr.py
  3 loop rounds r1..: spots -> calibration solves (calib_flops, more for the slow spots) -> fit ->
@@ -121,14 +122,16 @@ def calib_flops(plan, spot):
     return sorted({int(i * step) for i in range(n)})
 
 
-def solve_calib(plan, ranges, out, rake_env, flops_override=None):
+def solve_calib(plan, ranges, out, rake_env, flops_override=None, only=None, jobs=4):
     spots = json.load(open(f"{ranges}/spots.json"))
     groups = {}
     for name in spots:
+        if only and name not in only:
+            continue
         fl = flops_override or calib_flops(plan, name)
         groups.setdefault(tuple(fl), []).append(name)
     for fl, names in groups.items():
-        py("run_postflop.py", f"{ranges} {out} {','.join(map(str, fl))} {','.join(names)} 4",
+        py("run_postflop.py", f"{ranges} {out} {','.join(map(str, fl))} {','.join(names)} {jobs}",
            env=rake_env, out=f"{out}.log")
 
 
@@ -209,16 +212,35 @@ def main():
         log(f"tree: {open('work2/tree.txt.log').readline().strip()}")
     os.environ["NLH_CONFIG"] = "work2/config2.json"
     os.environ["NLH_TREE"] = "work2/tree.json"
-    # 1: start ranges from the build's final solution
+    # 1: start ranges. Same tree as the build: its final solution. A new (larger) tree: a cold solve
+    #    with the fixed priors, then one with R from the build's last fit (Phase 0 refit if present)
     start = "work/final/pre"
+    if open("work2/tree.txt").read() != open("work/tree.txt").read():
+        if not done("work2/start/summary.json"):
+            os.makedirs("work2/start0", exist_ok=True)
+            os.makedirs("work2/start", exist_ok=True)
+            if not done("work2/start0/summary.json"):
+                py("rmodel.py", "fixed work2 work2/start0/rfile.bin", out="work2/start0/rmodel.txt")
+                preflop("work2/start0", plan["final_iterations"], "work2/start0/rfile.bin")
+            fit = plan.get("start_fit") or next(f for f in ("work/p0/fit.json", "work/final/fit.json",
+                                                             "work/s4/fit.json") if os.path.exists(f))
+            py("rmodel.py", f"fitted work2 {fit} work2/start0/pre work2/start/rfile.bin", out="work2/start/rmodel.txt")
+            preflop("work2/start", plan["final_iterations"], "work2/start/rfile.bin", "work2/start0/pre.state")
+            keep("work2/start", "start", milestone=True)
+            commit(f"{os.path.basename(os.getcwd())}: start solve on the new preflop tree")
+            log(f"start solve on the new tree done (R from {fit})")
+        start = "work2/start/pre"
     # 2: river correction
     if plan.get("river_flops") and not done("work2/river/corr.json"):
         os.makedirs("work2/river", exist_ok=True)
         py("spots.py", f"{start} work2/river/ranges", out="work2/river/spots.txt")
         fl = sorted({int(i * 100 / plan["river_flops"]) for i in range(plan["river_flops"])})
-        solve_calib(plan, "work2/river/ranges", "work2/river/turn", {}, fl)
-        solve_calib(plan, "work2/river/ranges", "work2/river/river",
-                    {"RIVER": "1", "MEM_MB": str(plan.get("river_mem_mb", 3500))}, fl)
+        rs = plan.get("river_spots")
+        solve_calib(plan, "work2/river/ranges", "work2/river/turn", {}, fl, rs)
+        renv = {"RIVER": "1", "MEM_MB": str(plan.get("river_mem_mb", 3500))}
+        if plan.get("river_reduced"):
+            renv["RIVER_REDUCED"] = str(plan["river_reduced"])
+        solve_calib(plan, "work2/river/ranges", "work2/river/river", renv, fl, rs, plan.get("river_jobs", 4))
         py("fit_r.py", "work2/river/ranges work2/river/turn work2/river/fit_turn.json", out="work2/river/fit.txt")
         py("fit_r.py", "work2/river/ranges work2/river/river work2/river/fit_river.json", out="work2/river/fit.txt")
         py("river_corr.py", "work2/river/fit_turn.json work2/river/fit_river.json work2/river/corr.json",

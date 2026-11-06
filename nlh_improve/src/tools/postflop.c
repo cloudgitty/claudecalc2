@@ -5,7 +5,7 @@
  *   keys: donk=0|1 (OOP is not the preflop raiser: its root lead is 33% only),
  *         threads=1, target=0.5 (% of pot), maxit=1000, rake=0.10, cap=5,
  *         turnend=1 (end after the turn with an equity showdown over the river),
- *         maxraises=1, compact=2, mem_mb=0, ckpt=600 (seconds between checkpoints, 0 = off),
+ *         maxraises=1, river_reduced=0 (>0: river bet frac; one size + all-in, no river raises), compact=2, mem_mb=0, ckpt=600 (seconds between checkpoints, 0 = off),
  *         allin_extra=0.50 (all-in added beside a listed
  *         size that puts in more than this share of the remaining stack, flop and turn)
  * Ranges: float32[1326] weights 0..1 by combo index (src/hands.py).
@@ -162,6 +162,7 @@ int main(int argc, char **argv)
         else if (!strcmp(key, "maxraises")) c.max_raises = (int)val;
         else if (!strcmp(key, "allin_extra")) c.allin_extra_frac = val;
         else if (!strcmp(key, "ckpt")) ckpt_every = val;
+        else if (!strcmp(key, "river_reduced")) { c.river_reduced = val > 0; if (val > 0) c.river_bet_frac = val; }
         else if (!strcmp(key, "compact")) c.compact_storage = (int)val;
         else if (!strcmp(key, "mem_mb")) c.memory_limit = (size_t)(val * 1048576.0);
         else { fprintf(stderr, "unknown option %s\n", key); return 2; }
