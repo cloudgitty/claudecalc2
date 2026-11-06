@@ -41,6 +41,8 @@ def main():
              f"ckpt={os.environ.get('CKPT_S', '600')}"]
     if os.environ.get("RIVER") == "1" and os.environ.get("RIVER_REDUCED"):
         extra.append(f"river_reduced={os.environ['RIVER_REDUCED']}")
+    if os.environ.get("MAXIT"):
+        extra.append(f"maxit={os.environ['MAXIT']}")
     if os.environ.get("MEM_MB"):
         extra.append(f"mem_mb={os.environ['MEM_MB']}")
     spots = json.load(open(os.path.join(rdir, "spots.json")))
@@ -65,7 +67,7 @@ def main():
                 continue
             cmd = ["./build/postflop", f, f"{sp['pot']:g}", f"{sp['stack']:g}",
                    os.path.join(rdir, f"{name}_oop.f32"), os.path.join(rdir, f"{name}_ip.f32"), prefix,
-                   f"donk={sp['donk']}", "threads=1",
+                   f"donk={sp['donk']}", f"threads={os.environ.get('THREADS', '1')}",
                    f"rake={os.environ.get('RAKE_PCT', '0.10')}", f"cap={os.environ.get('RAKE_CAP', '5')}"] + extra
             # largest pots first so the slow solves start early
             tasks.append((-sp["stack"] / sp["pot"], name, i, cmd))

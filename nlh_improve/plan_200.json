@@ -1,0 +1,7 @@
+{
+ "config": {"postflop_max_raises": 2, "cold_4bets": true, "multiway_level": 2},
+ "calib_flops": 30, "calib_flops_slow": 50, "slow_spots": ["srp_SB_vs_BB", "srp_BTN_vs_BB"],
+ "round_iterations": 600, "final_iterations": 5000, "max_rounds": 10,
+ "river_flops": 4, "river_spots": ["srp_BTN_vs_BB", "srp_SB_vs_BB", "3bp_BTN_vs_BB", "3bp_CO_vs_BTN"],
+ "river_reduced": 0.66, "river_jobs": 1, "river_threads": 4, "river_maxit": 400, "river_mem_mb": 14500
+}

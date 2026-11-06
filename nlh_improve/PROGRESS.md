@@ -37,3 +37,18 @@
   Moves are of the size of the old loops' noise. Kept as interim results (work/p0 in each build),
   not swapped into the delivered files: the stored postflop strategies belong to the old ranges.
 - Phase B measurements running.
+
+## Phase B gate decisions (2026-11-06; raw numbers in work/phaseB.txt)
+- **Two raises per street: everywhere.** Turn-end solve cost 1.6-1.9x, memory ~2x (gate <= 3x).
+- **River (item 8): reduced river tree** (user decision): the full river tree does not fit at 200bb/300bb
+  in single-raised pots (12-35 GB). Reduced tree = one river bet size 66% + all-in, facing a river bet
+  fold or call only; flop and turn unchanged (2 raises). 40 iterations, BTN vs BB AcJc8d, 1 thread:
+  100bb SRP 371 s / 6.8 GB, 3bp 53 s / 1.1 GB; 200bb SRP 435 s / 8.5 GB, 3bp 179 s / 3.5 GB;
+  300bb SRP 755 s / 12.0 GB, 3bp 221 s / 4.5 GB. Run one at a time on 4 threads, cap 400 iterations.
+  Sample: srp_BTN_vs_BB, srp_SB_vs_BB, 3bp_BTN_vs_BB, 3bp_CO_vs_BTN x 4 flops (0, 25, 50, 75) per depth.
+  The rake variants use the main loop's river correction (a ratio river/turn-end), not their own.
+  Stored strategies stay turn-end solves.
+- **Preflop tree: un-pruned (cold 4-bets and multiway 3-bet pots).** 100 iterations on 4 threads:
+  100bb 8 s pruned / 46 s cold4 / 95 s cold4+mw3bp; 300bb 14 / 61 / 124 s. Final solve 5,000
+  iterations ~1.5-1.7 h; loop rounds 600 warm-started iterations ~10-12 min.
+- **Flops:** all 100 in every final pass. Plans: plan_100.json, plan_200.json, plan_300.json.

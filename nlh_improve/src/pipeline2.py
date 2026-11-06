@@ -238,6 +238,9 @@ def main():
         rs = plan.get("river_spots")
         solve_calib(plan, "work2/river/ranges", "work2/river/turn", {}, fl, rs)
         renv = {"RIVER": "1", "MEM_MB": str(plan.get("river_mem_mb", 3500))}
+        for k, e in (("river_threads", "THREADS"), ("river_maxit", "MAXIT")):
+            if plan.get(k):
+                renv[e] = str(plan[k])
         if plan.get("river_reduced"):
             renv["RIVER_REDUCED"] = str(plan["river_reduced"])
         solve_calib(plan, "work2/river/ranges", "work2/river/river", renv, fl, rs, plan.get("river_jobs", 4))
