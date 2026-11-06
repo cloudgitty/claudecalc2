@@ -52,7 +52,7 @@ def postflop_order(p):
 
 def load_preflop(prefix, tree_json):
     if not os.path.exists(tree_json):
-        tree_json = os.path.join("work", "tree.json")
+        tree_json = os.environ.get("NLH_TREE", os.path.join("work", "tree.json"))
     tree = json.load(open(tree_json))["nodes"]
     strat = np.fromfile(prefix + ".strat", dtype=np.float32)
     off, s = 0, {}

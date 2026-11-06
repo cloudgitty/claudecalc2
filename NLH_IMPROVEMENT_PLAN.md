@@ -105,11 +105,17 @@ container *restart* (every restart so far kept the disk: 4 restarts across the 2
 builds, no file lost). They do **not** survive the container being replaced by a fresh one, because
 `work/` is not in git (0.7-1.4 GB per depth).
 
-**Durable checkpoints** are pushed to the `part-b-solver` branch on GitHub. They survive anything.
-They are kept small: the fitted R (`fit.json`, `rfile.bin`), the preflop strategy and EV of each
-finished round, the packed outputs and the logs - enough to resume the loop without re-running
-finished rounds. Bulky solve files (~130 MB per postflop pass) stay local; if they were lost, only
-the postflop pass in progress is redone, not the loop.
+**Durable checkpoints** are pushed to the `part-b-solver` branch on GitHub (folder
+`checkpoints/` inside each build). They survive anything. To keep the repository small (on the
+un-pruned tree one round's preflop strategy is ~70 MB):
+- **every round:** the round summary (RFI widths, largest move), the preflop log and the gzipped
+  R fit (`fit.json.gz`) - the convergence record;
+- **milestones** (end of a loop, final solve, polish, river correction): additionally the gzipped
+  R file (`rfile.bin.gz`), the preflop strategy and EV as gzipped float16, and the reach file -
+  enough to restart the next step on a fresh container.
+Bulky solve files (~130 MB per postflop pass) and the per-round strategies stay local. A fresh
+container therefore resumes from the last milestone; an ordinary restart (disk kept) loses nothing
+beyond the step in progress.
 
 ---
 
@@ -118,21 +124,21 @@ the postflop pass in progress is redone, not the loop.
 | Step | Local checkpoint (what is saved, when) | Resumes by | Max loss on a crash | Durable checkpoint (git) |
 | --- | --- | --- | --- | --- |
 | Equity table (reused; only if recomputed) | none (single 22-25 min run) | re-running it | ~25 min | `eq1326.bin` and `eq169.bin` (7.3 MB together) committed once, so a fresh container never recomputes them |
-| Preflop solve (every run) | `<prefix>.state`: regrets and strategy sums **every 50 iterations** (exists today) | `./build/preflop` loads the state automatically | 50 iterations: ~15 s at 100bb, ~1-2 min on the un-pruned tree | after each finished run: `pre.strat`, `pre.ev`, `pre.reach`, `pre.log` (~25 MB per run; committed per round) |
+| Preflop solve (every run) | `<prefix>.state`: regrets and strategy sums **every 50 iterations** (exists today); each round warm-starts from the previous round's state | `./build/preflop` loads the state automatically | 50 iterations: ~15 s at 100bb, ~1-2 min on the un-pruned tree | every round: summary and log; milestones: float16 strategy and EV (gzipped) and reach |
 | Postflop solve, turn-end (calibration and final pass) | each finished solve writes `<flop>.bin` + `.json`; the runner skips finished solves (exists today) | `src/run_postflop.py` re-run | the 4 solves in flight: up to ~4 min each at 300bb | per spot after each pass: a compact summary (EV per class, exploitability) for the R fit; the packed `postflop/*.bin.gz` after the final pass |
 | Postflop solve, river (new, item 8) | **new:** solver state saved every 10 minutes to `work/ckpt/<spot>_<flop>.bin` (the solver already has `ss_save_state` / `ss_load_state`; the driver will call them), deleted when the solve finishes | the driver loads the checkpoint if it exists | 10 min per solve in flight (without it: up to ~1 h each) | river correction table after the river calibration |
-| R fit (each round) | `fit.json`, `rfile.bin` in the round folder | the pipeline skips rounds whose files exist | seconds | committed per round |
-| Convergence loop (item 2) | one folder per round (`work/r<N>/`); the running average of R is recomputed from the committed per-round `rfile.bin` files | `src/pipeline.sh` re-run: finished rounds skipped, the open round resumes mid-step | the step in progress (one preflop checkpoint interval or the postflop solves in flight) | each finished round: R, preflop result, widths in `PROGRESS.md` |
+| R fit (each round) | `fit.json`, `rfile_raw.bin`, `rfile.bin` in the round folder | the pipeline skips rounds whose files exist | seconds | every round: `fit.json.gz`; milestones: `rfile.bin.gz` |
+| Convergence loop (item 2) | one folder per round (`work2/<tag>_r<N>/`); the running average of R is recomputed from the rounds' `rfile_raw.bin` files | `python3 ../nlh_improve/src/pipeline2.py <plan>` re-run: finished rounds skipped, the open round resumes mid-step | the step in progress (one preflop checkpoint interval or the postflop solves in flight) | each finished round: widths and largest move in `PROGRESS2.md`, summary, log, fit |
 | Final postflop pass | as for postflop solves | runner skip | 4 solves in flight | `postflop/*.bin.gz` and the per-spot summaries when the pass ends; `PROGRESS.md` every 2 h with the solve count |
-| Rake variants | same folders and rules as the main loop (`work/var_<name>_r<N>/`) | pipeline skip | step in progress | per round, as the main loop |
+| Rake variants | same folders and rules as the main loop (`work2/<variant>_r<N>/`) | pipeline skip | step in progress | per round, as the main loop |
 | Packing, validation, report | outputs written in seconds | re-run | seconds | outputs, `validation.md`, `REPORT.md`, zip |
 
 **Rule of thumb:** after a restart the worst case is about 10 minutes of lost compute (one river
 checkpoint interval); typical is under 5 minutes.
 
 ### What keeps a crash from costing more than the table says
-- **Resumable pipeline.** `src/pipeline.sh` checks for each step's output and skips finished work;
-  it is simply started again after a restart.
+- **Resumable pipeline.** `nlh_improve/src/pipeline2.py` checks for each step's output and skips
+  finished work; it is simply started again after a restart.
 - **Watcher always running.** The one long outage (6.5 h at 300bb) happened while no watcher was
   running and the session looked idle. A background watcher stays on for the whole run, re-armed
   every 2 hours; after a restart I restart the pipeline and the watcher straight away.

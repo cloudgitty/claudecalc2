@@ -58,7 +58,8 @@ def node_id(tree, path, hero):
 
 def pack_preflop(prefix, out):
     work = os.path.dirname(prefix) or "."
-    tpath = os.path.join(work, "tree.json") if os.path.exists(os.path.join(work, "tree.json")) else "work/tree.json"
+    tpath = os.path.join(work, "tree.json") if os.path.exists(os.path.join(work, "tree.json")) else \
+        os.environ.get("NLH_TREE", "work/tree.json")
     tree = json.load(open(tpath))["nodes"]
     strat = np.fromfile(prefix + ".strat", dtype=np.float32)
     ev = np.fromfile(prefix + ".ev", dtype=np.float32).reshape(len(tree), 169)
