@@ -21,3 +21,13 @@
   `postflop_allin_extra_frac` from the config; `RIVER=1` solves flop to river. Mid-solve
   checkpoints every 600 s (`<prefix>.ckpt`), removed on completion. Kill-and-resume test: the
   resumed solve is bit-identical to an uninterrupted one (values, strategies, EVs).
+- Preflop warm start (item 2): regrets from the previous round, strategy sums cleared, iteration
+  count continued (restarting it discards the regrets: 4.5 vs 1.0 bb/100). Same-payoff test:
+  0.19 bb/100 after 50 warm iterations (cold: ~10 after 100).
+- River correction (item 8): `src/river_corr.py` (river R / turn-end R per spot, side, class,
+  shrunk to buckets; group averages for unsolved pairs), applied by `rmodel.py` via RIVER_CORR.
+- Phase C pipeline: `src/pipeline2.py` (resumable; per-round durable checkpoints in each build's
+  `checkpoints/`, milestones with strategies). Phase D checks: `src/validate2.py` (conservation,
+  convergence log, river error).
+- Phase 0, 100bb: RFI 9.3/11.5/14.7/16.2/25.1/37.7/46.1 -> 9.7/12.6/15.3/16.9/24.7/39.8/52.4
+  (R refit on all 100 flops, 50/50 with the final R); SB limp 4.1 -> 0.7.
