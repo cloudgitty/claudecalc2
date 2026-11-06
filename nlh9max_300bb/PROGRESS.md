@@ -46,3 +46,6 @@ Everything else (trees, R, all solves) is computed at 300bb.
 - Rake variants running (rake 0, cap 3bb, rake 5%; three R rounds each).
 - Rake-free control done (13:58, 3 rounds, ~1.6 h each): RFI 10.4/11.6/14.0/16.3/22.5/28.2,
   SB 50.7 (+15.3 limp). Cap 3bb and rake 5% variants running (~10 h).
+- Cap 3bb variant done (18:13, 3 rounds): RFI 10.8/13.4/15.1/19.5/19.7/32.7, SB 47.3 (+17.9 limp).
+- 18:15-00:52 container down (the watcher had stopped when the command safety check failed);
+  pipeline restarted for the rake 5% variant (3 rounds, ~5 h), then packing and validation.
