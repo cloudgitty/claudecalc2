@@ -52,3 +52,4 @@
   100bb 8 s pruned / 46 s cold4 / 95 s cold4+mw3bp; 300bb 14 / 61 / 124 s. Final solve 5,000
   iterations ~1.5-1.7 h; loop rounds 600 warm-started iterations ~10-12 min.
 - **Flops:** all 100 in every final pass. Plans: plan_100.json, plan_200.json, plan_300.json.
+- 22:00 container restart; pipeline resumed (river SB vs BB Kc9c7d from its 21:27 checkpoint, ~30 min lost)
