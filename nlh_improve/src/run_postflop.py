@@ -27,6 +27,11 @@ def calib_indices(flops):
     return idx
 
 
+# the solver built next to this source tree (not the build folder's own older binary)
+POSTFLOP = os.environ.get("POSTFLOP_BIN") or os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                                                          "build", "postflop")
+
+
 def main():
     rdir, out = sys.argv[1], sys.argv[2]
     which = sys.argv[3]
@@ -65,7 +70,7 @@ def main():
             prefix = os.path.join(out, name, f"{i:03d}_{f}")
             if os.path.exists(prefix + ".json"):
                 continue
-            cmd = ["./build/postflop", f, f"{sp['pot']:g}", f"{sp['stack']:g}",
+            cmd = [POSTFLOP, f, f"{sp['pot']:g}", f"{sp['stack']:g}",
                    os.path.join(rdir, f"{name}_oop.f32"), os.path.join(rdir, f"{name}_ip.f32"), prefix,
                    f"donk={sp['donk']}", f"threads={os.environ.get('THREADS', '1')}",
                    f"rake={os.environ.get('RAKE_PCT', '0.10')}", f"cap={os.environ.get('RAKE_CAP', '5')}"] + extra

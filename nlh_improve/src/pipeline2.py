@@ -66,7 +66,8 @@ def done(path):
 def commit(msg):
     """Durable checkpoint: commit and push the small results (work2/ is ignored, so the files to
     keep are copied into checkpoints/ first)."""
-    sh("git add -A checkpoints PROGRESS2.md 2>/dev/null; git commit -qm \"" + msg +
+    open("PROGRESS2.md", "a").close()      # git add aborts on a missing path
+    sh("git add -A checkpoints PROGRESS2.md; git commit -qm \"" + msg +
        "\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: "
        "https://claude.ai/code/session_01Xh1SLG9q2fz5cKSV5JmQFu\" || true; "
        "for i in 1 2 3 4; do git push -q -u origin part-b-solver && break; sleep $((2**i)); done")
@@ -133,6 +134,12 @@ def solve_calib(plan, ranges, out, rake_env, flops_override=None, only=None, job
     for fl, names in groups.items():
         py("run_postflop.py", f"{ranges} {out} {','.join(map(str, fl))} {','.join(names)} {jobs}",
            env=rake_env, out=f"{out}.log")
+    # every spot that was attempted must have finished solves; otherwise stop here, not in the fit
+    for name in sorted(os.listdir(out)):
+        n = len([f for f in os.listdir(os.path.join(out, name)) if f.endswith(".json")])
+        if n == 0:
+            log(f"no finished solves for {name} in {out} (see {out}.log)")
+            sys.exit(1)
 
 
 def fit_round(plan, d, prev_pre, ranges, solves, rake_env, history):
