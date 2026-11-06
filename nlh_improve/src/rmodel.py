@@ -182,8 +182,8 @@ def fitted(work, cfg, fitp, prefix, out):
         for p in pl:
             o = ip if p == oop else oop
             eq = (P * E * r[o][None, :]).sum(1) / np.maximum((P * r[o][None, :]).sum(1), 1e-12)
-            if name:
-                sd = fit[name]["sides"][SEATS[p]]
+            sd = fit[name]["sides"].get(SEATS[p]) if name else None   # a side can be missing (skipped solves)
+            if sd is not None:
                 edges, Rb = sd["edges"], np.array(sd["R"])
                 nsolved += 1
                 if "R_class" in sd:          # solved spot: per-class R (playability included)

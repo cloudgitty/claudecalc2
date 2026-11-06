@@ -224,7 +224,12 @@ def main():
                 preflop("work2/start0", plan.get("start_iterations", 2000), "work2/start0/rfile.bin")
             fit = plan.get("start_fit") or next(f for f in ("work/p0/fit.json", "work/final/fit.json",
                                                              "work/s4/fit.json") if os.path.exists(f))
-            py("rmodel.py", f"fitted work2 {fit} work2/start0/pre work2/start/rfile.bin", out="work2/start/rmodel.txt")
+            # the old fit's spot -> node map is for the old tree: map the same spots on the new tree
+            shutil.copy(fit, "work2/start/fit.json")
+            py("spots.py", "work2/start0/pre work2/start/ranges", out="work2/start/spots.txt")
+            shutil.copy("work2/start/ranges/spots.json", "work2/start/spots_used.json")
+            py("rmodel.py", "fitted work2 work2/start/fit.json work2/start0/pre work2/start/rfile.bin",
+               out="work2/start/rmodel.txt")
             preflop("work2/start", plan.get("start_iterations", 2000), "work2/start/rfile.bin", "work2/start0/pre.state")
             keep("work2/start", "start", milestone=True)
             commit(f"{os.path.basename(os.getcwd())}: start solve on the new preflop tree")
