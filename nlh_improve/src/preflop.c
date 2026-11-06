@@ -551,6 +551,21 @@ int main(int argc, char **argv)
     snprintf(path, sizeof path, "%s.state", prefix);
     int start = load_state(path);
     if (start) fprintf(log, "resumed at iteration %d\n", start);
+    else if (getenv("PF_WARM")) {
+        /* warm start (improvement plan, item 2): regrets from the previous round's state (same
+           tree, new payoffs), strategy sums cleared, iteration count restarted */
+        int w = load_state(getenv("PF_WARM"));
+        if (w) {
+            /* the iteration count continues from w so the DCFR discounts stay small (restarting
+               it at 1 discards the loaded regrets); `iterations` counts the new ones */
+            for (int n = 0; n < nnodes; n++)
+                if (T[n].kind == 'D') memset(T[n].ssum, 0, sizeof(float) * (size_t)T[n].nact * NC);
+            start = w;
+            iters += w;
+            fprintf(log, "warm start from %s (its iteration %d), %d more iterations\n", getenv("PF_WARM"), w, iters - w);
+        } else
+            fprintf(log, "warm start file %s not usable, cold start\n", getenv("PF_WARM"));
+    }
     double worst = 1e9;
     for (int t = start + 1; t <= iters; t++) {
         current_strategies();

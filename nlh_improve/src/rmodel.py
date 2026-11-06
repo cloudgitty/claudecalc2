@@ -128,6 +128,22 @@ def fitted(work, cfg, fitp, prefix, out):
     import rreg
     rrows = rreg.observations(fit)
     hbeta = rreg.fit_model(rrows, True) if rrows else None
+    # item 8: river correction (src/river_corr.py), applied when RIVER_CORR names its output
+    corr = json.load(open(os.environ["RIVER_CORR"])) if os.environ.get("RIVER_CORR") else None
+    PT = {0: "limp", 1: "srp", 2: "3bp", 3: "4bp", 4: "5bp"}
+
+    def group_corr(ptype, ip_, ag_, buckets):
+        if not corr:
+            return np.ones(len(buckets))
+        g = corr["groups"]
+        key = f"{PT.get(ptype, 'srp')}|{int(ip_)}|{int(ag_)}"
+        if key not in g:
+            alt = [k for k in g if k.startswith(f"{PT.get(ptype, 'srp')}|{int(ip_)}|")] or \
+                  [k for k in g if k.split("|")[1] == str(int(ip_))]
+            if not alt:
+                return np.ones(len(buckets))
+            key = alt[0]
+        return np.array(g[key])[np.clip(buckets, 0, len(g[key]) - 1)]
     rake_pts.sort()
     pots = np.array([p for p, _ in rake_pts])
     rakes = np.array([r for _, r in rake_pts])
@@ -171,7 +187,13 @@ def fitted(work, cfg, fitp, prefix, out):
                 edges, Rb = sd["edges"], np.array(sd["R"])
                 nsolved += 1
                 if "R_class" in sd:          # solved spot: per-class R (playability included)
-                    Rs.append(np.clip(np.array(sd["R_class"]), 0.05, 5.0))
+                    Rc = np.array(sd["R_class"])
+                    if corr and name in corr["spots"] and SEATS[p] in corr["spots"][name]:
+                        Rc = Rc * np.array(corr["spots"][name][SEATS[p]]["C_class"])
+                    elif corr:
+                        bb = np.searchsorted(sd["edges"], np.array(sd["eq_class"]))
+                        Rc = Rc * group_corr(t["ptype"], p == ip, t["aggr"] == p, bb)
+                    Rs.append(np.clip(Rc, 0.05, 5.0))
                     continue
             else:
                 stack = cfg["stack_bb"] - t["inv"][p]
@@ -181,7 +203,9 @@ def fitted(work, cfg, fitp, prefix, out):
                 if hbeta is not None:
                     wcl = r[p] * np.array([6 if k // 13 == k % 13 else 4 if k // 13 < k % 13 else 12 for k in range(169)])
                     bcl = rreg.bucket_of(eq, wcl)
-                    Rs.append(np.clip(rreg.predict(hbeta, float(p == ip), float(t["aggr"] == p), spr, bcl), 0.05, 5.0))
+                    Rp = rreg.predict(hbeta, float(p == ip), float(t["aggr"] == p), spr, bcl)
+                    Rp = Rp * group_corr(t["ptype"], p == ip, t["aggr"] == p, bcl)
+                    Rs.append(np.clip(Rp, 0.05, 5.0))
                     nreg += 1
                     continue
                 # bucket edges from this terminal's own range
