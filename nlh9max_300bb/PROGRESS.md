@@ -49,3 +49,12 @@ Everything else (trees, R, all solves) is computed at 300bb.
 - Cap 3bb variant done (18:13, 3 rounds): RFI 10.8/13.4/15.1/19.5/19.7/32.7, SB 47.3 (+17.9 limp).
 - 18:15-00:52 container down (the watcher had stopped when the command safety check failed);
   pipeline restarted for the rake 5% variant (3 rounds, ~5 h), then packing and validation.
+- 00:52-04:00: rake 5% variant (3 rounds): RFI 10.8/11.8/14.3/18.3/20.2/32.4, SB 35.0 (+28.9 limp).
+- Stage 8 done (04:01): packed 1.67 MB; validation all pass except: in-position 3-bet vs call /
+  polarisation (no in-position flats) and rake vs control (BTN +10.0 wider with rake: without rake
+  the BB defends 71% vs a BTN open). Postflop worst 0.500% of pot, preflop worst 0.025 bb/100.
+  5-bet: BB vs BTN 4-bet folds 49.5 / calls 28.2 / jams 22.3% (AA KK QQ AK KQs 55 + A5s A4s).
+  The 4-bet cap never triggered.
+- Totals: 32.8 h elapsed (2026-11-04 19:12 - 11-06 04:01 UTC), ~23.5 h running (~9 h container
+  down); ~88 core-hours (postflop 62.8, preflop ~25; equity tables reused). Outputs:
+  preflop.json 61,947 B, preflop_ev.bin 47,996 B, postflop/ 1,437,466 B (1.67 MB total).

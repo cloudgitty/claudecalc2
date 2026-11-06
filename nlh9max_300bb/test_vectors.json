@@ -1,0 +1,9295 @@
+{
+ "note": "expected decoded values for the formats in REPORT.md; percents are in 5% steps",
+ "preflop": [
+  {
+   "id": "BTN:open",
+   "node": 5,
+   "hand": "85o",
+   "actions": [
+    "f",
+    "r3"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "HJ:vs_UTGr3_UTG1r9",
+   "node": 16381,
+   "hand": "63s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "BB:vs_HJr3_COr9",
+   "node": 1612,
+   "hand": "A5s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "LJ:vs_UTGr3_LJr9_UTGr25.2",
+   "node": 13272,
+   "hand": "T4s",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {},
+   "ev_bb": -9.0078
+  },
+  {
+   "id": "LJ:vs_UTGr3_LJr9_UTGr25.2",
+   "node": 13272,
+   "hand": "62o",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {},
+   "ev_bb": -9.0156
+  },
+  {
+   "id": "BTN:vs_BTNr3_BBr15_BTNr37.5_BBa300",
+   "node": 44,
+   "hand": "KTs",
+   "actions": [
+    "f",
+    "c"
+   ],
+   "freqs": {},
+   "ev_bb": -37.5
+  },
+  {
+   "id": "BB:vs_UTG1r3_COr9",
+   "node": 5195,
+   "hand": "75s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "UTG1:open",
+   "node": 1,
+   "hand": "54s",
+   "actions": [
+    "f",
+    "r3"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "BB:vs_UTG1r3",
+   "node": 4088,
+   "hand": "88",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {
+    "c": 100
+   },
+   "ev_bb": -0.855
+  },
+  {
+   "id": "HJ:vs_UTG1r3_HJr9_UTG1r25.2",
+   "node": 6539,
+   "hand": "94o",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {},
+   "ev_bb": -9.0078
+  },
+  {
+   "id": "CO:vs_UTG1r3_COr9_UTG1r25.2",
+   "node": 5199,
+   "hand": "Q5o",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {},
+   "ev_bb": -9.0078
+  },
+  {
+   "id": "BB:vs_UTGr3_COr9",
+   "node": 9793,
+   "hand": "Q5o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "BTN:vs_UTG1r3_LJr9",
+   "node": 8668,
+   "hand": "Q5s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "SB:open",
+   "node": 6,
+   "hand": "AKo",
+   "actions": [
+    "f",
+    "c",
+    "r3.5"
+   ],
+   "freqs": {
+    "r": 100
+   },
+   "ev_bb": 2.0293
+  },
+  {
+   "id": "BB:vs_UTGr3_LJr9",
+   "node": 13268,
+   "hand": "J4s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "SB:vs_COr3_BTNr9",
+   "node": 491,
+   "hand": "A2o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "SB:vs_BTNr3",
+   "node": 34,
+   "hand": "K4s",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "LJ:open",
+   "node": 2,
+   "hand": "96s",
+   "actions": [
+    "f",
+    "r3"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "BB:vs_LJr3_BTNr9",
+   "node": 2002,
+   "hand": "Q5s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "HJ:vs_UTG1r3_HJr9_UTG1r25.2",
+   "node": 6539,
+   "hand": "A2o",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {},
+   "ev_bb": -9.0156
+  },
+  {
+   "id": "CO:vs_LJr3_HJr9",
+   "node": 4070,
+   "hand": "95o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "HJ:vs_HJr3_SBr15",
+   "node": 575,
+   "hand": "KTo",
+   "actions": [
+    "f",
+    "c",
+    "r37.5"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0
+  },
+  {
+   "id": "BTN:vs_UTGr3_UTG1r9",
+   "node": 16383,
+   "hand": "44",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "SB:vs_COr3_BTNr9",
+   "node": 491,
+   "hand": "22",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "BTN:vs_BTNr3_BBr15_BTNr37.5_BBa300",
+   "node": 44,
+   "hand": "86s",
+   "actions": [
+    "f",
+    "c"
+   ],
+   "freqs": {},
+   "ev_bb": -37.5938
+  },
+  {
+   "id": "BB:vs_SBc",
+   "node": 8,
+   "hand": "AQo",
+   "actions": [
+    "c",
+    "r3"
+   ],
+   "freqs": {
+    "r": 100
+   },
+   "ev_bb": 0.9604
+  },
+  {
+   "id": "UTG1:open",
+   "node": 1,
+   "hand": "J2s",
+   "actions": [
+    "f",
+    "r3"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0001
+  },
+  {
+   "id": "BTN:vs_BTNr3_BBr15_BTNr37.5_BBa300",
+   "node": 44,
+   "hand": "44",
+   "actions": [
+    "f",
+    "c"
+   ],
+   "freqs": {},
+   "ev_bb": -37.5
+  },
+  {
+   "id": "SB:vs_HJr3_BTNr9",
+   "node": 880,
+   "hand": "T4s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "CO:vs_UTG1r3_HJr9",
+   "node": 6532,
+   "hand": "T3s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "LJ:vs_LJr3_BTNr9",
+   "node": 2003,
+   "hand": "A2s",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {
+    "r": 10
+   },
+   "ev_bb": -3.0156
+  },
+  {
+   "id": "CO:vs_UTG1r3",
+   "node": 4085,
+   "hand": "64o",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0001
+  },
+  {
+   "id": "BB:vs_SBc",
+   "node": 8,
+   "hand": "A2s",
+   "actions": [
+    "c",
+    "r3"
+   ],
+   "freqs": {
+    "r": 100
+   },
+   "ev_bb": 0.0469
+  },
+  {
+   "id": "BB:vs_SBc",
+   "node": 8,
+   "hand": "J6o",
+   "actions": [
+    "c",
+    "r3"
+   ],
+   "freqs": {
+    "c": 100
+   },
+   "ev_bb": -0.3628
+  },
+  {
+   "id": "HJ:vs_UTG1r3_LJr9",
+   "node": 8666,
+   "hand": "87o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "HJ:vs_HJr3_SBr15",
+   "node": 575,
+   "hand": "T4o",
+   "actions": [
+    "f",
+    "c",
+    "r37.5"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0625
+  },
+  {
+   "id": "BB:vs_UTGr3_LJr9",
+   "node": 13268,
+   "hand": "T5s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "BTN:vs_BTNr3_BBr15",
+   "node": 38,
+   "hand": "JJ",
+   "actions": [
+    "f",
+    "c",
+    "r37.5"
+   ],
+   "freqs": {
+    "r": 100
+   },
+   "ev_bb": 5.3711
+  },
+  {
+   "id": "HJ:vs_HJr3_SBr15",
+   "node": 575,
+   "hand": "JTo",
+   "actions": [
+    "f",
+    "c",
+    "r37.5"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0566
+  },
+  {
+   "id": "HJ:vs_UTG1r3",
+   "node": 4084,
+   "hand": "Q5s",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0001
+  },
+  {
+   "id": "HJ:vs_LJr3_HJr9_LJr25.2",
+   "node": 4077,
+   "hand": "T5s",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {
+    "c": 10,
+    "a": 80
+   },
+   "ev_bb": -19.4844
+  },
+  {
+   "id": "BB:vs_UTG1r3_BTNr9",
+   "node": 4464,
+   "hand": "T7s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "SB:vs_BTNr3_SBr15_BTNr37.5",
+   "node": 108,
+   "hand": "97s",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {},
+   "ev_bb": -15.1641
+  },
+  {
+   "id": "SB:vs_SBr3.5_BBr10.5_SBr29.4_BBa300",
+   "node": 31,
+   "hand": "77",
+   "actions": [
+    "f",
+    "c"
+   ],
+   "freqs": {},
+   "ev_bb": -29.4062
+  },
+  {
+   "id": "BTN:vs_LJr3_HJr9",
+   "node": 4071,
+   "hand": "Q3o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "BB:vs_SBr3.5",
+   "node": 22,
+   "hand": "A7s",
+   "actions": [
+    "f",
+    "c",
+    "r10.5"
+   ],
+   "freqs": {
+    "r": 100
+   },
+   "ev_bb": -0.5645
+  },
+  {
+   "id": "CO:vs_LJr3_COr9_LJr25.2",
+   "node": 2737,
+   "hand": "T3o",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {
+    "c": 20,
+    "a": 35
+   },
+   "ev_bb": -17.0938
+  },
+  {
+   "id": "BB:vs_HJr3_COr9",
+   "node": 1612,
+   "hand": "73o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "UTG:vs_UTGr3_BTNr9",
+   "node": 9063,
+   "hand": "Q8o",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0059
+  },
+  {
+   "id": "BB:vs_UTG1r3_LJr9",
+   "node": 8670,
+   "hand": "T8o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "CO:open",
+   "node": 4,
+   "hand": "K4s",
+   "actions": [
+    "f",
+    "r3"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "LJ:vs_UTGr3",
+   "node": 8681,
+   "hand": "A6o",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0001
+  },
+  {
+   "id": "CO:vs_UTGr3_LJr9",
+   "node": 13265,
+   "hand": "96o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "CO:vs_LJr3",
+   "node": 1623,
+   "hand": "65s",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "BB:vs_UTGr3_SBr15",
+   "node": 8755,
+   "hand": "74o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "BB:vs_BTNr3",
+   "node": 35,
+   "hand": "87s",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "LJ:vs_UTGr3",
+   "node": 8681,
+   "hand": "T3o",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "UTG:vs_UTGr3_UTG1r9",
+   "node": 16386,
+   "hand": "65s",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.002
+  },
+  {
+   "id": "UTG1:vs_UTG1r3_SBr15",
+   "node": 4158,
+   "hand": "T7s",
+   "actions": [
+    "f",
+    "c",
+    "r37.5"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0137
+  },
+  {
+   "id": "HJ:vs_UTGr3_UTG1r9",
+   "node": 16381,
+   "hand": "K5s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "HJ:vs_UTGr3_UTG1r9",
+   "node": 16381,
+   "hand": "J8o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "SB:vs_HJr3",
+   "node": 504,
+   "hand": "92o",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "BB:vs_HJr3_SBc",
+   "node": 517,
+   "hand": "74o",
+   "actions": [
+    "f",
+    "c",
+    "r18"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "BB:vs_HJr3_SBc",
+   "node": 517,
+   "hand": "Q2s",
+   "actions": [
+    "f",
+    "c",
+    "r18"
+   ],
+   "freqs": {},
+   "ev_bb": -1.002
+  },
+  {
+   "id": "BTN:vs_COr3_BTNr9_COr25.2",
+   "node": 496,
+   "hand": "A8o",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {
+    "c": 40
+   },
+   "ev_bb": -9.7188
+  },
+  {
+   "id": "UTG:vs_UTGr3_COr9",
+   "node": 9794,
+   "hand": "T4o",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0234
+  },
+  {
+   "id": "UTG:open",
+   "node": 0,
+   "hand": "82o",
+   "actions": [
+    "f",
+    "r3"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "HJ:vs_UTGr3",
+   "node": 8682,
+   "hand": "83s",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "LJ:vs_LJr3_HJr9",
+   "node": 4074,
+   "hand": "T7s",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {
+    "c": 20
+   },
+   "ev_bb": -3.2891
+  },
+  {
+   "id": "SB:vs_UTGr3_LJr9",
+   "node": 13267,
+   "hand": "Q5o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "HJ:vs_HJr3_BTNr9",
+   "node": 882,
+   "hand": "J3o",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0176
+  },
+  {
+   "id": "HJ:vs_UTGr3_UTG1r9",
+   "node": 16381,
+   "hand": "92o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "LJ:vs_UTG1r3_LJr9_UTG1r25.2",
+   "node": 8674,
+   "hand": "T7o",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {},
+   "ev_bb": -9.0
+  },
+  {
+   "id": "SB:vs_SBc_BBr3",
+   "node": 10,
+   "hand": "82s",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {
+    "c": 5,
+    "r": 5
+   },
+   "ev_bb": -1.0518
+  },
+  {
+   "id": "CO:vs_UTGr3_UTG1r9",
+   "node": 16382,
+   "hand": "A4s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "SB:vs_UTG1r3",
+   "node": 4087,
+   "hand": "A3s",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "BTN:vs_BTNr3_SBr15",
+   "node": 105,
+   "hand": "64s",
+   "actions": [
+    "f",
+    "c",
+    "r37.5"
+   ],
+   "freqs": {},
+   "ev_bb": -3.002
+  },
+  {
+   "id": "SB:vs_UTGr3",
+   "node": 8685,
+   "hand": "94o",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "SB:vs_UTG1r3",
+   "node": 4087,
+   "hand": "76s",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "SB:vs_LJr3_HJr9",
+   "node": 4072,
+   "hand": "86s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "LJ:vs_LJr3_BBr15",
+   "node": 1629,
+   "hand": "A6s",
+   "actions": [
+    "f",
+    "c",
+    "r37.5"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0
+  },
+  {
+   "id": "BB:vs_LJr3_SBr15",
+   "node": 1695,
+   "hand": "KJs",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "CO:vs_HJr3_COr9_HJr25.2",
+   "node": 1616,
+   "hand": "J8o",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {
+    "c": 20,
+    "a": 20
+   },
+   "ev_bb": -13.1406
+  },
+  {
+   "id": "UTG:vs_UTGr3_UTG1r9",
+   "node": 16386,
+   "hand": "84s",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.002
+  },
+  {
+   "id": "BB:vs_UTG1r3_HJr9",
+   "node": 6535,
+   "hand": "75o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "UTG:vs_UTGr3_BBr15",
+   "node": 8689,
+   "hand": "76s",
+   "actions": [
+    "f",
+    "c",
+    "r37.5"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0469
+  },
+  {
+   "id": "UTG1:vs_UTG1r3_COr9",
+   "node": 5196,
+   "hand": "54o",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.002
+  },
+  {
+   "id": "BB:vs_UTGr3_COr9",
+   "node": 9793,
+   "hand": "97s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "SB:vs_HJr3_COr9",
+   "node": 1611,
+   "hand": "JTs",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "HJ:vs_UTGr3_LJr9",
+   "node": 13264,
+   "hand": "AQo",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "BTN:open",
+   "node": 5,
+   "hand": "Q6o",
+   "actions": [
+    "f",
+    "r3"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "BB:vs_UTG1r3_SBr15",
+   "node": 4157,
+   "hand": "T4s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "HJ:open",
+   "node": 3,
+   "hand": "A3s",
+   "actions": [
+    "f",
+    "r3"
+   ],
+   "freqs": {
+    "r": 95
+   },
+   "ev_bb": 0.0092
+  },
+  {
+   "id": "UTG:open",
+   "node": 0,
+   "hand": "T2s",
+   "actions": [
+    "f",
+    "r3"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "CO:open",
+   "node": 4,
+   "hand": "98s",
+   "actions": [
+    "f",
+    "r3"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "UTG:vs_UTGr3_UTG1r9",
+   "node": 16386,
+   "hand": "22",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0039
+  },
+  {
+   "id": "SB:open",
+   "node": 6,
+   "hand": "A9o",
+   "actions": [
+    "f",
+    "c",
+    "r3.5"
+   ],
+   "freqs": {
+    "c": 100
+   },
+   "ev_bb": -0.2168
+  },
+  {
+   "id": "SB:vs_UTGr3",
+   "node": 8685,
+   "hand": "K8s",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5005
+  },
+  {
+   "id": "CO:vs_HJr3",
+   "node": 502,
+   "hand": "K7o",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "HJ:vs_HJr3_COr9",
+   "node": 1613,
+   "hand": "A8s",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0
+  },
+  {
+   "id": "BTN:vs_UTGr3_HJr9",
+   "node": 11131,
+   "hand": "ATs",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "SB:open",
+   "node": 6,
+   "hand": "85s",
+   "actions": [
+    "f",
+    "c",
+    "r3.5"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "HJ:vs_UTGr3_UTG1r9",
+   "node": 16381,
+   "hand": "87o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "BTN:vs_BTNr3_BBr15_BTNr37.5_BBa300",
+   "node": 44,
+   "hand": "93o",
+   "actions": [
+    "f",
+    "c"
+   ],
+   "freqs": {},
+   "ev_bb": -37.5
+  },
+  {
+   "id": "UTG:vs_UTGr3_BTNr9",
+   "node": 9063,
+   "hand": "Q9s",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0137
+  },
+  {
+   "id": "BB:vs_UTG1r3_HJr9",
+   "node": 6535,
+   "hand": "Q9s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "HJ:vs_UTG1r3_HJr9_UTG1r25.2",
+   "node": 6539,
+   "hand": "Q9o",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {},
+   "ev_bb": -9.0
+  },
+  {
+   "id": "SB:vs_HJr3_BTNr9",
+   "node": 880,
+   "hand": "93s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "BB:vs_HJr3_COr9",
+   "node": 1612,
+   "hand": "J5o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "BB:vs_BTNr3",
+   "node": 35,
+   "hand": "A8s",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {
+    "c": 100
+   },
+   "ev_bb": -0.5283
+  },
+  {
+   "id": "CO:vs_HJr3",
+   "node": 502,
+   "hand": "J4s",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "BTN:vs_UTGr3_COr9",
+   "node": 9791,
+   "hand": "A2s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "CO:vs_LJr3_HJr9",
+   "node": 4070,
+   "hand": "J5o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "UTG1:vs_UTGr3",
+   "node": 8680,
+   "hand": "QJs",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0001
+  },
+  {
+   "id": "LJ:vs_LJr3_COr9",
+   "node": 2734,
+   "hand": "A9s",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0
+  },
+  {
+   "id": "SB:vs_LJr3_HJr9",
+   "node": 4072,
+   "hand": "52s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "BB:vs_HJr3_SBr15",
+   "node": 574,
+   "hand": "Q2o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "CO:vs_HJr3",
+   "node": 502,
+   "hand": "Q8o",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "HJ:vs_HJr3_COr9",
+   "node": 1613,
+   "hand": "K8o",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {
+    "c": 5
+   },
+   "ev_bb": -3.0625
+  },
+  {
+   "id": "SB:vs_LJr3",
+   "node": 1625,
+   "hand": "83o",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "BB:vs_UTGr3_SBr15",
+   "node": 8755,
+   "hand": "96o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "BB:vs_UTG1r3_COr9",
+   "node": 5195,
+   "hand": "A6o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "UTG:vs_UTGr3_BTNr9",
+   "node": 9063,
+   "hand": "QJs",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0039
+  },
+  {
+   "id": "BTN:vs_BTNr3_SBr15",
+   "node": 105,
+   "hand": "A7s",
+   "actions": [
+    "f",
+    "c",
+    "r37.5"
+   ],
+   "freqs": {
+    "r": 55
+   },
+   "ev_bb": -2.9863
+  },
+  {
+   "id": "SB:vs_LJr3_COr9",
+   "node": 2732,
+   "hand": "J2o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "SB:vs_LJr3",
+   "node": 1625,
+   "hand": "98o",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "UTG:vs_UTGr3_COr9",
+   "node": 9794,
+   "hand": "A7o",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0156
+  },
+  {
+   "id": "LJ:vs_UTGr3_UTG1r9",
+   "node": 16380,
+   "hand": "ATo",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "BB:vs_UTG1r3_LJr9",
+   "node": 8670,
+   "hand": "22",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "HJ:vs_HJr3_BTNr9",
+   "node": 882,
+   "hand": "AQs",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {
+    "c": 100
+   },
+   "ev_bb": -0.4331
+  },
+  {
+   "id": "SB:vs_UTGr3_COr9",
+   "node": 9792,
+   "hand": "72s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "HJ:vs_UTGr3_UTG1r9",
+   "node": 16381,
+   "hand": "A4o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "LJ:vs_LJr3_BTNr9",
+   "node": 2003,
+   "hand": "64s",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {
+    "c": 5
+   },
+   "ev_bb": -3.1133
+  },
+  {
+   "id": "UTG1:vs_UTG1r3_LJr9",
+   "node": 8671,
+   "hand": "63s",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0
+  },
+  {
+   "id": "BB:vs_LJr3_COr9",
+   "node": 2733,
+   "hand": "52o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "BB:vs_UTGr3_UTG1r9",
+   "node": 16385,
+   "hand": "96s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "BTN:vs_UTG1r3_HJr9",
+   "node": 6533,
+   "hand": "KK",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "BB:vs_LJr3_SBr15",
+   "node": 1695,
+   "hand": "52s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "BB:vs_UTGr3",
+   "node": 8686,
+   "hand": "93o",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "CO:vs_UTG1r3",
+   "node": 4085,
+   "hand": "J5s",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0001
+  },
+  {
+   "id": "HJ:vs_LJr3_HJr9_LJr25.2",
+   "node": 4077,
+   "hand": "QJs",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {},
+   "ev_bb": -9.0
+  },
+  {
+   "id": "BTN:vs_BTNr3_SBr15",
+   "node": 105,
+   "hand": "87s",
+   "actions": [
+    "f",
+    "c",
+    "r37.5"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0098
+  },
+  {
+   "id": "SB:vs_LJr3_BTNr9",
+   "node": 2001,
+   "hand": "66",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "HJ:vs_LJr3",
+   "node": 1622,
+   "hand": "T6s",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "CO:vs_HJr3_COr9_HJr25.2",
+   "node": 1616,
+   "hand": "44",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {
+    "c": 40
+   },
+   "ev_bb": -9.1094
+  },
+  {
+   "id": "SB:vs_BTNr3_SBr15_BTNr37.5",
+   "node": 108,
+   "hand": "KTo",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {},
+   "ev_bb": -15.0
+  },
+  {
+   "id": "BB:vs_UTG1r3_LJr9",
+   "node": 8670,
+   "hand": "87o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "BTN:vs_LJr3_HJr9",
+   "node": 4071,
+   "hand": "66",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "UTG:vs_UTGr3_UTG1r9",
+   "node": 16386,
+   "hand": "53o",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0
+  },
+  {
+   "id": "HJ:vs_UTG1r3_HJr9_UTG1r25.2",
+   "node": 6539,
+   "hand": "J8o",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {},
+   "ev_bb": -9.0
+  },
+  {
+   "id": "HJ:vs_UTGr3_LJr9",
+   "node": 13264,
+   "hand": "A3s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "UTG1:open",
+   "node": 1,
+   "hand": "42o",
+   "actions": [
+    "f",
+    "r3"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "UTG:vs_UTGr3_LJr9",
+   "node": 13269,
+   "hand": "53o",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.002
+  },
+  {
+   "id": "HJ:vs_LJr3_HJr9_LJr25.2",
+   "node": 4077,
+   "hand": "82s",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {
+    "c": 15,
+    "a": 55
+   },
+   "ev_bb": -15.9297
+  },
+  {
+   "id": "SB:vs_UTGr3",
+   "node": 8685,
+   "hand": "Q9s",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "BTN:vs_BTNr3_SBr15_BTNr37.5_SBa300",
+   "node": 111,
+   "hand": "62s",
+   "actions": [
+    "f",
+    "c"
+   ],
+   "freqs": {},
+   "ev_bb": -37.5312
+  },
+  {
+   "id": "SB:vs_UTGr3",
+   "node": 8685,
+   "hand": "53o",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "HJ:vs_UTG1r3_HJr9_UTG1r25.2",
+   "node": 6539,
+   "hand": "Q4o",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {},
+   "ev_bb": -9.0
+  },
+  {
+   "id": "UTG1:open",
+   "node": 1,
+   "hand": "Q4o",
+   "actions": [
+    "f",
+    "r3"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "BTN:vs_HJr3_BTNr9_HJr25.2",
+   "node": 885,
+   "hand": "76s",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {
+    "c": 10,
+    "a": 10
+   },
+   "ev_bb": -10.0156
+  },
+  {
+   "id": "BB:vs_HJr3_BTNr9",
+   "node": 881,
+   "hand": "JJ",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "CO:vs_UTGr3",
+   "node": 8683,
+   "hand": "93o",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "BTN:vs_UTG1r3_HJr9",
+   "node": 6533,
+   "hand": "KJs",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "BB:vs_LJr3_SBr15",
+   "node": 1695,
+   "hand": "85s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "SB:vs_COr3_BTNr9",
+   "node": 491,
+   "hand": "J7s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "BB:vs_BTNr3_SBr15",
+   "node": 104,
+   "hand": "J5s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "CO:vs_UTG1r3_LJr9",
+   "node": 8667,
+   "hand": "82o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "BB:vs_SBr3.5",
+   "node": 22,
+   "hand": "65o",
+   "actions": [
+    "f",
+    "c",
+    "r10.5"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "SB:vs_SBr3.5_BBr10.5",
+   "node": 25,
+   "hand": "53s",
+   "actions": [
+    "f",
+    "c",
+    "r29.4"
+   ],
+   "freqs": {},
+   "ev_bb": -3.5293
+  },
+  {
+   "id": "BTN:open",
+   "node": 5,
+   "hand": "32o",
+   "actions": [
+    "f",
+    "r3"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "BTN:vs_UTGr3_LJr9",
+   "node": 13266,
+   "hand": "A6s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "LJ:vs_LJr3_BBr15",
+   "node": 1629,
+   "hand": "32s",
+   "actions": [
+    "f",
+    "c",
+    "r37.5"
+   ],
+   "freqs": {
+    "r": 5
+   },
+   "ev_bb": -3.0957
+  },
+  {
+   "id": "HJ:vs_UTGr3",
+   "node": 8682,
+   "hand": "T3o",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0001
+  },
+  {
+   "id": "BB:vs_UTGr3_BTNr9",
+   "node": 9062,
+   "hand": "54o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "SB:vs_UTGr3_HJr9",
+   "node": 11132,
+   "hand": "KJs",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "CO:vs_UTG1r3_LJr9",
+   "node": 8667,
+   "hand": "J5o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "HJ:vs_UTG1r3_HJr9_UTG1r25.2",
+   "node": 6539,
+   "hand": "Q6s",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {},
+   "ev_bb": -9.0
+  },
+  {
+   "id": "SB:vs_BTNr3_SBr15_BTNr37.5",
+   "node": 108,
+   "hand": "K7s",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {},
+   "ev_bb": -15.0
+  },
+  {
+   "id": "CO:vs_UTGr3_LJr9",
+   "node": 13265,
+   "hand": "K2o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "BB:vs_UTG1r3",
+   "node": 4088,
+   "hand": "62o",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "CO:vs_UTG1r3_HJr9",
+   "node": 6532,
+   "hand": "T7o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "BB:vs_BTNr3_BBr15_BTNr37.5",
+   "node": 41,
+   "hand": "ATs",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {
+    "c": 100
+   },
+   "ev_bb": -10.8984
+  },
+  {
+   "id": "CO:vs_HJr3_COr9_HJr25.2",
+   "node": 1616,
+   "hand": "65s",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {
+    "c": 30,
+    "a": 15
+   },
+   "ev_bb": -10.8594
+  },
+  {
+   "id": "HJ:vs_UTGr3_LJr9",
+   "node": 13264,
+   "hand": "JTo",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "BB:vs_BTNr3",
+   "node": 35,
+   "hand": "75s",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "SB:vs_UTG1r3",
+   "node": 4087,
+   "hand": "JJ",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {
+    "c": 80,
+    "r": 20
+   },
+   "ev_bb": -0.428
+  },
+  {
+   "id": "CO:vs_LJr3",
+   "node": 1623,
+   "hand": "87o",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "BB:vs_BTNr3_BBr15_BTNr37.5",
+   "node": 41,
+   "hand": "J3o",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {},
+   "ev_bb": -15.0
+  },
+  {
+   "id": "SB:vs_COr3",
+   "node": 115,
+   "hand": "62o",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "CO:vs_LJr3",
+   "node": 1623,
+   "hand": "QQ",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {
+    "r": 100
+   },
+   "ev_bb": 2.875
+  },
+  {
+   "id": "BB:vs_HJr3_SBr15",
+   "node": 574,
+   "hand": "T3o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "SB:vs_HJr3",
+   "node": 504,
+   "hand": "92s",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "SB:vs_BTNr3",
+   "node": 34,
+   "hand": "K3s",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "CO:vs_UTG1r3_LJr9",
+   "node": 8667,
+   "hand": "T7o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "CO:vs_UTG1r3",
+   "node": 4085,
+   "hand": "72o",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "SB:vs_UTG1r3_BTNr9",
+   "node": 4463,
+   "hand": "Q5o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "SB:vs_UTG1r3_LJr9",
+   "node": 8669,
+   "hand": "A5o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "LJ:vs_UTGr3_LJr9_UTGr25.2",
+   "node": 13272,
+   "hand": "AA",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {
+    "a": 100
+   },
+   "ev_bb": 26.0156
+  },
+  {
+   "id": "CO:vs_COr3_BTNr9",
+   "node": 493,
+   "hand": "J5s",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0098
+  },
+  {
+   "id": "BB:vs_BTNr3_BBr15_BTNr37.5",
+   "node": 41,
+   "hand": "97o",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {},
+   "ev_bb": -15.0
+  },
+  {
+   "id": "BTN:vs_LJr3_COr9",
+   "node": 2731,
+   "hand": "97o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "BTN:vs_UTG1r3_LJr9",
+   "node": 8668,
+   "hand": "JJ",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "UTG1:vs_UTGr3",
+   "node": 8680,
+   "hand": "82s",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "BTN:vs_BTNr3_BBr15",
+   "node": 38,
+   "hand": "KQo",
+   "actions": [
+    "f",
+    "c",
+    "r37.5"
+   ],
+   "freqs": {
+    "r": 5
+   },
+   "ev_bb": -3.002
+  },
+  {
+   "id": "BB:vs_UTG1r3_COr9",
+   "node": 5195,
+   "hand": "77",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "BB:vs_COr3_BTNr9",
+   "node": 492,
+   "hand": "88",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "UTG1:vs_UTG1r3_BBr15",
+   "node": 4091,
+   "hand": "AJs",
+   "actions": [
+    "f",
+    "c",
+    "r37.5"
+   ],
+   "freqs": {
+    "c": 40,
+    "r": 10
+   },
+   "ev_bb": -3.0352
+  },
+  {
+   "id": "SB:vs_COr3_BTNr9",
+   "node": 491,
+   "hand": "J2s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "BB:vs_LJr3",
+   "node": 1626,
+   "hand": "K3s",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "HJ:vs_LJr3_HJr9_LJr25.2",
+   "node": 4077,
+   "hand": "33",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {},
+   "ev_bb": -9.0
+  },
+  {
+   "id": "BB:vs_UTG1r3_COr9",
+   "node": 5195,
+   "hand": "63s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "HJ:vs_UTGr3_UTG1r9",
+   "node": 16381,
+   "hand": "K3o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "SB:vs_SBr3.5_BBr10.5",
+   "node": 25,
+   "hand": "QJs",
+   "actions": [
+    "f",
+    "c",
+    "r29.4"
+   ],
+   "freqs": {
+    "r": 100
+   },
+   "ev_bb": -3.2031
+  },
+  {
+   "id": "UTG:open",
+   "node": 0,
+   "hand": "KQo",
+   "actions": [
+    "f",
+    "r3"
+   ],
+   "freqs": {
+    "r": 100
+   },
+   "ev_bb": 0.0847
+  },
+  {
+   "id": "SB:vs_SBr3.5_BBr10.5",
+   "node": 25,
+   "hand": "AJo",
+   "actions": [
+    "f",
+    "c",
+    "r29.4"
+   ],
+   "freqs": {
+    "r": 100
+   },
+   "ev_bb": -0.6968
+  },
+  {
+   "id": "UTG:vs_UTGr3_SBr15",
+   "node": 8756,
+   "hand": "43o",
+   "actions": [
+    "f",
+    "c",
+    "r37.5"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0039
+  },
+  {
+   "id": "LJ:vs_UTG1r3",
+   "node": 4083,
+   "hand": "K8s",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0001
+  },
+  {
+   "id": "LJ:vs_UTGr3",
+   "node": 8681,
+   "hand": "85o",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "UTG1:open",
+   "node": 1,
+   "hand": "32s",
+   "actions": [
+    "f",
+    "r3"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "LJ:open",
+   "node": 2,
+   "hand": "J2o",
+   "actions": [
+    "f",
+    "r3"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "BTN:vs_BTNr3_BBr15",
+   "node": 38,
+   "hand": "44",
+   "actions": [
+    "f",
+    "c",
+    "r37.5"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0
+  },
+  {
+   "id": "BB:vs_UTG1r3_SBr15",
+   "node": 4157,
+   "hand": "T8s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "CO:vs_UTGr3",
+   "node": 8683,
+   "hand": "A6o",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0001
+  },
+  {
+   "id": "SB:vs_UTG1r3_BTNr9",
+   "node": 4463,
+   "hand": "T4o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "CO:vs_COr3_SBr15",
+   "node": 186,
+   "hand": "T4o",
+   "actions": [
+    "f",
+    "c",
+    "r37.5"
+   ],
+   "freqs": {
+    "r": 5
+   },
+   "ev_bb": -3.082
+  },
+  {
+   "id": "CO:vs_UTG1r3_HJr9",
+   "node": 6532,
+   "hand": "A2s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "LJ:vs_LJr3_SBr15",
+   "node": 1696,
+   "hand": "Q6o",
+   "actions": [
+    "f",
+    "c",
+    "r37.5"
+   ],
+   "freqs": {
+    "r": 5
+   },
+   "ev_bb": -3.1504
+  },
+  {
+   "id": "SB:vs_BTNr3",
+   "node": 34,
+   "hand": "T8o",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "HJ:vs_LJr3",
+   "node": 1622,
+   "hand": "52s",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "BB:vs_LJr3_COr9",
+   "node": 2733,
+   "hand": "96o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "UTG:vs_UTGr3_UTG1r9",
+   "node": 16386,
+   "hand": "K9s",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0078
+  },
+  {
+   "id": "HJ:vs_UTGr3_LJr9",
+   "node": 13264,
+   "hand": "83s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "SB:vs_UTGr3_COr9",
+   "node": 9792,
+   "hand": "J7o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "BB:vs_UTG1r3_SBr15",
+   "node": 4157,
+   "hand": "T7s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "BTN:vs_HJr3_BTNr9_HJr25.2",
+   "node": 885,
+   "hand": "85s",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {
+    "c": 5,
+    "a": 5
+   },
+   "ev_bb": -9.7188
+  },
+  {
+   "id": "CO:vs_LJr3_HJr9",
+   "node": 4070,
+   "hand": "98o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "SB:vs_UTG1r3_HJr9",
+   "node": 6534,
+   "hand": "J3s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "CO:vs_UTG1r3",
+   "node": 4085,
+   "hand": "KQo",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0005
+  },
+  {
+   "id": "UTG1:vs_UTG1r3_BTNr9",
+   "node": 4465,
+   "hand": "T3o",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0039
+  },
+  {
+   "id": "LJ:vs_UTG1r3",
+   "node": 4083,
+   "hand": "97o",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0001
+  },
+  {
+   "id": "BTN:vs_LJr3",
+   "node": 1624,
+   "hand": "A3o",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "HJ:vs_UTGr3",
+   "node": 8682,
+   "hand": "J9o",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0001
+  },
+  {
+   "id": "LJ:vs_UTGr3_UTG1r9",
+   "node": 16380,
+   "hand": "Q7s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "BB:vs_SBr3.5_BBr10.5_SBr29.4",
+   "node": 28,
+   "hand": "88",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {
+    "c": 100
+   },
+   "ev_bb": -5.8984
+  },
+  {
+   "id": "SB:vs_UTGr3",
+   "node": 8685,
+   "hand": "97s",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "BTN:vs_BTNr3_SBr15_BTNr37.5_SBa300",
+   "node": 111,
+   "hand": "J9s",
+   "actions": [
+    "f",
+    "c"
+   ],
+   "freqs": {},
+   "ev_bb": -37.7812
+  },
+  {
+   "id": "BTN:vs_BTNr3_BBr15_BTNr37.5_BBa300",
+   "node": 44,
+   "hand": "75o",
+   "actions": [
+    "f",
+    "c"
+   ],
+   "freqs": {},
+   "ev_bb": -37.5
+  },
+  {
+   "id": "SB:vs_HJr3",
+   "node": 504,
+   "hand": "K7o",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "BB:vs_HJr3_BTNr9",
+   "node": 881,
+   "hand": "62o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "UTG1:vs_UTG1r3_SBr15",
+   "node": 4158,
+   "hand": "Q7s",
+   "actions": [
+    "f",
+    "c",
+    "r37.5"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0312
+  },
+  {
+   "id": "BB:vs_UTG1r3_HJr9",
+   "node": 6535,
+   "hand": "Q6o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "BB:vs_BTNr3",
+   "node": 35,
+   "hand": "AJo",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {
+    "r": 100
+   },
+   "ev_bb": -0.1526
+  },
+  {
+   "id": "UTG1:vs_UTG1r3_SBr15",
+   "node": 4158,
+   "hand": "A7o",
+   "actions": [
+    "f",
+    "c",
+    "r37.5"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0078
+  },
+  {
+   "id": "BB:vs_UTGr3_SBr15",
+   "node": 8755,
+   "hand": "T2o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "BTN:vs_UTGr3_UTG1r9",
+   "node": 16383,
+   "hand": "KTs",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "SB:vs_COr3_BTNr9",
+   "node": 491,
+   "hand": "K3o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "UTG1:vs_UTG1r3_BBr15",
+   "node": 4091,
+   "hand": "ATs",
+   "actions": [
+    "f",
+    "c",
+    "r37.5"
+   ],
+   "freqs": {
+    "r": 35
+   },
+   "ev_bb": -3.0156
+  },
+  {
+   "id": "BTN:vs_HJr3_COr9",
+   "node": 1610,
+   "hand": "86s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "LJ:vs_UTG1r3",
+   "node": 4083,
+   "hand": "95s",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0001
+  },
+  {
+   "id": "LJ:vs_UTG1r3",
+   "node": 4083,
+   "hand": "KQo",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {
+    "r": 35
+   },
+   "ev_bb": -0.0029
+  },
+  {
+   "id": "BTN:vs_LJr3_COr9",
+   "node": 2731,
+   "hand": "QQ",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "CO:vs_UTGr3",
+   "node": 8683,
+   "hand": "AA",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {
+    "r": 100
+   },
+   "ev_bb": 9.7109
+  },
+  {
+   "id": "BB:vs_UTG1r3_BTNr9",
+   "node": 4464,
+   "hand": "K2s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "HJ:vs_UTGr3_UTG1r9",
+   "node": 16381,
+   "hand": "J5o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "UTG:vs_UTGr3_COr9",
+   "node": 9794,
+   "hand": "Q8s",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0605
+  },
+  {
+   "id": "BB:vs_LJr3_SBr15",
+   "node": 1695,
+   "hand": "76o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "UTG1:vs_UTG1r3_HJr9",
+   "node": 6536,
+   "hand": "J3o",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.002
+  },
+  {
+   "id": "UTG1:vs_UTG1r3_LJr9",
+   "node": 8671,
+   "hand": "QJs",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0
+  },
+  {
+   "id": "BTN:vs_HJr3_COr9",
+   "node": 1610,
+   "hand": "84o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "LJ:vs_LJr3_COr9",
+   "node": 2734,
+   "hand": "88",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {
+    "c": 45,
+    "r": 15
+   },
+   "ev_bb": -2.877
+  },
+  {
+   "id": "SB:vs_BTNr3_SBr15_BTNr37.5",
+   "node": 108,
+   "hand": "86s",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {},
+   "ev_bb": -15.1953
+  },
+  {
+   "id": "UTG1:vs_UTG1r3_COr9",
+   "node": 5196,
+   "hand": "Q7o",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0059
+  },
+  {
+   "id": "BB:vs_HJr3",
+   "node": 505,
+   "hand": "K7o",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "UTG1:vs_UTG1r3_LJr9",
+   "node": 8671,
+   "hand": "62s",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0
+  },
+  {
+   "id": "BB:vs_HJr3_COr9",
+   "node": 1612,
+   "hand": "A2o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "BB:vs_BTNr3_SBr15",
+   "node": 104,
+   "hand": "T5o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "SB:vs_BTNr3_SBr15_BTNr37.5",
+   "node": 108,
+   "hand": "92s",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {},
+   "ev_bb": -15.1484
+  },
+  {
+   "id": "SB:vs_HJr3_COr9",
+   "node": 1611,
+   "hand": "T6o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "BB:vs_LJr3_BTNr9",
+   "node": 2002,
+   "hand": "53o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "UTG1:vs_UTG1r3_HJr9",
+   "node": 6536,
+   "hand": "J9o",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.002
+  },
+  {
+   "id": "BB:vs_UTGr3_SBr15",
+   "node": 8755,
+   "hand": "85o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "SB:vs_COr3_BTNr9",
+   "node": 491,
+   "hand": "A7s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "UTG1:vs_UTGr3",
+   "node": 8680,
+   "hand": "52s",
+   "actions": [
+    "f",
+    "c",
+    "r9"
+   ],
+   "freqs": {},
+   "ev_bb": -0.0
+  },
+  {
+   "id": "SB:vs_COr3",
+   "node": 115,
+   "hand": "J6s",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "CO:vs_UTG1r3_HJr9",
+   "node": 6532,
+   "hand": "T6o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "SB:vs_LJr3_COr9",
+   "node": 2732,
+   "hand": "93o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "SB:vs_UTG1r3_HJr9",
+   "node": 6534,
+   "hand": "62o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "BTN:vs_UTG1r3_BTNr9_UTG1r25.2",
+   "node": 4468,
+   "hand": "63s",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {},
+   "ev_bb": -9.0078
+  },
+  {
+   "id": "UTG1:vs_UTG1r3_COr9",
+   "node": 5196,
+   "hand": "52o",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.002
+  },
+  {
+   "id": "BB:vs_SBr3.5_BBr10.5_SBr29.4",
+   "node": 28,
+   "hand": "KQs",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {
+    "a": 100
+   },
+   "ev_bb": -6.3086
+  },
+  {
+   "id": "SB:vs_UTGr3",
+   "node": 8685,
+   "hand": "JTo",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {},
+   "ev_bb": -0.5
+  },
+  {
+   "id": "BTN:vs_HJr3_COr9",
+   "node": 1610,
+   "hand": "32o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "UTG:vs_UTGr3_UTG1r9",
+   "node": 16386,
+   "hand": "J3o",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {},
+   "ev_bb": -3.0
+  },
+  {
+   "id": "BB:vs_LJr3_BTNr9",
+   "node": 2002,
+   "hand": "52s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": -1.0
+  },
+  {
+   "id": "BTN:vs_HJr3_COr9",
+   "node": 1610,
+   "hand": "74s",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "SB:vs_COr3",
+   "node": 115,
+   "hand": "KJs",
+   "actions": [
+    "f",
+    "c",
+    "r15"
+   ],
+   "freqs": {
+    "r": 100
+   },
+   "ev_bb": -0.3835
+  },
+  {
+   "id": "CO:vs_UTG1r3_COr9_UTG1r25.2",
+   "node": 5199,
+   "hand": "TT",
+   "actions": [
+    "f",
+    "c",
+    "a"
+   ],
+   "freqs": {
+    "c": 100
+   },
+   "ev_bb": -8.8906
+  },
+  {
+   "id": "LJ:vs_UTGr3_UTG1r9",
+   "node": 16380,
+   "hand": "85o",
+   "actions": [
+    "f"
+   ],
+   "freqs": {},
+   "ev_bb": 0.0
+  },
+  {
+   "id": "CO:vs_COr3_BBr15",
+   "node": 119,
+   "hand": "64o",
+   "actions": [
+    "f",
+    "c",
+    "r37.5"
+   ],
+   "freqs": {
+    "r": 5
+   },
+   "ev_bb": -3.2285
+  },
+  {
+   "id": "LJ:vs_LJr3_HJr9",
+   "node": 4074,
+   "hand": "Q6o",
+   "actions": [
+    "f",
+    "c",
+    "r25.2"
+   ],
+   "freqs": {
+    "c": 15
+   },
+   "ev_bb": -3.3145
+  }
+ ],
+ "postflop": [
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 73,
+   "flop": "AcKc3d",
+   "node": "ip_vs_bet",
+   "combo": "7c5h",
+   "combo_index": 204,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 85,
+   "flop": "Ac9c2d",
+   "node": "oop_root",
+   "combo": "7h7c",
+   "combo_index": 251,
+   "freq_indices": [
+    19,
+    1
+   ],
+   "percents": [
+    95,
+    5
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 6,
+   "flop": "AcJd3h",
+   "node": "ip_vs_check",
+   "combo": "QhQc",
+   "combo_index": 901,
+   "freq_indices": [
+    20,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    100,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 6,
+   "flop": "AcJd3h",
+   "node": "ip_vs_bet",
+   "combo": "4c3d",
+   "combo_index": 33,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_HJ_vs_BB",
+   "flop_index": 56,
+   "flop": "QcTd6h",
+   "node": "oop_root",
+   "combo": "Qd6d",
+   "combo_index": 837,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_SB_vs_BB",
+   "flop_index": 25,
+   "flop": "Ac8c4d",
+   "node": "oop_vs_checkbet",
+   "combo": "8d6d",
+   "combo_index": 317,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 62,
+   "flop": "Jc6c2d",
+   "node": "ip_vs_check",
+   "combo": "As6s",
+   "combo_index": 1294,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_HJ_vs_BB",
+   "flop_index": 20,
+   "flop": "Qc7d3h",
+   "node": "oop_root",
+   "combo": "6h3d",
+   "combo_index": 158,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 41,
+   "flop": "Ac6c3d",
+   "node": "oop_vs_checkbet",
+   "combo": "Ks4s",
+   "combo_index": 1092,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 83,
+   "flop": "AcKd5h",
+   "node": "oop_root",
+   "combo": "Qd3c",
+   "combo_index": 824,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_HJ_vs_CO",
+   "flop_index": 36,
+   "flop": "Kc7c6d",
+   "node": "oop_root",
+   "combo": "3d2s",
+   "combo_index": 13,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 14,
+   "flop": "AcJc3d",
+   "node": "oop_vs_checkbet",
+   "combo": "Qd8s",
+   "combo_index": 847,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 91,
+   "flop": "7c5c4c",
+   "node": "ip_vs_check",
+   "combo": "Td4s",
+   "combo_index": 539,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 83,
+   "flop": "AcKd5h",
+   "node": "oop_vs_checkbet",
+   "combo": "As4h",
+   "combo_index": 1285,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 15,
+   "flop": "Jc4c2d",
+   "node": "ip_vs_check",
+   "combo": "5s4c",
+   "combo_index": 113,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 30,
+   "flop": "Tc8d4h",
+   "node": "oop_root",
+   "combo": "3d2s",
+   "combo_index": 13,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 86,
+   "flop": "Jc9c8d",
+   "node": "oop_vs_checkbet",
+   "combo": "KsJd",
+   "combo_index": 1118,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_HJ_vs_CO",
+   "flop_index": 66,
+   "flop": "Ac6d3h",
+   "node": "ip_vs_check",
+   "combo": "Ah9s",
+   "combo_index": 1256,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_HJ_vs_BB",
+   "flop_index": 2,
+   "flop": "Kc8d6h",
+   "node": "oop_vs_checkbet",
+   "combo": "Qs9c",
+   "combo_index": 931,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 69,
+   "flop": "KcKd5c",
+   "node": "oop_root",
+   "combo": "Ac3h",
+   "combo_index": 1134,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_HJ_vs_BB",
+   "flop_index": 82,
+   "flop": "9c8d6h",
+   "node": "oop_vs_checkbet",
+   "combo": "Jc4h",
+   "combo_index": 640,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_SB_vs_BB",
+   "flop_index": 53,
+   "flop": "Kc5c5d",
+   "node": "ip_vs_check",
+   "combo": "AdJs",
+   "combo_index": 1215,
+   "freq_indices": [
+    0,
+    0,
+    7,
+    13
+   ],
+   "percents": [
+    0,
+    0,
+    35,
+    65
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 94,
+   "flop": "Ac5d3h",
+   "node": "oop_vs_checkbet",
+   "combo": "Ah2c",
+   "combo_index": 1225,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 23,
+   "flop": "8c6c2d",
+   "node": "oop_vs_checkbet",
+   "combo": "9h5d",
+   "combo_index": 448,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 30,
+   "flop": "Tc8d4h",
+   "node": "oop_root",
+   "combo": "5d3d",
+   "combo_index": 83,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 0,
+   "flop": "AcJc8d",
+   "node": "ip_vs_bet",
+   "combo": "As3d",
+   "combo_index": 1280,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_SB_vs_BB",
+   "flop_index": 8,
+   "flop": "Jc4d2h",
+   "node": "oop_vs_checkbet",
+   "combo": "9c6d",
+   "combo_index": 395,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_HJ_vs_CO",
+   "flop_index": 93,
+   "flop": "Ac4d2h",
+   "node": "oop_root",
+   "combo": "QdTh",
+   "combo_index": 854,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 98,
+   "flop": "8c8d8h",
+   "node": "oop_root",
+   "combo": "KdJs",
+   "combo_index": 1029,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_SB_vs_BB",
+   "flop_index": 52,
+   "flop": "8c6d5h",
+   "node": "oop_vs_checkbet",
+   "combo": "Qd6s",
+   "combo_index": 839,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 10,
+   "flop": "Qc8d6h",
+   "node": "ip_vs_check",
+   "combo": "8s6h",
+   "combo_index": 369,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_HJ_vs_CO",
+   "flop_index": 81,
+   "flop": "9c7d4h",
+   "node": "ip_vs_bet",
+   "combo": "7d6h",
+   "combo_index": 228,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 50,
+   "flop": "7c5d2h",
+   "node": "ip_vs_check",
+   "combo": "Kc6d",
+   "combo_index": 963,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 6,
+   "flop": "AcJd3h",
+   "node": "oop_vs_checkbet",
+   "combo": "7s7h",
+   "combo_index": 275,
+   "freq_indices": [
+    12,
+    8,
+    0,
+    0
+   ],
+   "percents": [
+    60,
+    40,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_HJ_vs_BB",
+   "flop_index": 27,
+   "flop": "KcQdTh",
+   "node": "ip_vs_bet",
+   "combo": "Ad7s",
+   "combo_index": 1199,
+   "freq_indices": [
+    17,
+    3,
+    0,
+    0
+   ],
+   "percents": [
+    85,
+    15,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 78,
+   "flop": "Qc8c4d",
+   "node": "oop_vs_checkbet",
+   "combo": "9s6c",
+   "combo_index": 481,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 1,
+   "flop": "Jc7c4c",
+   "node": "ip_vs_check",
+   "combo": "9d7d",
+   "combo_index": 427,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 43,
+   "flop": "AcTc5d",
+   "node": "ip_vs_check",
+   "combo": "Td4s",
+   "combo_index": 539,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 29,
+   "flop": "Tc8c3d",
+   "node": "ip_vs_check",
+   "combo": "Tc8h",
+   "combo_index": 522,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_SB_vs_BB",
+   "flop_index": 11,
+   "flop": "8c8d5h",
+   "node": "ip_vs_bet",
+   "combo": "7h6s",
+   "combo_index": 250,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 70,
+   "flop": "Tc3c3d",
+   "node": "oop_vs_checkbet",
+   "combo": "9c7c",
+   "combo_index": 398,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 4,
+   "flop": "Jc8c5d",
+   "node": "ip_vs_bet",
+   "combo": "5d3s",
+   "combo_index": 85,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 54,
+   "flop": "Kc5d5h",
+   "node": "ip_vs_bet",
+   "combo": "Qh4s",
+   "combo_index": 872,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 84,
+   "flop": "Kc4d2h",
+   "node": "ip_vs_check",
+   "combo": "8h7c",
+   "combo_index": 345,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 34,
+   "flop": "JcJd9h",
+   "node": "ip_vs_check",
+   "combo": "Kd2s",
+   "combo_index": 993,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 42,
+   "flop": "AcJd7h",
+   "node": "ip_vs_check",
+   "combo": "Qd4c",
+   "combo_index": 828,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 70,
+   "flop": "Tc3c3d",
+   "node": "ip_vs_bet",
+   "combo": "6s2h",
+   "combo_index": 173,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 99,
+   "flop": "QcJcTd",
+   "node": "ip_vs_bet",
+   "combo": "Qs5s",
+   "combo_index": 918,
+   "freq_indices": [
+    0,
+    13,
+    7,
+    0
+   ],
+   "percents": [
+    0,
+    65,
+    35,
+    0
+   ]
+  },
+  {
+   "spot": "srp_SB_vs_BB",
+   "flop_index": 92,
+   "flop": "Jc9c8c",
+   "node": "ip_vs_check",
+   "combo": "QsTd",
+   "combo_index": 936,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 40,
+   "flop": "Ac4c3d",
+   "node": "oop_vs_checkbet",
+   "combo": "Kh8c",
+   "combo_index": 1059,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_HJ_vs_CO",
+   "flop_index": 7,
+   "flop": "7c6c4d",
+   "node": "oop_vs_checkbet",
+   "combo": "AsKc",
+   "combo_index": 1319,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 22,
+   "flop": "8c4c2d",
+   "node": "ip_vs_bet",
+   "combo": "6h4d",
+   "combo_index": 162,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 3,
+   "flop": "9c6c3d",
+   "node": "ip_vs_bet",
+   "combo": "AcTd",
+   "combo_index": 1161,
+   "freq_indices": [
+    1,
+    3,
+    16,
+    0
+   ],
+   "percents": [
+    5,
+    15,
+    80,
+    0
+   ]
+  },
+  {
+   "spot": "srp_SB_vs_BB",
+   "flop_index": 85,
+   "flop": "Ac9c2d",
+   "node": "ip_vs_check",
+   "combo": "8d3c",
+   "combo_index": 304,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_SB_vs_BB",
+   "flop_index": 40,
+   "flop": "Ac4c3d",
+   "node": "oop_root",
+   "combo": "Qs7c",
+   "combo_index": 923,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 95,
+   "flop": "KcTc2d",
+   "node": "oop_vs_checkbet",
+   "combo": "AsTs",
+   "combo_index": 1310,
+   "freq_indices": [
+    0,
+    20,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    100,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 31,
+   "flop": "AcJd8h",
+   "node": "ip_vs_bet",
+   "combo": "6h2s",
+   "combo_index": 156,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 56,
+   "flop": "QcTd6h",
+   "node": "oop_vs_checkbet",
+   "combo": "Jh6h",
+   "combo_index": 721,
+   "freq_indices": [
+    5,
+    5,
+    5,
+    5
+   ],
+   "percents": [
+    25,
+    25,
+    25,
+    25
+   ]
+  },
+  {
+   "spot": "3bp_SB_vs_BB",
+   "flop_index": 62,
+   "flop": "Jc6c2d",
+   "node": "ip_vs_bet",
+   "combo": "6s2d",
+   "combo_index": 172,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 9,
+   "flop": "JcJd6c",
+   "node": "ip_vs_check",
+   "combo": "Jd4d",
+   "combo_index": 675,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 13,
+   "flop": "6c3d3h",
+   "node": "ip_vs_check",
+   "combo": "AhKd",
+   "combo_index": 1270,
+   "freq_indices": [
+    10,
+    8,
+    2,
+    0
+   ],
+   "percents": [
+    50,
+    40,
+    10,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 93,
+   "flop": "Ac4d2h",
+   "node": "oop_root",
+   "combo": "Qc9s",
+   "combo_index": 811,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 30,
+   "flop": "Tc8d4h",
+   "node": "ip_vs_bet",
+   "combo": "KsKh",
+   "combo_index": 1127,
+   "freq_indices": [
+    0,
+    14,
+    6,
+    0
+   ],
+   "percents": [
+    0,
+    70,
+    30,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 45,
+   "flop": "Kc5c3d",
+   "node": "oop_root",
+   "combo": "5s2c",
+   "combo_index": 105,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 66,
+   "flop": "Ac6d3h",
+   "node": "ip_vs_check",
+   "combo": "AdKc",
+   "combo_index": 1220,
+   "freq_indices": [
+    4,
+    9,
+    4,
+    3
+   ],
+   "percents": [
+    20,
+    45,
+    20,
+    15
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 33,
+   "flop": "KcJd5h",
+   "node": "oop_root",
+   "combo": "Qh5c",
+   "combo_index": 873,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_SB_vs_BB",
+   "flop_index": 90,
+   "flop": "Tc9c7d",
+   "node": "ip_vs_check",
+   "combo": "Kd4h",
+   "combo_index": 1000,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 5,
+   "flop": "Ac9c5c",
+   "node": "oop_vs_checkbet",
+   "combo": "Ad6d",
+   "combo_index": 1193,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 84,
+   "flop": "Kc4d2h",
+   "node": "oop_root",
+   "combo": "8d5d",
+   "combo_index": 313,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_HJ_vs_BB",
+   "flop_index": 50,
+   "flop": "7c5d2h",
+   "node": "ip_vs_bet",
+   "combo": "Ah3c",
+   "combo_index": 1229,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 8,
+   "flop": "Jc4d2h",
+   "node": "oop_root",
+   "combo": "Qs9c",
+   "combo_index": 931,
+   "freq_indices": [
+    20,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    100,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 21,
+   "flop": "6c3c3d",
+   "node": "oop_root",
+   "combo": "6s5h",
+   "combo_index": 185,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 52,
+   "flop": "8c6d5h",
+   "node": "ip_vs_bet",
+   "combo": "Qc4c",
+   "combo_index": 788,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 29,
+   "flop": "Tc8c3d",
+   "node": "ip_vs_check",
+   "combo": "QsTd",
+   "combo_index": 936,
+   "freq_indices": [
+    0,
+    5,
+    15,
+    0
+   ],
+   "percents": [
+    0,
+    25,
+    75,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 10,
+   "flop": "Qc8d6h",
+   "node": "oop_root",
+   "combo": "8s5s",
+   "combo_index": 366,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 10,
+   "flop": "Qc8d6h",
+   "node": "oop_vs_checkbet",
+   "combo": "Qh7s",
+   "combo_index": 884,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 89,
+   "flop": "QcTc2d",
+   "node": "oop_vs_checkbet",
+   "combo": "Qc7d",
+   "combo_index": 801,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 37,
+   "flop": "9c5d2h",
+   "node": "ip_vs_bet",
+   "combo": "Qd4d",
+   "combo_index": 829,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 33,
+   "flop": "KcJd5h",
+   "node": "oop_vs_checkbet",
+   "combo": "AsTs",
+   "combo_index": 1310,
+   "freq_indices": [
+    16,
+    2,
+    2,
+    0
+   ],
+   "percents": [
+    80,
+    10,
+    10,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 0,
+   "flop": "AcJc8d",
+   "node": "ip_vs_check",
+   "combo": "Qc6s",
+   "combo_index": 799,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_SB_vs_BB",
+   "flop_index": 85,
+   "flop": "Ac9c2d",
+   "node": "ip_vs_check",
+   "combo": "8c6s",
+   "combo_index": 295,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 34,
+   "flop": "JcJd9h",
+   "node": "oop_root",
+   "combo": "Ah7d",
+   "combo_index": 1246,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 93,
+   "flop": "Ac4d2h",
+   "node": "ip_vs_bet",
+   "combo": "6d4c",
+   "combo_index": 144,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_HJ_vs_BB",
+   "flop_index": 16,
+   "flop": "Kc8c3d",
+   "node": "oop_root",
+   "combo": "Qh9c",
+   "combo_index": 889,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 82,
+   "flop": "9c8d6h",
+   "node": "oop_vs_checkbet",
+   "combo": "KdQs",
+   "combo_index": 1033,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 4,
+   "flop": "Jc8c5d",
+   "node": "ip_vs_bet",
+   "combo": "5s5h",
+   "combo_index": 119,
+   "freq_indices": [
+    0,
+    4,
+    16,
+    0
+   ],
+   "percents": [
+    0,
+    20,
+    80,
+    0
+   ]
+  },
+  {
+   "spot": "srp_SB_vs_BB",
+   "flop_index": 98,
+   "flop": "8c8d8h",
+   "node": "oop_vs_checkbet",
+   "combo": "Th3s",
+   "combo_index": 568,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_HJ_vs_BB",
+   "flop_index": 91,
+   "flop": "7c5c4c",
+   "node": "oop_vs_checkbet",
+   "combo": "Ah4c",
+   "combo_index": 1233,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 12,
+   "flop": "8c8d5c",
+   "node": "oop_root",
+   "combo": "Ac3s",
+   "combo_index": 1135,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 74,
+   "flop": "AcQcJd",
+   "node": "oop_vs_checkbet",
+   "combo": "9c6h",
+   "combo_index": 396,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_HJ_vs_CO",
+   "flop_index": 93,
+   "flop": "Ac4d2h",
+   "node": "ip_vs_bet",
+   "combo": "6h4s",
+   "combo_index": 164,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 18,
+   "flop": "Qc8c6d",
+   "node": "ip_vs_bet",
+   "combo": "6d2d",
+   "combo_index": 137,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 77,
+   "flop": "KcQc2d",
+   "node": "oop_vs_checkbet",
+   "combo": "8h4h",
+   "combo_index": 335,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_HJ_vs_CO",
+   "flop_index": 9,
+   "flop": "JcJd6c",
+   "node": "ip_vs_bet",
+   "combo": "Ah5h",
+   "combo_index": 1239,
+   "freq_indices": [
+    20,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    100,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 5,
+   "flop": "Ac9c5c",
+   "node": "ip_vs_check",
+   "combo": "8h6c",
+   "combo_index": 341,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 2,
+   "flop": "Kc8d6h",
+   "node": "oop_root",
+   "combo": "Qh2s",
+   "combo_index": 864,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 34,
+   "flop": "JcJd9h",
+   "node": "ip_vs_check",
+   "combo": "Ks9d",
+   "combo_index": 1110,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 29,
+   "flop": "Tc8c3d",
+   "node": "ip_vs_check",
+   "combo": "KhQc",
+   "combo_index": 1075,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 55,
+   "flop": "KcKdJc",
+   "node": "oop_vs_checkbet",
+   "combo": "4c3h",
+   "combo_index": 34,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_HJ_vs_BB",
+   "flop_index": 51,
+   "flop": "7c5d3h",
+   "node": "oop_root",
+   "combo": "Jc7h",
+   "combo_index": 652,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 71,
+   "flop": "5c3c2d",
+   "node": "ip_vs_check",
+   "combo": "Ah8c",
+   "combo_index": 1249,
+   "freq_indices": [
+    20,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    100,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 74,
+   "flop": "AcQcJd",
+   "node": "oop_vs_checkbet",
+   "combo": "Ac9d",
+   "combo_index": 1157,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 18,
+   "flop": "Qc8c6d",
+   "node": "ip_vs_check",
+   "combo": "8c7d",
+   "combo_index": 297,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 0,
+   "flop": "AcJc8d",
+   "node": "ip_vs_check",
+   "combo": "Jd6c",
+   "combo_index": 682,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 49,
+   "flop": "QcTd3h",
+   "node": "ip_vs_bet",
+   "combo": "3c2d",
+   "combo_index": 7,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_SB_vs_BB",
+   "flop_index": 52,
+   "flop": "8c6d5h",
+   "node": "oop_vs_checkbet",
+   "combo": "7h5h",
+   "combo_index": 245,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 59,
+   "flop": "AcKc6d",
+   "node": "oop_root",
+   "combo": "9c8c",
+   "combo_index": 402,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 33,
+   "flop": "KcJd5h",
+   "node": "ip_vs_check",
+   "combo": "6s6d",
+   "combo_index": 188,
+   "freq_indices": [
+    2,
+    2,
+    6,
+    10
+   ],
+   "percents": [
+    10,
+    10,
+    30,
+    50
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 20,
+   "flop": "Qc7d3h",
+   "node": "ip_vs_bet",
+   "combo": "Ks2c",
+   "combo_index": 1081,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 12,
+   "flop": "8c8d5c",
+   "node": "oop_vs_checkbet",
+   "combo": "Tc5h",
+   "combo_index": 510,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 48,
+   "flop": "QcTc6d",
+   "node": "ip_vs_check",
+   "combo": "Kc3c",
+   "combo_index": 950,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 43,
+   "flop": "AcTc5d",
+   "node": "ip_vs_bet",
+   "combo": "Qh8s",
+   "combo_index": 888,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 97,
+   "flop": "QcTc7d",
+   "node": "oop_vs_checkbet",
+   "combo": "9s3s",
+   "combo_index": 472,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_SB_vs_BB",
+   "flop_index": 91,
+   "flop": "7c5c4c",
+   "node": "ip_vs_bet",
+   "combo": "9d6s",
+   "combo_index": 425,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 92,
+   "flop": "Jc9c8c",
+   "node": "ip_vs_bet",
+   "combo": "9d2s",
+   "combo_index": 409,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 16,
+   "flop": "Kc8c3d",
+   "node": "ip_vs_check",
+   "combo": "Kh4c",
+   "combo_index": 1043,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_SB_vs_BB",
+   "flop_index": 41,
+   "flop": "Ac6c3d",
+   "node": "oop_root",
+   "combo": "7d3h",
+   "combo_index": 216,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 17,
+   "flop": "KcJc6d",
+   "node": "oop_root",
+   "combo": "5h2d",
+   "combo_index": 92,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 52,
+   "flop": "8c6d5h",
+   "node": "ip_vs_check",
+   "combo": "Jh6d",
+   "combo_index": 720,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 20,
+   "flop": "Qc7d3h",
+   "node": "ip_vs_check",
+   "combo": "9s9h",
+   "combo_index": 495,
+   "freq_indices": [
+    0,
+    1,
+    8,
+    11
+   ],
+   "percents": [
+    0,
+    5,
+    40,
+    55
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 96,
+   "flop": "KcTc9c",
+   "node": "oop_vs_checkbet",
+   "combo": "KsKd",
+   "combo_index": 1126,
+   "freq_indices": [
+    0,
+    8,
+    7,
+    5
+   ],
+   "percents": [
+    0,
+    40,
+    35,
+    25
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 28,
+   "flop": "Qc7c3d",
+   "node": "oop_vs_checkbet",
+   "combo": "7h4d",
+   "combo_index": 240,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 42,
+   "flop": "AcJd7h",
+   "node": "ip_vs_bet",
+   "combo": "KdKc",
+   "combo_index": 1034,
+   "freq_indices": [
+    2,
+    18,
+    0,
+    0
+   ],
+   "percents": [
+    10,
+    90,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 0,
+   "flop": "AcJc8d",
+   "node": "oop_root",
+   "combo": "Ac4c",
+   "combo_index": 1136,
+   "freq_indices": [
+    10,
+    10
+   ],
+   "percents": [
+    50,
+    50
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 73,
+   "flop": "AcKc3d",
+   "node": "ip_vs_bet",
+   "combo": "8h4h",
+   "combo_index": 335,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_SB_vs_BB",
+   "flop_index": 34,
+   "flop": "JcJd9h",
+   "node": "oop_root",
+   "combo": "Td4h",
+   "combo_index": 538,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_SB_vs_BB",
+   "flop_index": 32,
+   "flop": "Jc8d3h",
+   "node": "oop_root",
+   "combo": "AhJd",
+   "combo_index": 1262,
+   "freq_indices": [
+    17,
+    0,
+    0,
+    3
+   ],
+   "percents": [
+    85,
+    0,
+    0,
+    15
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 45,
+   "flop": "Kc5c3d",
+   "node": "oop_vs_checkbet",
+   "combo": "Ac3d",
+   "combo_index": 1133,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_HJ_vs_CO",
+   "flop_index": 72,
+   "flop": "Ac9c7d",
+   "node": "oop_vs_checkbet",
+   "combo": "6h2d",
+   "combo_index": 154,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 15,
+   "flop": "Jc4c2d",
+   "node": "oop_root",
+   "combo": "8d4d",
+   "combo_index": 309,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 25,
+   "flop": "Ac8c4d",
+   "node": "ip_vs_bet",
+   "combo": "AsJs",
+   "combo_index": 1314,
+   "freq_indices": [
+    2,
+    16,
+    2,
+    0
+   ],
+   "percents": [
+    10,
+    80,
+    10,
+    0
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 5,
+   "flop": "Ac9c5c",
+   "node": "oop_root",
+   "combo": "QsJd",
+   "combo_index": 940,
+   "freq_indices": [
+    20,
+    0
+   ],
+   "percents": [
+    100,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 37,
+   "flop": "9c5d2h",
+   "node": "oop_vs_checkbet",
+   "combo": "9s9h",
+   "combo_index": 495,
+   "freq_indices": [
+    0,
+    6,
+    14,
+    0
+   ],
+   "percents": [
+    0,
+    30,
+    70,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 29,
+   "flop": "Tc8c3d",
+   "node": "oop_root",
+   "combo": "Jc2h",
+   "combo_index": 632,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 26,
+   "flop": "Kc7d3h",
+   "node": "ip_vs_bet",
+   "combo": "JhTs",
+   "combo_index": 738,
+   "freq_indices": [
+    11,
+    1,
+    8,
+    0
+   ],
+   "percents": [
+    55,
+    5,
+    40,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 1,
+   "flop": "Jc7c4c",
+   "node": "oop_root",
+   "combo": "Th3s",
+   "combo_index": 568,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_HJ_vs_BB",
+   "flop_index": 95,
+   "flop": "KcTc2d",
+   "node": "ip_vs_check",
+   "combo": "Qs6h",
+   "combo_index": 921,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_HJ_vs_BB",
+   "flop_index": 25,
+   "flop": "Ac8c4d",
+   "node": "oop_root",
+   "combo": "AdKc",
+   "combo_index": 1220,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 54,
+   "flop": "Kc5d5h",
+   "node": "ip_vs_check",
+   "combo": "Jc5h",
+   "combo_index": 644,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 50,
+   "flop": "7c5d2h",
+   "node": "oop_vs_checkbet",
+   "combo": "6h4h",
+   "combo_index": 163,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 40,
+   "flop": "Ac4c3d",
+   "node": "oop_vs_checkbet",
+   "combo": "Kc8d",
+   "combo_index": 971,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 99,
+   "flop": "QcJcTd",
+   "node": "ip_vs_bet",
+   "combo": "JcTd",
+   "combo_index": 663,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_SB_vs_BB",
+   "flop_index": 78,
+   "flop": "Qc8c4d",
+   "node": "ip_vs_check",
+   "combo": "5h2c",
+   "combo_index": 91,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 53,
+   "flop": "Kc5c5d",
+   "node": "ip_vs_check",
+   "combo": "TdTc",
+   "combo_index": 560,
+   "freq_indices": [
+    20,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    100,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_SB_vs_BB",
+   "flop_index": 6,
+   "flop": "AcJd3h",
+   "node": "ip_vs_check",
+   "combo": "QsJc",
+   "combo_index": 939,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 10,
+   "flop": "Qc8d6h",
+   "node": "oop_root",
+   "combo": "Qh3h",
+   "combo_index": 867,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 68,
+   "flop": "Jc7c7d",
+   "node": "ip_vs_check",
+   "combo": "5s2d",
+   "combo_index": 106,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 53,
+   "flop": "Kc5c5d",
+   "node": "oop_vs_checkbet",
+   "combo": "Tc7h",
+   "combo_index": 518,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 29,
+   "flop": "Tc8c3d",
+   "node": "oop_vs_checkbet",
+   "combo": "Qh4d",
+   "combo_index": 870,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 86,
+   "flop": "Jc9c8d",
+   "node": "oop_root",
+   "combo": "Ad2d",
+   "combo_index": 1177,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 12,
+   "flop": "8c8d5c",
+   "node": "ip_vs_check",
+   "combo": "Ts9c",
+   "combo_index": 623,
+   "freq_indices": [
+    0,
+    7,
+    13,
+    0
+   ],
+   "percents": [
+    0,
+    35,
+    65,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 63,
+   "flop": "Jc8c3d",
+   "node": "oop_vs_checkbet",
+   "combo": "8h4h",
+   "combo_index": 335,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_SB_vs_BB",
+   "flop_index": 11,
+   "flop": "8c8d5h",
+   "node": "ip_vs_bet",
+   "combo": "6s2c",
+   "combo_index": 171,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_HJ_vs_CO",
+   "flop_index": 70,
+   "flop": "Tc3c3d",
+   "node": "ip_vs_bet",
+   "combo": "Ad5h",
+   "combo_index": 1190,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 83,
+   "flop": "AcKd5h",
+   "node": "ip_vs_check",
+   "combo": "5s4c",
+   "combo_index": 113,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 88,
+   "flop": "KcJc9d",
+   "node": "oop_vs_checkbet",
+   "combo": "Tc6d",
+   "combo_index": 513,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 58,
+   "flop": "Tc6d4h",
+   "node": "ip_vs_check",
+   "combo": "Jd8s",
+   "combo_index": 693,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 10,
+   "flop": "Qc8d6h",
+   "node": "oop_root",
+   "combo": "7d5c",
+   "combo_index": 222,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 2,
+   "flop": "Kc8d6h",
+   "node": "oop_vs_checkbet",
+   "combo": "JhJc",
+   "combo_index": 739,
+   "freq_indices": [
+    0,
+    9,
+    11,
+    0
+   ],
+   "percents": [
+    0,
+    45,
+    55,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_SB_vs_BB",
+   "flop_index": 74,
+   "flop": "AcQcJd",
+   "node": "oop_vs_checkbet",
+   "combo": "KsJc",
+   "combo_index": 1117,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_SB_vs_BB",
+   "flop_index": 36,
+   "flop": "Kc7c6d",
+   "node": "oop_root",
+   "combo": "7c3c",
+   "combo_index": 194,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 2,
+   "flop": "Kc8d6h",
+   "node": "oop_vs_checkbet",
+   "combo": "QcJd",
+   "combo_index": 817,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_SB_vs_BB",
+   "flop_index": 6,
+   "flop": "AcJd3h",
+   "node": "ip_vs_bet",
+   "combo": "Tc7h",
+   "combo_index": 518,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_HJ_vs_BB",
+   "flop_index": 29,
+   "flop": "Tc8c3d",
+   "node": "oop_vs_checkbet",
+   "combo": "AhQs",
+   "combo_index": 1268,
+   "freq_indices": [
+    2,
+    17,
+    1,
+    0
+   ],
+   "percents": [
+    10,
+    85,
+    5,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 39,
+   "flop": "6c4c2d",
+   "node": "ip_vs_check",
+   "combo": "5h5c",
+   "combo_index": 103,
+   "freq_indices": [
+    19,
+    1,
+    0,
+    0
+   ],
+   "percents": [
+    95,
+    5,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_HJ_vs_CO",
+   "flop_index": 66,
+   "flop": "Ac6d3h",
+   "node": "oop_root",
+   "combo": "9d4d",
+   "combo_index": 415,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 69,
+   "flop": "KcKd5c",
+   "node": "ip_vs_bet",
+   "combo": "Ts6d",
+   "combo_index": 612,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 64,
+   "flop": "JcJd4h",
+   "node": "oop_root",
+   "combo": "Jd6d",
+   "combo_index": 683,
+   "freq_indices": [
+    5,
+    5,
+    5,
+    5
+   ],
+   "percents": [
+    25,
+    25,
+    25,
+    25
+   ]
+  },
+  {
+   "spot": "srp_HJ_vs_BB",
+   "flop_index": 32,
+   "flop": "Jc8d3h",
+   "node": "ip_vs_check",
+   "combo": "Qs3s",
+   "combo_index": 910,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 55,
+   "flop": "KcKdJc",
+   "node": "ip_vs_bet",
+   "combo": "4d3d",
+   "combo_index": 41,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 32,
+   "flop": "Jc8d3h",
+   "node": "oop_root",
+   "combo": "4s4c",
+   "combo_index": 63,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 94,
+   "flop": "Ac5d3h",
+   "node": "ip_vs_check",
+   "combo": "Jd9s",
+   "combo_index": 697,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 50,
+   "flop": "7c5d2h",
+   "node": "ip_vs_bet",
+   "combo": "9d3c",
+   "combo_index": 410,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 99,
+   "flop": "QcJcTd",
+   "node": "ip_vs_bet",
+   "combo": "7s7c",
+   "combo_index": 273,
+   "freq_indices": [
+    20,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    100,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 36,
+   "flop": "Kc7c6d",
+   "node": "oop_root",
+   "combo": "Qh5c",
+   "combo_index": 873,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 43,
+   "flop": "AcTc5d",
+   "node": "ip_vs_check",
+   "combo": "2s2h",
+   "combo_index": 5,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_HJ_vs_CO",
+   "flop_index": 32,
+   "flop": "Jc8d3h",
+   "node": "ip_vs_bet",
+   "combo": "Qc4c",
+   "combo_index": 788,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_HJ_vs_CO",
+   "flop_index": 74,
+   "flop": "AcQcJd",
+   "node": "ip_vs_check",
+   "combo": "4s2d",
+   "combo_index": 56,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 63,
+   "flop": "Jc8c3d",
+   "node": "oop_vs_checkbet",
+   "combo": "Tc7c",
+   "combo_index": 516,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 5,
+   "flop": "Ac9c5c",
+   "node": "oop_vs_checkbet",
+   "combo": "KhJh",
+   "combo_index": 1073,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 1,
+   "flop": "Jc7c4c",
+   "node": "ip_vs_check",
+   "combo": "8d4h",
+   "combo_index": 310,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_HJ_vs_CO",
+   "flop_index": 29,
+   "flop": "Tc8c3d",
+   "node": "oop_root",
+   "combo": "Ts5h",
+   "combo_index": 609,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_HJ_vs_CO",
+   "flop_index": 43,
+   "flop": "AcTc5d",
+   "node": "ip_vs_check",
+   "combo": "7c6h",
+   "combo_index": 208,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_HJ_vs_BB",
+   "flop_index": 62,
+   "flop": "Jc6c2d",
+   "node": "ip_vs_check",
+   "combo": "9h6h",
+   "combo_index": 453,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 52,
+   "flop": "8c6d5h",
+   "node": "ip_vs_check",
+   "combo": "7s4d",
+   "combo_index": 262,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_SB_vs_BB",
+   "flop_index": 43,
+   "flop": "AcTc5d",
+   "node": "ip_vs_bet",
+   "combo": "9d6s",
+   "combo_index": 425,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_SB_vs_BB",
+   "flop_index": 85,
+   "flop": "Ac9c2d",
+   "node": "ip_vs_check",
+   "combo": "KdTs",
+   "combo_index": 1025,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_HJ_vs_BB",
+   "flop_index": 35,
+   "flop": "JcTc8d",
+   "node": "ip_vs_bet",
+   "combo": "Qc5c",
+   "combo_index": 792,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 74,
+   "flop": "AcQcJd",
+   "node": "oop_root",
+   "combo": "7d3c",
+   "combo_index": 214,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_HJ_vs_CO",
+   "flop_index": 82,
+   "flop": "9c8d6h",
+   "node": "ip_vs_bet",
+   "combo": "Ad8h",
+   "combo_index": 1202,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 57,
+   "flop": "QcTd9h",
+   "node": "oop_vs_checkbet",
+   "combo": "Qs5d",
+   "combo_index": 916,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 7,
+   "flop": "7c6c4d",
+   "node": "oop_vs_checkbet",
+   "combo": "Kd3d",
+   "combo_index": 995,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 35,
+   "flop": "JcTc8d",
+   "node": "oop_vs_checkbet",
+   "combo": "5d4d",
+   "combo_index": 87,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 32,
+   "flop": "Jc8d3h",
+   "node": "ip_vs_check",
+   "combo": "Qd4d",
+   "combo_index": 829,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 22,
+   "flop": "8c4c2d",
+   "node": "ip_vs_bet",
+   "combo": "Th9c",
+   "combo_index": 589,
+   "freq_indices": [
+    0,
+    4,
+    16,
+    0
+   ],
+   "percents": [
+    0,
+    20,
+    80,
+    0
+   ]
+  },
+  {
+   "spot": "srp_SB_vs_BB",
+   "flop_index": 25,
+   "flop": "Ac8c4d",
+   "node": "ip_vs_bet",
+   "combo": "AsTs",
+   "combo_index": 1310,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 37,
+   "flop": "9c5d2h",
+   "node": "oop_vs_checkbet",
+   "combo": "Qd4c",
+   "combo_index": 828,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_SB_vs_BB",
+   "flop_index": 50,
+   "flop": "7c5d2h",
+   "node": "oop_vs_checkbet",
+   "combo": "Tc2h",
+   "combo_index": 498,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 37,
+   "flop": "9c5d2h",
+   "node": "oop_root",
+   "combo": "7h3h",
+   "combo_index": 237,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 41,
+   "flop": "Ac6c3d",
+   "node": "oop_vs_checkbet",
+   "combo": "9c8d",
+   "combo_index": 403,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 10,
+   "flop": "Qc8d6h",
+   "node": "ip_vs_bet",
+   "combo": "5h2h",
+   "combo_index": 93,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 39,
+   "flop": "6c4c2d",
+   "node": "ip_vs_check",
+   "combo": "9h3h",
+   "combo_index": 441,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 35,
+   "flop": "JcTc8d",
+   "node": "oop_vs_checkbet",
+   "combo": "KsQd",
+   "combo_index": 1122,
+   "freq_indices": [
+    0,
+    19,
+    1,
+    0
+   ],
+   "percents": [
+    0,
+    95,
+    5,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 54,
+   "flop": "Kc5d5h",
+   "node": "ip_vs_bet",
+   "combo": "8d3c",
+   "combo_index": 304,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_SB_vs_BB",
+   "flop_index": 56,
+   "flop": "QcTd6h",
+   "node": "ip_vs_check",
+   "combo": "AsJh",
+   "combo_index": 1313,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 79,
+   "flop": "Tc8c6d",
+   "node": "ip_vs_bet",
+   "combo": "6s2s",
+   "combo_index": 174,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 3,
+   "flop": "9c6c3d",
+   "node": "ip_vs_check",
+   "combo": "5h5d",
+   "combo_index": 104,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_HJ_vs_CO",
+   "flop_index": 44,
+   "flop": "Jc4d4h",
+   "node": "ip_vs_bet",
+   "combo": "Qc6d",
+   "combo_index": 797,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 27,
+   "flop": "KcQdTh",
+   "node": "oop_vs_checkbet",
+   "combo": "KhQs",
+   "combo_index": 1078,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_HJ_vs_BB",
+   "flop_index": 4,
+   "flop": "Jc8c5d",
+   "node": "oop_root",
+   "combo": "Ks7d",
+   "combo_index": 1102,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_HJ_vs_CO",
+   "flop_index": 5,
+   "flop": "Ac9c5c",
+   "node": "ip_vs_bet",
+   "combo": "Kc3h",
+   "combo_index": 952,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 94,
+   "flop": "Ac5d3h",
+   "node": "oop_root",
+   "combo": "Qs4s",
+   "combo_index": 914,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 25,
+   "flop": "Ac8c4d",
+   "node": "oop_vs_checkbet",
+   "combo": "Tc3s",
+   "combo_index": 503,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_HJ_vs_CO",
+   "flop_index": 85,
+   "flop": "Ac9c2d",
+   "node": "ip_vs_bet",
+   "combo": "8s6s",
+   "combo_index": 370,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 41,
+   "flop": "Ac6c3d",
+   "node": "ip_vs_bet",
+   "combo": "6s5d",
+   "combo_index": 184,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 60,
+   "flop": "AcQcTd",
+   "node": "oop_root",
+   "combo": "QcJh",
+   "combo_index": 818,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 47,
+   "flop": "QcTc4d",
+   "node": "ip_vs_check",
+   "combo": "JsJh",
+   "combo_index": 779,
+   "freq_indices": [
+    19,
+    1,
+    0,
+    0
+   ],
+   "percents": [
+    95,
+    5,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 53,
+   "flop": "Kc5c5d",
+   "node": "oop_vs_checkbet",
+   "combo": "9h2c",
+   "combo_index": 435,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 32,
+   "flop": "Jc8d3h",
+   "node": "oop_vs_checkbet",
+   "combo": "Tc5s",
+   "combo_index": 511,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_HJ_vs_BB",
+   "flop_index": 19,
+   "flop": "Tc6c4d",
+   "node": "ip_vs_bet",
+   "combo": "5c2s",
+   "combo_index": 69,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 73,
+   "flop": "AcKc3d",
+   "node": "ip_vs_check",
+   "combo": "Qh4c",
+   "combo_index": 869,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_SB_vs_BB",
+   "flop_index": 98,
+   "flop": "8c8d8h",
+   "node": "oop_root",
+   "combo": "8d3s",
+   "combo_index": 307,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 55,
+   "flop": "KcKdJc",
+   "node": "oop_vs_checkbet",
+   "combo": "Jc3c",
+   "combo_index": 634,
+   "freq_indices": [
+    5,
+    5,
+    5,
+    5
+   ],
+   "percents": [
+    25,
+    25,
+    25,
+    25
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 70,
+   "flop": "Tc3c3d",
+   "node": "ip_vs_bet",
+   "combo": "Qh2c",
+   "combo_index": 861,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 43,
+   "flop": "AcTc5d",
+   "node": "ip_vs_check",
+   "combo": "Kh6c",
+   "combo_index": 1051,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 92,
+   "flop": "Jc9c8c",
+   "node": "oop_root",
+   "combo": "6c2h",
+   "combo_index": 122,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 44,
+   "flop": "Jc4d4h",
+   "node": "ip_vs_check",
+   "combo": "5c3h",
+   "combo_index": 72,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 67,
+   "flop": "Ac9d3h",
+   "node": "oop_vs_checkbet",
+   "combo": "As9d",
+   "combo_index": 1304,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 57,
+   "flop": "QcTd9h",
+   "node": "oop_root",
+   "combo": "Qh2d",
+   "combo_index": 862,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 55,
+   "flop": "KcKdJc",
+   "node": "ip_vs_bet",
+   "combo": "Qc4h",
+   "combo_index": 790,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_SB_vs_BB",
+   "flop_index": 37,
+   "flop": "9c5d2h",
+   "node": "ip_vs_bet",
+   "combo": "AsJc",
+   "combo_index": 1311,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_SB_vs_BB",
+   "flop_index": 87,
+   "flop": "Kc4c2d",
+   "node": "ip_vs_check",
+   "combo": "Qd7c",
+   "combo_index": 840,
+   "freq_indices": [
+    0,
+    0,
+    14,
+    6
+   ],
+   "percents": [
+    0,
+    0,
+    70,
+    30
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 21,
+   "flop": "6c3c3d",
+   "node": "oop_vs_checkbet",
+   "combo": "9s3s",
+   "combo_index": 472,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 89,
+   "flop": "QcTc2d",
+   "node": "oop_root",
+   "combo": "As7s",
+   "combo_index": 1298,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 49,
+   "flop": "QcTd3h",
+   "node": "ip_vs_bet",
+   "combo": "AhKc",
+   "combo_index": 1269,
+   "freq_indices": [
+    0,
+    0,
+    15,
+    5
+   ],
+   "percents": [
+    0,
+    0,
+    75,
+    25
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 2,
+   "flop": "Kc8d6h",
+   "node": "oop_root",
+   "combo": "9s6c",
+   "combo_index": 481,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 38,
+   "flop": "Tc8d7h",
+   "node": "ip_vs_bet",
+   "combo": "8h5d",
+   "combo_index": 338,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 99,
+   "flop": "QcJcTd",
+   "node": "ip_vs_bet",
+   "combo": "AhTd",
+   "combo_index": 1258,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 96,
+   "flop": "KcTc9c",
+   "node": "ip_vs_bet",
+   "combo": "3h2c",
+   "combo_index": 15,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 61,
+   "flop": "Jc5c2d",
+   "node": "ip_vs_bet",
+   "combo": "6h2s",
+   "combo_index": 156,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_HJ_vs_CO",
+   "flop_index": 66,
+   "flop": "Ac6d3h",
+   "node": "oop_root",
+   "combo": "6c2h",
+   "combo_index": 122,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 83,
+   "flop": "AcKd5h",
+   "node": "ip_vs_bet",
+   "combo": "Qd4s",
+   "combo_index": 831,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 61,
+   "flop": "Jc5c2d",
+   "node": "oop_vs_checkbet",
+   "combo": "Kc7s",
+   "combo_index": 969,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 96,
+   "flop": "KcTc9c",
+   "node": "oop_vs_checkbet",
+   "combo": "7d4c",
+   "combo_index": 218,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 9,
+   "flop": "JcJd6c",
+   "node": "ip_vs_bet",
+   "combo": "Kc9c",
+   "combo_index": 974,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 70,
+   "flop": "Tc3c3d",
+   "node": "oop_root",
+   "combo": "Td9h",
+   "combo_index": 558,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 78,
+   "flop": "Qc8c4d",
+   "node": "ip_vs_bet",
+   "combo": "Kh5d",
+   "combo_index": 1048,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 42,
+   "flop": "AcJd7h",
+   "node": "ip_vs_bet",
+   "combo": "Jh5s",
+   "combo_index": 718,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 3,
+   "flop": "9c6c3d",
+   "node": "ip_vs_bet",
+   "combo": "Jc3s",
+   "combo_index": 637,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_HJ_vs_BB",
+   "flop_index": 18,
+   "flop": "Qc8c6d",
+   "node": "ip_vs_bet",
+   "combo": "6h2c",
+   "combo_index": 153,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 15,
+   "flop": "Jc4c2d",
+   "node": "oop_vs_checkbet",
+   "combo": "Ah9c",
+   "combo_index": 1253,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 62,
+   "flop": "Jc6c2d",
+   "node": "oop_root",
+   "combo": "Ks7h",
+   "combo_index": 1103,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_SB_vs_BB",
+   "flop_index": 88,
+   "flop": "KcJc9d",
+   "node": "ip_vs_bet",
+   "combo": "Ts2s",
+   "combo_index": 598,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 55,
+   "flop": "KcKdJc",
+   "node": "ip_vs_check",
+   "combo": "AdKh",
+   "combo_index": 1222,
+   "freq_indices": [
+    0,
+    5,
+    14,
+    1
+   ],
+   "percents": [
+    0,
+    25,
+    70,
+    5
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 5,
+   "flop": "Ac9c5c",
+   "node": "oop_vs_checkbet",
+   "combo": "AhKc",
+   "combo_index": 1269,
+   "freq_indices": [
+    0,
+    1,
+    15,
+    4
+   ],
+   "percents": [
+    0,
+    5,
+    75,
+    20
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 57,
+   "flop": "QcTd9h",
+   "node": "ip_vs_bet",
+   "combo": "Qh9s",
+   "combo_index": 892,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 42,
+   "flop": "AcJd7h",
+   "node": "ip_vs_bet",
+   "combo": "Qh9d",
+   "combo_index": 890,
+   "freq_indices": [
+    20,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    100,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 96,
+   "flop": "KcTc9c",
+   "node": "oop_root",
+   "combo": "Kd7h",
+   "combo_index": 1012,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 74,
+   "flop": "AcQcJd",
+   "node": "ip_vs_bet",
+   "combo": "Qd4s",
+   "combo_index": 831,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 39,
+   "flop": "6c4c2d",
+   "node": "ip_vs_bet",
+   "combo": "6s4s",
+   "combo_index": 182,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 47,
+   "flop": "QcTc4d",
+   "node": "oop_vs_checkbet",
+   "combo": "Td2s",
+   "combo_index": 531,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 80,
+   "flop": "9c7d2h",
+   "node": "oop_root",
+   "combo": "4c2s",
+   "combo_index": 31,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_SB_vs_BB",
+   "flop_index": 23,
+   "flop": "8c6c2d",
+   "node": "ip_vs_check",
+   "combo": "6c4d",
+   "combo_index": 129,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 78,
+   "flop": "Qc8c4d",
+   "node": "oop_vs_checkbet",
+   "combo": "4d3s",
+   "combo_index": 43,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_SB_vs_BB",
+   "flop_index": 93,
+   "flop": "Ac4d2h",
+   "node": "oop_root",
+   "combo": "Qh9s",
+   "combo_index": 892,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 16,
+   "flop": "Kc8c3d",
+   "node": "oop_root",
+   "combo": "5d3d",
+   "combo_index": 83,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_SB_vs_BB",
+   "flop_index": 17,
+   "flop": "KcJc6d",
+   "node": "ip_vs_check",
+   "combo": "Ad9s",
+   "combo_index": 1207,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 62,
+   "flop": "Jc6c2d",
+   "node": "ip_vs_bet",
+   "combo": "KhJh",
+   "combo_index": 1073,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 41,
+   "flop": "Ac6c3d",
+   "node": "ip_vs_check",
+   "combo": "KhJh",
+   "combo_index": 1073,
+   "freq_indices": [
+    18,
+    2,
+    0,
+    0
+   ],
+   "percents": [
+    90,
+    10,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 97,
+   "flop": "QcTc7d",
+   "node": "oop_root",
+   "combo": "7d6s",
+   "combo_index": 229,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_SB_vs_BB",
+   "flop_index": 28,
+   "flop": "Qc7c3d",
+   "node": "oop_vs_checkbet",
+   "combo": "5h2h",
+   "combo_index": 93,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 55,
+   "flop": "KcKdJc",
+   "node": "oop_root",
+   "combo": "Js3h",
+   "combo_index": 747,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 65,
+   "flop": "5c4d2h",
+   "node": "ip_vs_check",
+   "combo": "Th9h",
+   "combo_index": 591,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    20
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    100
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 94,
+   "flop": "Ac5d3h",
+   "node": "oop_vs_checkbet",
+   "combo": "Qs3s",
+   "combo_index": 910,
+   "freq_indices": [
+    13,
+    2,
+    5,
+    0
+   ],
+   "percents": [
+    65,
+    10,
+    25,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 80,
+   "flop": "9c7d2h",
+   "node": "oop_root",
+   "combo": "9d4c",
+   "combo_index": 414,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 75,
+   "flop": "Kc9c7d",
+   "node": "ip_vs_bet",
+   "combo": "8d7d",
+   "combo_index": 321,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 1,
+   "flop": "Jc7c4c",
+   "node": "oop_vs_checkbet",
+   "combo": "6c5h",
+   "combo_index": 134,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 1,
+   "flop": "Jc7c4c",
+   "node": "ip_vs_bet",
+   "combo": "Tc6c",
+   "combo_index": 512,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 69,
+   "flop": "KcKd5c",
+   "node": "oop_vs_checkbet",
+   "combo": "3h3d",
+   "combo_index": 20,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_SB_vs_BB",
+   "flop_index": 11,
+   "flop": "8c8d5h",
+   "node": "ip_vs_check",
+   "combo": "AdTd",
+   "combo_index": 1209,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    20
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    100
+   ]
+  },
+  {
+   "spot": "3bp_HJ_vs_CO",
+   "flop_index": 53,
+   "flop": "Kc5c5d",
+   "node": "oop_vs_checkbet",
+   "combo": "Ks6s",
+   "combo_index": 1100,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_SB_vs_BB",
+   "flop_index": 53,
+   "flop": "Kc5c5d",
+   "node": "oop_vs_checkbet",
+   "combo": "6h3c",
+   "combo_index": 157,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 86,
+   "flop": "Jc9c8d",
+   "node": "ip_vs_bet",
+   "combo": "8c6c",
+   "combo_index": 292,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_SB_vs_BB",
+   "flop_index": 13,
+   "flop": "6c3d3h",
+   "node": "oop_root",
+   "combo": "Th6c",
+   "combo_index": 577,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_UTG_vs_BB",
+   "flop_index": 24,
+   "flop": "9c7c6d",
+   "node": "oop_root",
+   "combo": "Tc8d",
+   "combo_index": 521,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_CO_vs_BTN",
+   "flop_index": 0,
+   "flop": "AcJc8d",
+   "node": "ip_vs_check",
+   "combo": "9s3s",
+   "combo_index": 472,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 90,
+   "flop": "Tc9c7d",
+   "node": "ip_vs_check",
+   "combo": "4c2c",
+   "combo_index": 28,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 70,
+   "flop": "Tc3c3d",
+   "node": "oop_root",
+   "combo": "8h8c",
+   "combo_index": 349,
+   "freq_indices": [
+    20,
+    0
+   ],
+   "percents": [
+    100,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 85,
+   "flop": "Ac9c2d",
+   "node": "oop_vs_checkbet",
+   "combo": "Ad2s",
+   "combo_index": 1179,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_BTN_vs_BB",
+   "flop_index": 9,
+   "flop": "JcJd6c",
+   "node": "ip_vs_bet",
+   "combo": "5d3d",
+   "combo_index": 83,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "4bp_CO_vs_BTN",
+   "flop_index": 8,
+   "flop": "Jc4d2h",
+   "node": "ip_vs_bet",
+   "combo": "AsJd",
+   "combo_index": 1312,
+   "freq_indices": [
+    0,
+    13,
+    7,
+    0
+   ],
+   "percents": [
+    0,
+    65,
+    35,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 2,
+   "flop": "Kc8d6h",
+   "node": "oop_vs_checkbet",
+   "combo": "Th9s",
+   "combo_index": 592,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 79,
+   "flop": "Tc8c6d",
+   "node": "oop_vs_checkbet",
+   "combo": "Kh2c",
+   "combo_index": 1035,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_BTN_vs_BB",
+   "flop_index": 22,
+   "flop": "8c4c2d",
+   "node": "oop_root",
+   "combo": "AsQd",
+   "combo_index": 1316,
+   "freq_indices": [
+    19,
+    1
+   ],
+   "percents": [
+    95,
+    5
+   ]
+  },
+  {
+   "spot": "3bp_HJ_vs_CO",
+   "flop_index": 26,
+   "flop": "Kc7d3h",
+   "node": "ip_vs_check",
+   "combo": "4c2h",
+   "combo_index": 30,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 56,
+   "flop": "QcTd6h",
+   "node": "ip_vs_check",
+   "combo": "KcQh",
+   "combo_index": 988,
+   "freq_indices": [
+    10,
+    5,
+    5,
+    0
+   ],
+   "percents": [
+    50,
+    25,
+    25,
+    0
+   ]
+  },
+  {
+   "spot": "srp_CO_vs_BB",
+   "flop_index": 43,
+   "flop": "AcTc5d",
+   "node": "ip_vs_bet",
+   "combo": "Ad7s",
+   "combo_index": 1199,
+   "freq_indices": [
+    0,
+    13,
+    7,
+    0
+   ],
+   "percents": [
+    0,
+    65,
+    35,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 65,
+   "flop": "5c4d2h",
+   "node": "oop_root",
+   "combo": "9h8d",
+   "combo_index": 460,
+   "freq_indices": [
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "srp_UTG_vs_BB",
+   "flop_index": 44,
+   "flop": "Jc4d4h",
+   "node": "oop_vs_checkbet",
+   "combo": "QdTs",
+   "combo_index": 855,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "spot": "3bp_BTN_vs_BB",
+   "flop_index": 66,
+   "flop": "Ac6d3h",
+   "node": "ip_vs_bet",
+   "combo": "Tc4d",
+   "combo_index": 505,
+   "freq_indices": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "percents": [
+    0,
+    0,
+    0,
+    0
+   ]
+  }
+ ]
+}
