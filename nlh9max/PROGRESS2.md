@@ -1,1 +1,2 @@
 - main round 1: RFI 8.5/10.8/13.0/16.5/25.0/46.7/48.3; largest move 4.13
+- main round 2: RFI 10.1/11.6/14.0/17.1/24.5/45.6/49.8; largest move 1.62
