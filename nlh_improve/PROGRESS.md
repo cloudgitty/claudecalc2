@@ -53,3 +53,5 @@
   iterations ~1.5-1.7 h; loop rounds 600 warm-started iterations ~10-12 min.
 - **Flops:** all 100 in every final pass. Plans: plan_100.json, plan_200.json, plan_300.json.
 - 22:00 container restart; pipeline resumed (river SB vs BB Kc9c7d from its 21:27 checkpoint, ~30 min lost)
+- 06:24 (Nov 7) container restart during main round 1 (calibration solves 173/390 of the 50-flop group done); pipeline resumed, solves in flight lost (~5 min)
+- Budget (Nov 7): a main-loop round at 100bb takes ~6.5 h (30/50 flops per spot, two raises, ~490 solves), so 100bb Phase C is ~100+ h instead of ~18 h. Asked the user; decision: keep the plan as is (30/50 flops, full rake-variant loops).
