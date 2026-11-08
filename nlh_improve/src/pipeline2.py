@@ -293,7 +293,24 @@ def main():
             f.write(f"- polish (R on all 100 flops): largest RFI move {move:.2f}\n")
         commit(f"{os.path.basename(os.getcwd())}: polish on all flops (move {move:.2f})")
         log(f"polish: largest RFI move {move:.2f}")
-    # 7: rake variants
+    # 6b: the plan's extra round when polish moved a width by more than 0.5 points: a second full
+    #     100-flop pass on the polished ranges, refit (averaged with the polish fit), re-solve
+    pmove = max(abs(a - b) for a, b in zip(widths("work2/polish/summary.json"), widths("work2/final/summary.json")))
+    if pmove > 0.5 and not done("work2/polish2/summary.json"):
+        os.makedirs("work2/polish2", exist_ok=True)
+        if not done("work2/polish2/rfile.bin"):
+            py("spots.py", "work2/polish/pre work2/polish2/ranges", out="work2/polish2/spots.txt")
+            py("run_postflop.py", "work2/polish2/ranges work2/polish2/solves all all 4", out="work2/polish2/solves.log")
+            fit_round(plan, "work2/polish2", "work2/polish/pre", "work2/polish2/ranges", "work2/polish2/solves", {},
+                      ["work2/polish/rfile_raw.bin"])
+        preflop("work2/polish2", plan["final_iterations"], "work2/polish2/rfile.bin", "work2/polish/pre.state")
+        keep("work2/polish2", "polish2", milestone=True)
+        move2 = max(abs(a - b) for a, b in zip(widths("work2/polish2/summary.json"), widths("work2/polish/summary.json")))
+        with open("PROGRESS2.md", "a") as f:
+            f.write(f"- polish round 2 (second 100-flop pass): largest RFI move {move2:.2f}\n")
+        commit(f"{os.path.basename(os.getcwd())}: polish round 2 (move {move2:.2f})")
+        log(f"polish round 2: largest RFI move {move2:.2f}")
+    # 7: rake variants (controls; they start from the first polish, which they began from)
     for tag, rk in (("rake0", (0.0, 0.0)), ("cap3", (0.10, 3.0)), ("pct5", (0.05, 5.0))):
         last_v, conv_v = loop(plan, tag, "work2/polish/pre", rake=rk)
         log(f"variant {tag} {'converged' if conv_v else 'at the round cap'}: {last_v}")
