@@ -25,3 +25,4 @@
 - cap3 round 3: RFI 9.1/11.4/13.4/17.6/25.9/47.1/43.9; largest move 0.55
 - cap3 round 4: RFI 9.1/11.3/13.5/17.1/25.4/47.0/46.8; largest move 2.96
 - cap3 round 5: RFI 9.1/11.5/13.6/17.2/25.6/46.3/46.8; largest move 0.70
+- cap3 round 6: RFI 9.1/11.4/13.5/17.4/25.4/45.2/47.1; largest move 1.12
