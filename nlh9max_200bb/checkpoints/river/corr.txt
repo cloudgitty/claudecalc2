@@ -1,0 +1,8 @@
+3bp_CO_vs_BTN CO: mean correction 0.872, buckets 1.01 / 0.82 / 0.78 / 0.87 / 0.83; realised share turn-end 0.458 river 0.401
+3bp_CO_vs_BTN BTN: mean correction 1.163, buckets 1.21 / 1.32 / 1.13 / 1.09 / 1.11; realised share turn-end 0.417 river 0.471
+srp_BTN_vs_BB BB: mean correction 0.830, buckets 0.74 / 0.74 / 0.99 / 0.92 / 0.84; realised share turn-end 0.377 river 0.307
+srp_BTN_vs_BB BTN: mean correction 1.171, buckets 1.27 / 1.39 / 1.01 / 1.07 / 1.09; realised share turn-end 0.440 river 0.477
+group 3bp|0|0: 1.01 / 0.82 / 0.78 / 0.87 / 0.83
+group 3bp|1|1: 1.21 / 1.32 / 1.13 / 1.09 / 1.11
+group srp|0|0: 0.74 / 0.74 / 0.99 / 0.92 / 0.84
+group srp|1|1: 1.27 / 1.39 / 1.01 / 1.07 / 1.09
