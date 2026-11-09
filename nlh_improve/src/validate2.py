@@ -7,7 +7,7 @@ usage (from a build folder): python3 ../nlh_improve/src/validate2.py [validation
  2 convergence log: the main loop and every rake variant must show RFI moves <= 0.5 points for two
    rounds in a row (from work2/pipeline2.log)
  3 river error: on the river-sampled flops, the correction to R (river R / turn-end R) and the
-   change of the four root strategies between the turn-end and the river solves (mean absolute
+   change of the first decisions (OOP root, IP after a check) between the turn-end and the river solves (mean absolute
    frequency difference, reach-weighted, in points)
 """
 import glob
@@ -73,8 +73,14 @@ def river_error(lines):
         if not os.path.exists(q):
             continue
         a, b = read_solve(q), read_solve(p)
-        for na, nb in zip(a["nodes"], b["nodes"]):
-            if na is None or nb is None or na["strat"].shape != nb["strat"].shape:
+        # only the two decisions whose reach is the player's whole range: OOP's first action (node 0)
+        # and IP's reply to a check (the first IP node in depth-first order; check sorts first)
+        first_ip = next((i for i, n in enumerate(a["nodes"]) if n is not None and n["player"] == 1), None)
+        for k in (0, first_ip):
+            if k is None:
+                continue
+            na, nb = a["nodes"][k], b["nodes"][k]
+            if na is None or nb is None or na["strat"].shape != nb["strat"].shape or na["actions"] != nb["actions"]:
                 continue
             w = a["ranges"][na["player"]]
             if w.sum() <= 0:
@@ -84,7 +90,7 @@ def river_error(lines):
     if diffs:
         lines.append(f"- river error on the root strategies: mean {np.mean(diffs):.1f} points, worst node "
                      f"{max(diffs):.1f} points of frequency moved between the turn-end and the river solves "
-                     f"({len(diffs)} root nodes); the stored strategies are turn-end solves")
+                     f"({len(diffs)} first decisions: OOP root and IP after a check); the stored strategies are turn-end solves")
     return True
 
 
