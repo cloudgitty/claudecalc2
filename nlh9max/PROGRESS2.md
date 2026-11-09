@@ -38,3 +38,4 @@
 - pct5 round 6: RFI 9.3/11.4/14.1/17.6/25.7/48.1/46.7; largest move 0.62
 - pct5 round 7: RFI 9.2/11.9/14.4/17.8/25.7/47.7/49.9; largest move 3.15
 - pct5 round 8: RFI 9.3/12.1/14.7/17.8/25.6/47.4/52.4; largest move 2.49
+- pct5 round 9: RFI 9.4/12.3/14.5/17.6/25.7/47.7/52.2; largest move 0.28
