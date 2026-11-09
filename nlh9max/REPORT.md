@@ -6,6 +6,74 @@ postflop game is solved heads-up on a sample of flops, to the end of the turn, w
 replaced by an equity showdown. Every abstraction below is stated with the error measured for
 it, where it could be measured. `PROGRESS.md` has the stage log.
 
+> **Improvement update (November 2026).** The outputs in this folder (`preflop.json`,
+> `preflop_ev.bin`, `postflop/*.bin.gz`, `test_vectors.json`, `validation.md`, `rake_report.md`) were
+> rebuilt with the improvement plan (`../NLH_IMPROVEMENT_PLAN.md`, items 1-8). Formats and the
+> `combos.json` enumeration are unchanged. Section 0 below describes what changed and what was
+> measured; sections 1-9 describe the original build and stay as its record where section 0 does not
+> supersede them. The improved engine is `../nlh_improve/` (its `PROGRESS.md` has the engineering
+> and gate log); this run's log is `PROGRESS2.md`, its durable checkpoints are in `checkpoints/`.
+
+## 0. Improvement update: what changed and what was measured
+
+| # | Change | Result at 100bb |
+| --- | --- | --- |
+| 1 | R refitted on all 100 flops (polish) | Two polish rounds; the second moved the RFI widths by up to 1.67 points (mostly SB) |
+| 2 | Converged preflop <-> R loop, running average of R, 30 calibration flops per spot (50 for SB vs BB, BTN vs BB) | **Not met.** 10 rounds (cap); largest RFI moves 4.13, 1.62, 1.37, 1.11, 0.62, 1.10, 0.62, 0.61, 0.87, 0.40. From round 5 on the widths oscillate within about +/-0.6-0.9 points with no drift (calibration-flop noise) |
+| 3 | Rake variants (rake 0, cap 3bb, rake 5%) through the same loop | **Not met** for any of the three in 10 rounds (last moves 1.10, 1.11, 1.96); the rake-free BTN was still widening by ~1 point per round at the cap |
+| 4 | Hand-type features (pair, suited, connected, suited ace, broadway) in the R regression for unsolved spots | Used for every terminal without its own solves |
+| 5 | Money-conserving payoffs (card removal only between players who meet; folded players as scalar masses) | Summed EV at rake 0, R = 1: **-0.023** bb per hand (was +0.066); the 0.02 tolerance is narrowly missed |
+| 6 | Un-pruned preflop tree: cold 4-bets and 3-way 3-bet pots | 112,379 nodes (was 8,057); 5,000 iterations ~1.5 h on 4 cores |
+| 7 | Two postflop raises per street | Everywhere (1.6-1.9x cost per solve) |
+| 8 | River correction: reduced river tree (66% + all-in, no river raises) on 4 spots x 4 flops, ratio river R / turn-end R per bucket and hand class | Measured; see below. Stored postflop strategies stay turn-end solves |
+
+**Main result (opening widths, % of combos)**
+
+| | UTG | UTG1 | LJ | HJ | CO | BTN | SB | SB limp |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Original build | 9.3 | 11.5 | 14.7 | 16.2 | 25.1 | 37.7 | 46.1 | 4.1 |
+| **Improved** | **9.1** | **11.8** | **14.2** | **18.2** | **26.3** | **45.7** | **48.9** | **0.0** |
+| Residual swing (last rounds) | +/-0.3 | +/-0.3 | +/-0.4 | +/-0.6 | +/-0.6 | +/-0.6 | +/-1.5 | |
+
+Other changes against the original build: BB vs CO open now 3-bet-or-fold (call 7.1 -> 0.0, 3-bet
+10.5 -> 11.1); CO vs a BTN 3-bet no longer calls (14.5 -> 0.1); BB vs SB 3-bets more (28.1 -> 30.3).
+Preflop best response: worst seat 0.081 bb/100.
+
+**River correction (item 8).** Realised share of the pot, turn-end model -> river solve:
+BTN vs BB single-raised: BTN 0.354 -> 0.451 (R x1.35), BB 0.525 -> 0.401 (x0.77); SB vs BB: SB
+0.375 -> 0.343 (x0.88), BB 0.450 -> 0.462 (x1.05); CO vs BTN 3-bet pot: CO 0.324 -> 0.286 (x0.83),
+BTN 0.520 -> 0.560 (x1.20). The turn-end model understates how much the player in position and the
+preflop raiser realise; this is the main reason the BTN opens 8 points wider than before. Limits:
+SB vs BB on 7c5d2h did not fit in memory (19.6 GB compact), so that spot uses 3 flops; BTN vs BB
+3-bet pots had no calling range in the start solution (0.04 combos), so 3-bet pots where the caller
+is in position, or the 3-bettor out of position, use the single-raised groups with the same
+position and role. The river solves are capped at 400 iterations (0.2-2.9% of the pot).
+
+**River error in the stored strategies.** On the river-sampled flops the first decisions (OOP root,
+IP after a check) move by **25 points of frequency on average** (worst 74) between the turn-end
+and the river solve. The largest single effect: BB leading into a BTN open. The turn-end model
+leads 39% on average over the 100 flops (more than 80% on 20 flops; the original build: 33% and
+21 flops); with the river played BB mostly checks. Treat BB donk-lead frequencies in
+`postflop/srp_*_vs_BB.bin.gz` as an artefact of the turn-end abstraction.
+
+**Rake (output C, `rake_report.md`).** Rake 0 vs rake 10% / 5bb: BTN 53.9 vs 45.7, SB 42.2 vs 48.9,
+UTG1/LJ/HJ about 1 point narrower without rake, UTG and CO about the same; BB vs SB open calls
+30.3% without rake vs 4.9% with it. Rake makes the blinds fold more (their calls pay the rake
+most), so the late-position steals widen with rake in this model and the BTN only tightens against
+the rake-free control. The check "rake tightens every non-blind RFI range" fails (it failed in the
+original build too).
+
+**Validation (`validation.md`).** Format, packing and round-trip checks pass. Failures: in-position
+3-bet-or-fold (no flats; as in the original build), rake-tightening (above), payoff conservation
+-0.023 vs 0.02, the four convergence rules (above), and postflop exploitability: 2 of 900 final
+solves end above 0.5% of the pot (worst 0.955%). Across all 100bb runs 11 of 17,960 solves hit
+the divergence guard; all are in spots whose calling range is almost empty (BTN/CO/BB flatting a
+UTG or CO open, 0-0.5% of hands), so their weight in the R fit and the preflop is negligible.
+
+**Compute.** Phase C+D at 100bb: 6 Nov 15:33 - 9 Nov 13:36 UTC, about 70 hours wall clock on 4
+cores (~280 core-hours) including the river calibration (~8 h), 10 main rounds, 2 polish rounds,
+30 variant rounds and the final pass; about 2 h were lost to three container restarts.
+
 ## 1. Game and parameters
 
 All parameters are in `config.json`. The table in the task lists eight seats (UTG, UTG1, LJ,
