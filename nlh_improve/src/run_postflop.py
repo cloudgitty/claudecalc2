@@ -40,7 +40,7 @@ def main():
     flops = json.load(open("flops.json"))["flops"]
     cfg = json.load(open(os.environ.get("NLH_CONFIG", "config.json")))
     # solver options from the config (improvement plan items 7 and 8); RIVER=1 solves to the river
-    extra = [f"maxraises={cfg.get('postflop_max_raises', 1)}",
+    extra = [f"maxraises={os.environ.get('MAXRAISES') or cfg.get('postflop_max_raises', 1)}",
              f"allin_extra={cfg.get('postflop_allin_extra_frac', 0.0)}",
              f"turnend={0 if os.environ.get('RIVER') == '1' else 1}",
              f"ckpt={os.environ.get('CKPT_S', '600')}"]

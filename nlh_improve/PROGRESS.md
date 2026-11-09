@@ -55,3 +55,7 @@
 - 22:00 container restart; pipeline resumed (river SB vs BB Kc9c7d from its 21:27 checkpoint, ~30 min lost)
 - 06:24 (Nov 7) container restart during main round 1 (calibration solves 173/390 of the 50-flop group done); pipeline resumed, solves in flight lost (~5 min)
 - Budget (Nov 7): a main-loop round at 100bb takes ~6.5 h (30/50 flops per spot, two raises, ~490 solves), so 100bb Phase C is ~100+ h instead of ~18 h. Asked the user; decision: keep the plan as is (30/50 flops, full rake-variant loops).
+- 200bb river step (Nov 9): with two postflop raises, 7 of 8 single-raised river solves need 12.5-21 GB
+  (limit 12.5 GB) and were skipped. Decision: single-raised pots are measured with ONE postflop raise
+  on both sides of the ratio (turn-end and river), plan key `river_srp_max_raises`; 3-bet pots keep two.
+  Needs at 200bb: 7.1-7.6 GB (7c5d2h: BTN 11.8 GB, SB 12.55 GB -> skipped). Same setting for 300bb.

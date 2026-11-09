@@ -248,14 +248,24 @@ def main():
         py("spots.py", f"{start} work2/river/ranges", out="work2/river/spots.txt")
         fl = sorted({int(i * 100 / plan["river_flops"]) for i in range(plan["river_flops"])})
         rs = plan.get("river_spots")
-        solve_calib(plan, "work2/river/ranges", "work2/river/turn", {}, fl, rs)
         renv = {"RIVER": "1", "MEM_MB": str(plan.get("river_mem_mb", 3500))}
         for k, e in (("river_threads", "THREADS"), ("river_maxit", "MAXIT")):
             if plan.get(k):
                 renv[e] = str(plan[k])
         if plan.get("river_reduced"):
             renv["RIVER_REDUCED"] = str(plan["river_reduced"])
-        solve_calib(plan, "work2/river/ranges", "work2/river/river", renv, fl, rs, plan.get("river_jobs", 4))
+        # river_srp_max_raises: single-raised pots measured with fewer postflop raises on BOTH sides of
+        # the ratio (turn-end and river), so their river solves fit in memory
+        groups = [(rs, {})]
+        if plan.get("river_srp_max_raises"):
+            srp = [s for s in (rs or []) if s.startswith("srp_")]
+            groups = [([s for s in rs if s not in srp], {}), (srp, {"MAXRAISES": str(plan["river_srp_max_raises"])})]
+        for spots_, extra in groups:
+            if not spots_:
+                continue
+            solve_calib(plan, "work2/river/ranges", "work2/river/turn", dict(extra), fl, spots_)
+            solve_calib(plan, "work2/river/ranges", "work2/river/river", {**renv, **extra}, fl, spots_,
+                        plan.get("river_jobs", 4))
         py("fit_r.py", "work2/river/ranges work2/river/turn work2/river/fit_turn.json", out="work2/river/fit.txt")
         py("fit_r.py", "work2/river/ranges work2/river/river work2/river/fit_river.json", out="work2/river/fit.txt")
         py("river_corr.py", "work2/river/fit_turn.json work2/river/fit_river.json work2/river/corr.json",
