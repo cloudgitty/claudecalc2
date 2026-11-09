@@ -59,3 +59,4 @@
   (limit 12.5 GB) and were skipped. Decision: single-raised pots are measured with ONE postflop raise
   on both sides of the ratio (turn-end and river), plan key `river_srp_max_raises`; 3-bet pots keep two.
   Needs at 200bb: 7.1-7.6 GB (7c5d2h: BTN 11.8 GB, SB 12.55 GB -> skipped). Same setting for 300bb.
+- 200bb river correction done (Nov 9 22:53): measured srp_BTN_vs_BB (BTN x1.17, BB x0.83) and 3bp_CO_vs_BTN (BTN x1.16, CO x0.87). srp_SB_vs_BB and 3bp_BTN_vs_BB had almost no calling range in the start solution (0.58 / 0.72 combos) and were skipped by the fit; those lines use the nearest group.
