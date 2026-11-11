@@ -62,3 +62,4 @@
 - 200bb river correction done (Nov 9 22:53): measured srp_BTN_vs_BB (BTN x1.17, BB x0.83) and 3bp_CO_vs_BTN (BTN x1.16, CO x0.87). srp_SB_vs_BB and 3bp_BTN_vs_BB had almost no calling range in the start solution (0.58 / 0.72 combos) and were skipped by the fit; those lines use the nearest group.
 - Nov 10 01:07 container restart during 200bb main round 1 (91/100 slow-spot solves done); pipeline resumed, solves in flight lost (~5 min)
 - Nov 11 01:59 container restart during 200bb main round 5 (58/100 slow-spot solves done); pipeline resumed, solves in flight lost (~5 min)
+- 2026-11-11 06:38 UTC: container restarted during 200bb main round 6 (318 solves on disk); pipeline restarted, resumes from saved solves.
