@@ -64,3 +64,4 @@
 - Nov 11 01:59 container restart during 200bb main round 5 (58/100 slow-spot solves done); pipeline resumed, solves in flight lost (~5 min)
 - 2026-11-11 06:38 UTC: container restarted during 200bb main round 6 (318 solves on disk); pipeline restarted, resumes from saved solves.
 - 2026-11-11 10:28 UTC: disk allowance ran out during 200bb round 7 preflop (pipeline died, pre.* truncated). Freed space by deleting 100bb intermediate round solves and preflop state (rounds 1-9 of each loop; finished outputs, final/polish/round-10 dirs kept) and 200bb rounds 1-5 solves/state. Removed truncated main_r7/pre.*, kept its complete solves and fit; pipeline restarted. Plan: prune old round solves as each depth progresses.
+- 2026-11-13 00:31 UTC: container restarted during 200bb rake0 round 5 (15 solves on disk); pipeline restarted, resumes from saved solves.
