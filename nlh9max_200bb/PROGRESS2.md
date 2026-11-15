@@ -32,3 +32,4 @@
 - cap3 round 10: RFI 8.0/8.9/11.6/15.5/30.4/69.6/24.6; largest move 1.24
 - pct5 round 1: RFI 8.4/9.9/12.1/17.3/30.0/78.8/28.7; largest move 17.34
 - pct5 round 2: RFI 7.8/9.3/11.7/16.4/26.8/69.0/25.0; largest move 9.80
+- pct5 round 3: RFI 7.4/9.0/10.2/16.0/27.4/67.4/24.2; largest move 1.62
