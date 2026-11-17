@@ -28,6 +28,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <sys/stat.h>
+#include <sys/statvfs.h>
 
 static float *read_range(const char *path)
 {
@@ -62,6 +64,13 @@ static void save_ckpt(int it)
 {
     char tmp[640], txt[640];
     snprintf(tmp, sizeof tmp, "%s.tmp", ckpt_path);
+    /* The save goes to a temporary file next to the previous checkpoint, so it needs the previous
+       checkpoint's size again in free space. Skip it (keep the previous one) when the disk does not
+       have that plus 1 GB, instead of filling the disk and deleting the partial file. */
+    struct stat st;
+    struct statvfs vs;
+    if (stat(ckpt_path, &st) == 0 && statvfs(ckpt_path, &vs) == 0 &&
+        (double)vs.f_bavail * vs.f_frsize < (double)st.st_size + 1e9) return;
     if (ss_save_state(cur_solver, tmp) != 0) { remove(tmp); return; }
     rename(tmp, ckpt_path);
     snprintf(txt, sizeof txt, "%s.txt", ckpt_path);
