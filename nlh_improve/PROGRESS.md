@@ -69,3 +69,4 @@
 - 2026-11-13 13:59 UTC: container restarted during 200bb rake0 round 7 (82 solves on disk); pipeline restarted.
 - 2026-11-14 00:36 UTC: container restarted during 200bb rake0 round 10 (51 solves on disk); pipeline restarted.
 - 2026-11-17 02:06 UTC: container restarted after 200bb Phase D finished (nothing lost); 300bb pipeline (plan_300.json) started 02:07.
+- 2026-11-17 05:50 UTC: user chose option 1 for the spots the improved preflop never reaches (empty postflop files): src/fill_spots.py + src/fill.sh solve them on the original build's ranges with the improved engine and mark them in the file header note. 100bb: srp_CO_vs_BB, srp_HJ_vs_BB, 3bp_BTN_vs_BB, 4bp_BTN_vs_BB. 200bb: srp_BTN_vs_BB, srp_CO_vs_BB, srp_HJ_vs_BB, srp_UTG_vs_BB, 3bp_CO_vs_BTN, 3bp_SB_vs_BB, 4bp_BTN_vs_BB. Running alongside the 300bb river step (2 jobs).

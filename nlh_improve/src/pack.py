@@ -160,7 +160,7 @@ def pack_postflop(rdir, sdir, out):
         reached = min(sp.get("live", [1, 1])) > 0
         header = {"format": "NLH postflop root decisions v1 (REPORT.md)", "spot": name, "pot_type": pot_type,
                   "reached": reached,
-                  "note": "" if reached else "not reached in the preflop equilibrium: one player's range is "
+                  "note": sp.get("note", "") if reached else "not reached in the preflop equilibrium: one player's range is "
                                              "empty (see REPORT.md); no flops stored",
                   "range_combos": [sp["oop_combos"], sp["ip_combos"]],
                   "hero": hero, "villain": villain, "oop": sp["oop"], "ip": sp["ip"], "pot_bb": sp["pot"],
