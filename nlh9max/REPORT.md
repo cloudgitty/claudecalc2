@@ -65,10 +65,22 @@ original build too).
 
 **Validation (`validation.md`).** Format, packing and round-trip checks pass. Failures: in-position
 3-bet-or-fold (no flats; as in the original build), rake-tightening (above), payoff conservation
--0.023 vs 0.02, the four convergence rules (above), and postflop exploitability: 2 of 900 final
+-0.023 vs 0.02, the four convergence rules (above), and postflop exploitability: 2 of 1,300 final
 solves end above 0.5% of the pot (worst 0.955%). Across all 100bb runs 11 of 17,960 solves hit
 the divergence guard; all are in spots whose calling range is almost empty (BTN/CO/BB flatting a
 UTG or CO open, 0-0.5% of hands), so their weight in the R fit and the preflop is negligible.
+
+**Spots the improved preflop does not reach, and the fill.** Because the improved preflop is
+3-bet-or-fold in several places, six of the 15 postflop spots have an empty range for one player
+in the improved equilibrium: srp_BTN_vs_SB, srp_CO_vs_BTN, srp_CO_vs_BB, srp_HJ_vs_BB,
+3bp_BTN_vs_BB and 4bp_BTN_vs_BB. Four of them were reached in the original build, so they were
+solved on **the original build's preflop ranges** with the improved postflop engine (two raises per
+street, same rake, pot and stack, all 100 flops): srp_CO_vs_BB, srp_HJ_vs_BB, 3bp_BTN_vs_BB and
+4bp_BTN_vs_BB (400 solves, worst 0.500% of the pot). Their file headers carry a `note`
+saying so; **their ranges do not match `preflop.json`**, so use them as a reference
+for those lines, not as part of the improved equilibrium. srp_BTN_vs_SB and srp_CO_vs_BTN were
+empty in the original build too and stay `"reached": false` with no flops. (`nlh_improve/src/fill_spots.py`,
+`fill.sh`; log `fill.out`.)
 
 **Compute.** Phase C+D at 100bb: 6 Nov 15:33 - 9 Nov 13:36 UTC, about 70 hours wall clock on 4
 cores (~280 core-hours) including the river calibration (~8 h), 10 main rounds, 2 polish rounds,

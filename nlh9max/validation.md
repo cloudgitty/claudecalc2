@@ -12,7 +12,7 @@ Preflop solution `work2/polish2/pre`, outputs in `.`.
 ## 2 Round trip (independent decoder)
 
 - PASS preflop: 100000 entries match the packer: worst frequency diff 0 points, worst EV diff 0 bb
-- PASS postflop: 100008 entries match the packer
+- PASS postflop: 100009 entries match the packer
 
 ## 4 Hand sanity (frequencies in %)
 
@@ -44,12 +44,16 @@ Preflop solution `work2/polish2/pre`, outputs in `.`.
 
 | Spot | flops | median exploitability % of pot | worst | max iterations |
 | --- | --- | --- | --- | --- |
+| 3bp_BTN_vs_BB | 100 | 0.452 | 0.500 | 170 |
 | 3bp_CO_vs_BTN | 100 | 0.461 | 0.499 | 250 |
 | 3bp_HJ_vs_CO | 100 | 0.457 | 0.498 | 210 |
 | 3bp_SB_vs_BB | 100 | 0.469 | 0.499 | 310 |
 | 3bp_UTG_vs_BB | 100 | 0.451 | 0.498 | 360 |
+| 4bp_BTN_vs_BB | 100 | 0.385 | 0.500 | 80 |
 | 4bp_CO_vs_BTN | 100 | 0.427 | 0.499 | 90 |
 | srp_BTN_vs_BB | 100 | 0.477 | 0.500 | 380 |
+| srp_CO_vs_BB | 100 | 0.478 | 0.500 | 290 |
+| srp_HJ_vs_BB | 100 | 0.480 | 0.499 | 360 |
 | srp_SB_vs_BB | 100 | 0.474 | 0.499 | 300 |
 | srp_UTG_vs_BB | 100 | 0.475 | 0.955 | 610 |
 | srp_UTG_vs_BTN | 100 | 0.469 | 0.635 | 500 |
