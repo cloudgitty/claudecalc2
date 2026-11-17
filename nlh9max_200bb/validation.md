@@ -45,19 +45,26 @@ Preflop solution `work2/polish2/pre`, outputs in `.`.
 | Spot | flops | median exploitability % of pot | worst | max iterations |
 | --- | --- | --- | --- | --- |
 | 3bp_BTN_vs_BB | 100 | 0.467 | 0.499 | 280 |
+| 3bp_CO_vs_BTN | 100 | 0.474 | 0.898 | 340 |
 | 3bp_HJ_vs_CO | 100 | 0.472 | 0.500 | 410 |
+| 3bp_SB_vs_BB | 100 | 0.469 | 0.499 | 340 |
 | 3bp_UTG_vs_BB | 100 | 0.470 | 0.500 | 310 |
+| 4bp_BTN_vs_BB | 100 | 0.439 | 0.496 | 150 |
 | 4bp_CO_vs_BTN | 100 | 0.457 | 0.500 | 190 |
+| srp_BTN_vs_BB | 100 | 0.489 | 0.500 | 550 |
 | srp_BTN_vs_SB | 100 | 0.480 | 0.500 | 520 |
+| srp_CO_vs_BB | 100 | 0.489 | 0.500 | 590 |
+| srp_HJ_vs_BB | 100 | 0.487 | 0.499 | 590 |
 | srp_SB_vs_BB | 100 | 0.484 | 0.499 | 430 |
+| srp_UTG_vs_BB | 100 | 0.486 | 0.500 | 510 |
 | srp_UTG_vs_BTN | 100 | 0.483 | 0.499 | 670 |
-- PASS postflop exploitability <= 0.5% of pot (or the iteration cap): worst 0.500% of pot
+- **FAIL** postflop exploitability <= 0.5% of pot (or the iteration cap): worst 0.898% of pot
 
 ## 6 Test vectors
 
 - test_vectors.json: 300 preflop and 300 postflop entries
 
-**2 check(s) FAILED**
+**3 check(s) FAILED**
 
 ## 7 Improvement-plan checks
 

@@ -80,10 +80,24 @@ with it (29.1) because without rake it limps 18.6% instead of raising; open + li
 every opener.
 
 **Validation (`validation.md`).** Format, packing and round-trip checks pass; RFI ordering, BB
-defence, 4-bet/5-bet narrowing, preflop best response and postflop exploitability (700 final
-solves, worst 0.500% of the pot) pass. Failures: in-position 3-bet-or-fold (no flats; as in the
-original build), payoff conservation -0.022 vs 0.02, and the four convergence rules (above). No
-200bb solve hit the divergence guard.
+defence, 4-bet/5-bet narrowing, and preflop best response pass. Failures: in-position 3-bet-or-fold (no flats; as in the
+original build), payoff conservation -0.022 vs 0.02, the four convergence rules (above), and
+postflop exploitability: the 700 solves of the improved ranges all end at or below 0.500% of the
+pot, but 1 of the 700 fill solves (below) ends at 0.898% (3bp_CO_vs_BTN on Qc8c6d; it hit the
+divergence guard and was re-solved, the only 200bb solve that did).
+
+**Spots the improved preflop does not reach, and the fill.** Because the improved preflop is
+3-bet-or-fold in several places, eight of the 15 postflop spots have an empty range for one player
+in the improved equilibrium: srp_BTN_vs_BB, srp_CO_vs_BTN, srp_CO_vs_BB, srp_HJ_vs_BB,
+srp_UTG_vs_BB, 3bp_CO_vs_BTN, 3bp_SB_vs_BB and 4bp_BTN_vs_BB (srp_UTG_vs_BTN is nearly empty, 0.9
+combos, and was solved on its own range). Seven of the eight were reached in the original build,
+so they were solved on **the original build's preflop ranges** with the improved postflop engine
+(two raises per street, same rake, pot and stack, all 100 flops; 700 solves): srp_BTN_vs_BB,
+srp_CO_vs_BB, srp_HJ_vs_BB, srp_UTG_vs_BB, 3bp_CO_vs_BTN, 3bp_SB_vs_BB and 4bp_BTN_vs_BB. Their file
+headers carry a `note` saying so; **their ranges do not match `preflop.json`**, so use them as a
+reference for those lines, not as part of the improved equilibrium. srp_CO_vs_BTN was empty in the
+original build too and stays `"reached": false` with no flops. (`nlh_improve/src/fill_spots.py`,
+`fill.sh`; log `fill.out`.)
 
 **Compute.** Phase C+D at 200bb: 9 Nov 13:35 - 16 Nov 16:14 UTC, about 171 hours wall clock on 4
 cores (~680 core-hours): river calibration ~8 h, 10 main rounds, 2 polish rounds, 30 variant
