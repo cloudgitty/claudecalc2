@@ -68,3 +68,4 @@
 - 2026-11-13 03:07 UTC: container restarted again during 200bb rake0 round 5 (221 solves on disk); pipeline restarted.
 - 2026-11-13 13:59 UTC: container restarted during 200bb rake0 round 7 (82 solves on disk); pipeline restarted.
 - 2026-11-14 00:36 UTC: container restarted during 200bb rake0 round 10 (51 solves on disk); pipeline restarted.
+- 2026-11-17 02:06 UTC: container restarted after 200bb Phase D finished (nothing lost); 300bb pipeline (plan_300.json) started 02:07.

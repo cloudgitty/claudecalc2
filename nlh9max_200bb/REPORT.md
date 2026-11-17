@@ -8,6 +8,88 @@ This is a separate, complete run at 200bb: the engine is the one built for the 1
 (`../nlh9max`), but **no 100bb result is reused** - the equity table, flop set, trees, realisation
 factors and every solve were recomputed here. `PROGRESS.md` has the stage log.
 
+> **Improvement update (November 2026).** The outputs in this folder (`preflop.json`,
+> `preflop_ev.bin`, `postflop/*.bin.gz`, `test_vectors.json`, `validation.md`, `rake_report.md`) were
+> rebuilt with the improvement plan (`../NLH_IMPROVEMENT_PLAN.md`, items 1-8). Formats and the
+> `combos.json` enumeration are unchanged. Section 0 below describes what changed and what was
+> measured; sections 1-9 describe the original build and stay as its record where section 0 does not
+> supersede them. The improved engine is `../nlh_improve/` (its `PROGRESS.md` has the engineering
+> and gate log); this run's log is `PROGRESS2.md`, its durable checkpoints are in `checkpoints/`.
+
+## 0. Improvement update: what changed and what was measured
+
+**Read this first: the 200bb loops did not converge.** The late-position and SB opening widths
+below still move by several points between refits; treat BTN, SB and HJ widths as ranges, not
+point values (see "Stability" below). UTG-LJ are stable to about a point.
+
+| # | Change | Result at 200bb |
+| --- | --- | --- |
+| 1 | R refitted on all 100 flops (polish) | Two polish rounds; largest RFI moves **8.22** and **7.11** points (BTN 66.1 -> 61.5 -> 68.6, SB 24.0 -> 23.0 -> 29.1, HJ 13.9 -> 13.8 -> 16.7) |
+| 2 | Converged preflop <-> R loop, running average of R, 30 calibration flops per spot (50 for SB vs BB, BTN vs BB) | **Not met.** 10 rounds (cap); largest RFI moves 15.47, 6.01, 5.81, 4.58, 2.55, 0.98, 0.75, 1.27, 1.97, 4.44. The BTN widened every round from 51.5 to 66.1; the SB narrowed from 45.4 to 24.0 |
+| 3 | Rake variants (rake 0, cap 3bb, rake 5%) through the same loop | **Not met** for any of the three in 10 rounds (last moves 0.55, 1.24, 1.68; the rake-5% BTN ranged 62.7-71.8 over rounds 3-10) |
+| 4 | Hand-type features (pair, suited, connected, suited ace, broadway) in the R regression for unsolved spots | Used for every terminal without its own solves |
+| 5 | Money-conserving payoffs | Summed EV at rake 0, R = 1: **-0.022** bb per hand (original model +0.066 at 100bb); the 0.02 tolerance is narrowly missed |
+| 6 | Un-pruned preflop tree: cold 4-bets and 3-way 3-bet pots | 133,022 nodes |
+| 7 | Two postflop raises per street | Everywhere except the single-raised river measurement (item 8) |
+| 8 | River correction: reduced river tree (66% + all-in; **one raise** in single-raised pots, to fit in memory at 200bb) on 4 flops per spot | Measured on 2 spots only; see below. Stored postflop strategies stay turn-end solves |
+
+**Main result (opening widths, % of combos)**
+
+| | UTG | UTG1 | LJ | HJ | CO | BTN | SB | SB limp |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Original build | 11.4 | 12.7 | 14.8 | 19.3 | 24.5 | 35.3 | 51.5 | 3.8 |
+| **Improved (polish round 2)** | **8.1** | **9.8** | **12.8** | **16.7** | **26.3** | **68.6** | **29.1** | **0.4** |
+| Range seen in the last refits (main r8-r10, polish, polish 2, final) | 7.2-8.8 | 9.4-10.4 | 10.7-13.1 | 13.4-16.7 | 26.3-29.3 | 61.5-69.7 | 22.2-30.4 | |
+
+**Stability.** The delivered widths are the second 100-flop polish. Between the two polish passes
+the BTN moved 7.1 points and the SB 6.1; the main loop's last round moved the SB 4.4 points. The
+200bb BTN, SB and HJ widths are therefore **unstable**: the solver's answer to "how wide does the
+BTN open at 200bb with this rake" is "roughly 60-70%", not 68.6%. The cause is the same as at
+100bb (calibration-flop noise in the realisation factors feeding back into the ranges), but it is
+larger here because deep stacks make the postflop value of position, and so R, more sensitive to
+the ranges.
+
+The BTN opening twice as wide as in the original build comes mostly from the river correction
+(the BTN realises 17% more of the pot against the BB once the river is played) and from the BB no
+longer flatting: BB vs BTN open is now call 0.0 / 3-bet 18.8 (original 3.2 / 18.7). BB vs SB open:
+call 18.9 / 3-bet 23.6. BB vs CO: call 0.0 / 3-bet 10.2. Preflop best response: worst seat
+0.229 bb/100.
+
+**River correction (item 8).** Realised share of the pot, turn-end model -> river solve:
+BTN vs BB single-raised: BTN 0.440 -> 0.477 (R x1.17), BB 0.377 -> 0.307 (x0.83); CO vs BTN
+3-bet pot: CO 0.458 -> 0.401 (x0.87), BTN 0.417 -> 0.471 (x1.16). As at 100bb, the turn-end model
+understates what the player in position realises. Limits: with two postflop raises 7 of 8
+single-raised river solves needed 12.5-21 GB, so the single-raised river trees allow **one raise**
+per street (the 3-bet-pot river trees keep two). SB vs BB single-raised and BTN vs BB 3-bet pots had almost no
+calling range in the start solution (0.58 and 0.72 combos) and were skipped; those lines use the
+nearest group with the same position and role. River solves reached 0.5-2.9% of the pot
+(400-iteration cap).
+
+**River error in the stored strategies.** On the river-sampled flops the first decisions (OOP root,
+IP after a check) move by **27.8 points of frequency on average** (worst 60.1) between the
+turn-end and the river solve. As at 100bb, treat BB donk-lead frequencies in
+`postflop/srp_*_vs_BB.bin.gz` as an artefact of the turn-end abstraction.
+
+**Rake (output C, `rake_report.md`).** Rake 10% / 5bb against the rake-free control: UTG -1.1,
+UTG1 -0.4, LJ -0.2, HJ -0.1, CO -5.1, BTN -3.8, SB **+10.9** points. The check "rake tightens every
+non-blind RFI range" now passes, but for UTG-HJ the differences (0.1-1.1 points) are **smaller than
+the loop noise**, so the pass is not meaningful there. The SB is narrower without rake (18.2) than
+with it (29.1) because without rake it limps 18.6% instead of raising; open + limp is 36.8 vs
+29.5. The clear rake effects are in the blinds' calling: BB calls a BTN open 23.7% without rake and
+0% with it, a SB open 60.0% vs 18.9%. Cap 3bb and 5% sit between the two and inside the noise for
+every opener.
+
+**Validation (`validation.md`).** Format, packing and round-trip checks pass; RFI ordering, BB
+defence, 4-bet/5-bet narrowing, preflop best response and postflop exploitability (700 final
+solves, worst 0.500% of the pot) pass. Failures: in-position 3-bet-or-fold (no flats; as in the
+original build), payoff conservation -0.022 vs 0.02, and the four convergence rules (above). No
+200bb solve hit the divergence guard.
+
+**Compute.** Phase C+D at 200bb: 9 Nov 13:35 - 16 Nov 16:14 UTC, about 171 hours wall clock on 4
+cores (~680 core-hours): river calibration ~8 h, 10 main rounds, 2 polish rounds, 30 variant
+rounds and the final pass. Seven container restarts and one disk-full stop each lost part of a round
+(logged in `../nlh_improve/PROGRESS.md`).
+
 ## 1. Game and parameters
 
 All parameters are in `config.json`. The seat list in the task has eight seats (UTG, UTG1, LJ,
