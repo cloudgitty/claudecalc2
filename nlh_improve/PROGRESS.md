@@ -73,3 +73,4 @@
 - 17 Nov 14:47: 300bb river solves (10-12 GB checkpoints) drove the disk to 0.5 GB free on each failed checkpoint save (the temp file fills the disk before being removed). postflop.c now skips a save when free space < previous checkpoint + 1 GB (keeps the previous one); results unchanged (smoke test identical). Running solve keeps the old binary until it finishes.
 - 18 Nov 00:38: container restart (300bb in main_r1, second batch at 4/390 solves); pipeline2 restarted, resumed with 386 solves to run.
 - 18 Nov ~07:10: container restart (300bb main round 1 done at 07:03, round 2 just started); pipeline2 restarted 07:25 and resumed in main_r2.
+- 19 Nov ~01:00: container restart (300bb main round 3, first batch 97/100); pipeline2 restarted 01:16.
