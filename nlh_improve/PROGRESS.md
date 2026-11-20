@@ -74,3 +74,4 @@
 - 18 Nov 00:38: container restart (300bb in main_r1, second batch at 4/390 solves); pipeline2 restarted, resumed with 386 solves to run.
 - 18 Nov ~07:10: container restart (300bb main round 1 done at 07:03, round 2 just started); pipeline2 restarted 07:25 and resumed in main_r2.
 - 19 Nov ~01:00: container restart (300bb main round 3, first batch 97/100); pipeline2 restarted 01:16.
+- 20 Nov ~01:00: container restart (300bb main round 7, first batch 62/100); pipeline2 restarted 01:12.
