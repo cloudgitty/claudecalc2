@@ -9,3 +9,4 @@
 - main round 9: RFI 11.7/15.2/18.6/25.4/33.7/40.1/54.8; largest move 1.58
 - main round 10: RFI 11.7/15.5/19.0/26.2/33.8/39.6/50.8; largest move 4.05
 - polish (R on all 100 flops): largest RFI move 4.61
+- polish round 2 (second 100-flop pass): largest RFI move 6.71
