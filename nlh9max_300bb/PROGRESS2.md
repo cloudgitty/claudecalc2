@@ -14,3 +14,4 @@
 - rake0 round 2: RFI 13.8/15.1/19.3/23.5/31.5/39.2/24.1; largest move 3.32
 - rake0 round 3: RFI 13.3/15.5/20.0/24.1/32.4/38.9/38.4; largest move 14.23
 - rake0 round 4: RFI 13.4/15.0/19.5/23.7/32.2/40.4/42.5; largest move 4.17
+- rake0 round 5: RFI 13.2/14.6/20.0/23.5/31.2/40.9/37.2; largest move 5.34
