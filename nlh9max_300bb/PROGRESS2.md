@@ -20,3 +20,4 @@
 - rake0 round 8: RFI 13.1/14.9/19.4/23.6/32.5/38.8/30.8; largest move 2.13
 - rake0 round 9: RFI 13.3/15.4/19.9/23.8/32.6/41.8/28.9; largest move 2.98
 - rake0 round 10: RFI 13.2/15.7/20.2/24.8/32.3/40.8/30.3; largest move 1.43
+- cap3 round 1: RFI 12.0/14.2/18.2/21.2/32.2/38.4/38.7; largest move 18.26
