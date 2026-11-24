@@ -78,3 +78,5 @@
 
 - 24 Nov 00:25: 300bb container restart (fifth) during rake0 round 10, first batch at 42/100;
   pipeline2 restarted, resumes skipping finished solves.
+- 24 Nov 01:08: sixth 300bb container restart, again in rake0 round 10 (first batch 24/57 left
+  after the 00:25 resume); pipeline2 restarted.
