@@ -1,0 +1,11 @@
+RFI widths (% of combos): UTG 12.9 UTG1 15.3 LJ 19.3 HJ 26.6 CO 34.9 BTN 42.4 SB 46.3 | SB limp 2.0
+BB vs BTN open: call 0.7, raise 22.8
+BB vs SB open: call 31.2, raise 14.2
+BB vs CO open: call 6.7, raise 14.2
+BB vs UTG open: call 1.3, raise 6.4
+SB vs BTN open: call 0.0, raise 13.2
+BTN vs CO open: call 0.2, raise 9.3
+BTN vs UTG open: call 0.0, raise 5.5
+CO vs HJ open: call 0.6, raise 7.8
+BTN vs BB 3-bet: call 0.2, 4-bet 24.2, (of BTN opens) 100.0
+CO vs BTN 3-bet: call 16.3, 4-bet 19.1, (of CO opens) 100.0
