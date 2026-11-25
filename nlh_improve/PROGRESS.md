@@ -80,3 +80,5 @@
   pipeline2 restarted, resumes skipping finished solves.
 - 24 Nov 01:08: sixth 300bb container restart, again in rake0 round 10 (first batch 24/57 left
   after the 00:25 resume); pipeline2 restarted.
+
+- 25 Nov 00:35 — seventh container restart. pipeline2 died during cap3 round 4's preflop solve (all 330 second-batch solves and the R fit were already on disk). Restarted with the same command; it skipped the finished rounds and resumed at the cap3 round 4 preflop solve.
