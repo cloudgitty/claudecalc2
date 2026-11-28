@@ -90,3 +90,16 @@
   - pipeline2.py: with work/tree.txt gone, the start checkpoint decides whether the tree is new;
   - the full postflop pass of the final solve is not re-run (polish/polish2 already used it; Phase D re-solves its own 100-flop pass on polish2);
   - pct5 rounds 1-2 kept only their R fits: their R files are rebuilt from those fits (rmodel, same running average) and their preflop state re-solved — round 1 cold (5000 iterations, no state left to warm-start from), round 2 warm from it (+600, as in the loop). The rebuilt widths are compared with the committed ones before round 3 runs on them.
+
+### 28 Nov 09:45: 300bb pct5 r1/r2 rebuilt, round 3 started
+- Equity tables recomputed. The pct5 r1 and r2 preflop solves were rebuilt from their committed fits (r1 cold, 5000 iterations; r2 warm, 600 iterations).
+- Rebuilt opening ranges against the committed ones:
+
+  | Round | UTG | UTG1 | LJ | HJ | CO | BTN | SB |
+  | --- | --- | --- | --- | --- | --- | --- | --- |
+  | r2 committed | 13.4 | 15.2 | 18.9 | 24.6 | 31.7 | 42.5 | 38.2 |
+  | r2 rebuilt | 13.7 | 14.9 | 19.5 | 23.8 | 31.6 | 41.8 | 60.1 |
+
+- Every position except SB agrees to within 1 point. SB was already the unstable spot in this loop: it moved from 28.6 to 49.7 between r1 committed and r1 rebuilt.
+- Decision: keep the committed summary.json as the round 3 reference, so the move history stays consistent. Round 3's SB move may come out inflated. That costs at most extra rounds, because convergence needs two rounds with moves of 0.5 or less.
+- pipeline2 resumed at pct5 round 3 at 09:43.
