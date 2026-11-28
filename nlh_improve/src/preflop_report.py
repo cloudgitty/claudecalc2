@@ -65,6 +65,10 @@ def actor_reach(tree, strat, n):
 
 def summary(prefix):
     work = os.path.dirname(prefix) or "."
+    # a round restored from a durable checkpoint on a fresh container keeps only its summary
+    # (round checkpoints hold no strategy, NLH_IMPROVEMENT_PLAN.md section 3): use it as it is
+    if not os.path.exists(prefix + ".strat") and os.path.exists(os.path.join(work, "summary.json")):
+        return json.load(open(os.path.join(work, "summary.json")))
     tree, strat = load_preflop(prefix, os.path.join(work, "tree.json"))
     out = {"rfi": {}, "sanity": {}}
     for s in SEATS[:-1]:

@@ -222,7 +222,10 @@ def main():
     # 1: start ranges. Same tree as the build: its final solution. A new (larger) tree: a cold solve
     #    with the fixed priors, then one with R from the build's last fit (Phase 0 refit if present)
     start = "work/final/pre"
-    if open("work2/tree.txt").read() != open("work/tree.txt").read():
+    # on a fresh container work/ (the build's own run, not in git) is gone: the start step's checkpoint
+    # decides instead (it exists only for a new tree)
+    if (os.path.exists("checkpoints/start/summary.json") if not os.path.exists("work/tree.txt")
+            else open("work2/tree.txt").read() != open("work/tree.txt").read()):
         if not done("work2/start/summary.json"):
             os.makedirs("work2/start0", exist_ok=True)
             os.makedirs("work2/start", exist_ok=True)

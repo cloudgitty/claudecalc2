@@ -82,3 +82,11 @@
   after the 00:25 resume); pipeline2 restarted.
 
 - 25 Nov 00:35 — seventh container restart. pipeline2 died during cap3 round 4's preflop solve (all 330 second-batch solves and the R fit were already on disk). Restarted with the same command; it skipped the finished rounds and resumed at the cap3 round 4 preflop solve.
+
+- 28 Nov 07:48 — the container was REPLACED (fresh clone, not a restart): every ignored folder was gone (nlh9max_300bb/work, work2, build/, the scratchpad). Last durable checkpoint: pct5 round 2 (26 Nov 20:41). The outage began some time after 26 Nov 23:55 (last watcher report), so about 1.3 days of compute were lost: the in-flight pct5 round 3 and the idle time until the session woke. Recovery from the checkpoints in nlh9max_300bb/checkpoints:
+  - rebuilt the tools (make), the equity tables (build/equity work, stack-independent) and the preflop tree from config.json + plan_300.json (133,022 nodes, matches the checkpoint's reach file);
+  - new src/restore_ckpt.py restores work2/<step>/ from checkpoints/<step>/: milestones (start, final, polish, polish2, main_last) get their float16 strategy/EV widened to float32 and renormalised; the restored polish2 and final reproduce the committed RFI widths exactly (UTG 11.8 ... SB 50.2 | limp 1.2, and 11.8 ... 52.3 | 0.5);
+  - round checkpoints keep no strategy, so preflop_report.summary() now falls back to the round's summary.json when its strategy is missing (used for the rake0/cap3 round-10 results in the rake report and validation);
+  - pipeline2.py: with work/tree.txt gone, the start checkpoint decides whether the tree is new;
+  - the full postflop pass of the final solve is not re-run (polish/polish2 already used it; Phase D re-solves its own 100-flop pass on polish2);
+  - pct5 rounds 1-2 kept only their R fits: their R files are rebuilt from those fits (rmodel, same running average) and their preflop state re-solved — round 1 cold (5000 iterations, no state left to warm-start from), round 2 warm from it (+600, as in the loop). The rebuilt widths are compared with the committed ones before round 3 runs on them.
